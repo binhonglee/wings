@@ -1,0 +1,26 @@
+go-filepath examples/go/classroom
+kt-filepath examples/kt
+ts-filepath examples/ts
+
+go-import time
+go-import homework:path/to/homework
+ts-import People:./People
+ts-import Homework:path/to/Homework
+kt-import java.util.ArrayList
+
+ts-implement People
+
+Student {
+    id          int         id          -1
+    name        str         name
+    class       str         class
+    isActive    bool        is_active   true
+    year        date        year
+    homeworks   []Homework  homeworks
+}
+
+tsFunc(
+    public addHomework(hw: Homework): void {
+        this.Homeworks.push(hw);
+    }
+)

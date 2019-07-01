@@ -1,0 +1,18 @@
+go-filepath examples/go
+kt-filepath examples/kt
+ts-filepath examples/ts/person
+
+Emotion {
+    Accomplished
+    Angry
+    Annoyed
+    Appalled
+    Excited
+    Exhausted
+    FeelsGood
+    Frustrated
+    Happy
+    Meh
+    Sad
+    Satisfied
+}
