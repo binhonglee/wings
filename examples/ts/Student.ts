@@ -10,36 +10,28 @@ import Homework from 'path/to/Homework';
 
 export default class Student implements People {
     [key: string]: any;
-    public id: number;
-    public name: string;
-    public class: string;
-    public isActive: boolean;
-    public year: Date;
-    public homeworks: [];
+    public id: number = -1;
+    public name: string = '';
+    public class: string = '';
+    public isActive: boolean = true;
+    public year: Date = new Date();
+    public homeworks: [] = [];
     
-    constructor() {
-        this.id = -1;
-        this.name = '';
-        this.class = '';
-        this.isActive = true;
-        this.year = new Date();
-        this.homeworks = [];
-    }
-    
-    public init(
-        id: number,
-        name: string,
-        class: string,
-        isActive: boolean,
-        year: Date,
-        homeworks: [],
-    ): void {
-        this.id = id;
-        this.name = name;
-        this.class = class;
-        this.isActive = isActive;
-        this.year = year;
-        this.homeworks = homeworks;
+    public init(data: any): boolean {
+        try {
+            this.id = data.id;
+            this.name = data.name;
+            this.class = data.class;
+            this.isActive = data.is_active;
+            this.year = new Date(data.year);
+            
+            if (data.homeworks !== "null") {    
+                this.homeworks = data.homeworks;
+            }
+        } catch (e) {
+            return false;
+        }
+        return true;
     }
     
     public toJsonKey(key: string): string {

@@ -33,6 +33,13 @@ proc typeInit(name: string): string =
     else:
         return "new " & name & "()"
 
+proc typeAssign(name: string, content: string): string =
+    case name
+    of "date":
+        return "new Date(" & content & ")"
+    else:
+        return content
+
 proc enumFile*(
     name: string,
     values: seq[string],
@@ -75,8 +82,6 @@ proc structFile*(
     structFile &= " {\n"
 
     var declaration: string = "[key: string]: any;"
-    var params: string = ""
-    var constructor: string = ""
     var init: string = ""
     var jsonKey: string = ""
 
@@ -88,21 +93,23 @@ proc structFile*(
         if (declaration.len() > 1):
             declaration &= "\n"
 
-        if (params.len() > 1):
-            params &= "\n"
-            constructor &= "\n"
+        if (init.len() > 1):
             init &= "\n"
             jsonKey &= "\n"
 
-        declaration &= "public " & field[0] & ": " & types(field[1]) & ";"
-        params &= field[0] & ": " & types(field[1]) & ","
-        
         var typeInit: string = typeInit(field[1])
         if field.len() > 3:
             typeInit = field[3]
 
-        constructor &= "this." & field[0] & " = " & typeInit & ";"
-        init &= "this." & field[0] & " = " & field[0] & ";"
+        declaration &= "public " & field[0] & ": " & types(field[1]) & " = " & typeInit & ";"
+
+        if contains(field[1], "[]"):
+            init &= "\nif (data." & field[2] & " !== \"null\") {"
+            init &= indent("\nthis." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";", 4, " ")
+            init &= "\n}"
+        else:
+            init &= "this." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";"
+        
         jsonKey &= "case '" & field[0] & "': {\n"
         jsonKey &= indent("return '" & field[2] & "';", 4, " ")
         jsonKey &= "\n}"
@@ -110,14 +117,14 @@ proc structFile*(
     structFile &= indent(declaration, 4, " ")
     structFile &= "\n"
     structFile &= indent(
-        "\nconstructor() {\n" & indent(constructor, 4, " ") & "\n}", 4, " "
-    )
-    structFile &= "\n"
-    structFile &= indent(
-        "\npublic init(\n" &
-        indent(params, 4, " ") &
-        "\n): void {\n" &
-        indent(init, 4, " ") &
+        "\npublic init(data: any): boolean {\n" &
+        indent(
+            "try {\n" &
+            indent(init, 4, " ") &
+            "\n} catch (e) {\n" &
+            indent("return false;", 4, " ") &
+            "\n}\nreturn true;", 4, " "
+        ) &
         "\n}", 4, " "
     )
     structFile &= "\n"

@@ -13,7 +13,9 @@ Requirements:
 Supported languages:
 
 - [go](http://golang.org/)
+- [Kotlin](https://kotlinlang.org) (Untested)
 - [TypeScript](https://www.typescriptlang.org)
+  - [Useful utility package](https://github.com/binhonglee/wings-ts-util)
 
 \*_Note: Ironically has yet to support `Nim` itself._
 
@@ -26,6 +28,8 @@ Supported types:
 | bool | bool | Boolean | boolean |
 | date | time.Time | Date | Date |
 | []type | []type | ArrayList\<type\> | [] |
+
+_Unsupported types are initialized as custom struct / classes unless specified otherwise._
 
 Run `nimble genFile "{filepath}"` or `plz run //src:wings -- "{filepath}"` to generate the files.
 
@@ -61,6 +65,10 @@ tsFunc(
     }
 )
 ```
+
+The format of the fields goes from left to right in such order "field name", "field type", "field JSON name", and "initialize as" (optional, not used in Go).
+
+_*Note: "initialize as" field does not go through any conversion or localization so make sure it works with all versions of output that will be using it._
 
 ## Enum
 

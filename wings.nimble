@@ -4,8 +4,9 @@ version       = "0.0.1"
 author        = "BinHong Lee"
 description   = "A simple cross language struct and enum file generator."
 license       = "MIT"
-srcDir        = "src"
+skipDirs      = @["examples"]
 bin           = @["wings"]
+srcDir        = "src"
 
 # Dependencies
 

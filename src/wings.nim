@@ -2,7 +2,6 @@ from os import paramCount, paramStr
 from strutils import split
 import tables
 import wingspkg/core
-import wingspkg/plz
 
 proc getHeader(source: string): string =
     var header = """
@@ -33,8 +32,8 @@ proc init(count: int): void =
         return
 
     for i in countup(1, count, 1):
-        # try:
+        try:
             fromFile(paramStr(i))
-        # except:
-            # echo "File " & paramStr(i) & " Not Found."
+        except:
+            echo "File " & paramStr(i) & " Not Found."
 init(paramCount())

@@ -1,4 +1,4 @@
-subinclude('//build_defs/nim')
+subinclude('@pleasings//nim')
 
 nim_binary(
     name = 'wings',
