@@ -104,8 +104,8 @@ proc structFile*(
         declaration &= "public " & field[0] & ": " & types(field[1]) & " = " & typeInit & ";"
 
         if contains(field[1], "[]"):
-            init &= "\nif (data." & field[2] & " !== \"null\") {"
-            init &= indent("\nthis." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";", 4, " ")
+            init &= "\nif (data." & field[2] & " !== \"null\") {\n"
+            init &= indent("this." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";", 4, " ")
             init &= "\n}"
         else:
             init &= "this." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";"

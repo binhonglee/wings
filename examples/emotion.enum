@@ -1,6 +1,7 @@
 go-filepath examples/go
 kt-filepath examples/kt
 ts-filepath examples/ts/person
+nim-filepath examples/nim
 
 Emotion {
     Accomplished

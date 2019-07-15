@@ -3,19 +3,9 @@ from strutils import split
 import tables
 import wingspkg/core
 
-proc getHeader(source: string): string =
-    var header = """
-/* This is a generated file
- *
- * If you would like to make any changes, please edit the source file instead.
- * run `nimble genFile "{SOURCE_FILE}"` upon completion.
-"""
-
-    return header & " * Source: " & source & "\n */\n\n"
-
 proc toFile(path: string, content: string, source: string): void =
     try:
-        writeFile(path, getHeader(source) & content)
+        writeFile(path, content)
     except:
         echo "Please create the required folder to host the new files to be created and run this again."
 

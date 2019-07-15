@@ -6,7 +6,7 @@ Requirements:
 
 - [Nim](https://nim-lang.org/)
   - [Nimble](https://github.com/nim-lang/nimble) - Bundled with Nim. (optional)
-- [Please](https://please.build) (optional)
+- [Please](https://please.build) (alternative to nimble)
 
 \*_Note: Replace `plz` with `./pleasew` if you do not have please installed._
 
@@ -14,6 +14,7 @@ Supported languages:
 
 - [go](http://golang.org/)
 - [Kotlin](https://kotlinlang.org) (Untested)
+- [Nim](https://nim-lang.org/) (Untested)
 - [TypeScript](https://www.typescriptlang.org)
   - [Useful utility package](https://github.com/binhonglee/wings-ts-util)
 
@@ -21,13 +22,13 @@ Supported languages:
 
 Supported types:
 
-| wings | go | Kotlin | TypeScript |
-|:--|:--|:--|:--|
-| int | int | Int | number |
-| str | string | String | string |
-| bool | bool | Boolean | boolean |
-| date | time.Time | Date | Date |
-| []type | []type | ArrayList\<type\> | [] |
+| wings | go | Kotlin | Nim | TypeScript |
+|:--|:--|:--|:--|:--|
+| int | int | Int | int | number |
+| str | string | String | string | string |
+| bool | bool | Boolean | bool | boolean |
+| date | time.Time | Date | DateTime | Date |
+| []type | []type | ArrayList\<type\> | seq[type] | [] |
 
 _Unsupported types are initialized as custom struct / classes unless specified otherwise._
 
@@ -41,12 +42,14 @@ example/student.struct
 go-filepath examples/go/classroom
 kt-filepath examples/kt
 ts-filepath examples/ts
+nim-filepath examples/nim
 
 go-import time
 go-import homework:path/to/homework
 ts-import People:./People
 ts-import Homework:path/to/Homework
 kt-import java.util.ArrayList
+nim-import times
 
 ts-implement People
 

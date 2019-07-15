@@ -1,13 +1,15 @@
 from strutils
 import capitalizeAscii, contains, join, normalize, parseEnum, removeSuffix, split, splitWhitespace
 import tables
-import lang/go, lang/ts, lang/kt
+import lib/header
+import lang/go, lang/ts, lang/kt, lang/nim
 
 const filetypes: Table[string, int] =
     toTable([
         ("go", 0),
         ("kt", 1),
-        ("ts", 2),
+        ("nim", 2),
+        ("ts", 3),
     ])
 
 proc structFile(file: File, filename: string, package: Table[string, string]): Table[string, string] =
@@ -78,6 +80,11 @@ proc structFile(file: File, filename: string, package: Table[string, string]): T
                 fields, functions.getOrDefault(filetype),
                 implement.getOrDefault(filetype), tempPackage[tempPackage.len() - 1],
             )
+        of "nim":
+            fileContent = nim.structFile(
+                name, imports.getOrDefault(filetype),
+                fields, functions.getOrDefault(filetype),
+            )
         of "ts":
             fileContent = ts.structFile(
                 name, imports.getOrDefault(filetype),
@@ -122,6 +129,8 @@ proc enumFile(file: File, filename: string, package: Table[string, string]): Tab
             fileContent = go.enumFile(name, values, tempPackage[tempPackage.len() - 1])
         of "kt":
             fileContent = kt.enumFile(name, values, tempPackage[tempPackage.len() - 1])
+        of "nim":
+            fileContent = nim.enumFile(name, values)
         of "ts":
             fileContent = ts.enumFile(name, values)
         else:
@@ -137,7 +146,7 @@ proc newFileName(filename: string): Table[string, string] =
 
     for filetype in filetypes.keys:
         case filetype
-        of "go":
+        of "go", "nim":
             filenames.add(
                 filetype,
                 join(
@@ -154,7 +163,7 @@ proc newFileName(filename: string): Table[string, string] =
 
     return filenames
 
-proc fromFile*(filename: string): Table[string, string] =
+proc fromFile*(filename: string, header: string = ""): Table[string, string] =
     var fileInfo: seq[string] = filename.split('.')
 
     var newFileName: Table[string, string] = initTable[string, string]()
@@ -198,7 +207,7 @@ proc fromFile*(filename: string): Table[string, string] =
             "/" &
             newFileName[filetype] &
             filetype,
-            getOrDefault(fileContents, filetype)
+            genHeader(filetype, filename, header) & getOrDefault(fileContents, filetype)
         )
 
     return generatedFiles

@@ -1,7 +1,9 @@
-/* This is a generated file
- *
+/*
+ * This is a generated file
+ * 
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
+ * 
  * Source: examples/student.struct
  */
 
@@ -25,7 +27,7 @@ export default class Student implements People {
             this.isActive = data.is_active;
             this.year = new Date(data.year);
             
-            if (data.homeworks !== "null") {    
+            if (data.homeworks !== "null") {
                 this.homeworks = data.homeworks;
             }
         } catch (e) {

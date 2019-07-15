@@ -29,7 +29,7 @@ proc enumFile*(
 ): string =
     var enumFile: string = ""
     enumFile &= "package " & package & "\n\n"
-    enumFile &= "type "& name & " int\n\n"
+    enumFile &= "type " & name & " int\n\n"
     enumFile &= "const ("
     var count: int = 0
     var content: string = ""
