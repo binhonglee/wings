@@ -4,14 +4,15 @@ from sequtils
 import foldr
 import tables
 import lib/header
-import lang/go, lang/ts, lang/kt, lang/nim
+import lang/go, lang/kt, lang/nim, lang/py, lang/ts
 
 const filetypes: Table[string, int] =
     toTable([
         ("go", 0),
         ("kt", 1),
         ("nim", 2),
-        ("ts", 3),
+        ("py", 3),
+        ("ts", 4),
     ])
 
 proc structFile(file: File, filename: string, package: Table[string, string]): Table[string, string] =
@@ -89,6 +90,12 @@ proc structFile(file: File, filename: string, package: Table[string, string]): T
                 name, imports.getOrDefault(filetype),
                 fields, functions.getOrDefault(filetype),
             )
+        of "py":
+            fileContent = py.structFile(
+                name, imports.getOrDefault(filetype),
+                fields, functions.getOrDefault(filetype),
+                implement.getOrDefault(filetype),
+            )
         of "ts":
             fileContent = ts.structFile(
                 name, imports.getOrDefault(filetype),
@@ -135,6 +142,8 @@ proc enumFile(file: File, filename: string, package: Table[string, string]): Tab
             fileContent = kt.enumFile(name, values, tempPackage[tempPackage.len() - 1])
         of "nim":
             fileContent = nim.enumFile(name, values)
+        of "py":
+            fileContent = py.enumFile(name, values)
         of "ts":
             fileContent = ts.enumFile(name, values)
         else:
@@ -150,7 +159,7 @@ proc newFileName(filename: string): Table[string, string] =
 
     for filetype in filetypes.keys:
         case filetype
-        of "go", "nim":
+        of "go", "nim", "py":
             filenames.add(
                 filetype,
                 join(

@@ -18,7 +18,7 @@ run `nimble genFile "{SOURCE_FILE}"` upon completion.
         header = "/*\n" &
             indent(header, 1, " * ") &
             "\n */"
-    of "nim":
+    of "nim", "py":
         header = indent(header, 1, "# ")
 
     return header & "\n\n"

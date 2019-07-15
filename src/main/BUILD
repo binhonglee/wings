@@ -8,7 +8,10 @@ nim_binary(
         'wingspkg/plz.nim',
         'wingspkg/lang/go.nim',
         'wingspkg/lang/kt.nim',
+        'wingspkg/lang/nim.nim',
+        'wingspkg/lang/py.nim',
         'wingspkg/lang/ts.nim',
+        'wingspkg/lib/header.nim',
     ],
     visibility = ['PUBLIC'],
 )

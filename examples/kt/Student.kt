@@ -14,7 +14,7 @@ import java.util.ArrayList
 class Student {
     var id: Int = -1
     var name: String = ""
-    var class: String = ""
+    var curClass: String = ""
     var isActive: Boolean = true
     var year: Date = Date()
     var homeworks: ArrayList<Homework> = ArrayList<Homework>()
@@ -23,7 +23,7 @@ class Student {
         when (key) {
             "id" -> return "id"
             "name" -> return "name"
-            "class" -> return "class"
+            "curClass" -> return "class"
             "isActive" -> return "is_active"
             "year" -> return "year"
             "homeworks" -> return "homeworks"

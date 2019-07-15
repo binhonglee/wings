@@ -71,7 +71,7 @@ proc structFile*(
     structFile &= "package " & package & "\n\n"
 
     for toImport in imports:
-        if toImport.len < 1:
+        if toImport.len() < 1:
             continue
 
         structFile &= "import " & toImport & "\n"

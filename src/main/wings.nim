@@ -1,11 +1,14 @@
-from os import paramCount, paramStr
+from os import FilePermission, fileExists, paramCount, paramStr, setFilePermissions
 from strutils import split
 import tables
 import wingspkg/core
 
 proc toFile(path: string, content: string): void =
     try:
+        if fileExists(path):
+            setFilePermissions(path, {FilePermission.fpUserWrite, FilePermission.fpGroupWrite, FilePermission.fpOthersWrite})
         writeFile(path, content)
+        setFilePermissions(path, {FilePermission.fpUserRead, FilePermission.fpGroupRead, FilePermission.fpOthersRead})
     except:
         echo "Please create the required folder to host the new files to be created and run this again."
 

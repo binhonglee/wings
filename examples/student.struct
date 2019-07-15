@@ -1,21 +1,24 @@
 go-filepath examples/go/classroom
 kt-filepath examples/kt
-ts-filepath examples/ts
 nim-filepath examples/nim
+py-filepath examples/py
+ts-filepath examples/ts
 
 go-import time
 go-import homework:path/to/homework
-ts-import People:./People
-ts-import { Homework }:path/to/Homework
 kt-import java.util.ArrayList
 nim-import times
+py-import datetime:date
+ts-import People:./People
+ts-import { Homework }:path/to/Homework
 
+py-implement People
 ts-implement People
 
 Student {
     id          int         id          -1
     name        str         name
-    class       str         class
+    curClass    str         class
     isActive    bool        is_active   true
     year        date        year
     homeworks   []Homework  homeworks

@@ -17,7 +17,7 @@ import (
 type Student struct {
     Id int `json:"id"`
     Name string `json:"name"`
-    Class string `json:"class"`
+    CurClass string `json:"class"`
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
     Homeworks []homework.Homework `json:"homeworks"`

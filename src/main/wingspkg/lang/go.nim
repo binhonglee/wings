@@ -78,7 +78,7 @@ proc structFile*(
 
     for fieldStr in fields:
         var field = fieldStr.split(' ')
-        if field.len > 2:
+        if field.len() > 2:
             if declarations.len() > 1:
                 declarations &= "\n"
             declarations &= capitalizeAscii(field[0]) & " " & types(field[1]) & " `json:\"" & field[2] & "\"`"

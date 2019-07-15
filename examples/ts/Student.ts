@@ -14,7 +14,7 @@ export default class Student implements People {
     [key: string]: any;
     public id: number = -1;
     public name: string = '';
-    public class: string = '';
+    public curClass: string = '';
     public isActive: boolean = true;
     public year: Date = new Date();
     public homeworks: [] = [];
@@ -23,7 +23,7 @@ export default class Student implements People {
         try {
             this.id = data.id;
             this.name = data.name;
-            this.class = data.class;
+            this.curClass = data.class;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
             
@@ -44,7 +44,7 @@ export default class Student implements People {
             case 'name': {
                 return 'name';
             }
-            case 'class': {
+            case 'curClass': {
                 return 'class';
             }
             case 'isActive': {

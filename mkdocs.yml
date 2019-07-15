@@ -9,6 +9,7 @@ repo_url: https://github.com/binhonglee/wings
 
 markdown_extensions:
   - codehilite
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
