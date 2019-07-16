@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "outDir": "./dist",
+        "moduleResolution": "node",
+        "declaration": true
+    },
+    "include": [
+        "index.ts"
+    ]
+}

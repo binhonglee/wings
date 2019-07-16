@@ -1,0 +1,31 @@
+site_name: wings
+site_description: A simple cross language struct and enum file generator.
+site_author: BinHong Lee
+
+theme:
+  name: 'material'
+
+repo_url: https://github.com/binhonglee/wings
+
+markdown_extensions:
+  - codehilite
+
+nav:
+  - Home: index.md
+  - Main package:
+    - wings.nim: main/index.md
+    - wingspkg:
+      - core.nim: main/wingspkg/core.md
+      - plz.nim: main/wingspkg/plz.md
+      - lang:
+        - Go: main/wingspkg/lang/go.md
+        - Kotlin: main/wingspkg/lang/kt.md
+        - Nim : main/wingspkg/lang/nim.md
+        - TypeScript: main/wingspkg/lang/ts.md
+      - lib:
+        - header.nim: main/wingspkg/lib/header.md
+  - Utility classes:
+    - TypeScript:
+      - Overview: tsUtil/index.md
+      - Source: tsUtil/index.ts.md
+  - License: license.md

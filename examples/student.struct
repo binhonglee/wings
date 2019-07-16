@@ -6,7 +6,7 @@ nim-filepath examples/nim
 go-import time
 go-import homework:path/to/homework
 ts-import People:./People
-ts-import Homework:path/to/Homework
+ts-import { Homework }:path/to/Homework
 kt-import java.util.ArrayList
 nim-import times
 

@@ -1,5 +1,7 @@
 from strutils
 import capitalizeAscii, contains, join, normalize, parseEnum, removeSuffix, split, splitWhitespace
+from sequtils
+import foldr
 import tables
 import lib/header
 import lang/go, lang/ts, lang/kt, lang/nim
@@ -43,7 +45,9 @@ proc structFile(file: File, filename: string, package: Table[string, string]): T
                 words[0].removeSuffix("-import")
                 if not imports.hasKey(words[0]):
                     imports.add(words[0], newSeq[string](0))
-                imports[words[0]].add(words[1])
+                var key: string = words[0]
+                words.delete(0)
+                imports[key].add(foldr(words, a & " " & b))
             elif words[0].contains("Func("):
                 words[0].removeSuffix("Func(")
                 functions.add(words[0], "")

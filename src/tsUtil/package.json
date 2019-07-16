@@ -1,0 +1,21 @@
+{
+    "name": "wings-ts-util",
+    "version": "0.0.1",
+    "description": "Utility class for Wings (a codegen module).",
+    "main": "index.ts",
+    "scripts": {
+        "build": "npm run clean && tsc -p ./tsconfig.json",
+        "clean": "rm -rf dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/binhonglee/wings.git",
+        "directory": "src/tsUtil"
+    },
+    "author": "BinHong Lee",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "typescript": "3.5.3"
+    }
+}

@@ -1,6 +1,6 @@
 from strutils import indent
 
-proc arr*(name: string, arr: seq[string]): string =
+proc arr(name: string, arr: seq[string]): string =
     var condition: string = ""
 
     var before: string = name & " = ["

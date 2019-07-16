@@ -8,7 +8,7 @@
  */
 
 import People from './People';
-import Homework from 'path/to/Homework';
+import { Homework } from 'path/to/Homework';
 
 export default class Student implements People {
     [key: string]: any;

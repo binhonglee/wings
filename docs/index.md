@@ -20,13 +20,13 @@ A simple cross language struct and enum file generator. (You might want to use a
 
 ## Supported types
 
-| wings | go  | Kotlin | Nim | TypeScript |
-| :---- | :-- | :----- | :-- | :--------- |
-| `int` | `int` | `Int` | `int` | `number` |
-| `str` | `string` | `String` | `string` | `string` |
-| `bool` | `bool` | `Boolean` | `bool` | `boolean` |
-| `date` | `time.Time` | `Date` | `DateTime` | `Date` |
-| `[]type` | `[]type` | `ArrayList\<type\>` | `seq[type]` | `[]` |
+| wings    | go          | Kotlin              | Nim         | TypeScript |
+| :------- | :---------- | :------------------ | :---------- | :--------- |
+| `int`    | `int`       | `Int`               | `int`       | `number`   |
+| `str`    | `string`    | `String`            | `string`    | `string`   |
+| `bool`   | `bool`      | `Boolean`           | `bool`      | `boolean`  |
+| `date`   | `time.Time` | `Date`              | `DateTime`  | `Date`     |
+| `[]type` | `[]type`    | `ArrayList\<type\>` | `seq[type]` | `[]`       |
 
 _Unsupported types are initialized as custom struct / classes unless specified otherwise._
 

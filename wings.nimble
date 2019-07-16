@@ -6,7 +6,7 @@ description   = "A simple cross language struct and enum file generator."
 license       = "MIT"
 skipDirs      = @["examples"]
 bin           = @["wings"]
-srcDir        = "src"
+srcDir        = "src/main"
 
 # Dependencies
 
