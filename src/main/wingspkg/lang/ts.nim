@@ -7,15 +7,15 @@ proc types(name: string): string =
 
     case name
     of "int":
-        return "number"
+        result = "number"
     of "str":
-        return "string"
+        result = "string"
     of "bool":
-        return "boolean"
+        result = "boolean"
     of "date":
-        return "Date"
+        result = "Date"
     else:
-        return name
+        result = name
 
 proc typeInit(name: string): string =
     if contains(name, "[]"):
@@ -23,37 +23,36 @@ proc typeInit(name: string): string =
 
     case name
     of "int":
-        return "-1"
+        result = "-1"
     of "str":
-        return "''"
+        result = "''"
     of "bool":
-        return "false"
+        result = "false"
     of "date":
-        return "new Date()"
+        result = "new Date()"
     else:
-        return "new " & name & "()"
+        result = "new " & name & "()"
 
 proc typeAssign(name: string, content: string): string =
     case name
     of "date":
-        return "new Date(" & content & ")"
+        result = "new Date(" & content & ")"
     else:
-        return content
+        result = content
 
 proc enumFile*(
     name: string,
     values: seq[string],
 ): string =
-    var enumFile: string = ""
-    enumFile &= "enum " & name & "{"
+    result = "enum " & name & "{"
     
     var content: string = ""
     for value in values:
         if value.len() > 0:
             content &= "\n" & value & ","
 
-    enumFile &= indent(content, 4, " ") & "\n}\n"
-    return enumFile & "\nexport default " & name & ";\n"
+    result &= indent(content, 4, " ") & "\n}\n"
+    result &= "\nexport default " & name & ";\n"
 
 
 proc structFile*(
@@ -63,7 +62,7 @@ proc structFile*(
     functions: string,
     implement: string,
 ): string =
-    var structFile: string = ""
+    result = ""
 
     for toImport in imports:
         if toImport.len < 1:
@@ -71,15 +70,15 @@ proc structFile*(
 
         var importDat: seq[string] = toImport.split(':')
 
-        structFile &= "import " & importDat[0] & " from '" & importDat[1] & "';\n"
+        result &= "import " & importDat[0] & " from '" & importDat[1] & "';\n"
 
-    structFile &= "\n"
-    structFile &= "export default class " & name
+    result &= "\n"
+    result &= "export default class " & name
 
     if implement.len() > 0:
-        structFile &= " implements " & implement
+        result &= " implements " & implement
 
-    structFile &= " {\n"
+    result &= " {\n"
 
     var declaration: string = "[key: string]: any;"
     var init: string = ""
@@ -114,9 +113,9 @@ proc structFile*(
         jsonKey &= indent("return '" & field[2] & "';", 4, " ")
         jsonKey &= "\n}"
 
-    structFile &= indent(declaration, 4, " ")
-    structFile &= "\n"
-    structFile &= indent(
+    result &= indent(declaration, 4, " ")
+    result &= "\n"
+    result &= indent(
         "\npublic init(data: any): boolean {\n" &
         indent(
             "try {\n" &
@@ -127,8 +126,8 @@ proc structFile*(
         ) &
         "\n}", 4, " "
     )
-    structFile &= "\n"
-    structFile &= indent(
+    result &= "\n"
+    result &= indent(
         "\npublic toJsonKey(key: string): string {\n" &
         indent(
             "switch (key) {\n" &
@@ -143,6 +142,6 @@ proc structFile*(
     )
 
     if functions.len() > 0:
-        structFile &= "\n" & functions
+        result &= "\n" & functions
 
-    return structFile & "\n}\n"
+    result &= "\n}\n"

@@ -3,61 +3,56 @@ import contains, indent, replace, split
 
 proc types(name: string): string =
     var arr: bool = false
-    var outType: string = name
+    result = name
 
     if contains(name, "[]"):
         arr = true
-        outType = replace(name, "[]", "")
+        result = replace(name, "[]", "")
 
-    case outType
+    case result
     of "int":
-        outType = "Int"
+        result = "Int"
     of "str":
-        outType = "String"
+        result = "String"
     of "bool":
-        outType = "Boolean"
+        result = "Boolean"
     of "date":
-        outType = "Date"
-    else:
-        outType = outType
+        result = "Date"
 
     if arr:
-        return "ArrayList<" & outType & ">"
-    else:
-        return outType
+        result = "ArrayList<" & result & ">"
 
 proc typeInit(name: string): string =
+    result = name
     if contains(name, "[]"):
-        return types(name) & "()"
+        result = types(name)
 
-    case name
+    case result
     of "int":
-        return "-1"
+        result = "-1"
     of "str":
-        return "\"\""
+        result = "\"\""
     of "bool":
-        return "false"
+        result = "false"
     of "date":
-        return "Date()"
+        result = "Date()"
     else:
-        return name & "()"
+        result &= "()"
 
 proc enumFile*(
     name: string,
     values: seq[string],
     package: string,
 ): string =
-    var enumFile: string = ""
-    enumFile &= "package " & package & "\n\n"
-    enumFile &= "enum class " & name & " {"
+    result = "package " & package & "\n\n"
+    result &= "enum class " & name & " {"
 
     var content: string = ""
     for value in values:
         if value.len() > 0:
             content &= "\n" & value & ","
 
-    enumFile &= indent(content, 4, " ") & "\n}\n"
-    return enumFile
+    result &= indent(content, 4, " ") & "\n}\n"
 
 proc structFile*(
     name: string,
@@ -67,22 +62,21 @@ proc structFile*(
     implement: string,
     package: string,
 ): string =
-    var structFile: string = ""
-    structFile &= "package " & package & "\n\n"
+    result = "package " & package & "\n\n"
 
     for toImport in imports:
         if toImport.len() < 1:
             continue
 
-        structFile &= "import " & toImport & "\n"
+        result &= "import " & toImport & "\n"
 
-    structFile &= "\n"
-    structFile &= "class " & name
+    result &= "\n"
+    result &= "class " & name
     
     if implement.len() > 0:
-        structFile &= " : " & implement
+        result &= " : " & implement
 
-    structFile &= " {\n"
+    result &= " {\n"
 
     var declaration: string = ""
     var jsonKey: string = ""
@@ -103,10 +97,10 @@ proc structFile*(
         declaration &= "var " & field[0] & ": " & types(field[1]) & " = " & typeInit
         jsonKey &= "\"" & field[0] & "\" -> return \"" & field[2] & "\""
 
-    structFile &= indent(declaration, 4, " ")
-    structFile &= "\n\n"
+    result &= indent(declaration, 4, " ")
+    result &= "\n\n"
     
-    structFile &= indent(
+    result &= indent(
         "fun toJsonKey(key: string): string {\n" &
         indent(
             "when (key) {\n" &
@@ -118,6 +112,6 @@ proc structFile*(
     )
 
     if functions.len() > 0:
-        structFile &= "\n" & functions
+        result &= "\n" & functions
     
-    return structFile & "\n}\n"
+    result &= "\n}\n"

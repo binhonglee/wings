@@ -67,7 +67,7 @@ proc structFile(file: File, filename: string, package: Table[string, string]): T
             else:
                 functions[inFunc] &= "\n" & line
 
-    var structFiles: Table[string, string] = initTable[string, string]()
+    result = initTable[string, string]()
 
     for filetype in package.keys:
         var fileContent: string = ""
@@ -105,9 +105,7 @@ proc structFile(file: File, filename: string, package: Table[string, string]): T
         else:
             continue
 
-        structFiles.add(filetype, fileContent)
-
-    return structFiles
+        result.add(filetype, fileContent)
 
 proc enumFile(file: File, filename: string, package: Table[string, string]): Table[string, string] =
     var line: string = ""
@@ -130,7 +128,7 @@ proc enumFile(file: File, filename: string, package: Table[string, string]): Tab
         elif inEnum:
             values.add(words[0])
 
-    var enumFiles: Table[string, string] = initTable[string, string]()
+    result = initTable[string, string]()
 
     for filetype in package.keys:
         var fileContent: string = ""
@@ -149,18 +147,16 @@ proc enumFile(file: File, filename: string, package: Table[string, string]): Tab
         else:
             continue
 
-        enumFiles.add(filetype, fileContent)
-
-    return enumFiles
+        result.add(filetype, fileContent)
 
 proc newFileName(filename: string): Table[string, string] =
     let temp: seq[string] = filename.split('/')
-    var filenames: Table[string, string] = initTable[string, string]()
+    result = initTable[string, string]()
 
     for filetype in filetypes.keys:
         case filetype
         of "go", "nim", "py":
-            filenames.add(
+            result.add(
                 filetype,
                 join(
                     split(
@@ -172,9 +168,7 @@ proc newFileName(filename: string): Table[string, string] =
             var words = split(temp[temp.len() - 1], '_')
             for i in countup(0, words.len() - 1, 1):
                 words[i] = capitalizeAscii(words[i])
-            filenames.add(filetype, join(words))
-
-    return filenames
+            result.add(filetype, join(words))
 
 proc fromFile*(filename: string, header: string = ""): Table[string, string] =
     var fileInfo: seq[string] = filename.split('.')
@@ -212,15 +206,13 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
 
     file.close()
 
-    var generatedFiles: Table[string, string] = initTable[string, string]()
+    result = initTable[string, string]()
 
     for filetype in packages.keys:
-        generatedFiles.add(
+        result.add(
             getOrDefault(packages, filetype) &
             "/" &
             newFileName[filetype] &
             filetype,
             genHeader(filetype, filename, header) & getOrDefault(fileContents, filetype)
         )
-
-    return generatedFiles

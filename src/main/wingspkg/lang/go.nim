@@ -2,35 +2,35 @@ from strutils
 import capitalizeAscii, contains, toLowerAscii, replace, indent, split, unindent
 
 proc types(name: string): string =
-    var arr: string = ""
-    var outType: string = name
+    result = name
+    var arr: bool = false
     if contains(name, "[]"):
-        arr = "[]"
-        outType = replace(name, "[]", "")
+        arr = true
+        result = replace(name, "[]", "")
 
-    case outType
+    case result
     of "int":
-        outType = "int"
+        result = "int"
     of "str":
-        outType = "string"
+        result = "string"
     of "bool":
-        outType = "bool"
+        result = "bool"
     of "date":
-        outType = "time.Time"
+        result = "time.Time"
     else:
-        outType = toLowerAscii(outType) & "." & outType
-
-    return arr & outType
+        result = toLowerAscii(result) & "." & result
+    
+    if arr:
+        result = "[]" & result
 
 proc enumFile*(
     name: string,
     values: seq[string],
     package: string,
 ): string =
-    var enumFile: string = ""
-    enumFile &= "package " & package & "\n\n"
-    enumFile &= "type " & name & " int\n\n"
-    enumFile &= "const ("
+    result = "package " & package & "\n\n"
+    result &= "type " & name & " int\n\n"
+    result &= "const ("
     var count: int = 0
     var content: string = ""
 
@@ -44,7 +44,7 @@ proc enumFile*(
 
         content &= "\n" & value & iota
 
-    return enumFile & indent(content, 4, " ") & "\n)\n"
+    result &= indent(content, 4, " ") & "\n)\n"
 
 proc structFile*(
     name: string,
@@ -53,8 +53,7 @@ proc structFile*(
     functions: string,
     package: string,
 ): string =
-    var structFile: string = ""
-    structFile &= "package " & package & "\n"
+    result = "package " & package & "\n"
     var declarations: string = ""
 
     if imports.len() > 0:
@@ -71,7 +70,7 @@ proc structFile*(
                 declarations &=  "\n" & importDat[0] & " \"" & importDat[1] & "\""
         var after: string = "\n)\n"
 
-        structFile &= before & indent(declarations, 4, " ") & after
+        result &= before & indent(declarations, 4, " ") & after
     
     declarations = ""
     var before = "\ntype " & name & " struct {\n"
@@ -84,11 +83,9 @@ proc structFile*(
             declarations &= capitalizeAscii(field[0]) & " " & types(field[1]) & " `json:\"" & field[2] & "\"`"
     var after = "\n}\n"
 
-    structFile &= before & indent(declarations, 4, " ") & after
+    result &= before & indent(declarations, 4, " ") & after
 
     if functions.len() > 0:
-        structFile &= unindent(functions, 4, " ") & "\n"
+        result &= unindent(functions, 4, " ") & "\n"
 
-    structFile &= "\ntype " & name & "s []" & name
-
-    return structFile
+    result &= "\ntype " & name & "s []" & name

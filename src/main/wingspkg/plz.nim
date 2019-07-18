@@ -3,12 +3,12 @@ from strutils import indent
 proc arr(name: string, arr: seq[string]): string =
     var condition: string = ""
 
-    var before: string = name & " = ["
+    result = name & " = ["
     for i in countup(0, arr.len - 1, 1):
         condition &= "\n'" & arr[i] & "',"
     var after: string = "\n],"
 
-    return before & indent(condition, 4, " ") & after
+    result &= indent(condition, 4, " ") & after
 
 proc goPlzBuild*(
     name: string,
@@ -17,7 +17,7 @@ proc goPlzBuild*(
 ): string =
     var buildRule: string = ""
 
-    var before: string = "go_library("
+    result = "go_library("
     buildRule &= "\nname = '" & name & "',"
     buildRule &= "\nsrcs = ['" & name & ".go'],"
 
@@ -29,4 +29,4 @@ proc goPlzBuild*(
 
     var after: string = "\n)\n"
 
-    return before & indent(buildRule, 4, " ") & after
+    result &= indent(buildRule, 4, " ") & after

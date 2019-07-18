@@ -3,36 +3,31 @@ import contains, indent, replace, split
 
 proc types(name: string): string =
     var arr: bool = false
-    var outType: string = name
+    result = name
 
     if contains(name, "[]"):
         arr = true
-        outType = replace(name, "[]", "")
+        result = replace(name, "[]", "")
 
-    case outType
+    case result
     of "int":
-        outType = "int"
+        result = "int"
     of "str":
-        outType = "string"
+        result = "string"
     of "bool":
-        outType = "bool"
+        result = "bool"
     of "date":
-        outType = "DateTime"
-    else:
-        outType = outType
+        result = "DateTime"
 
     if arr:
-        return "seq[" & outType & "]"
-    else:
-        return outType
+        result = "seq[" & result & "]"
 
 proc enumFile*(
     name: string,
     values: seq[string],
 ): string =
-    var enumFile: string = ""
-    enumFile &= "type\n"
-    enumFile &= indent(name & "* = enum", 4, " ") & "\n"
+    result = "type\n"
+    result &= indent(name & "* = enum", 4, " ") & "\n"
 
     var content: string = ""
     for value in values:
@@ -42,8 +37,7 @@ proc enumFile*(
 
             content &= value & ","
 
-    enumFile &= indent(content, 8, " ")
-    return enumFile
+    result &= indent(content, 8, " ")
 
 proc structFile*(
     name: string,
@@ -51,19 +45,19 @@ proc structFile*(
     fields: seq[string],
     functions: string,
 ): string =
-    var structFile: string = ""
+    result = ""
 
     for toImport in imports:
         if toImport.len < 1:
             continue
 
-        structFile &= "import " & toImport & "\n"
+        result &= "import " & toImport & "\n"
 
     if imports.len() > 0:
-        structFile &= "\n"
+        result &= "\n"
 
-    structFile &= "type\n"
-    structFile &= indent(name & "* = object", 4, " ")
+    result &= "type\n"
+    result &= indent(name & "* = object", 4, " ")
 
     var declaration = ""
 
@@ -77,10 +71,8 @@ proc structFile*(
 
         declaration &= field[2] & "* : " & types(field[1])
 
-    structFile &= "\n" & indent(declaration, 8, " ")
-    structFile &= "\n"
+    result &= "\n" & indent(declaration, 8, " ")
+    result &= "\n"
 
     if functions.len() > 0:
-        structFile &= "\n" & functions
-
-    return structFile
+        result &= "\n" & functions
