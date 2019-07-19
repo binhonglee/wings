@@ -8,7 +8,7 @@
 
 person.struct
 
-```text
+```text hl_lines="3 5"
 ts-filepath path/to/tsfile
 
 ts-import { IWingsStruct }:wings-ts-util
@@ -23,7 +23,7 @@ Person {
 
 TypeScript
 
-```ts
+```ts hl_lines="1 6 10"
 import { WingsStructUtil } from wings-ts-util;
 import Person from 'path/to/tsfile';
 

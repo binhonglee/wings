@@ -11,7 +11,7 @@ from datetime import date
 class Student(People):
     id: int = -1
     name: str = ""
-    class: str = ""
+    cur_class: str = ""
     is_active: bool = True
     year: date = date.today()
     homeworks: list = list()

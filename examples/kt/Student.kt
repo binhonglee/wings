@@ -23,7 +23,7 @@ class Student {
         when (key) {
             "id" -> return "id"
             "name" -> return "name"
-            "curClass" -> return "class"
+            "curClass" -> return "cur_class"
             "isActive" -> return "is_active"
             "year" -> return "year"
             "homeworks" -> return "homeworks"

@@ -41,3 +41,12 @@ Converts `wings` type to Nim type.
 | Argument | Type     | Description                               |
 | :------- | :------- | :---------------------------------------- |
 | `name`   | `string` | The defined `wings` type to be converted. |
+
+#### `typeAssign: string`
+
+Assign the `content` the way it should be based on the `name` (type).
+
+| Argument  | Type     | Description               |
+| :-------- | :------- | :------------------------ |
+| `name`    | `string` | The defined `wings` type. |
+| `content` | `string` | Content to be assigned.   |

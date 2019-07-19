@@ -1,5 +1,7 @@
 from strutils
-import capitalizeAscii, contains, toLowerAscii, replace, indent, split, unindent
+import capitalizeAscii, contains, toLowerAscii,
+    replace, indent, split, unindent
+from ../lib/varname import camelCase
 
 proc types(name: string): string =
     result = name
@@ -57,7 +59,6 @@ proc structFile*(
     var declarations: string = ""
 
     if imports.len() > 0:
-        var before: string = "\nimport ("
         for toImport in imports:
             if toImport.len < 1:
                 continue
@@ -67,23 +68,21 @@ proc structFile*(
             if importDat.len < 2:
                 declarations &= "\n\"" & toImport & "\""
             else:
-                declarations &=  "\n" & importDat[0] & " \"" & importDat[1] & "\""
-        var after: string = "\n)\n"
+                declarations &=  "\n" & importDat[0] &
+                    " \"" & importDat[1] & "\""
+        result &= "\nimport (" & indent(declarations, 4, " ") & "\n)\n"
 
-        result &= before & indent(declarations, 4, " ") & after
-    
     declarations = ""
-    var before = "\ntype " & name & " struct {\n"
-
     for fieldStr in fields:
         var field = fieldStr.split(' ')
-        if field.len() > 2:
+        if field.len() > 1:
             if declarations.len() > 1:
                 declarations &= "\n"
-            declarations &= capitalizeAscii(field[0]) & " " & types(field[1]) & " `json:\"" & field[2] & "\"`"
-    var after = "\n}\n"
+            declarations &= capitalizeAscii(camelCase(field[0])) & " " &
+                types(field[1]) & " `json:\"" & field[0] & "\"`"
 
-    result &= before & indent(declarations, 4, " ") & after
+    result &= "\ntype " & name & " struct {\n" &
+        indent(declarations, 4, " ") & "\n}\n"
 
     if functions.len() > 0:
         result &= unindent(functions, 4, " ") & "\n"

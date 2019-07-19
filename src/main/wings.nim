@@ -1,20 +1,40 @@
-from os import FilePermission, fileExists, paramCount, paramStr, setFilePermissions
+from os
+import FilePermission, fileExists, paramCount, paramStr, setFilePermissions
 from strutils import split
 import tables
 import wingspkg/core
 
+const header: string ="""
+This is a generated file
+
+If you would like to make any changes, please edit the source file instead.
+run `nimble genFile "{SOURCE_FILE}"` upon completion.
+"""
+
 proc toFile(path: string, content: string): void =
     try:
         if fileExists(path):
-            setFilePermissions(path, {FilePermission.fpUserWrite, FilePermission.fpGroupWrite, FilePermission.fpOthersWrite})
+            setFilePermissions(
+                path, {
+                    FilePermission.fpUserWrite,
+                    FilePermission.fpGroupWrite,
+                    FilePermission.fpOthersWrite
+                }
+            )
         writeFile(path, content)
-        setFilePermissions(path, {FilePermission.fpUserRead, FilePermission.fpGroupRead, FilePermission.fpOthersRead})
+        setFilePermissions(
+            path, {
+                FilePermission.fpUserRead,
+                FilePermission.fpGroupRead,
+                FilePermission.fpOthersRead
+            }
+        )
     except:
-        echo "Please create the required folder to host the new files to be created and run this again."
+        echo "Please create the required folder for files to be generated."
 
 proc fromFile(filepath: string): void =
     var source: string = filepath
-    var outputFiles: Table[string, string] = core.fromFile(source)
+    var outputFiles: Table[string, string] = core.fromFile(source, header)
 
     for path in outputFiles.keys:
         toFile(path, outputFiles[path])

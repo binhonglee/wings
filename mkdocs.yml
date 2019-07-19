@@ -4,10 +4,12 @@ site_author: BinHong Lee
 
 theme:
   name: 'material'
+  font: false
 
 repo_url: https://github.com/binhonglee/wings
 
 markdown_extensions:
+  - admonition
   - codehilite
   - pymdownx.superfences
 

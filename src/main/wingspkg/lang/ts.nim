@@ -1,5 +1,6 @@
 from strutils
 import contains, indent, intToStr, split
+from ../lib/varname import camelCase
 
 proc types(name: string): string =
     if contains(name, "[]"):
@@ -86,7 +87,7 @@ proc structFile*(
 
     for fieldStr in fields:
         let field = fieldStr.split(' ')
-        if field.len() < 3:
+        if field.len() < 2:
             continue
         
         if (declaration.len() > 1):
@@ -97,20 +98,26 @@ proc structFile*(
             jsonKey &= "\n"
 
         var typeInit: string = typeInit(field[1])
-        if field.len() > 3:
-            typeInit = field[3]
-
-        declaration &= "public " & field[0] & ": " & types(field[1]) & " = " & typeInit & ";"
+        if field.len() > 2:
+            typeInit = field[2]
+        var fieldName: string = camelCase(field[0])
+        declaration &= "public " & fieldName & ": " &
+            types(field[1]) & " = " & typeInit & ";"
 
         if contains(field[1], "[]"):
-            init &= "\nif (data." & field[2] & " !== \"null\") {\n"
-            init &= indent("this." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";", 4, " ")
+            init &= "\nif (data." & field[0] & " !== null) {\n"
+            init &= indent(
+                "this." & fieldName &
+                " = " & typeAssign(field[1], "data." & field[0]) &
+                ";", 4, " "
+            )
             init &= "\n}"
         else:
-            init &= "this." & field[0] & " = " & typeAssign(field[1], "data." & field[2]) & ";"
+            init &= "this." & fieldName & " = " &
+                typeAssign(field[1], "data." & field[0]) & ";"
         
-        jsonKey &= "case '" & field[0] & "': {\n"
-        jsonKey &= indent("return '" & field[2] & "';", 4, " ")
+        jsonKey &= "case '" & fieldName & "': {\n"
+        jsonKey &= indent("return '" & field[0] & "';", 4, " ")
         jsonKey &= "\n}"
 
     result &= indent(declaration, 4, " ")

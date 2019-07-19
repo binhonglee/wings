@@ -5,7 +5,7 @@ A simple cross language struct and enum file generator. (You might want to use a
 ## Requirements
 
 -   [Nim](https://nim-lang.org/)
-    -   [Nimble](https://github.com/nim-lang/nimble) - Bundled with Nim. (optional)
+    -   [Nimble](https://github.com/nim-lang/nimble) - Bundled with Nim
 -   [Please](https://please.build) (alternative to nimble)
 
 \*_Note: Replace `plz` with `./pleasew` if you do not have please installed._
@@ -13,8 +13,8 @@ A simple cross language struct and enum file generator. (You might want to use a
 ## Supported languages
 
 -   [go](http://golang.org/)
--   [Kotlin](https://kotlinlang.org) (Untested)
--   [Nim](https://nim-lang.org/)
+-   [Kotlin](https://kotlinlang.org) (WIP)
+-   [Nim](https://nim-lang.org/) (WIP)
 -   [Python](https://www.python.org/)
 -   [TypeScript](https://www.typescriptlang.org)
     -   [Utility package](https://github.com/binhonglee/wings-ts-util)
@@ -26,12 +26,19 @@ A simple cross language struct and enum file generator. (You might want to use a
 | `int`    | `int`       | `Int`             | `int`       | `int`  | `number`   |
 | `str`    | `string`    | `String`          | `string`    | `str`  | `string`   |
 | `bool`   | `bool`      | `Boolean`         | `bool`      | `bool` | `boolean`  |
-| `date`   | `time.Time` | `Date`            | `DateTime`  | `date` | `Date`     |
+| `date`   | `time.Time` | `Date`            | -           | `date` | `Date`     |
 | `[]type` | `[]type`    | `ArrayList<type>` | `seq[type]` | `list` | `[]`       |
 
-_Unsupported types are initialized as custom struct / classes unless specified otherwise._
+!!! info
+    Unsupported types are initialized as custom struct / classes unless specified otherwise.
 
-Run `nimble genFile "{filepath}"` or `plz run //src:wings -- "{filepath}"` to generate the files.
+!!! warning "Nim `date`"
+    It is currently unsupported since I haven't figure out how to parse ISOString time properly from `string` in Nim.
+
+Run `plz run //src:wings -- "{filepath}"` to generate the files.
+
+!!! warning "Issue with `nimble`"
+    I also have a task made for nimble (`nimble genFile "{filepath}"`) but its currently broken for the latest version (see official issue [here](https://github.com/nim-lang/nimble/issues/633)). If you have an older version of nimble, it should work as intended.
 
 ## Struct
 
@@ -46,20 +53,22 @@ ts-filepath some/files
 
 go-import time
 go-import homework:path/to/homework
-ts-import { IWingsStruct }:wings-ts-util
-ts-import Homework:path/to/Homework
 kt-import java.util.ArrayList
 nim-import times
+py-import datetime:date
+ts-import { IWingsStruct }:wings-ts-util
+ts-import Homework:path/to/Homework
 
-ts-implement IWingsStruct
+py-implement People
+ts-implement People
 
 Student {
-    id          int         id          -1
-    name        str         name
-    class       str         class
-    isActive    bool        is_active   true
-    year        date        year
-    homeworks   []Homework  homeworks
+    id          int          -1
+    name        str
+    cur_class   str
+    is_active   bool         true
+    year        date
+    homeworks   []Homework
 }
 
 tsFunc(
@@ -91,7 +100,7 @@ import (
 type Student struct {
     Id int `json:"id"`
     Name string `json:"name"`
-    CurClass string `json:"class"`
+    CurClass string `json:"cur_class"`
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
     Homeworks []homework.Homework `json:"homeworks"`
@@ -126,7 +135,7 @@ class Student {
         when (key) {
             "id" -> return "id"
             "name" -> return "name"
-            "curClass" -> return "class"
+            "curClass" -> return "cur_class"
             "isActive" -> return "is_active"
             "year" -> return "year"
             "homeworks" -> return "homeworks"
@@ -144,16 +153,27 @@ class Student {
 # 
 # Source: student.struct
 
+import json
 import times
 
 type
     Student* = object
         id* : int
         name* : string
-        class* : string
-        is_active* : bool
+        curClass* : string
+        isActive* : bool
         year* : DateTime
         homeworks* : seq[Homework]
+
+proc parse*(student: var Student, data: string): void =
+    let jsonOutput = parseJson(data)
+    
+    student.id = jsonOutput["id"].getInt()
+    student.name = jsonOutput["name"].getStr()
+    student.curClass = jsonOutput["cur_class"].getStr()
+    student.isActive = jsonOutput["is_active"].getBool()
+    student.year = now()  # as you can see, this isn't working
+    student.homeworks = jsonOutput["homeworks"].getElems()
 ```
 
 ```py tab="python/student.py"
@@ -170,7 +190,7 @@ from datetime import date
 class Student(People):
     id: int = -1
     name: str = ""
-    class: str = ""
+    cur_class: str = ""
     is_active: bool = True
     year: date = date.today()
     homeworks: list = list()
@@ -189,10 +209,10 @@ class Student(People):
  * Source: student.struct
  */
 
-import IWingsStruct from 'wings-ts-util';
-import { Homework } from 'path/to/Homework';
+import { IWingsStruct } from 'wings-ts-util';
+import Homework from 'path/to/Homework';
 
-export default class Student implements IWingsStruct {
+export default class Student implements People {
     [key: string]: any;
     public id: number = -1;
     public name: string = '';
@@ -205,7 +225,7 @@ export default class Student implements IWingsStruct {
         try {
             this.id = data.id;
             this.name = data.name;
-            this.curClass = data.class;
+            this.curClass = data.cur_class;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
             
@@ -227,7 +247,7 @@ export default class Student implements IWingsStruct {
                 return 'name';
             }
             case 'curClass': {
-                return 'class';
+                return 'cur_class';
             }
             case 'isActive': {
                 return 'is_active';

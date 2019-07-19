@@ -1,5 +1,6 @@
 from strutils
 import contains, indent, replace, split
+from ../lib/varname import camelCase
 
 proc types(name: string): string =
     var arr: bool = false
@@ -83,7 +84,7 @@ proc structFile*(
 
     for fieldStr in fields:
         let field = fieldStr.split(' ')
-        if field.len() < 3:
+        if field.len() < 2:
             continue
 
         if (declaration.len() > 1):
@@ -91,11 +92,11 @@ proc structFile*(
             jsonKey &= "\n"
         
         var typeInit: string = typeInit(field[1])
-        if field.len() > 3:
-            typeInit = field[3]
-
-        declaration &= "var " & field[0] & ": " & types(field[1]) & " = " & typeInit
-        jsonKey &= "\"" & field[0] & "\" -> return \"" & field[2] & "\""
+        if field.len() > 2:
+            typeInit = field[2]
+        var fieldName: string = camelCase(field[0])
+        declaration &= "var " & fieldName & ": " & types(field[1]) & " = " & typeInit
+        jsonKey &= "\"" & fieldName & "\" -> return \"" & field[0] & "\""
 
     result &= indent(declaration, 4, " ")
     result &= "\n\n"

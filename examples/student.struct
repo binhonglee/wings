@@ -16,12 +16,12 @@ py-implement People
 ts-implement People
 
 Student {
-    id          int         id          -1
-    name        str         name
-    curClass    str         class
-    isActive    bool        is_active   true
-    year        date        year
-    homeworks   []Homework  homeworks
+    id          int        -1
+    name        str
+    cur_class   str
+    is_active   bool       true
+    year        date
+    homeworks   []Homework
 }
 
 tsFunc(

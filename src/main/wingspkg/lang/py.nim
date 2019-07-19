@@ -81,16 +81,16 @@ proc structFile*(
     var declaration: string = ""
     for fieldStr in fields:
         var field = fieldStr.split(' ')
-        if field.len() > 2:
+        if field.len() > 1:
             if declaration.len() > 1:
                 declaration &= "\n"
 
             var varInit: string = typeInit(field[1])
-            if field.len() > 3:
-                varInit = field[3]
+            if field.len() > 2:
+                varInit = field[2]
                 if field[1] == "bool":
                     varInit = capitalizeAscii(varInit)
-            declaration &= field[2] & ": " & types(field[1]) & " = " & varInit
+            declaration &= field[0] & ": " & types(field[1]) & " = " & varInit
 
     result &= indent(declaration, 4, " ") & "\n"
     result &= indent(

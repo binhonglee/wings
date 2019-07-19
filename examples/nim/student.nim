@@ -5,13 +5,24 @@
 # 
 # Source: examples/student.struct
 
+import json
 import times
 
 type
     Student* = object
         id* : int
         name* : string
-        class* : string
-        is_active* : bool
+        curClass* : string
+        isActive* : bool
         year* : DateTime
         homeworks* : seq[Homework]
+
+proc parse*(student: var Student, data: string): void =
+    let jsonOutput = parseJson(data)
+    
+    student.id = jsonOutput["id"].getInt()
+    student.name = jsonOutput["name"].getStr()
+    student.curClass = jsonOutput["cur_class"].getStr()
+    student.isActive = jsonOutput["is_active"].getBool()
+    student.year = now()
+    student.homeworks = jsonOutput["homeworks"].getElems()

@@ -23,7 +23,7 @@ export default class Student implements People {
         try {
             this.id = data.id;
             this.name = data.name;
-            this.curClass = data.class;
+            this.curClass = data.cur_class;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
             
@@ -45,7 +45,7 @@ export default class Student implements People {
                 return 'name';
             }
             case 'curClass': {
-                return 'class';
+                return 'cur_class';
             }
             case 'isActive': {
                 return 'is_active';

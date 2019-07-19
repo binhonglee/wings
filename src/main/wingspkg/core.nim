@@ -1,7 +1,6 @@
 from strutils
 import capitalizeAscii, contains, join, normalize, parseEnum, removeSuffix, split, splitWhitespace
-from sequtils
-import foldr
+from sequtils import foldr
 import tables
 import lib/header
 import lang/go, lang/kt, lang/nim, lang/py, lang/ts
@@ -15,7 +14,11 @@ const filetypes: Table[string, int] =
         ("ts", 4),
     ])
 
-proc structFile(file: File, filename: string, package: Table[string, string]): Table[string, string] =
+proc structFile(
+    file: File,
+    filename: string,
+    package: Table[string, string]
+): Table[string, string] =
     var line: string = ""
 
     var inStruct: bool = false
@@ -107,7 +110,11 @@ proc structFile(file: File, filename: string, package: Table[string, string]): T
 
         result.add(filetype, fileContent)
 
-proc enumFile(file: File, filename: string, package: Table[string, string]): Table[string, string] =
+proc enumFile(
+    file: File,
+    filename: string,
+    package: Table[string, string]
+): Table[string, string] =
     var line: string = ""
     var name: string = ""
 
@@ -214,5 +221,6 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
             "/" &
             newFileName[filetype] &
             filetype,
-            genHeader(filetype, filename, header) & getOrDefault(fileContents, filetype)
+            genHeader(filetype, filename, header) &
+            getOrDefault(fileContents, filetype),
         )
