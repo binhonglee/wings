@@ -40,10 +40,12 @@ export class WingsStructUtil {
                     if (val.length === 0) {
                         return 'null';
                     } else {
-                        let toReturn = '';
+                        let toReturn = '[';
                         for (const item of val) {
-                            toReturn += this.stringify(item);
+                            toReturn += this.stringify(item) + ',';
                         }
+                        toReturn = toReturn.slice(0, -1);
+                        toReturn += ']';
                         return toReturn;
                     }
                 } else if (this.isIWingsStruct(val)) {

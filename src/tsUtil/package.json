@@ -1,6 +1,6 @@
 {
     "name": "wings-ts-util",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Utility class for Wings (a codegen module).",
     "main": "index.ts",
     "scripts": {
@@ -14,8 +14,8 @@
     },
     "author": "BinHong Lee",
     "license": "MIT",
-    "dependencies": {},
     "devDependencies": {
+        "ts-node": "8.3.0",
         "typescript": "3.5.3"
     }
 }
