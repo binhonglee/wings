@@ -1,0 +1,1342 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A simple cross language struct and enum file generator.">
+      
+      
+      
+        <meta name="author" content="BinHong Lee">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>wings</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+    
+    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#wings" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="." title="wings" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              wings
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Home
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/binhonglee/wings/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="." title="wings" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    wings
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/binhonglee/wings/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Home
+      </label>
+    
+    <a href="." title="Home" class="md-nav__link md-nav__link--active">
+      Home
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" title="Requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-languages" title="Supported languages" class="md-nav__link">
+    Supported languages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-types" title="Supported types" class="md-nav__link">
+    Supported types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#struct" title="Struct" class="md-nav__link">
+    Struct
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" title="Enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filepath" title="filepath" class="md-nav__link">
+    filepath
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import" title="import" class="md-nav__link">
+    import
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implement" title="implement" class="md-nav__link">
+    implement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#langfunc" title="{lang}Func" class="md-nav__link">
+    {lang}Func
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Main package
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Main package
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/" title="wings.nim" class="md-nav__link">
+      wings.nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      wingspkg
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        wingspkg
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/core/" title="core.nim" class="md-nav__link">
+      core.nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/plz/" title="plz.nim" class="md-nav__link">
+      plz.nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2-3" type="checkbox" id="nav-2-2-3">
+    
+    <label class="md-nav__link" for="nav-2-2-3">
+      lang
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-2-3">
+        lang
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lang/go/" title="Go" class="md-nav__link">
+      Go
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lang/kt/" title="Kotlin" class="md-nav__link">
+      Kotlin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lang/nim/" title="Nim" class="md-nav__link">
+      Nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lang/py/" title="Python" class="md-nav__link">
+      Python
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lang/ts/" title="TypeScript" class="md-nav__link">
+      TypeScript
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2-4" type="checkbox" id="nav-2-2-4">
+    
+    <label class="md-nav__link" for="nav-2-2-4">
+      lib
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-2-4">
+        lib
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lib/header/" title="header.nim" class="md-nav__link">
+      header.nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lib/varname/" title="varname.nim" class="md-nav__link">
+      varname.nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lib/wenum/" title="wenum.nim" class="md-nav__link">
+      wenum.nim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/lib/wstruct/" title="wstruct.nim" class="md-nav__link">
+      wstruct.nim
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2-5" type="checkbox" id="nav-2-2-5">
+    
+    <label class="md-nav__link" for="nav-2-2-5">
+      util
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-2-5">
+        util
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/util/wenumutil/" title="wenumutil.md" class="md-nav__link">
+      wenumutil.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="main/wingspkg/util/wstructutil/" title="wstructutil.md" class="md-nav__link">
+      wstructutil.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Utility classes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Utility classes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-1" type="checkbox" id="nav-3-1">
+    
+    <label class="md-nav__link" for="nav-3-1">
+      TypeScript
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-1">
+        TypeScript
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="tsUtil/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="tsUtil/index.ts/" title="Source" class="md-nav__link">
+      Source
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="license/" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" title="Requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-languages" title="Supported languages" class="md-nav__link">
+    Supported languages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-types" title="Supported types" class="md-nav__link">
+    Supported types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#struct" title="Struct" class="md-nav__link">
+    Struct
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum" title="Enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filepath" title="filepath" class="md-nav__link">
+    filepath
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import" title="import" class="md-nav__link">
+    import
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implement" title="implement" class="md-nav__link">
+    implement
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#langfunc" title="{lang}Func" class="md-nav__link">
+    {lang}Func
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/binhonglee/wings/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="wings">wings</h1>
+<p>A simple cross language struct and enum file generator. (You might want to use a linter with this to clean up some trailing whitespaces and uneven tabbings.)</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><a href="https://nim-lang.org/">Nim</a><ul>
+<li><a href="https://github.com/nim-lang/nimble">Nimble</a> - Bundled with Nim</li>
+</ul>
+</li>
+<li><a href="https://please.build">Please</a> (alternative to nimble)</li>
+</ul>
+<p>*<em>Note: Replace <code>plz</code> with <code>./pleasew</code> if you do not have please installed.</em></p>
+<h2 id="supported-languages">Supported languages</h2>
+<ul>
+<li><a href="http://golang.org/">go</a></li>
+<li><a href="https://kotlinlang.org">Kotlin</a> (WIP)</li>
+<li><a href="https://nim-lang.org/">Nim</a> (WIP)</li>
+<li><a href="https://www.python.org/">Python</a></li>
+<li><a href="https://www.typescriptlang.org">TypeScript</a><ul>
+<li><a href="https://github.com/binhonglee/wings-ts-util">Utility package</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="supported-types">Supported types</h2>
+<table>
+<thead>
+<tr>
+<th align="left">wings</th>
+<th align="left">Go</th>
+<th align="left">Kotlin</th>
+<th align="left">Nim</th>
+<th align="left">Python</th>
+<th align="left">TypeScript</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>int</code></td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>Int</code></td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>int</code></td>
+<td align="left"><code>number</code></td>
+</tr>
+<tr>
+<td align="left"><code>str</code></td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>str</code></td>
+<td align="left"><code>string</code></td>
+</tr>
+<tr>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>Boolean</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>boolean</code></td>
+</tr>
+<tr>
+<td align="left"><code>date</code></td>
+<td align="left"><code>time.Time</code></td>
+<td align="left"><code>Date</code></td>
+<td align="left">-</td>
+<td align="left"><code>date</code></td>
+<td align="left"><code>Date</code></td>
+</tr>
+<tr>
+<td align="left"><code>[]type</code></td>
+<td align="left"><code>[]type</code></td>
+<td align="left"><code>ArrayList&lt;type&gt;</code></td>
+<td align="left"><code>seq[type]</code></td>
+<td align="left"><code>list</code></td>
+<td align="left"><code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Unsupported types are initialized as custom struct / classes unless specified otherwise.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Nim <code>date</code></p>
+<p>It is currently unsupported since I haven't figure out how to parse ISOString time properly from <code>string</code> in Nim.</p>
+</div>
+<p>Run <code>plz run //src:wings -- "{filepath}"</code> to generate the files.</p>
+<div class="admonition warning">
+<p class="admonition-title">Issue with <code>nimble</code></p>
+<p>I also have a task made for nimble (<code>nimble genFile "{filepath}"</code>) but its currently broken for the latest version (see official issue <a href="https://github.com/nim-lang/nimble/issues/633">here</a>). If you have an older version of nimble, it should work as intended.</p>
+</div>
+<h2 id="struct">Struct</h2>
+<p>Input file:</p>
+<div class="codehilite"><pre><span></span>go-filepath classroom
+kt-filepath another
+nim-filepath folder
+py-filepath python
+ts-filepath some/files
+
+go-import time
+go-import homework:path/to/homework
+kt-import java.util.ArrayList
+nim-import times
+py-import datetime:date
+ts-import { IWingsStruct }:wings-ts-util
+ts-import Homework:path/to/Homework
+
+py-implement People
+ts-implement People
+
+Student {
+    id          int          -1
+    name        str
+    cur_class   str
+    is_active   bool         true
+    year        date
+    homeworks   []Homework
+}
+
+tsFunc(
+    public addHomework(hw: Homework): void {
+        this.Homeworks.push(hw);
+    }
+)
+</pre></div>
+
+<p>Output files:</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">classroom/student.go</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a generated file</span>
+<span class="cm"> * </span>
+<span class="cm"> * If you would like to make any changes, please edit the source file instead.</span>
+<span class="cm"> * run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Source: student.struct</span>
+<span class="cm"> */</span>
+
+<span class="kn">package</span> <span class="nx">classroom</span>
+
+<span class="kn">import</span> <span class="p">(</span>    
+    <span class="s">&quot;time&quot;</span>
+    <span class="nx">homework</span> <span class="s">&quot;path/to/homework&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Student</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Id</span> <span class="kt">int</span> <span class="s">`json:&quot;id&quot;`</span>
+    <span class="nx">Name</span> <span class="kt">string</span> <span class="s">`json:&quot;name&quot;`</span>
+    <span class="nx">CurClass</span> <span class="kt">string</span> <span class="s">`json:&quot;cur_class&quot;`</span>
+    <span class="nx">IsActive</span> <span class="kt">bool</span> <span class="s">`json:&quot;is_active&quot;`</span>
+    <span class="nx">Year</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`json:&quot;year&quot;`</span>
+    <span class="nx">Homeworks</span> <span class="p">[]</span><span class="nx">homework</span><span class="p">.</span><span class="nx">Homework</span> <span class="s">`json:&quot;homeworks&quot;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Students</span> <span class="p">[]</span><span class="nx">Student</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">another/Student.kt</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a generated file</span>
+<span class="cm"> * </span>
+<span class="cm"> * If you would like to make any changes, please edit the source file instead.</span>
+<span class="cm"> * run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Source: student.struct</span>
+<span class="cm"> */</span>
+
+<span class="k">package</span> <span class="nn">another</span>
+
+<span class="k">import</span> <span class="nn">java.util.ArrayList</span>
+
+<span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span>
+    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+    <span class="k">var</span> <span class="py">curClass</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+    <span class="k">var</span> <span class="py">isActive</span><span class="p">:</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">true</span>
+    <span class="k">var</span> <span class="py">year</span><span class="p">:</span> <span class="n">Date</span> <span class="p">=</span> <span class="n">Date</span><span class="p">()</span>
+    <span class="k">var</span> <span class="py">homeworks</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Homework</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Homework</span><span class="p">&gt;()</span>
+
+    <span class="k">fun</span> <span class="nf">toJsonKey</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">):</span> <span class="n">string</span> <span class="p">{</span>
+        <span class="k">when</span> <span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="s">&quot;id&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;id&quot;</span>
+            <span class="s">&quot;name&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;name&quot;</span>
+            <span class="s">&quot;curClass&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;cur_class&quot;</span>
+            <span class="s">&quot;isActive&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;is_active&quot;</span>
+            <span class="s">&quot;year&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;year&quot;</span>
+            <span class="s">&quot;homeworks&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;homeworks&quot;</span>
+            <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="n">key</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_2" />
+<label for="__tab_1_2">folder/student.nim</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c"># This is a generated file</span>
+<span class="c"># </span>
+<span class="c"># If you would like to make any changes, please edit the source file instead.</span>
+<span class="c"># run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="c"># </span>
+<span class="c"># Source: student.struct</span>
+
+<span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">times</span>
+
+<span class="k">type</span>
+    <span class="n">Student</span><span class="o">*</span> <span class="o">=</span> <span class="k">object</span>
+        <span class="n">id</span><span class="o">*</span> <span class="p">:</span> <span class="kt">int</span>
+        <span class="n">name</span><span class="o">*</span> <span class="p">:</span> <span class="kt">string</span>
+        <span class="n">curClass</span><span class="o">*</span> <span class="p">:</span> <span class="kt">string</span>
+        <span class="n">isActive</span><span class="o">*</span> <span class="p">:</span> <span class="kt">bool</span>
+        <span class="n">year</span><span class="o">*</span> <span class="p">:</span> <span class="n">DateTime</span>
+        <span class="n">homeworks</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">Homework</span><span class="o">]</span>
+
+<span class="k">proc </span><span class="nf">parse</span><span class="o">*</span><span class="p">(</span><span class="n">student</span><span class="p">:</span> <span class="kd">var</span> <span class="n">Student</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kt">string</span><span class="p">):</span> <span class="n">void</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">jsonOutput</span> <span class="o">=</span> <span class="n">parseJson</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">student</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">jsonOutput</span><span class="o">[</span><span class="s">&quot;id&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">getInt</span><span class="p">()</span>
+    <span class="n">student</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">jsonOutput</span><span class="o">[</span><span class="s">&quot;name&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">getStr</span><span class="p">()</span>
+    <span class="n">student</span><span class="p">.</span><span class="n">curClass</span> <span class="o">=</span> <span class="n">jsonOutput</span><span class="o">[</span><span class="s">&quot;cur_class&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">getStr</span><span class="p">()</span>
+    <span class="n">student</span><span class="p">.</span><span class="n">isActive</span> <span class="o">=</span> <span class="n">jsonOutput</span><span class="o">[</span><span class="s">&quot;is_active&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">getBool</span><span class="p">()</span>
+    <span class="n">student</span><span class="p">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>  <span class="c"># as you can see, this isn&#39;t working</span>
+    <span class="n">student</span><span class="p">.</span><span class="n">homeworks</span> <span class="o">=</span> <span class="n">jsonOutput</span><span class="o">[</span><span class="s">&quot;homeworks&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">getElems</span><span class="p">()</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_3" />
+<label for="__tab_1_3">python/student.py</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1"># This is a generated file</span>
+<span class="c1"># </span>
+<span class="c1"># If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1"># run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="c1"># </span>
+<span class="c1"># Source: student.struct</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">People</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">cur_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">year</span><span class="p">:</span> <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="n">homeworks</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_4" />
+<label for="__tab_1_4">some/files/Student.ts</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a generated file</span>
+<span class="cm"> * </span>
+<span class="cm"> * If you would like to make any changes, please edit the source file instead.</span>
+<span class="cm"> * run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Source: student.struct</span>
+<span class="cm"> */</span>
+
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">IWingsStruct</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Homework</span> <span class="nx">from</span> <span class="s1">&#39;path/to/Homework&#39;</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">Student</span> <span class="kr">implements</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">]</span><span class="o">:</span> <span class="nx">any</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">id</span>: <span class="kt">number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">name</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">curClass</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">isActive</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="kr">public</span> <span class="nx">year</span>: <span class="kt">Date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+    <span class="kr">public</span> <span class="nx">homeworks</span><span class="o">:</span> <span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="kr">public</span> <span class="nx">init</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="kr">boolean</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">curClass</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">cur_class</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">isActive</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">is_active</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">year</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">homeworks</span> <span class="o">!==</span> <span class="s2">&quot;null&quot;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">homeworks</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">homeworks</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kr">public</span> <span class="nx">toJsonKey</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;id&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">case</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;name&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">case</span> <span class="s1">&#39;curClass&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;cur_class&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">case</span> <span class="s1">&#39;isActive&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;is_active&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">case</span> <span class="s1">&#39;year&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;year&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">case</span> <span class="s1">&#39;homeworks&#39;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s1">&#39;homeworks&#39;</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">key</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kr">public</span> <span class="nx">addHomework</span><span class="p">(</span><span class="nx">hw</span>: <span class="kt">Homework</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">Homeworks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">hw</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></div>
+</div>
+<p>The format of the fields goes from left to right in such order "field name", "field type", "field JSON name", and "initialize as" (optional, not used in Go and Nim).</p>
+<p><em>*Note: There is no gurranttee that "initialize as" field goes through a proper conversion or localization based on the targetted output languages so ideally you want to make sure it works with all versions of output that will be using it.</em></p>
+<h2 id="enum">Enum</h2>
+<p>Input file:</p>
+<div class="codehilite"><pre><span></span>go-filepath path
+kt-filepath to
+nim-filepath some
+py-filepath python
+ts-filepath file/person
+
+Emotion {
+    Accomplished
+    Angry
+    Annoyed
+    Appalled
+    Excited
+    Exhausted
+    FeelsGood
+    Frustrated
+    Happy
+    Meh
+    Sad
+    Satisfied
+}
+</pre></div>
+
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">path/emotion.go</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a generated file</span>
+<span class="cm"> * </span>
+<span class="cm"> * If you would like to make any changes, please edit the source file instead.</span>
+<span class="cm"> * run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Source: emotion.enum</span>
+<span class="cm"> */</span>
+
+<span class="kn">package</span> <span class="nx">path</span>
+
+<span class="kd">type</span> <span class="nx">Emotion</span> <span class="kt">int</span>
+
+<span class="kd">const</span> <span class="p">(</span>    
+    <span class="nx">Accomplished</span> <span class="p">=</span> <span class="kc">iota</span>
+    <span class="nx">Angry</span>
+    <span class="nx">Annoyed</span>
+    <span class="nx">Appalled</span>
+    <span class="nx">Excited</span>
+    <span class="nx">Exhausted</span>
+    <span class="nx">FeelsGood</span>
+    <span class="nx">Frustrated</span>
+    <span class="nx">Happy</span>
+    <span class="nx">Meh</span>
+    <span class="nx">Sad</span>
+    <span class="nx">Satisfied</span>
+<span class="p">)</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">to/Emotion.kt</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a generated file</span>
+<span class="cm"> * </span>
+<span class="cm"> * If you would like to make any changes, please edit the source file instead.</span>
+<span class="cm"> * run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Source: emotion.enum</span>
+<span class="cm"> */</span>
+
+<span class="k">package</span> <span class="nn">to</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">Emotion</span> <span class="p">{</span>    
+    <span class="n">Accomplished</span><span class="p">,</span>
+    <span class="n">Angry</span><span class="p">,</span>
+    <span class="n">Annoyed</span><span class="p">,</span>
+    <span class="n">Appalled</span><span class="p">,</span>
+    <span class="n">Excited</span><span class="p">,</span>
+    <span class="n">Exhausted</span><span class="p">,</span>
+    <span class="n">FeelsGood</span><span class="p">,</span>
+    <span class="n">Frustrated</span><span class="p">,</span>
+    <span class="n">Happy</span><span class="p">,</span>
+    <span class="n">Meh</span><span class="p">,</span>
+    <span class="n">Sad</span><span class="p">,</span>
+    <span class="n">Satisfied</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_2" />
+<label for="__tab_2_2">some/emotion.nim</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c"># This is a generated file</span>
+<span class="c"># </span>
+<span class="c"># If you would like to make any changes, please edit the source file instead.</span>
+<span class="c"># run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="c"># </span>
+<span class="c"># Source: emotion.enum</span>
+
+<span class="k">type</span>
+    <span class="n">Emotion</span><span class="o">*</span> <span class="o">=</span> <span class="k">enum</span>
+        <span class="n">Accomplished</span><span class="p">,</span>
+        <span class="n">Angry</span><span class="p">,</span>
+        <span class="n">Annoyed</span><span class="p">,</span>
+        <span class="n">Appalled</span><span class="p">,</span>
+        <span class="n">Excited</span><span class="p">,</span>
+        <span class="n">Exhausted</span><span class="p">,</span>
+        <span class="n">FeelsGood</span><span class="p">,</span>
+        <span class="n">Frustrated</span><span class="p">,</span>
+        <span class="n">Happy</span><span class="p">,</span>
+        <span class="n">Meh</span><span class="p">,</span>
+        <span class="n">Sad</span><span class="p">,</span>
+        <span class="n">Satisfied</span><span class="p">,</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_3" />
+<label for="__tab_2_3">python/emotion.py</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="c1"># This is a generated file</span>
+<span class="c1"># </span>
+<span class="c1"># If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1"># run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="c1"># </span>
+<span class="c1"># Source: emotion.enum</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
+
+<span class="k">class</span> <span class="nc">Emotion</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">Accomplished</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Angry</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Annoyed</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Appalled</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Excited</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Exhausted</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">FeelsGood</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Frustrated</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Happy</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Meh</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Sad</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">Satisfied</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_4" />
+<label for="__tab_2_4">file/person/Emotion.ts</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * This is a generated file</span>
+<span class="cm"> * </span>
+<span class="cm"> * If you would like to make any changes, please edit the source file instead.</span>
+<span class="cm"> * run `nimble genFile &quot;{SOURCE_FILE}&quot;` upon completion.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Source: emotion.enum</span>
+<span class="cm"> */</span>
+
+<span class="kr">enum</span> <span class="nx">Emotion</span><span class="p">{</span>    
+    <span class="nx">Accomplished</span><span class="p">,</span>
+    <span class="nx">Angry</span><span class="p">,</span>
+    <span class="nx">Annoyed</span><span class="p">,</span>
+    <span class="nx">Appalled</span><span class="p">,</span>
+    <span class="nx">Excited</span><span class="p">,</span>
+    <span class="nx">Exhausted</span><span class="p">,</span>
+    <span class="nx">FeelsGood</span><span class="p">,</span>
+    <span class="nx">Frustrated</span><span class="p">,</span>
+    <span class="nx">Happy</span><span class="p">,</span>
+    <span class="nx">Meh</span><span class="p">,</span>
+    <span class="nx">Sad</span><span class="p">,</span>
+    <span class="nx">Satisfied</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Emotion</span><span class="p">;</span>
+</pre></div></div>
+</div>
+<h2 id="filepath">filepath</h2>
+<p>Basically the path location of where the generated file lives relative to where the build is ran (which if you use Please or Nimble as suggested, it will always be at the top level folder of this project - <code>wings/</code>).</p>
+<p>If the namespace for a specific language is not defined, the file for that language will not be generated.</p>
+<h2 id="import">import</h2>
+<p>Usually the <code>include</code> or <code>import</code> statement required for some part of the file to work properly. (In this case, its mostly external classes or enums for custom typing.)</p>
+<h2 id="implement">implement</h2>
+<p>In many occassion, your struct or object might be implementing a separate interface class. Use this to specify the class that it is implementing. (There is not support for this in <code>go</code> since it would already inherently associate your struct to the interface if you implemented all the functions and variables defined in the interface.)</p>
+<h2 id="langfunc">{lang}Func</h2>
+<p>Specific functions for specific programming languages. Ideally, you should have a separate utility classes that do all the other operations. This is mostly designed to be used for defining functions in an interface that the struct / class is implementing.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="main/" title="wings.nim" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                wings.nim
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      
+    
+  </body>
+</html>
