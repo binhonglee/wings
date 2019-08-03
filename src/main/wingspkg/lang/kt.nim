@@ -1,6 +1,8 @@
 from strutils
 import contains, indent, replace, split
+from tables import getOrDefault
 from ../lib/varname import camelCase
+import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
     var arr: bool = false
@@ -40,7 +42,7 @@ proc typeInit(name: string): string =
     else:
         result &= "()"
 
-proc enumFile*(
+proc wEnumFile(
     name: string,
     values: seq[string],
     package: string,
@@ -55,7 +57,7 @@ proc enumFile*(
 
     result &= indent(content, 4, " ") & "\n}\n"
 
-proc structFile*(
+proc wStructFile(
     name: string,
     imports: seq[string],
     fields: seq[string],
@@ -116,3 +118,17 @@ proc structFile*(
         result &= "\n" & functions
     
     result &= "\n}\n"
+
+proc genWEnum*(wenum: WEnum): string =
+    var tempPackage: seq[string] = split(wenum.package.getOrDefault("kt"), '/')
+    result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1])
+
+proc genWStruct*(wstruct: WStruct): string =
+    var tempPackage: seq[string] = split(wstruct.package.getOrDefault("kt"), '/')
+
+    result = wStructFile(
+        wstruct.name, wstruct.imports.getOrDefault("kt"),
+        wstruct.fields, wstruct.functions.getOrDefault("kt"),
+        wstruct.implement.getOrDefault("kt"),
+        tempPackage[tempPackage.len() - 1],
+    )

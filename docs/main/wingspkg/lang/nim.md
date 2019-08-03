@@ -3,34 +3,38 @@
 ## Imports
 
 -   strutils
+    -   capitalizeAscii
     -   contains
     -   indent
+    -   normalize
     -   replace
     -   split
+-   tables
+    -   getOrDefault
+-   [../lib/varname](../lib/varname)
+    -   camelCase
+-   [../lib/wstruct](../lib/wstruct)
+-   [../lib/wenum](../lib/wenum)
 
 ## Functions
 
 ### `public`
 
-#### `enumFile: string`
+#### `genWEnum: string`
 
-Generate the Nim file based on the given enum file info.
+Converts the given `WEnum` object to an enum file.
 
-| Argument | Type          | Description         |
-| :------- | :------------ | :------------------ |
-| `name`   | `string`      | Name of the enum.   |
-| `values` | `seq[string]` | Values of the enum. |
+| Argument | Type    | Description                         |
+| :------- | :------ | :---------------------------------- |
+| `wenum`  | `WEnum` | Object with all information needed. |
 
-#### `structFile: string`
+#### `genWStruct: string`
 
-Generate the Nim file based on the given struct file info.
+Converts the given `WStruct` object to a struct file.
 
-| Argument    | Type          | Description                        |
-| :---------- | :------------ | :--------------------------------- |
-| `name`      | `string`      | Name of the struct.                |
-| `imports`   | `seq[string]` | File imports                       |
-| `fields`    | `seq[string]` | Struct fields.                     |
-| `functions` | `string`      | Additional self defined functions. |
+| Argument  | Type      | Description                         |
+| :-------- | :-------- | :---------------------------------- |
+| `wstruct` | `WStruct` | Object with all information needed. |
 
 ### `private`
 
@@ -50,3 +54,23 @@ Assign the `content` the way it should be based on the `name` (type).
 | :-------- | :------- | :------------------------ |
 | `name`    | `string` | The defined `wings` type. |
 | `content` | `string` | Content to be assigned.   |
+
+#### `wEnumFile: string`
+
+Generate the Nim file with the given info.
+
+| Argument | Type          | Description         |
+| :------- | :------------ | :------------------ |
+| `name`   | `string`      | Name of the enum.   |
+| `values` | `seq[string]` | Values of the enum. |
+
+#### `wStructFile: string`
+
+Generate the Nim file with the given info.
+
+| Argument    | Type          | Description                        |
+| :---------- | :------------ | :--------------------------------- |
+| `name`      | `string`      | Name of the struct.                |
+| `imports`   | `seq[string]` | File imports                       |
+| `fields`    | `seq[string]` | Struct fields.                     |
+| `functions` | `string`      | Additional self defined functions. |

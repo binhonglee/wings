@@ -1,7 +1,9 @@
 from strutils
 import capitalizeAscii, contains, toLowerAscii,
     replace, indent, split, unindent
+from tables import getOrDefault
 from ../lib/varname import camelCase
+import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
     result = name
@@ -21,11 +23,11 @@ proc types(name: string): string =
         result = "time.Time"
     else:
         result = toLowerAscii(result) & "." & result
-    
+
     if arr:
         result = "[]" & result
 
-proc enumFile*(
+proc wEnumFile(
     name: string,
     values: seq[string],
     package: string,
@@ -48,7 +50,7 @@ proc enumFile*(
 
     result &= indent(content, 4, " ") & "\n)\n"
 
-proc structFile*(
+proc wStructFile(
     name: string,
     imports: seq[string],
     fields: seq[string],
@@ -88,3 +90,16 @@ proc structFile*(
         result &= unindent(functions, 4, " ") & "\n"
 
     result &= "\ntype " & name & "s []" & name
+
+proc genWEnum*(wenum: WEnum): string =
+    var tempPackage: seq[string] = split(wenum.package.getOrDefault("go"), '/')
+    result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1])
+
+proc genWStruct*(wstruct: WStruct): string =
+    var tempPackage: seq[string] = split(wstruct.package.getOrDefault("go"), '/')
+
+    result = wStructFile(
+        wstruct.name, wstruct.imports.getOrDefault("go"),
+        wstruct.fields, wstruct.functions.getOrDefault("go"),
+        tempPackage[tempPackage.len() - 1],
+    )

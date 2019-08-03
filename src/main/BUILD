@@ -12,7 +12,11 @@ nim_binary(
         'wingspkg/lang/py.nim',
         'wingspkg/lang/ts.nim',
         'wingspkg/lib/header.nim',
+        'wingspkg/lib/wenum.nim',
+        'wingspkg/lib/wstruct.nim',
         'wingspkg/lib/varname.nim',
+        'wingspkg/util/wenumutil.nim',
+        'wingspkg/util/wstructutil.nim',
     ],
     visibility = ['PUBLIC'],
 )

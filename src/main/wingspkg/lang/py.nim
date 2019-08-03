@@ -1,5 +1,7 @@
 from strutils
 import capitalizeAscii, contains, indent, replace, split
+from tables import getOrDefault
+import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
     if contains(name, "[]"):
@@ -8,6 +10,8 @@ proc types(name: string): string =
     case name
     of "int":
         result = "int"
+    of "float":
+        result = "float"
     of "str":
         result = "str"
     of "bool":
@@ -24,6 +28,8 @@ proc typeInit(name: string): string =
     case name
     of "int":
         result = "-1"
+    of "float":
+        result = "-0.1"
     of "str":
         result = "\"\""
     of "bool":
@@ -33,7 +39,7 @@ proc typeInit(name: string): string =
     else:
         result = name & "()"
 
-proc enumFile*(
+proc wEnumFile(
     name: string,
     values: seq[string],
 ): string =
@@ -49,7 +55,7 @@ proc enumFile*(
 
     result &= indent(content, 4, " ")
 
-proc structFile*(
+proc wStructFile(
     name: string,
     imports: seq[string],
     fields: seq[string],
@@ -100,3 +106,13 @@ proc structFile*(
 
     if functions.len() > 0:
         result &= "\n" & functions & "\n"
+
+proc genWStruct*(wstruct: WStruct): string =
+    result = wStructFile(
+        wstruct.name, wstruct.imports.getOrDefault("py"),
+        wstruct.fields, wstruct.functions.getOrDefault("py"),
+        wstruct.implement.getOrDefault("py"),
+    )
+
+proc genWEnum*(wenum: WEnum): string =
+    result = wEnumFile(wenum.name, wenum.values)

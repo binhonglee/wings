@@ -1,13 +1,18 @@
 from strutils
-import contains, indent, intToStr, split
+import contains, indent, intToStr, replace, split
+from tables import getOrDefault
 from ../lib/varname import camelCase
+import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
+    result = name
+    var arr: bool = false
     if contains(name, "[]"):
-        return "[]"
+        arr = true
+        result = replace(name, "[]", "")
 
-    case name
-    of "int":
+    case result
+    of "int", "float":
         result = "number"
     of "str":
         result = "string"
@@ -15,8 +20,9 @@ proc types(name: string): string =
         result = "boolean"
     of "date":
         result = "Date"
-    else:
-        result = name
+
+    if arr:
+        result &= "[]"
 
 proc typeInit(name: string): string =
     if contains(name, "[]"):
@@ -25,6 +31,8 @@ proc typeInit(name: string): string =
     case name
     of "int":
         result = "-1"
+    of "float":
+        result = "-0.1"
     of "str":
         result = "''"
     of "bool":
@@ -41,7 +49,7 @@ proc typeAssign(name: string, content: string): string =
     else:
         result = content
 
-proc enumFile*(
+proc wEnumFile(
     name: string,
     values: seq[string],
 ): string =
@@ -56,7 +64,7 @@ proc enumFile*(
     result &= "\nexport default " & name & ";\n"
 
 
-proc structFile*(
+proc wStructFile(
     name: string,
     imports: seq[string],
     fields: seq[string],
@@ -152,3 +160,13 @@ proc structFile*(
         result &= "\n" & functions
 
     result &= "\n}\n"
+
+proc genWEnum*(wenum: WEnum): string =
+    result = wEnumFile(wenum.name, wenum.values)
+
+proc genWStruct*(wstruct: WStruct): string =
+    result = wStructFile(
+        wstruct.name, wstruct.imports.getOrDefault("ts"),
+        wstruct.fields, wstruct.functions.getOrDefault("ts"),
+        wstruct.implement.getOrDefault("ts"),
+    )

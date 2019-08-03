@@ -16,8 +16,8 @@ ts-import { IWingsStruct }:wings-ts-util
 ts-implement IWingsStruct
 
 Person {
-    id          int         id          -1
-    name        str         name
+    id      int     -1
+    name    str
 }
 ```
 

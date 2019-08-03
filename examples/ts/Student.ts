@@ -17,7 +17,7 @@ export default class Student implements People {
     public curClass: string = '';
     public isActive: boolean = true;
     public year: Date = new Date();
-    public homeworks: [] = [];
+    public homeworks: Homework[] = [];
     
     public init(data: any): boolean {
         try {
@@ -27,7 +27,7 @@ export default class Student implements People {
             this.isActive = data.is_active;
             this.year = new Date(data.year);
             
-            if (data.homeworks !== "null") {
+            if (data.homeworks !== null) {
                 this.homeworks = data.homeworks;
             }
         } catch (e) {

@@ -23,10 +23,17 @@ nav:
       - lang:
         - Go: main/wingspkg/lang/go.md
         - Kotlin: main/wingspkg/lang/kt.md
-        - Nim : main/wingspkg/lang/nim.md
+        - Nim: main/wingspkg/lang/nim.md
+        - Python: main/wingspkg/lang/py.md
         - TypeScript: main/wingspkg/lang/ts.md
       - lib:
         - header.nim: main/wingspkg/lib/header.md
+        - varname.nim: main/wingspkg/lib/varname.md
+        - wenum.nim: main/wingspkg/lib/wenum.md
+        - wstruct.nim: main/wingspkg/lib/wstruct.md
+      - util:
+        - wenumutil.md: main/wingspkg/util/wenumutil.md
+        - wstructutil.md: main/wingspkg/util/wstructutil.md
   - Utility classes:
     - TypeScript:
       - Overview: tsUtil/index.md

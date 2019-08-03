@@ -14,7 +14,7 @@ import (
     homework "path/to/homework"
 )
 
-type Student struct {
+type Student wstruct {
     Id int `json:"id"`
     Name string `json:"name"`
     CurClass string `json:"cur_class"`

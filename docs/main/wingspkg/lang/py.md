@@ -1,17 +1,15 @@
-# ts.nim
+# py.nim
 
 ## Imports
 
 -   strutils
+    -   capitalizeAscii
     -   contains
     -   indent
-    -   intToStr
     -   replace
     -   split
 -   tables
     -   getOrDefault
--   [../lib/varname](../lib/varname)
-    -   camelCase
 -   [../lib/wstruct](../lib/wstruct)
 -   [../lib/wenum](../lib/wenum)
 
@@ -39,20 +37,11 @@ Converts the given `WStruct` object to a struct file.
 
 #### `types: string`
 
-Converts `wings` type to TypeScript type.
+Converts `wings` type to Python type.
 
-| Argument | Type     | Description               |
-| :------- | :------- | :------------------------ |
-| `name`   | `string` | The defined `wings` type. |
-
-#### `typeAssign: string`
-
-Assign the `content` the way it should be based on the `name` (type).
-
-| Argument  | Type     | Description               |
-| :-------- | :------- | :------------------------ |
-| `name`    | `string` | The defined `wings` type. |
-| `content` | `string` | Content to be assigned.   |
+| Argument | Type     | Description                               |
+| :------- | :------- | :---------------------------------------- |
+| `name`   | `string` | The defined `wings` type to be converted. |
 
 #### `typeInit: string`
 
@@ -64,18 +53,18 @@ Provides the default to be initialzed based on its `wings` type.
 
 #### `wEnumFile: string`
 
-Generate the TypeScript file with the given info.
+Generate the Python file with the given info.
 
-| Name     | Type          | Description         |
+| Argument | Type          | Description         |
 | :------- | :------------ | :------------------ |
 | `name`   | `string`      | Name of the enum.   |
 | `values` | `seq[string]` | Values of the enum. |
 
 #### `wStructFile: string`
 
-Generate the TypeScript file with the given info.
+Generate the Python file with the given info.
 
-| Name        | Type          | Description                         |
+| Argument    | Type          | Description                         |
 | :---------- | :------------ | :---------------------------------- |
 | `name`      | `string`      | Name of the struct.                 |
 | `imports`   | `seq[string]` | File imports                        |
