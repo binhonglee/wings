@@ -15,7 +15,9 @@ export class WingsStructUtil {
         let toReturn = '{';
         for (const key in obj) {
             if (typeof key === 'string') {
-                toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key]) + ',';
+                if (typeof obj[key] !== 'function') {
+                    toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key]) + ',';
+                }
             }
         }
         return toReturn.slice(0, -1) + '}';
@@ -32,6 +34,9 @@ export class WingsStructUtil {
             }
             case 'string': {
                 return this.wrap(val);
+            }
+            case 'boolean': {
+                return String(val);
             }
             default: {
                 if (val instanceof Date) {
