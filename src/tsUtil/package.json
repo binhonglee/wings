@@ -8,7 +8,7 @@
         "build": "npm run clean && tsc -p ./tsconfig.json",
         "test": "mocha",
         "clean": "rm -rf dist",
-	"prepare": "npm run build"
+        "prepare": "npm run build"
     },
     "repository": {
         "type": "git",
