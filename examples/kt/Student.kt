@@ -11,8 +11,9 @@ package kt
 
 import java.util.ArrayList
 
+// Any person who is studying in a class
 class Student {
-    var id: Int = -1
+    var ID: Int = -1
     var name: String = ""
     var curClass: String = ""
     var isActive: Boolean = true
@@ -21,7 +22,7 @@ class Student {
 
     fun toJsonKey(key: string): string {
         when (key) {
-            "id" -> return "id"
+            "ID" -> return "id"
             "name" -> return "name"
             "curClass" -> return "cur_class"
             "isActive" -> return "is_active"

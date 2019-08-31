@@ -60,6 +60,7 @@ proc wStructFile(
     imports: seq[string],
     fields: seq[string],
     functions: string,
+    comment: string,
     implement: string,
 ): string =
     result = "import json\n"
@@ -73,6 +74,9 @@ proc wStructFile(
             result &= "import " & toImport & "\n"
         else:
             result &=  "from " & importDat[0] & " import " & importDat[1] & "\n"
+
+    if comment.len() > 0:
+        result &= "\n" & indent(comment, 1, "#")
 
     if imports.len() > 0:
         result &= "\n"
@@ -111,7 +115,7 @@ proc genWStruct*(wstruct: WStruct): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("py"),
         wstruct.fields, wstruct.functions.getOrDefault("py"),
-        wstruct.implement.getOrDefault("py"),
+        wstruct.comment, wstruct.implement.getOrDefault("py"),
     )
 
 proc genWEnum*(wenum: WEnum): string =

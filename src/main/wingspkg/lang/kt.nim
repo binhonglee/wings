@@ -62,6 +62,7 @@ proc wStructFile(
     imports: seq[string],
     fields: seq[string],
     functions: string,
+    comment: string,
     implement: string,
     package: string,
 ): string =
@@ -73,8 +74,9 @@ proc wStructFile(
 
         result &= "import " & toImport & "\n"
 
-    result &= "\n"
-    result &= "class " & name
+    if comment.len() > 0:
+        result &= "\n" & indent(comment, 2, "/")
+    result &= "\n" & "class " & name
     
     if implement.len() > 0:
         result &= " : " & implement
@@ -129,6 +131,6 @@ proc genWStruct*(wstruct: WStruct): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("kt"),
         wstruct.fields, wstruct.functions.getOrDefault("kt"),
-        wstruct.implement.getOrDefault("kt"),
+        wstruct.comment, wstruct.implement.getOrDefault("kt"),
         tempPackage[tempPackage.len() - 1],
     )

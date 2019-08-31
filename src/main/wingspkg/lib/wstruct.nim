@@ -6,6 +6,7 @@ import tables
 type
     WStruct* = object
         name*: string
+        comment*: string
         fields*: seq[string]
         functions*, implement*, package*: Table[string, string]
         imports*: Table[string, seq[string]]
@@ -13,6 +14,7 @@ type
 proc newWStruct*(): WStruct =
     result = WStruct()
     result.name = ""
+    result.comment = ""
     result.functions = initTable[string, string]()
     result.implement = initTable[string, string]()
     result.package = initTable[string, string]()
@@ -35,7 +37,12 @@ proc parseFile*(wstruct: var WStruct, file: File, filename: string, package: Tab
         var words: seq[string] = line.splitWhitespace()
 
         if not inWStruct and inFunc == "":
-            if words[0].endsWith("-implement"):
+            if words[0] == "#" or words[0] == "//":
+                words.delete(0)
+                if wstruct.comment.len() > 0:
+                    wstruct.comment &= "\n"
+                wstruct.comment &= " " & foldr(words, a & " " & b)
+            elif words[0].endsWith("-implement"):
                 var toImplement: string = words[1]
                 words[0].removeSuffix("-implement")
                 wstruct.implement.add(words[0], toImplement)

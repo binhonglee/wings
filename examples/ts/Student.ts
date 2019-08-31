@@ -10,9 +10,10 @@
 import People from './People';
 import { Homework } from 'path/to/Homework';
 
+// Any person who is studying in a class
 export default class Student implements People {
     [key: string]: any;
-    public id: number = -1;
+    public ID: number = -1;
     public name: string = '';
     public curClass: string = '';
     public isActive: boolean = true;
@@ -21,7 +22,7 @@ export default class Student implements People {
     
     public init(data: any): boolean {
         try {
-            this.id = data.id;
+            this.ID = data.id;
             this.name = data.name;
             this.curClass = data.cur_class;
             this.isActive = data.is_active;
@@ -38,7 +39,7 @@ export default class Student implements People {
     
     public toJsonKey(key: string): string {
         switch (key) {
-            case 'id': {
+            case 'ID': {
                 return 'id';
             }
             case 'name': {

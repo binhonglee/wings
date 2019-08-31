@@ -14,8 +14,9 @@ import (
     homework "path/to/homework"
 )
 
+// Any person who is studying in a class
 type Student struct {
-    Id int `json:"id"`
+    ID int `json:"id"`
     Name string `json:"name"`
     CurClass string `json:"cur_class"`
     IsActive bool `json:"is_active"`

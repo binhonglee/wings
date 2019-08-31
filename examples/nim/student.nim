@@ -8,9 +8,10 @@
 import json
 import times
 
+# Any person who is studying in a class
 type
     Student* = object
-        id* : int
+        ID* : int
         name* : string
         curClass* : string
         isActive* : bool
@@ -20,7 +21,7 @@ type
 proc parse*(student: var Student, data: string): void =
     let jsonOutput = parseJson(data)
     
-    student.id = jsonOutput["id"].getInt()
+    student.ID = jsonOutput["id"].getInt()
     student.name = jsonOutput["name"].getStr()
     student.curClass = jsonOutput["cur_class"].getStr()
     student.isActive = jsonOutput["is_active"].getBool()

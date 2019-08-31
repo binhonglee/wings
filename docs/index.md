@@ -35,7 +35,7 @@ A simple cross language struct and enum file generator. (You might want to use a
 !!! warning "Nim `date`"
     It is currently unsupported since I haven't figure out how to parse ISOString time properly from `string` in Nim.
 
-Run `plz run //src:wings -- "{filepath}"` to generate the files.
+Run `plz run //src/main:wings -- "{filepath}"` to generate the files.
 
 !!! warning "Issue with `nimble`"
     I also have a task made for nimble (`nimble genFile "{filepath}"`) but its currently broken for the latest version (see official issue [here](https://github.com/nim-lang/nimble/issues/633)). If you have an older version of nimble, it should work as intended.
@@ -61,6 +61,8 @@ ts-import Homework:path/to/Homework
 
 py-implement People
 ts-implement People
+
+# Any person who is studying in a class
 
 Student {
     id          int          -1
@@ -98,7 +100,7 @@ import (
 )
 
 type Student struct {
-    Id int `json:"id"`
+    ID int `json:"id"`
     Name string `json:"name"`
     CurClass string `json:"cur_class"`
     IsActive bool `json:"is_active"`
@@ -123,8 +125,9 @@ package another
 
 import java.util.ArrayList
 
+// Any person who is studying in a class
 class Student {
-    var id: Int = -1
+    var ID: Int = -1
     var name: String = ""
     var curClass: String = ""
     var isActive: Boolean = true
@@ -133,7 +136,7 @@ class Student {
 
     fun toJsonKey(key: string): string {
         when (key) {
-            "id" -> return "id"
+            "ID" -> return "id"
             "name" -> return "name"
             "curClass" -> return "cur_class"
             "isActive" -> return "is_active"
@@ -156,9 +159,10 @@ class Student {
 import json
 import times
 
+# Any person who is studying in a class
 type
     Student* = object
-        id* : int
+        ID* : int
         name* : string
         curClass* : string
         isActive* : bool
@@ -168,7 +172,7 @@ type
 proc parse*(student: var Student, data: string): void =
     let jsonOutput = parseJson(data)
     
-    student.id = jsonOutput["id"].getInt()
+    student.ID = jsonOutput["id"].getInt()
     student.name = jsonOutput["name"].getStr()
     student.curClass = jsonOutput["cur_class"].getStr()
     student.isActive = jsonOutput["is_active"].getBool()
@@ -187,6 +191,7 @@ proc parse*(student: var Student, data: string): void =
 import json
 from datetime import date
 
+# Any person who is studying in a class
 class Student(People):
     id: int = -1
     name: str = ""
@@ -212,6 +217,7 @@ class Student(People):
 import { IWingsStruct } from 'wings-ts-util';
 import Homework from 'path/to/Homework';
 
+// Any person who is studying in a class
 export default class Student implements People {
     [key: string]: any;
     public id: number = -1;

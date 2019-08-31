@@ -15,6 +15,8 @@ ts-import { Homework }:path/to/Homework
 py-implement People
 ts-implement People
 
+# Any person who is studying in a class
+
 Student {
     id          int        -1
     name        str

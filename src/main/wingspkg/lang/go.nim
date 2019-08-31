@@ -55,6 +55,7 @@ proc wStructFile(
     imports: seq[string],
     fields: seq[string],
     functions: string,
+    comment: string,
     package: string,
 ): string =
     result = "package " & package & "\n"
@@ -83,6 +84,8 @@ proc wStructFile(
             declarations &= capitalizeAscii(camelCase(field[0])) & " " &
                 types(field[1]) & " `json:\"" & field[0] & "\"`"
 
+    if comment.len() > 0:
+        result &= "\n" & indent(comment, 2, "/")
     result &= "\ntype " & name & " struct {\n" &
         indent(declarations, 4, " ") & "\n}\n"
 
@@ -101,5 +104,5 @@ proc genWStruct*(wstruct: WStruct): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("go"),
         wstruct.fields, wstruct.functions.getOrDefault("go"),
-        tempPackage[tempPackage.len() - 1],
+        wstruct.comment, tempPackage[tempPackage.len() - 1],
     )

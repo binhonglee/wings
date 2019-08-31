@@ -8,6 +8,7 @@
 import json
 from datetime import date
 
+# Any person who is studying in a class
 class Student(People):
     id: int = -1
     name: str = ""
