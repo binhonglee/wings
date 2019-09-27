@@ -7,6 +7,7 @@ license       = "MIT"
 skipDirs      = @["examples"]
 bin           = @["wings"]
 srcDir        = "src/main"
+installExt    = @["nim"]
 
 # Dependencies
 
