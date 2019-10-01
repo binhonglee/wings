@@ -1,0 +1,26 @@
+os:
+  - linux
+  - osx
+
+language: c
+node_js: stable
+
+install:
+  - cd src/tsUtil
+  - npm install
+  - cd ../../
+  - |
+      curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
+      sh init.sh -y
+
+before_script:
+  - export CHOOSENIM_NO_ANALYTICS=1
+  - export PATH=$HOME/.nimble/bin:$PATH
+
+script:
+  - ./scripts/test.sh
+  - cd src/tsUtil
+  - npm run cover
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

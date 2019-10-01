@@ -2,6 +2,10 @@
 
 A simple cross language struct and enum file generator. (You might want to use a linter with this to clean up some trailing whitespaces and uneven tabbings.)
 
+[![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=master)](https://travis-ci.org/binhonglee/wings)
+[![codecov](https://codecov.io/gh/binhonglee/wings/branch/master/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
+[![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
+
 ## Requirements
 
 -   [Nim](https://nim-lang.org/)
@@ -85,16 +89,16 @@ Output files:
 ```go tab="classroom/student.go"
 /*
  * This is a generated file
- * 
+ *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * 
+ *
  * Source: student.struct
  */
 
 package classroom
 
-import (    
+import (
     "time"
     homework "path/to/homework"
 )
@@ -114,10 +118,10 @@ type Students []Student
 ```kotlin tab="another/Student.kt"
 /*
  * This is a generated file
- * 
+ *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * 
+ *
  * Source: student.struct
  */
 
@@ -150,10 +154,10 @@ class Student {
 
 ```nim tab="folder/student.nim"
 # This is a generated file
-# 
+#
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-# 
+#
 # Source: student.struct
 
 import json
@@ -171,7 +175,7 @@ type
 
 proc parse*(student: var Student, data: string): void =
     let jsonOutput = parseJson(data)
-    
+
     student.ID = jsonOutput["id"].getInt()
     student.name = jsonOutput["name"].getStr()
     student.curClass = jsonOutput["cur_class"].getStr()
@@ -182,10 +186,10 @@ proc parse*(student: var Student, data: string): void =
 
 ```py tab="python/student.py"
 # This is a generated file
-# 
+#
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-# 
+#
 # Source: student.struct
 
 import json
@@ -199,7 +203,7 @@ class Student(People):
     is_active: bool = True
     year: date = date.today()
     homeworks: list = list()
-    
+
     def init(self, data):
         self = json.loads(data)
 ```
@@ -207,10 +211,10 @@ class Student(People):
 ```ts tab="some/files/Student.ts"
 /*
  * This is a generated file
- * 
+ *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * 
+ *
  * Source: student.struct
  */
 
@@ -226,7 +230,7 @@ export default class Student implements People {
     public isActive: boolean = true;
     public year: Date = new Date();
     public homeworks: [] = [];
-    
+
     public init(data: any): boolean {
         try {
             this.id = data.id;
@@ -234,7 +238,7 @@ export default class Student implements People {
             this.curClass = data.cur_class;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
-            
+
             if (data.homeworks !== "null") {
                 this.homeworks = data.homeworks;
             }
@@ -243,7 +247,7 @@ export default class Student implements People {
         }
         return true;
     }
-    
+
     public toJsonKey(key: string): string {
         switch (key) {
             case 'id': {
@@ -310,10 +314,10 @@ Emotion {
 ```go tab="path/emotion.go"
 /*
  * This is a generated file
- * 
+ *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * 
+ *
  * Source: emotion.enum
  */
 
@@ -321,7 +325,7 @@ package path
 
 type Emotion int
 
-const (    
+const (
     Accomplished = iota
     Angry
     Annoyed
@@ -340,16 +344,16 @@ const (
 ```kotlin tab="to/Emotion.kt"
 /*
  * This is a generated file
- * 
+ *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * 
+ *
  * Source: emotion.enum
  */
 
 package to
 
-enum class Emotion {    
+enum class Emotion {
     Accomplished,
     Angry,
     Annoyed,
@@ -367,10 +371,10 @@ enum class Emotion {
 
 ```nim tab="some/emotion.nim"
 # This is a generated file
-# 
+#
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-# 
+#
 # Source: emotion.enum
 
 type
@@ -391,10 +395,10 @@ type
 
 ```py tab="python/emotion.py"
 # This is a generated file
-# 
+#
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-# 
+#
 # Source: emotion.enum
 
 from enum import Enum, auto
@@ -417,14 +421,14 @@ class Emotion(Enum):
 ```ts tab="file/person/Emotion.ts"
 /*
  * This is a generated file
- * 
+ *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * 
+ *
  * Source: emotion.enum
  */
 
-enum Emotion{    
+enum Emotion{
     Accomplished,
     Angry,
     Annoyed,

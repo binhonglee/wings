@@ -2,3 +2,5 @@ nimcache/
 plz-out/
 site/
 wings
+report/
+init.sh
