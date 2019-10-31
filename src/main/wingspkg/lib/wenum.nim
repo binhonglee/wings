@@ -1,22 +1,24 @@
 from strutils import splitWhitespace
 import tables
+from ./winterface import IWings
 
 type
-    WEnum* = object
-        name*: string
+    WEnum* = ref object of IWings
         values*: seq[string]
-        package*: Table[string, string]
 
 proc newWEnum*(): WEnum =
     result = WEnum()
     result.name = ""
+    result.dependencies = newSeq[string](0)
+    result.filepath = initTable[string, string]()
+    result.imports = initTable[string, seq[string]]()
     result.values = newSeq[string](0)
-    result.package = initTable[string, string]()
 
-proc parseFile*(wenum: var WEnum, file: File, filename: string, package: Table[string, string]): void =
+proc parseFile*(wenum: var WEnum, file: File, filename: string, filepath: Table[string, string]): bool =
+    wenum.filename = filename
     var line: string = ""
     var inWEnum: bool = false
-    wenum.package = package
+    wenum.filepath = filepath
 
     while readLine(file, line):
         if line.len() < 1:
@@ -31,3 +33,8 @@ proc parseFile*(wenum: var WEnum, file: File, filename: string, package: Table[s
             inWEnum = false
         elif inWEnum:
             wenum.values.add(words[0])
+
+    if inWEnum:
+        result = false
+    else:
+        result = true

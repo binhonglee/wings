@@ -16,15 +16,10 @@ requires "nim >= 0.17.2"
 task genFile, "Generate file(s)":
     exec "nimble build"
     var start = false
-    var ran = false
+    var temp: string = ""
     for i in countup(0, paramCount(), 1):
         if start:
-            exec "./wings " & paramStr(i)
-
-            if not ran:
-                ran = true
+            temp &= " " & paramStr(i)
         elif paramStr(i) == "genFile":
             start = true
-
-    if not ran:
-        exec "./wings "
+    exec "./wings" & temp

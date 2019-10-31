@@ -9,6 +9,7 @@
 
 import People from './People';
 import { Homework } from 'path/to/Homework';
+import Emotion from './person/Emotion';
 
 // Any person who is studying in a class
 export default class Student implements People {
@@ -19,6 +20,7 @@ export default class Student implements People {
     public isActive: boolean = true;
     public year: Date = new Date();
     public homeworks: Homework[] = [];
+    public something: Map<str,str> = new Map<str,str>();
     
     public init(data: any): boolean {
         try {
@@ -31,6 +33,7 @@ export default class Student implements People {
             if (data.homeworks !== null) {
                 this.homeworks = data.homeworks;
             }
+            this.something = data.something;
         } catch (e) {
             return false;
         }
@@ -56,6 +59,9 @@ export default class Student implements People {
             }
             case 'homeworks': {
                 return 'homeworks';
+            }
+            case 'something': {
+                return 'something';
             }
             default: {
                 return key;

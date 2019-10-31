@@ -54,7 +54,7 @@ proc wEnumFile(
     values: seq[string],
 ): string =
     result = "enum " & name & "{"
-    
+
     var content: string = ""
     for value in values:
         if value.len() > 0:
@@ -80,6 +80,13 @@ proc wStructFile(
 
         var importDat: seq[string] = toImport.split(':')
 
+        if importDat.len() == 1:
+            let filename = toImport.split('/')
+            let classname = filename[filename.len() - 1].split('.')
+            let next = importDat[0]
+            importDat = newSeq[string](0)
+            importDat.add(classname[0])
+            importDat.add(next)
         result &= "import " & importDat[0] & " from '" & importDat[1] & "';\n"
 
     if comment.len() > 0:
@@ -100,7 +107,7 @@ proc wStructFile(
         let field = fieldStr.split(' ')
         if field.len() < 2:
             continue
-        
+
         if (declaration.len() > 1):
             declaration &= "\n"
 
@@ -126,7 +133,7 @@ proc wStructFile(
         else:
             init &= "this." & fieldName & " = " &
                 typeAssign(field[1], "data." & field[0]) & ";"
-        
+
         jsonKey &= "case '" & fieldName & "': {\n"
         jsonKey &= indent("return '" & field[0] & "';", 4, " ")
         jsonKey &= "\n}"
@@ -173,3 +180,5 @@ proc genWStruct*(wstruct: WStruct): string =
         wstruct.fields, wstruct.functions.getOrDefault("ts"),
         wstruct.comment, wstruct.implement.getOrDefault("ts"),
     )
+
+# proc importFilename*()

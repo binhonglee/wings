@@ -1,9 +1,8 @@
 from strutils
 import capitalizeAscii, contains, join, normalize, parseEnum, removeSuffix, split, splitWhitespace
-from sequtils import foldr
 import tables
-import lib/header, lib/wenum, lib/wstruct
-import util/wenumutil, util/wstructutil
+import lib/wenum, lib/wstruct, lib/winterface
+import util/wiutil
 
 proc newFilename(filename: string): Table[string, string] =
     const filetypes: array[5, string] = ["go", "kt", "nim", "py", "ts"]
@@ -29,26 +28,12 @@ proc newFilename(filename: string): Table[string, string] =
         else:
             echo "Unsupported type given"
 
-proc genFilenames(filename: string): Table[string, string] =
-    let temp: seq[string] = filename.split('/')
-    result = initTable[string, string]()
-
-    result.add(
-        "lower",
-        join(split(temp[temp.len() - 1], '_'))
-    )
-
-    var words = split(temp[temp.len() - 1], '_')
-    for i in countup(0, words.len() - 1, 1):
-        words[i] = capitalizeAscii(words[i])
-    result.add("capitalize", join(words))
-
 proc fromFile*(filename: string, header: string = ""): Table[string, string] =
     var fileInfo: seq[string] = filename.split('.')
 
     var newFileName: Table[string, string] = initTable[string, string]()
     var fileContents: Table[string, string] = initTable[string, string]()
-    var packages: Table[string, string] = initTable[string, string]()
+    var filepaths: Table[string, string] = initTable[string, string]()
 
     let file: File = open(filename)
     var line: string
@@ -63,19 +48,19 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
         if filepath[1] != "filepath":
             break;
 
-        packages.add(filepath[0], words[1])
+        filepaths.add(filepath[0], words[1])
 
     case fileInfo[fileInfo.len() - 1]
     of "struct":
         var wstruct = newWStruct()
-        if wstruct.parseFile(file, filename, packages):
-            fileContents = wstruct.genFiles()
+        if wstruct.parseFile(file, filename, filepaths):
+            fileContents = wstruct.genWStructFiles(header)
             newFileName = newFilename(filename.substr(0, filename.len() - 7))
     of "enum":
         var wenum = newWEnum()
-        wenum.parseFile(file, filename, packages)
-        fileContents = wenum.genFiles()
-        newFileName = newFilename(filename.substr(0, filename.len() - 5))
+        if wenum.parseFile(file, filename, filepaths):
+            fileContents = wenum.genWEnumFiles(header)
+            newFileName = newFilename(filename.substr(0, filename.len() - 5))
     else:
         echo "Unsupported file type: " & fileInfo[fileInfo.len() - 1]
         file.close()
@@ -83,24 +68,25 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
 
     file.close()
     result = initTable[string, string]()
-    for filetype in packages.keys:
+    for filetype in filepaths.keys:
         result.add(
-            getOrDefault(packages, filetype) &
+            getOrDefault(filepaths, filetype) &
             "/" &
             newFileName[filetype] &
             filetype,
-            genHeader(filetype, filename, header) &
             getOrDefault(fileContents, filetype),
         )
 
-
-proc fromFiles*(filenames: seq[string], header: string = ""): Table[string, string] =
-    var wenums: Table[string, WEnum] = initTable[string, WEnum]()
-    var wstructs: Table[string, WStruct] = initTable[string, WStruct]()
+proc fromFiles*(
+    filenames: seq[string], header: string = "",
+    prefixes: Table[string, string] = initTable[string, string](),
+): Table[string, Table[string, string]] =
+    var winterfaces: seq[IWings] = newSeq[IWings](0)
 
     for filename in filenames:
-        var fileInfo: seq[string] = filename.split('.')
-        var packages: Table[string, string] = initTable[string, string]()
+        let fileInfo: seq[string] = filename.split('.')
+
+        var filepaths: Table[string, string] = initTable[string, string]()
         let file: File = open(filename)
         var line: string
 
@@ -114,22 +100,24 @@ proc fromFiles*(filenames: seq[string], header: string = ""): Table[string, stri
             if filepath[1] != "filepath":
                 break;
 
-            packages.add(filepath[0], words[1])
+            filepaths.add(filepath[0], words[1])
 
         case fileInfo[fileInfo.len() - 1]
         of "enum":
             var wenum = newWEnum()
-            wenum.parseFile(file, filename, packages)
-            wenums.add(filename, wenum)
+            if wenum.parseFile(file, filename, filepaths):
+                winterfaces.add(wenum)
+            else:
+                echo "Failed to parse \"" & filename & "\". Skipping..."
         of "struct":
             var wstruct = newWStruct()
-            if not wstruct.parseFile(file, filename, packages):
-                file.close()
-                return
-            wstructs.add(filename, wstruct)
+            if wstruct.parseFile(file, filename, filepaths):
+                winterfaces.add(wstruct)
+            else:
+                echo "Failed to parse \"" & filename & "\". Skipping..."
         else:
             echo "Unsupported file type: " & fileInfo[fileInfo.len() - 1]
-            file.close()
-            return
 
         file.close()
+
+    result = dependencyGraph(winterfaces, prefixes, header)

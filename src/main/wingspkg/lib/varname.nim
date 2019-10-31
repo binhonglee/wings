@@ -1,5 +1,4 @@
 from strutils import capitalizeAscii, split, toUpperAscii
-from sequtils import foldr
 
 const customWords = @["id"]
 

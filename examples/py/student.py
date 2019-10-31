@@ -7,6 +7,7 @@
 
 import json
 from datetime import date
+import examples.py.emotion
 
 # Any person who is studying in a class
 class Student(People):
@@ -16,6 +17,7 @@ class Student(People):
     is_active: bool = True
     year: date = date.today()
     homeworks: list = list()
+    something: Map<str,str> = Map<str,str>()
     
     def init(self, data):
         self = json.loads(data)

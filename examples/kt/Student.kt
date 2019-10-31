@@ -10,6 +10,7 @@
 package kt
 
 import java.util.ArrayList
+import java.util.HashMap
 
 // Any person who is studying in a class
 class Student {
@@ -19,6 +20,7 @@ class Student {
     var isActive: Boolean = true
     var year: Date = Date()
     var homeworks: ArrayList<Homework> = ArrayList<Homework>()
+    var something: HashMap<String, String> = HashMap<String, String>()
 
     fun toJsonKey(key: string): string {
         when (key) {
@@ -28,6 +30,7 @@ class Student {
             "isActive" -> return "is_active"
             "year" -> return "year"
             "homeworks" -> return "homeworks"
+            "something" -> return "something"
             else -> return key
         }
     }

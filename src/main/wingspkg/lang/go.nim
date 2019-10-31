@@ -1,31 +1,37 @@
 from strutils
-import capitalizeAscii, contains, toLowerAscii,
-    replace, indent, split, unindent
+import capitalizeAscii, contains, endsWith, indent, removePrefix,
+    removeSuffix, replace, split, startsWith, toLowerAscii, unindent
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
     result = name
-    var arr: bool = false
-    if contains(name, "[]"):
-        arr = true
-        result = replace(name, "[]", "")
 
-    case result
-    of "int":
-        result = "int"
-    of "str":
-        result = "string"
-    of "bool":
-        result = "bool"
-    of "date":
-        result = "time.Time"
+    if startsWith(result, "Map<") and endsWith(result, ">"):
+        result.removePrefix("Map<")
+        result.removeSuffix(">")
+        var mapTypes: seq[string] = result.split(",")
+        if mapTypes.len() != 2:
+            echo "Invalid map type: " & name
+            result = ""
+        else:
+            result = "map[" & types(mapTypes[0]) & "]" & types(mapTypes[1])
+    elif startsWith(result, "[]"):
+        result.removePrefix("[]")
+        result = "[]" & types(result)
     else:
-        result = toLowerAscii(result) & "." & result
-
-    if arr:
-        result = "[]" & result
+        case result
+        of "int":
+            result = "int"
+        of "str":
+            result = "string"
+        of "bool":
+            result = "bool"
+        of "date":
+            result = "time.Time"
+        else:
+            result = toLowerAscii(result) & "." & result
 
 proc wEnumFile(
     name: string,
@@ -95,11 +101,11 @@ proc wStructFile(
     result &= "\ntype " & name & "s []" & name
 
 proc genWEnum*(wenum: WEnum): string =
-    var tempPackage: seq[string] = split(wenum.package.getOrDefault("go"), '/')
+    var tempPackage: seq[string] = split(wenum.filepath.getOrDefault("go"), '/')
     result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1])
 
 proc genWStruct*(wstruct: WStruct): string =
-    var tempPackage: seq[string] = split(wstruct.package.getOrDefault("go"), '/')
+    var tempPackage: seq[string] = split(wstruct.filepath.getOrDefault("go"), '/')
 
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("go"),

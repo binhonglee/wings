@@ -12,6 +12,7 @@ package classroom
 import (    
     "time"
     homework "path/to/homework"
+    emotion "github.com/binhonglee/wings/examples/go"
 )
 
 // Any person who is studying in a class
@@ -22,6 +23,7 @@ type Student struct {
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
     Homeworks []homework.Homework `json:"homeworks"`
+    Something map[string]string `json:"something"`
 }
 
 type Students []Student

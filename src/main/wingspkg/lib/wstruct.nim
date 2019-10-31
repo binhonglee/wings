@@ -2,26 +2,27 @@ from strutils
 import contains, endsWith, join, removeSuffix, split, splitWhitespace
 from sequtils import foldr
 import tables
+from ./winterface import IWings
 
 type
-    WStruct* = object
-        name*: string
+    WStruct* = ref object of IWings
         comment*: string
         fields*: seq[string]
-        functions*, implement*, package*: Table[string, string]
-        imports*: Table[string, seq[string]]
+        functions*, implement*: Table[string, string]
 
 proc newWStruct*(): WStruct =
     result = WStruct()
     result.name = ""
+    result.dependencies = newSeq[string](0)
+    result.filepath = initTable[string, string]()
+    result.imports = initTable[string, seq[string]]()
     result.comment = ""
+    result.fields = newSeq[string](0)
     result.functions = initTable[string, string]()
     result.implement = initTable[string, string]()
-    result.package = initTable[string, string]()
-    result.fields = newSeq[string](0)
-    result.imports = initTable[string, seq[string]]()
 
-proc parseFile*(wstruct: var WStruct, file: File, filename: string, package: Table[string, string]): bool =
+proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Table[string, string]): bool =
+    wstruct.filename = filename
     var line: string = ""
 
     var inWStruct: bool = false
@@ -47,12 +48,14 @@ proc parseFile*(wstruct: var WStruct, file: File, filename: string, package: Tab
                 words[0].removeSuffix("-implement")
                 wstruct.implement.add(words[0], toImplement)
             elif words[0].endsWith("-import"):
-                words[0].removeSuffix("-import")
-                if not wstruct.imports.hasKey(words[0]):
-                    wstruct.imports.add(words[0], newSeq[string](0))
                 var key: string = words[0]
                 words.delete(0)
+                key.removeSuffix("-import")
+                if not wstruct.imports.hasKey(key):
+                    wstruct.imports.add(key, newSeq[string](0))
                 wstruct.imports[key].add(foldr(words, a & " " & b))
+            elif words[0].endsWith("import"):
+                wstruct.dependencies.add(words[1])
             elif words[0].endsWith("Func("):
                 words[0].removeSuffix("Func(")
                 wstruct.functions.add(words[0], "")
@@ -74,5 +77,5 @@ proc parseFile*(wstruct: var WStruct, file: File, filename: string, package: Tab
             else:
                 wstruct.functions[inFunc] &= "\n" & line
 
-    wstruct.package = package
+    wstruct.filepath = filepath
     result = true

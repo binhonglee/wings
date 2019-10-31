@@ -6,11 +6,11 @@ ts-filepath examples/ts
 
 go-import time
 go-import homework:path/to/homework
-kt-import java.util.ArrayList
 nim-import times
 py-import datetime:date
 ts-import People:./People
 ts-import { Homework }:path/to/Homework
+import examples/emotion.enum
 
 py-implement People
 ts-implement People
@@ -24,6 +24,7 @@ Student {
     is_active   bool       true
     year        date
     homeworks   []Homework
+    something   Map<str,str>
 }
 
 tsFunc(
