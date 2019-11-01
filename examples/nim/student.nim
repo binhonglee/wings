@@ -6,8 +6,9 @@
 # Source: examples/student.struct
 
 import json
-import times
 import ./emotion
+import times
+import tables
 
 # Any person who is studying in a class
 type
@@ -18,7 +19,7 @@ type
         isActive* : bool
         year* : DateTime
         homeworks* : seq[Homework]
-        something* : Map<str,str>
+        something* : Table[string, string]
 
 proc parse*(student: var Student, data: string): void =
     let jsonOutput = parseJson(data)
@@ -29,4 +30,4 @@ proc parse*(student: var Student, data: string): void =
     student.isActive = jsonOutput["is_active"].getBool()
     student.year = now()
     student.homeworks = jsonOutput["homeworks"].getElems()
-    student.something = newMap<str,str>(jsonOutput["something"].getStr())
+    student.something = jsonOutput["something"].getElems()

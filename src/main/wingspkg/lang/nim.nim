@@ -1,34 +1,43 @@
 from strutils
-import capitalizeAscii, contains, indent, normalize, replace, split
+import capitalizeAscii, contains, endsWith, indent, normalize,
+    removePrefix, removeSuffix, replace, split, startsWith
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
-proc types(name: string): string =
-    var arr: bool = false
+proc types(imports: var seq[string], name: string): string =
     result = name
 
-    if contains(name, "[]"):
-        arr = true
-        result = replace(name, "[]", "")
-
-    case result
-    of "int":
-        result = "int"
-    of "float":
-        result = "float"
-    of "str":
-        result = "string"
-    of "bool":
-        result = "bool"
-    of "date":
-        result = "DateTime"
-
-    if arr:
-        result = "seq[" & result & "]"
+    if result.startsWith("Map<") and result.endsWith(">"):
+        result.removePrefix("Map<")
+        result.removeSuffix(">")
+        var typeToProcess: seq[string] = result.split(",")
+        if typeToProcess.len() != 2:
+            echo "Invalid map types."
+            result = ""
+        else:
+            imports.add("tables")
+            result = "Table[" & types(imports, typeToProcess[0]) &
+                ", " & types(imports, typeToProcess[1]) & "]"
+    elif result.startsWith("[]"):
+        result.removePrefix("[]")
+        result = "seq[" & types(imports, result) & "]"
+    else:
+        case result
+        of "int":
+            result = "int"
+        of "float":
+            result = "float"
+        of "str":
+            result = "string"
+        of "bool":
+            result = "bool"
+        of "date":
+            imports.add("times")
+            result = "DateTime"
 
 proc typeAssign(name: string, content: string): string =
-    if contains(name, "[]"):
+    if contains(name, "[]") or (startsWith(name, "Map<") and endsWith(name, ">")):
         return "jsonOutput[\"" & content &
             "\"].getElems()"
 
@@ -66,22 +75,10 @@ proc wStructFile(
     fields: seq[string],
     functions: string,
     comment: string,
+    implement: string,
 ): string =
     result = "import json\n"
-
-    for toImport in imports:
-        if toImport.len < 1:
-            continue
-
-        result &= "import " & toImport & "\n"
-
-    if comment.len() > 0:
-        result &= "\n" & indent(comment, 1, "#")
-
-    if imports.len() > 0:
-        result &= "\n"
-    result &= "type\n"
-    result &= indent(name & "* = object", 4, " ")
+    var mutImports = imports
 
     var declaration = ""
     var parse = ""
@@ -95,10 +92,28 @@ proc wStructFile(
             declaration &= "\n"
             parse &= "\n"
 
-        declaration &= camelCase(field[0]) & "* : " & types(field[1])
+        declaration &= camelCase(field[0]) & "* : " & mutImports.types(field[1])
         parse &= normalize(name) & "." & camelCase(field[0]) &
                 " = " & typeAssign(field[1], field[0])
 
+    for toImport in mutImports:
+        if toImport.len < 1:
+            continue
+
+        result &= "import " & toImport & "\n"
+
+    if comment.len() > 0:
+        result &= "\n" & indent(comment, 1, "#")
+
+    if imports.len() > 0:
+        result &= "\n"
+    result &= "type\n"
+
+    var objStr = "* = object"
+    if implement.len() > 0:
+        objStr = "* = ref object of " & implement
+
+    result &= indent(name & objStr, 4, " ")
     result &= "\n" & indent(declaration, 8, " ") & "\n\n"
 
     result &= "proc parse*(" & normalize(name) &
@@ -115,5 +130,5 @@ proc genWStruct*(wstruct: WStruct): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("nim"),
         wstruct.fields, wstruct.functions.getOrDefault("nim"),
-        wstruct.comment,
+        wstruct.comment, wstruct.implement.getOrDefault("nim"),
     )

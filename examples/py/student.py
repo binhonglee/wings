@@ -6,8 +6,8 @@
 # Source: examples/student.struct
 
 import json
-from datetime import date
 import examples.py.emotion
+from datetime import date
 
 # Any person who is studying in a class
 class Student(People):
@@ -16,8 +16,8 @@ class Student(People):
     cur_class: str = ""
     is_active: bool = True
     year: date = date.today()
-    homeworks: list = list()
-    something: Map<str,str> = Map<str,str>()
+    homeworks: list = []Homework()
+    something: dict = Map<str,str>()
     
     def init(self, data):
         self = json.loads(data)

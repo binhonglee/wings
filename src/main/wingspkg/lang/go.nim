@@ -5,7 +5,7 @@ from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
-proc types(name: string): string =
+proc types(imports: var seq[string], name: string): string =
     result = name
 
     if startsWith(result, "Map<") and endsWith(result, ">"):
@@ -16,10 +16,10 @@ proc types(name: string): string =
             echo "Invalid map type: " & name
             result = ""
         else:
-            result = "map[" & types(mapTypes[0]) & "]" & types(mapTypes[1])
+            result = "map[" & imports.types(mapTypes[0]) & "]" & imports.types(mapTypes[1])
     elif startsWith(result, "[]"):
         result.removePrefix("[]")
-        result = "[]" & types(result)
+        result = "[]" & imports.types(result)
     else:
         case result
         of "int":
@@ -29,6 +29,7 @@ proc types(name: string): string =
         of "bool":
             result = "bool"
         of "date":
+            imports.add("time")
             result = "time.Time"
         else:
             result = toLowerAscii(result) & "." & result
@@ -65,35 +66,37 @@ proc wStructFile(
     package: string,
 ): string =
     result = "package " & package & "\n"
-    var declarations: string = ""
+    var mutImports = imports
+    var fieldDec: string = ""
 
-    if imports.len() > 0:
-        for toImport in imports:
+    for fieldStr in fields:
+        var field = fieldStr.split(' ')
+        if field.len() > 1:
+            if fieldDec.len() > 1:
+                fieldDec &= "\n"
+            fieldDec &= capitalizeAscii(camelCase(field[0])) & " " &
+                mutImports.types(field[1]) & " `json:\"" & field[0] & "\"`"
+
+    var importDec = ""
+    if mutImports.len() > 0:
+        for toImport in mutImports:
             if toImport.len < 1:
                 continue
 
             var importDat: seq[string] = toImport.split(':')
 
             if importDat.len < 2:
-                declarations &= "\n\"" & toImport & "\""
+                importDec &= "\n\"" & toImport & "\""
             else:
-                declarations &=  "\n" & importDat[0] &
+                importDec &=  "\n" & importDat[0] &
                     " \"" & importDat[1] & "\""
-        result &= "\nimport (" & indent(declarations, 4, " ") & "\n)\n"
-
-    declarations = ""
-    for fieldStr in fields:
-        var field = fieldStr.split(' ')
-        if field.len() > 1:
-            if declarations.len() > 1:
-                declarations &= "\n"
-            declarations &= capitalizeAscii(camelCase(field[0])) & " " &
-                types(field[1]) & " `json:\"" & field[0] & "\"`"
+        result &= "\nimport (" & indent(importDec, 4, " ") & "\n)\n"
 
     if comment.len() > 0:
         result &= "\n" & indent(comment, 2, "/")
+
     result &= "\ntype " & name & " struct {\n" &
-        indent(declarations, 4, " ") & "\n}\n"
+        indent(fieldDec, 4, " ") & "\n}\n"
 
     if functions.len() > 0:
         result &= unindent(functions, 4, " ") & "\n"

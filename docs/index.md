@@ -32,6 +32,7 @@ A simple cross language struct and enum file generator. (You might want to use a
 | `bool`   | `bool`      | `Boolean`         | `bool`      | `bool` | `boolean`  |
 | `date`   | `time.Time` | `Date`            | -           | `date` | `Date`     |
 | `[]type` | `[]type`    | `ArrayList<type>` | `seq[type]` | `list` | `[]`       |
+| `Map<type1, type2>` | `map[type1]type2` | `HashMap<type1, type2>` | `Table[type1, type2]` | `dict` | `Map<type1, type2>` |
 
 !!! info
     Unsupported types are initialized as custom struct / classes unless specified otherwise.
@@ -39,10 +40,7 @@ A simple cross language struct and enum file generator. (You might want to use a
 !!! warning "Nim `date`"
     It is currently unsupported since I haven't figure out how to parse ISOString time properly from `string` in Nim.
 
-Run `plz run //src/main:wings -- "{filepath}"` to generate the files.
-
-!!! warning "Issue with `nimble`"
-    I also have a task made for nimble (`nimble genFile "{filepath}"`) but its currently broken for the latest version (see official issue [here](https://github.com/nim-lang/nimble/issues/633)). If you have an older version of nimble, it should work as intended.
+Run `nimble genFile "{filepath}"` or `plz run //src/main:wings -- "{filepath}"` to generate the files.
 
 ## Struct
 

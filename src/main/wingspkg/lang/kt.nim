@@ -1,5 +1,5 @@
 from strutils
-import startsWith, contains, endsWith, indent, removePrefix, removeSuffix, replace, split
+import contains, endsWith, indent, removePrefix, removeSuffix, replace, split, startsWith
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
@@ -18,7 +18,8 @@ proc types(imports: var seq[string], name: string): string =
             result = ""
         else:
             imports.add("java.util.HashMap")
-            result = "HashMap<" & types(imports, typeToProcess[0]) & ", " & types(imports, typeToProcess[1]) & ">"
+            result = "HashMap<" & types(imports, typeToProcess[0]) &
+                ", " & types(imports, typeToProcess[1]) & ">"
     elif result.startsWith("[]"):
         result.removePrefix("[]")
         imports.add("java.util.ArrayList")

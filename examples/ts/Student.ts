@@ -20,7 +20,7 @@ export default class Student implements People {
     public isActive: boolean = true;
     public year: Date = new Date();
     public homeworks: Homework[] = [];
-    public something: Map<str,str> = new Map<str,str>();
+    public something: Map<string, string> = new Map();
     
     public init(data: any): boolean {
         try {

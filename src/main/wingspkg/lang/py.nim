@@ -1,30 +1,34 @@
 from strutils
-import capitalizeAscii, contains, indent, replace, split
+import capitalizeAscii, indent, replace, startsWith, endsWith, split
 from tables import getOrDefault
 import ../lib/wstruct, ../lib/wenum
 
-proc types(name: string): string =
-    if contains(name, "[]"):
-        return "list"
-
-    case name
-    of "int":
-        result = "int"
-    of "float":
-        result = "float"
-    of "str":
-        result = "str"
-    of "bool":
-        result = "bool"
-    of "date":
-        result = "date"
+proc types(imports: var seq[string], name: string): string =
+    if name.startsWith("[]"):
+        result = "list"
+    elif name.startsWith("Map<") and name.endsWith(">"):
+        result = "dict"
     else:
-        result = name
+        case name
+        of "int":
+            result = "int"
+        of "float":
+            result = "float"
+        of "str":
+            result = "str"
+        of "bool":
+            result = "bool"
+        of "date":
+            imports.add("datetime:date")
+            result = "date"
+        else:
+            result = name
 
 proc typeInit(name: string): string =
-    if contains(name, "[]"):
-        return "list()"
-
+    if name.startsWith("[]"):
+        result = "list()"
+    elif name.startsWith("Map<") and name.endsWith(">"):
+        result = "{}"
     case name
     of "int":
         result = "-1"
@@ -64,8 +68,23 @@ proc wStructFile(
     implement: string,
 ): string =
     result = "import json\n"
+    var mutImports = imports
 
-    for toImport in imports:
+    var declaration: string = ""
+    for fieldStr in fields:
+        var field = fieldStr.split(' ')
+        if field.len() > 1:
+            if declaration.len() > 1:
+                declaration &= "\n"
+
+            var varInit: string = typeInit(field[1])
+            if field.len() > 2:
+                varInit = field[2]
+                if field[1] == "bool":
+                    varInit = capitalizeAscii(varInit)
+            declaration &= field[0] & ": " & mutImports.types(field[1]) & " = " & varInit
+
+    for toImport in mutImports:
         if toImport.len() < 1:
             continue
 
@@ -87,20 +106,6 @@ proc wStructFile(
     else:
         result &= implement
     result &= "):\n"
-
-    var declaration: string = ""
-    for fieldStr in fields:
-        var field = fieldStr.split(' ')
-        if field.len() > 1:
-            if declaration.len() > 1:
-                declaration &= "\n"
-
-            var varInit: string = typeInit(field[1])
-            if field.len() > 2:
-                varInit = field[2]
-                if field[1] == "bool":
-                    varInit = capitalizeAscii(varInit)
-            declaration &= field[0] & ": " & types(field[1]) & " = " & varInit
 
     result &= indent(declaration, 4, " ") & "\n"
     result &= indent(

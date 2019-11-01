@@ -4,10 +4,7 @@ nim-filepath examples/nim
 py-filepath examples/py
 ts-filepath examples/ts
 
-go-import time
 go-import homework:path/to/homework
-nim-import times
-py-import datetime:date
 ts-import People:./People
 ts-import { Homework }:path/to/Homework
 import examples/emotion.enum

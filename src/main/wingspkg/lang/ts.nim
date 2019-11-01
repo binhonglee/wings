@@ -1,46 +1,55 @@
 from strutils
-import contains, indent, intToStr, replace, split
+import contains, endsWith, indent, intToStr, removePrefix, removeSuffix, replace, split, startsWith
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
     result = name
-    var arr: bool = false
-    if contains(name, "[]"):
-        arr = true
-        result = replace(name, "[]", "")
 
-    case result
-    of "int", "float":
-        result = "number"
-    of "str":
-        result = "string"
-    of "bool":
-        result = "boolean"
-    of "date":
-        result = "Date"
-
-    if arr:
-        result &= "[]"
+    if result.startsWith("Map<") and result.endsWith(">"):
+        result.removePrefix("Map<")
+        result.removeSuffix(">")
+        var typeToProcess: seq[string] = result.split(",")
+        if typeToProcess.len() != 2:
+            echo "Invalid map types."
+            result = ""
+        else:
+            result = "Map<" & types(typeToProcess[0]) &
+                ", " & types(typeToProcess[1]) & ">"
+    elif result.startsWith("[]"):
+        result.removePrefix("[]")
+        result = types(result) & "[]"
+    else:
+        case result
+        of "int", "float":
+            result = "number"
+        of "str":
+            result = "string"
+        of "bool":
+            result = "boolean"
+        of "date":
+            result = "Date"
 
 proc typeInit(name: string): string =
-    if contains(name, "[]"):
-        return "[]"
-
-    case name
-    of "int":
-        result = "-1"
-    of "float":
-        result = "-0.1"
-    of "str":
-        result = "''"
-    of "bool":
-        result = "false"
-    of "date":
-        result = "new Date()"
+    if name.startsWith("[]"):
+        result = "[]"
+    elif name.startsWith("Map<") and name.endsWith(">"):
+        result = "new Map()"
     else:
-        result = "new " & name & "()"
+        case name
+        of "int":
+            result = "-1"
+        of "float":
+            result = "-0.1"
+        of "str":
+            result = "''"
+        of "bool":
+            result = "false"
+        of "date":
+            result = "new Date()"
+        else:
+            result = "new " & name & "()"
 
 proc typeAssign(name: string, content: string): string =
     case name
