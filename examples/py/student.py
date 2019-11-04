@@ -7,8 +7,9 @@
 import json
 from datetime import date
 import examples.py.emotion
+import examples.py.homework
 
-# Any person who is studying in a class
+# Student - Any person who is studying in a class
 class Student(People):
     id: int = -1
     name: str = ""

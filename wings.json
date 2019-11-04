@@ -8,5 +8,6 @@
     "prefixes": {
         "go": "github.com/binhonglee/wings"
     },
-    "tabbing": 4
+    "tabbing": 4,
+    "logging": 3
 }

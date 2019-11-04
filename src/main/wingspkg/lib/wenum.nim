@@ -1,6 +1,7 @@
 from strutils import splitWhitespace
 import sets
 import tables
+import ./config
 from ./winterface import IWings
 
 type
@@ -15,7 +16,9 @@ proc newWEnum*(): WEnum =
     result.imports = initTable[string, HashSet[string]]()
     result.values = newSeq[string](0)
 
-proc parseFile*(wenum: var WEnum, file: File, filename: string, filepath: Table[string, string]): bool =
+proc parseFile*(wenum: var WEnum, file: File, filename: string, filepath: Table[string, string], config: Config): bool =
+    if config.logging > 2:
+        echo "Parsing " & filename & "..."
     wenum.filename = filename
     var line: string = ""
     var inWEnum: bool = false

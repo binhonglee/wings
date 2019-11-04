@@ -4,6 +4,17 @@ from sequtils import foldr
 
 let joiner: Table[string, char] = {"go": '/', "kt": '/', "nim": '/', "py": '.', "ts": '/'}.toTable
 
+proc similarity(first: seq[string], second: seq[string]): int =
+    result = 0
+    var same: bool = true
+
+    while same:
+        if first[result] != second[result]:
+            same = false
+        else:
+            result += 1
+
+
 proc filename*(
     filename: string,
     filepath: Table[string, string],
@@ -62,23 +73,19 @@ proc importFilename*(
     result = filename(filename, filepath)
 
     for filetype in filepath.keys:
+        let selfPath: seq[string] = result[filetype].split(joiner[filetype])
+        let callerPath: seq[string] = callerFilepath[filetype].split(joiner[filetype])
 
-        if prefixes.contains(filetype):
+        var pos: int = similarity(selfPath, callerPath)
+
+        if filetype == "go" and pos > callerPath.len() - 2:
+            result.del("go")
+            continue
+        elif prefixes.contains(filetype):
             result[filetype] = prefixes[filetype] & joiner[filetype] & result[filetype]
             continue
         elif filetype == "py" or filetype == "go":
             continue
-
-        let selfPath: seq[string] = result[filetype].split(joiner[filetype])
-        let callerPath: seq[string] = callerFilepath[filetype].split(joiner[filetype])
-        var pos: int = 0
-        var same: bool = true
-
-        while same:
-            if selfPath[pos] != callerPath[pos]:
-                same = false
-            else:
-                pos += 1
 
         var output: string = ""
         for i in countup(pos, callerPath.len() - 2, 1):

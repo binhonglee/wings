@@ -12,7 +12,8 @@ var USER_CONFIG: Config = newConfig()
 proc toFile(path: string, content: string): void =
     try:
         writeFile(path, content)
-        echo "Successfully generated " & path
+        if USER_CONFIG.logging > 0:
+            echo "Successfully generated " & path
     except:
         echo "Please create the required folder for files to be generated."
 
@@ -36,7 +37,7 @@ proc init(count: int): void =
     if not setConfig and fileExists(DEFAULT_CONFIG_FILE):
         USER_CONFIG = config.parse(DEFAULT_CONFIG_FILE)
 
-    var outputFiles = fromFiles(wingsFiles, USER_CONFIG.header, USER_CONFIG.prefixes)
+    var outputFiles = fromFiles(wingsFiles, USER_CONFIG)
     for files in outputFiles.keys:
         for filetype in outputFiles[files].keys:
             toFile(filetype, outputFiles[files][filetype])

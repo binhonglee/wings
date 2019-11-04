@@ -3,6 +3,7 @@ import contains, endsWith, join, removeSuffix, split, splitWhitespace
 from sequtils import foldr
 import sets
 import tables
+import ./config
 from ./winterface import IWings
 
 type
@@ -22,7 +23,9 @@ proc newWStruct*(): WStruct =
     result.functions = initTable[string, string]()
     result.implement = initTable[string, string]()
 
-proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Table[string, string]): bool =
+proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Table[string, string], config: Config): bool =
+    if config.logging > 2:
+        echo "Parsing " & filename & "..."
     wstruct.filename = filename
     var line: string = ""
 

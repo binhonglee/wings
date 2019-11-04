@@ -103,11 +103,12 @@ proc wStructFile(
 
         result &= "import " & toImport & "\n"
 
-    if comment.len() > 0:
-        result &= "\n" & indent(comment, 1, "#")
-
     if imports.len() > 0:
         result &= "\n"
+
+    if comment.len() > 0:
+        result &= "\n" & indent(comment, 1, "#") & "\n"
+
     result &= "type\n"
 
     var objStr = "* = object"

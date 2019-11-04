@@ -4,15 +4,14 @@ nim-filepath examples/nim
 py-filepath examples/py
 ts-filepath examples/ts
 
-go-import homework:path/to/homework
 ts-import People:./People
-ts-import { Homework }:path/to/Homework
 import examples/emotion.enum.wings
+import examples/homework.struct.wings
 
 py-implement People
 ts-implement People
 
-# Any person who is studying in a class
+# Student - Any person who is studying in a class
 
 Student {
     id          int        -1

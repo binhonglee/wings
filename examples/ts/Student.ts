@@ -6,11 +6,11 @@
  * Source: examples/student.struct.wings
  */
 
+import Homework from './Homework';
 import People from './People';
-import { Homework } from 'path/to/Homework';
 import Emotion from './person/Emotion';
 
-// Any person who is studying in a class
+// Student - Any person who is studying in a class
 export default class Student implements People {
     [key: string]: any;
     public ID: number = -1;

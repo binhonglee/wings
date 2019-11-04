@@ -2,7 +2,7 @@ from strutils
 import capitalizeAscii, contains, endsWith, join, normalize,
     parseEnum, removeSuffix, split, splitWhitespace
 import tables
-import lib/wenum, lib/wstruct, lib/winterface
+import lib/wenum, lib/wstruct, lib/winterface, lib/config
 import util/wiutil
 
 proc newFilename(filename: string): Table[string, string] =
@@ -30,6 +30,7 @@ proc newFilename(filename: string): Table[string, string] =
             echo "Unsupported type given"
 
 proc fromFile*(filename: string, header: string = ""): Table[string, string] =
+    echo "This filepath is deprecated. Please use fromFiles() instead."
     let fileInfo: seq[string] = filename.split('.')
 
     var newFileName: Table[string, string] = initTable[string, string]()
@@ -51,16 +52,18 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
 
         filepaths.add(filepath[0], words[1])
 
+    let config = newConfig(header)
+
     case fileInfo[fileInfo.len() - 1]
     of "struct":
         var wstruct = newWStruct()
-        if wstruct.parseFile(file, filename, filepaths):
-            fileContents = wstruct.genWStructFiles(header)
+        if wstruct.parseFile(file, filename, filepaths, config):
+            fileContents = wstruct.genWStructFiles(config)
             newFileName = newFilename(filename.substr(0, filename.len() - 7))
     of "enum":
         var wenum = newWEnum()
-        if wenum.parseFile(file, filename, filepaths):
-            fileContents = wenum.genWEnumFiles(header)
+        if wenum.parseFile(file, filename, filepaths, config):
+            fileContents = wenum.genWEnumFiles(config)
             newFileName = newFilename(filename.substr(0, filename.len() - 5))
     else:
         echo "Unsupported file type: " & fileInfo[fileInfo.len() - 1]
@@ -79,8 +82,7 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
         )
 
 proc fromFiles*(
-    filenames: seq[string], header: string = "",
-    prefixes: Table[string, string] = initTable[string, string](),
+    filenames: seq[string], config: Config,
 ): Table[string, Table[string, string]] =
     var winterfaces: seq[IWings] = newSeq[IWings](0)
 
@@ -112,13 +114,13 @@ proc fromFiles*(
         case fileInfo[fileInfo.len() - 1]
         of "enum":
             var wenum = newWEnum()
-            if wenum.parseFile(file, rawFilename, filepaths):
+            if wenum.parseFile(file, rawFilename, filepaths, config):
                 winterfaces.add(wenum)
             else:
                 echo "Failed to parse \"" & rawFilename & "\". Skipping..."
         of "struct":
             var wstruct = newWStruct()
-            if wstruct.parseFile(file, rawFilename, filepaths):
+            if wstruct.parseFile(file, rawFilename, filepaths, config):
                 winterfaces.add(wstruct)
             else:
                 echo "Failed to parse \"" & rawFilename & "\". Skipping..."
@@ -127,4 +129,4 @@ proc fromFiles*(
 
         file.close()
 
-    result = dependencyGraph(winterfaces, prefixes, header)
+    result = dependencyGraph(winterfaces, config)

@@ -9,12 +9,11 @@
 package classroom
 
 import (    
-    homework "path/to/homework"
     emotion "github.com/binhonglee/wings/examples/go"
     "time"
 )
 
-// Any person who is studying in a class
+// Student - Any person who is studying in a class
 type Student struct {
     ID int `json:"id"`
     Name string `json:"name"`
@@ -22,8 +21,9 @@ type Student struct {
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
     Graduation time.Time `json:"graduation"`
-    Homeworks []homework.Homework `json:"homeworks"`
+    Homeworks []Homework `json:"homeworks"`
     Something map[string]string `json:"something"`
 }
 
+// Students - An array of Student
 type Students []Student

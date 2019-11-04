@@ -1,0 +1,14 @@
+go-filepath examples/go/classroom
+kt-filepath examples/kt
+nim-filepath examples/nim
+py-filepath examples/py
+ts-filepath examples/ts
+
+# Homework - Work to be done at home
+
+Homework {
+    id          int
+    name        str
+    due_date    date
+    given_date  date
+}

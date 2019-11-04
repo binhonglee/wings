@@ -5,11 +5,13 @@
 # Source: examples/student.struct.wings
 
 import json
+import ./homework
 import times
 import tables
 import ./emotion
 
-# Any person who is studying in a class
+
+# Student - Any person who is studying in a class
 type
     Student* = object
         ID* : int

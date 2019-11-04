@@ -12,18 +12,26 @@ run `nimble genFile "{SOURCE_FILE}"` upon completion.
 
 const DEFAULT_PREFIXES: Table[string, string] = initTable[string, string]()
 const DEFAULT_TABBING: int = 4
+const DEFAULT_LOGGING_LEVEL: int = 0
 
 type
     Config* = object
         header*: string
         prefixes*: Table[string, string]
         tabbing*: int
+        logging*: int
 
-proc newConfig*(): Config =
+proc newConfig*(
+    header: string = DEFAULT_HEADER,
+    prefixes: Table[string, string] = DEFAULT_PREFIXES,
+    tabbing: int = DEFAULT_TABBING,
+    logging: int = DEFAULT_LOGGING_LEVEL,
+): Config =
     result = Config()
-    result.header = DEFAULT_HEADER
-    result.prefixes = DEFAULT_PREFIXES
-    result.tabbing = DEFAULT_TABBING
+    result.header = header
+    result.prefixes = prefixes
+    result.tabbing = tabbing
+    result.logging = logging
 
 proc parse*(filename: string): Config =
     result = newConfig()
@@ -31,6 +39,9 @@ proc parse*(filename: string): Config =
         return result
 
     var jsonConfig: JsonNode = parseFile(filename)
+    if jsonConfig.hasKey("logging"):
+        result.logging = jsonConfig["logging"].getInt(DEFAULT_LOGGING_LEVEL)
+
     if jsonConfig.hasKey("header"):
         var header: seq[string] = newSeq[string](0)
         let headerSeq: seq[JsonNode] = jsonConfig["header"].getElems()
@@ -48,6 +59,8 @@ proc parse*(filename: string): Config =
             if fieldStr != "":
                 prefixes.add(field, fieldStr)
         result.prefixes = prefixes
+
     if jsonConfig.hasKey("tabbing"):
-        echo "The \"tabbing\" field can be set but is not yet configured to be respected."
+        if result.logging > 1:
+            echo "The \"tabbing\" field can be set but is not yet configured to be respected."
         result.tabbing = jsonConfig["tabbing"].getInt(DEFAULT_TABBING)

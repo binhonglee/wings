@@ -6,8 +6,16 @@ from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
-proc types(imports: var HashSet[string], name: string): string =
+proc types(imports: var HashSet[string], name: string, customTypes: HashSet[string] = initHashSet[string]()): string =
     result = name
+    var newCustoms: HashSet[string] = customTypes
+
+    if newCustoms.len() < 1:
+        for givenImport in imports:
+            let importDat: seq[string] = givenImport.split(':')
+
+            if importDat.len() == 2:
+                newCustoms.incl(importDat[0])
 
     if startsWith(result, "Map<") and endsWith(result, ">"):
         result.removePrefix("Map<")
@@ -17,7 +25,7 @@ proc types(imports: var HashSet[string], name: string): string =
             echo "Invalid map type: " & name
             result = ""
         else:
-            result = "map[" & imports.types(mapTypes[0]) & "]" & imports.types(mapTypes[1])
+            result = "map[" & imports.types(mapTypes[0]) & "]" & imports.types(mapTypes[1], newCustoms)
     elif startsWith(result, "[]"):
         result.removePrefix("[]")
         result = "[]" & imports.types(result)
@@ -33,7 +41,10 @@ proc types(imports: var HashSet[string], name: string): string =
             imports.incl("time")
             result = "time.Time"
         else:
-            result = toLowerAscii(result) & "." & result
+            var prefix = ""
+            if newCustoms.contains(toLowerAscii(result)):
+                prefix = toLowerAscii(result) & "."
+            result = prefix & result
 
 proc wEnumFile(
     name: string,
@@ -102,6 +113,7 @@ proc wStructFile(
     if functions.len() > 0:
         result &= unindent(functions, 4, " ") & "\n"
 
+    result &= "\n" & indent(" " & name & "s - An array of " & name, 2, "/")
     result &= "\ntype " & name & "s []" & name
 
 proc genWEnum*(wenum: WEnum): string =
