@@ -1,3 +1,4 @@
+import sets
 import tables
 
 type
@@ -6,13 +7,13 @@ type
         filename*: string
         dependencies*: seq[string]
         filepath*: Table[string, string]
-        imports*: Table[string, seq[string]]
+        imports*: Table[string, HashSet[string]]
 
 proc addImport(iwings: var IWings, newImport: string, importLang: string): void =
     if not iwings.imports.hasKey(importLang):
-        iwings.imports.add(importLang, newSeq[string](0))
+        iwings.imports.add(importLang, initHashSet[string]())
 
-    iwings.imports[importLang].add(newImport)
+    iwings.imports[importLang].incl(newImport)
 
 proc fulfillDependency*(iwings: var IWings, dependency: string, imports: Table[string, string]): bool =
     if not iwings.dependencies.contains(dependency):

@@ -21,6 +21,7 @@ type Student struct {
     CurClass string `json:"cur_class"`
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
+    Graduation time.Time `json:"graduation"`
     Homeworks []homework.Homework `json:"homeworks"`
     Something map[string]string `json:"something"`
 }

@@ -1,11 +1,12 @@
 from strutils
 import capitalizeAscii, contains, endsWith, indent, normalize,
     removePrefix, removeSuffix, replace, split, startsWith
+import sets
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
-proc types(imports: var seq[string], name: string): string =
+proc types(imports: var HashSet[string], name: string): string =
     result = name
 
     if result.startsWith("Map<") and result.endsWith(">"):
@@ -16,7 +17,7 @@ proc types(imports: var seq[string], name: string): string =
             echo "Invalid map types."
             result = ""
         else:
-            imports.add("tables")
+            imports.incl("tables")
             result = "Table[" & types(imports, typeToProcess[0]) &
                 ", " & types(imports, typeToProcess[1]) & "]"
     elif result.startsWith("[]"):
@@ -33,7 +34,7 @@ proc types(imports: var seq[string], name: string): string =
         of "bool":
             result = "bool"
         of "date":
-            imports.add("times")
+            imports.incl("times")
             result = "DateTime"
 
 proc typeAssign(name: string, content: string): string =
@@ -71,7 +72,7 @@ proc wEnumFile(
 
 proc wStructFile(
     name: string,
-    imports: seq[string],
+    imports: HashSet[string],
     fields: seq[string],
     functions: string,
     comment: string,

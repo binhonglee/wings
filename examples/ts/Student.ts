@@ -18,6 +18,7 @@ export default class Student implements People {
     public curClass: string = '';
     public isActive: boolean = true;
     public year: Date = new Date();
+    public graduation: Date = new Date();
     public homeworks: Homework[] = [];
     public something: Map<string, string> = new Map();
     
@@ -28,6 +29,7 @@ export default class Student implements People {
             this.curClass = data.cur_class;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
+            this.graduation = new Date(data.graduation);
             
             if (data.homeworks !== null) {
                 this.homeworks = data.homeworks;
@@ -55,6 +57,9 @@ export default class Student implements People {
             }
             case 'year': {
                 return 'year';
+            }
+            case 'graduation': {
+                return 'graduation';
             }
             case 'homeworks': {
                 return 'homeworks';

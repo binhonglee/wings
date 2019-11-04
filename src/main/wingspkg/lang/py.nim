@@ -1,9 +1,10 @@
 from strutils
 import capitalizeAscii, indent, replace, startsWith, endsWith, split
+import sets
 from tables import getOrDefault
 import ../lib/wstruct, ../lib/wenum
 
-proc types(imports: var seq[string], name: string): string =
+proc types(imports: var HashSet[string], name: string): string =
     if name.startsWith("[]"):
         result = "list"
     elif name.startsWith("Map<") and name.endsWith(">"):
@@ -19,7 +20,7 @@ proc types(imports: var seq[string], name: string): string =
         of "bool":
             result = "bool"
         of "date":
-            imports.add("datetime:date")
+            imports.incl("datetime:date")
             result = "date"
         else:
             result = name
@@ -61,7 +62,7 @@ proc wEnumFile(
 
 proc wStructFile(
     name: string,
-    imports: seq[string],
+    imports: HashSet[string],
     fields: seq[string],
     functions: string,
     comment: string,

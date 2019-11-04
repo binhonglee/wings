@@ -18,6 +18,7 @@ class Student {
     var curClass: String = ""
     var isActive: Boolean = true
     var year: Date = Date()
+    var graduation: Date = Date()
     var homeworks: ArrayList<Homework> = ArrayList<Homework>()
     var something: HashMap<String, String> = HashMap<String, String>()
 
@@ -28,6 +29,7 @@ class Student {
             "curClass" -> return "cur_class"
             "isActive" -> return "is_active"
             "year" -> return "year"
+            "graduation" -> return "graduation"
             "homeworks" -> return "homeworks"
             "something" -> return "something"
             else -> return key

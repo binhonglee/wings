@@ -5,9 +5,9 @@
 # Source: examples/student.struct.wings
 
 import json
-import ./emotion
 import times
 import tables
+import ./emotion
 
 # Any person who is studying in a class
 type
@@ -17,6 +17,7 @@ type
         curClass* : string
         isActive* : bool
         year* : DateTime
+        graduation* : DateTime
         homeworks* : seq[Homework]
         something* : Table[string, string]
 
@@ -28,5 +29,6 @@ proc parse*(student: var Student, data: string): void =
     student.curClass = jsonOutput["cur_class"].getStr()
     student.isActive = jsonOutput["is_active"].getBool()
     student.year = now()
+    student.graduation = now()
     student.homeworks = jsonOutput["homeworks"].getElems()
     student.something = jsonOutput["something"].getElems()

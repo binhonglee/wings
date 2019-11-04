@@ -1,5 +1,6 @@
 from strutils
 import contains, endsWith, indent, intToStr, removePrefix, removeSuffix, replace, split, startsWith
+import sets
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
@@ -75,7 +76,7 @@ proc wEnumFile(
 
 proc wStructFile(
     name: string,
-    imports: seq[string],
+    imports: HashSet[string],
     fields: seq[string],
     functions: string,
     comment: string,
@@ -189,5 +190,3 @@ proc genWStruct*(wstruct: WStruct): string =
         wstruct.fields, wstruct.functions.getOrDefault("ts"),
         wstruct.comment, wstruct.implement.getOrDefault("ts"),
     )
-
-# proc importFilename*()

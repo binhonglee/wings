@@ -1,12 +1,13 @@
 from strutils
 import contains, endsWith, indent, removePrefix, removeSuffix, replace, split, startsWith
+import sets
 from tables import getOrDefault
 from ../lib/varname import camelCase
 import ../lib/wstruct, ../lib/wenum
 
 const filetype: string = "kt"
 
-proc types(imports: var seq[string], name: string): string =
+proc types(imports: var HashSet[string], name: string): string =
     result = name
 
     if result.startsWith("Map<") and result.endsWith(">"):
@@ -17,12 +18,12 @@ proc types(imports: var seq[string], name: string): string =
             echo "Invalid map types."
             result = ""
         else:
-            imports.add("java.util.HashMap")
+            imports.incl("java.util.HashMap")
             result = "HashMap<" & types(imports, typeToProcess[0]) &
                 ", " & types(imports, typeToProcess[1]) & ">"
     elif result.startsWith("[]"):
         result.removePrefix("[]")
-        imports.add("java.util.ArrayList")
+        imports.incl("java.util.ArrayList")
         result = "ArrayList<" & types(imports, result) & ">"
     else:
         case result
@@ -38,7 +39,7 @@ proc types(imports: var seq[string], name: string): string =
 proc typeInit(name: string): string =
     result = name
     if strutils.contains(name, "[]") or strutils.contains(name, "Map<"):
-        var tempSeq = newSeq[string](0)
+        var tempSeq = initHashSet[string]()
         result = types(tempSeq, name)
 
     case result
@@ -70,7 +71,7 @@ proc wEnumFile(
 
 proc wStructFile(
     name: string,
-    imports: seq[string],
+    imports: HashSet[string],
     fields: seq[string],
     functions: string,
     comment: string,

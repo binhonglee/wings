@@ -20,6 +20,7 @@ Student {
     cur_class   str
     is_active   bool       true
     year        date
+    graduation  date
     homeworks   []Homework
     something   Map<str,str>
 }

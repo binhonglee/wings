@@ -1,4 +1,5 @@
 from strutils import splitWhitespace
+import sets
 import tables
 from ./winterface import IWings
 
@@ -11,7 +12,7 @@ proc newWEnum*(): WEnum =
     result.name = ""
     result.dependencies = newSeq[string](0)
     result.filepath = initTable[string, string]()
-    result.imports = initTable[string, seq[string]]()
+    result.imports = initTable[string, HashSet[string]]()
     result.values = newSeq[string](0)
 
 proc parseFile*(wenum: var WEnum, file: File, filename: string, filepath: Table[string, string]): bool =

@@ -5,8 +5,8 @@
 # Source: examples/student.struct.wings
 
 import json
-import examples.py.emotion
 from datetime import date
+import examples.py.emotion
 
 # Any person who is studying in a class
 class Student(People):
@@ -15,6 +15,7 @@ class Student(People):
     cur_class: str = ""
     is_active: bool = True
     year: date = date.today()
+    graduation: date = date.today()
     homeworks: list = []Homework()
     something: dict = Map<str,str>()
     

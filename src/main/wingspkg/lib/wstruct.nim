@@ -1,6 +1,7 @@
 from strutils
 import contains, endsWith, join, removeSuffix, split, splitWhitespace
 from sequtils import foldr
+import sets
 import tables
 from ./winterface import IWings
 
@@ -15,7 +16,7 @@ proc newWStruct*(): WStruct =
     result.name = ""
     result.dependencies = newSeq[string](0)
     result.filepath = initTable[string, string]()
-    result.imports = initTable[string, seq[string]]()
+    result.imports = initTable[string, HashSet[string]]()
     result.comment = ""
     result.fields = newSeq[string](0)
     result.functions = initTable[string, string]()
@@ -52,8 +53,8 @@ proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Ta
                 words.delete(0)
                 key.removeSuffix("-import")
                 if not wstruct.imports.hasKey(key):
-                    wstruct.imports.add(key, newSeq[string](0))
-                wstruct.imports[key].add(foldr(words, a & " " & b))
+                    wstruct.imports.add(key, initHashSet[string]())
+                wstruct.imports[key].incl(foldr(words, a & " " & b))
             elif words[0].endsWith("import"):
                 wstruct.dependencies.add(words[1])
             elif words[0].endsWith("Func("):
