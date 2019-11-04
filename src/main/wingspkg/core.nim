@@ -1,5 +1,6 @@
 from strutils
-import capitalizeAscii, contains, join, normalize, parseEnum, removeSuffix, split, splitWhitespace
+import capitalizeAscii, contains, endsWith, join, normalize,
+    parseEnum, removeSuffix, split, splitWhitespace
 import tables
 import lib/wenum, lib/wstruct, lib/winterface
 import util/wiutil
@@ -29,7 +30,7 @@ proc newFilename(filename: string): Table[string, string] =
             echo "Unsupported type given"
 
 proc fromFile*(filename: string, header: string = ""): Table[string, string] =
-    var fileInfo: seq[string] = filename.split('.')
+    let fileInfo: seq[string] = filename.split('.')
 
     var newFileName: Table[string, string] = initTable[string, string]()
     var fileContents: Table[string, string] = initTable[string, string]()
@@ -39,8 +40,8 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
     var line: string
 
     while readLine(file, line) and line.len() > 0:
-        var words: seq[string] = line.splitWhitespace()
-        var filepath: seq[string] = words[0].split('-')
+        let words: seq[string] = line.splitWhitespace()
+        let filepath: seq[string] = words[0].split('-')
 
         if words.len() < 2 or filepath.len() < 2:
             continue
@@ -83,11 +84,17 @@ proc fromFiles*(
 ): Table[string, Table[string, string]] =
     var winterfaces: seq[IWings] = newSeq[IWings](0)
 
-    for filename in filenames:
+    for rawFilename in filenames:
+        var filename: string = rawFilename
+        if filename.endsWith(".wings"):
+            filename.removeSuffix(".wings")
+        else:
+            echo "Filenames without .wings ending will be ignored soon."
+
         let fileInfo: seq[string] = filename.split('.')
 
         var filepaths: Table[string, string] = initTable[string, string]()
-        let file: File = open(filename)
+        let file: File = open(rawFilename)
         var line: string
 
         while readLine(file, line) and line.len() > 0:
@@ -105,16 +112,16 @@ proc fromFiles*(
         case fileInfo[fileInfo.len() - 1]
         of "enum":
             var wenum = newWEnum()
-            if wenum.parseFile(file, filename, filepaths):
+            if wenum.parseFile(file, rawFilename, filepaths):
                 winterfaces.add(wenum)
             else:
-                echo "Failed to parse \"" & filename & "\". Skipping..."
+                echo "Failed to parse \"" & rawFilename & "\". Skipping..."
         of "struct":
             var wstruct = newWStruct()
-            if wstruct.parseFile(file, filename, filepaths):
+            if wstruct.parseFile(file, rawFilename, filepaths):
                 winterfaces.add(wstruct)
             else:
-                echo "Failed to parse \"" & filename & "\". Skipping..."
+                echo "Failed to parse \"" & rawFilename & "\". Skipping..."
         else:
             echo "Unsupported file type: " & fileInfo[fileInfo.len() - 1]
 

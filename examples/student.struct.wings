@@ -7,7 +7,7 @@ ts-filepath examples/ts
 go-import homework:path/to/homework
 ts-import People:./People
 ts-import { Homework }:path/to/Homework
-import examples/emotion.enum
+import examples/emotion.enum.wings
 
 py-implement People
 ts-implement People
