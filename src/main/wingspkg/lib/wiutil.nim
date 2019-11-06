@@ -1,21 +1,21 @@
 import tables
-import ../lib/winterface, ../lib/wenum, ../lib/wstruct
-import ../lib/filename, ../lib/header, ../lib/config
+import ./winterface, ./wenum, ./wstruct
+import ../util/filename, ../util/header, ../util/config
 import ../lang/go, ../lang/kt, ../lang/nim, ../lang/py, ../lang/ts
+import ../util/log
 
 proc genWStructFiles*(this: var WStruct, config: Config): Table[string, string] =
     if this.dependencies.len() > 0:
         for dependency in this.dependencies:
-            echo "Dependency (" & dependency & ") not yet fulfilled."
+            LOG(WARNING, "Dependency (" & dependency & ") not yet fulfilled.")
 
-        echo "Generated files may not work as intended."
+        LOG(WARNING, "Generated files may not work as intended.")
 
     result = initTable[string, string]()
     let filenames = outputFilename(this.filename, this.filepath)
 
     for filetype in this.filepath.keys:
-        if config.logging > 2:
-            echo "Generating " & filenames[filetype] & "..."
+        LOG(INFO, "Generating " & filenames[filetype] & "...")
         var fileContent: string = ""
         case filetype
         of "go":
@@ -42,8 +42,7 @@ proc genWEnumFiles*(this: var WEnum, config: Config): Table[string, string] =
     let filenames = outputFilename(this.filename, this.filepath)
 
     for filetype in this.filepath.keys:
-        if config.logging > 2:
-            echo "Generating " & filenames[filetype] & "..."
+        LOG(INFO, "Generating " & filenames[filetype] & "...")
         var fileContent: string = ""
         case filetype
         of "go":
@@ -99,8 +98,8 @@ proc dependencyGraph*(
     while noDeps.len() > 0:
         var wing = filenameToObj[noDeps.pop()]
         let name = wing.filename
-        if config.logging > 1:
-            echo "Generating files from " & wing.filename & "..."
+        LOG(INFO, "Generating files from " & wing.filename & "...")
+
         result.add(name, wing.genFiles(config))
         if reverseDependencyTable.hasKey(name):
             for dependant in reverseDependencyTable[name]:
@@ -115,8 +114,11 @@ proc dependencyGraph*(
                     )
                 )
                 if not fulfillDep:
-                    echo "Something went wrong when fulfilling a dependency for " &
-                        obj.name
+                    LOG(
+                        ERROR,
+                        "Something went wrong when fulfilling a dependency for " &
+                        obj.name,
+                    )
                 else:
                     allWings[filenameToIndex[obj.filename]] = obj
             reverseDependencyTable.del(name)

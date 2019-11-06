@@ -3,7 +3,8 @@ import capitalizeAscii, contains, endsWith, indent, removePrefix,
     removeSuffix, replace, split, startsWith, toLowerAscii, unindent
 import sets
 from tables import getOrDefault
-from ../lib/varname import camelCase
+from ../util/varname import camelCase
+import ../util/log, ../util/config
 import ../lib/wstruct, ../lib/wenum
 
 proc types(imports: var HashSet[string], name: string, customTypes: HashSet[string] = initHashSet[string]()): string =
@@ -22,7 +23,7 @@ proc types(imports: var HashSet[string], name: string, customTypes: HashSet[stri
         result.removeSuffix(">")
         var mapTypes: seq[string] = result.split(",")
         if mapTypes.len() != 2:
-            echo "Invalid map type: " & name
+            LOG(ERROR, "Invalid map type: " & name)
             result = ""
         else:
             result = "map[" & imports.types(mapTypes[0]) & "]" & imports.types(mapTypes[1], newCustoms)

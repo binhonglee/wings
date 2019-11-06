@@ -9,9 +9,7 @@ bin           = @["wings"]
 srcDir        = "src/main"
 installExt    = @["nim"]
 
-# Dependencies
-
-requires "nim >= 0.17.2"
+requires "nim >= 1.0.0"
 
 task genFile, "Generate file(s)":
     exec "nimble build"

@@ -2,8 +2,8 @@ from strutils
 import capitalizeAscii, contains, endsWith, join, normalize,
     parseEnum, removeSuffix, split, splitWhitespace
 import tables
-import lib/wenum, lib/wstruct, lib/winterface, lib/config
-import util/wiutil
+import lib/wenum, lib/wstruct, lib/winterface, lib/wiutil
+import util/config, util/log
 
 proc newFilename(filename: string): Table[string, string] =
     const filetypes: array[5, string] = ["go", "kt", "nim", "py", "ts"]
@@ -27,12 +27,16 @@ proc newFilename(filename: string): Table[string, string] =
                 words[i] = capitalizeAscii(words[i])
             result.add(filetype, join(words))
         else:
-            echo "Unsupported type given"
+            LOG(ERROR, "Unsupported type given")
 
-proc fromFile*(filename: string, header: string = ""): Table[string, string] =
-    echo "This filepath is deprecated. Please use fromFiles() instead."
+proc fromFile*(filename: string, header: string = ""): Table[string, string] {.deprecated.} =
+    setLevel(DEPRECATED)
+    LOG(
+        DEPRECATED,
+        "fromFile is now deprecated. Please use fromFiles() instead.",
+    )
+
     let fileInfo: seq[string] = filename.split('.')
-
     var newFileName: Table[string, string] = initTable[string, string]()
     var fileContents: Table[string, string] = initTable[string, string]()
     var filepaths: Table[string, string] = initTable[string, string]()
@@ -66,7 +70,7 @@ proc fromFile*(filename: string, header: string = ""): Table[string, string] =
             fileContents = wenum.genWEnumFiles(config)
             newFileName = newFilename(filename.substr(0, filename.len() - 5))
     else:
-        echo "Unsupported file type: " & fileInfo[fileInfo.len() - 1]
+        LOG(ERROR, "Unsupported file type: " & fileInfo[fileInfo.len() - 1])
         file.close()
         return
 
@@ -91,7 +95,7 @@ proc fromFiles*(
         if filename.endsWith(".wings"):
             filename.removeSuffix(".wings")
         else:
-            echo "Filenames without .wings ending will be ignored soon."
+            LOG(DEPRECATED, "Filenames without .wings ending will be ignored soon.")
 
         let fileInfo: seq[string] = filename.split('.')
 
@@ -117,15 +121,15 @@ proc fromFiles*(
             if wenum.parseFile(file, rawFilename, filepaths, config):
                 winterfaces.add(wenum)
             else:
-                echo "Failed to parse \"" & rawFilename & "\". Skipping..."
+                LOG(ERROR, "Failed to parse \"" & rawFilename & "\". Skipping...")
         of "struct":
             var wstruct = newWStruct()
             if wstruct.parseFile(file, rawFilename, filepaths, config):
                 winterfaces.add(wstruct)
             else:
-                echo "Failed to parse \"" & rawFilename & "\". Skipping..."
+                LOG(ERROR, "Failed to parse \"" & rawFilename & "\". Skipping...")
         else:
-            echo "Unsupported file type: " & fileInfo[fileInfo.len() - 1]
+            LOG(ERROR, "Unsupported file type: " & fileInfo[fileInfo.len() - 1])
 
         file.close()
 

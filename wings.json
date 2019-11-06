@@ -9,5 +9,5 @@
         "go": "github.com/binhonglee/wings"
     },
     "tabbing": 4,
-    "logging": 3
+    "logging": 5
 }

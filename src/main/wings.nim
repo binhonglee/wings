@@ -4,7 +4,7 @@ from strutils
 import startsWith, endsWith
 import tables
 import wingspkg/core
-import wingspkg/lib/config
+import wingspkg/util/config, wingspkg/util/log
 
 const DEFAULT_CONFIG_FILE: string = "wings.json"
 var USER_CONFIG: Config = newConfig()
@@ -12,14 +12,18 @@ var USER_CONFIG: Config = newConfig()
 proc toFile(path: string, content: string): void =
     try:
         writeFile(path, content)
-        if USER_CONFIG.logging > 0:
-            echo "Successfully generated " & path
+        LOG(SUCCESS, "Successfully generated " & path)
     except:
-        echo "Please create the required folder for files to be generated."
+        LOG(
+            ERROR,
+            "Failed to generate " &
+            path &
+            "\nPlease make sure the required folders are already created.",
+        )
 
 proc init(count: int): void =
     if count < 1:
-        echo "Please add struct or enum files to be generated."
+        LOG(ERROR, "Please add struct or enum files to be generated.")
         return
 
     var setConfig: bool = false
@@ -27,7 +31,7 @@ proc init(count: int): void =
     for i in countup(1, count, 1):
         var file = paramStr(i)
         if not fileExists(file):
-            echo "Cannot find " & file & ". Skipping..."
+            LOG(ERROR, "Cannot find " & file & ". Skipping...")
         elif file.endsWith("wings.json"):
             USER_CONFIG = config.parse(file)
             setConfig = true

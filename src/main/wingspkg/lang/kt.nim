@@ -2,7 +2,8 @@ from strutils
 import contains, endsWith, indent, removePrefix, removeSuffix, replace, split, startsWith
 import sets
 from tables import getOrDefault
-from ../lib/varname import camelCase
+from ../util/varname import camelCase
+import ../util/log, ../util/config
 import ../lib/wstruct, ../lib/wenum
 
 const filetype: string = "kt"
@@ -15,7 +16,7 @@ proc types(imports: var HashSet[string], name: string): string =
         result.removeSuffix(">")
         var typeToProcess: seq[string] = result.split(",")
         if typeToProcess.len() != 2:
-            echo "Invalid map types."
+            LOG(ERROR, "Invalid map types.")
             result = ""
         else:
             imports.incl("java.util.HashMap")

@@ -3,7 +3,7 @@ import contains, endsWith, join, removeSuffix, split, splitWhitespace
 from sequtils import foldr
 import sets
 import tables
-import ./config
+import ../util/config, ../util/log
 from ./winterface import IWings
 
 type
@@ -24,8 +24,7 @@ proc newWStruct*(): WStruct =
     result.implement = initTable[string, string]()
 
 proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Table[string, string], config: Config): bool =
-    if config.logging > 2:
-        echo "Parsing " & filename & "..."
+    LOG(INFO, "Parsing " & filename & "...")
     wstruct.filename = filename
     var line: string = ""
 
@@ -68,7 +67,7 @@ proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Ta
                 wstruct.name = words[0]
                 inWStruct = true
             elif words.len > 1:
-                echo "Invalid input: " & join(words, " ")
+                LOG(ERROR, "Invalid input: " & join(words, " "))
                 return false
         elif inWStruct:
             if words[0] == "}":

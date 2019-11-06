@@ -1,6 +1,7 @@
 import tables
 import strutils
 from sequtils import foldr
+import ./log, ./config
 
 let joiner: Table[string, char] = {"go": '/', "kt": '/', "nim": '/', "py": '.', "ts": '/'}.toTable
 
@@ -51,7 +52,7 @@ proc filename*(
                 words[i] = capitalizeAscii(words[i])
             result.add(filetype, prefix & join(words) & suffix)
         else:
-            echo "Unsupported type given"
+            LOG(ERROR, "Unsupported type given.")
 
 proc outputFilename*(
     filename: string,
