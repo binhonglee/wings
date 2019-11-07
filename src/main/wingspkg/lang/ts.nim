@@ -3,7 +3,7 @@ import contains, endsWith, indent, intToStr, removePrefix, removeSuffix, replace
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
-import ../util/log, ../util/config
+import ../util/log
 import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =

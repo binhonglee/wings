@@ -9,5 +9,6 @@
         "go": "github.com/binhonglee/wings"
     },
     "tabbing": 4,
-    "logging": 5
+    "logging": 5,
+    "outputRootDirs": ["wings"]
 }

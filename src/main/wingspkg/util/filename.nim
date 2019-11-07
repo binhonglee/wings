@@ -1,7 +1,8 @@
+from os import unixToNativePath
 import tables
 import strutils
 from sequtils import foldr
-import ./log, ./config
+import ./log
 
 let joiner: Table[string, char] = {"go": '/', "kt": '/', "nim": '/', "py": '.', "ts": '/'}.toTable
 
@@ -15,12 +16,12 @@ proc similarity(first: seq[string], second: seq[string]): int =
         else:
             result += 1
 
-
 proc filename*(
     filename: string,
     filepath: Table[string, string],
     customJoin: Table[string, char] = joiner,
     filetypeSuffix: bool = false,
+    useNativePath: bool = false,
 ): Table[string, string] =
     var temp: seq[string] = filename.split('/')
     temp[temp.len() - 1] = temp[temp.len() - 1].split('.')[0]
@@ -36,21 +37,26 @@ proc filename*(
             suffix = "." & filetype
         case filetype
         of "go", "nim", "py":
-            result.add(
-                filetype,
-                prefix &
+            var file = prefix &
                 join(
                     split(
                         temp[temp.len() - 1], '_'
                     )
-                ) &
-                suffix
+                ) & suffix
+            if useNativePath:
+                file = unixToNativePath(file)
+            result.add(
+                filetype,
+                file
             )
         of "kt", "ts":
             var words = split(temp[temp.len() - 1], '_')
             for i in countup(0, words.len() - 1, 1):
                 words[i] = capitalizeAscii(words[i])
-            result.add(filetype, prefix & join(words) & suffix)
+            var file = prefix & join(words) & suffix
+            if useNativePath:
+                file = unixToNativePath(file)
+            result.add(filetype, file)
         else:
             LOG(ERROR, "Unsupported type given.")
 
@@ -62,7 +68,8 @@ proc outputFilename*(
         filename,
         filepath,
         {"go": '/', "kt": '/', "nim": '/', "py": '/', "ts": '/'}.toTable,
-        true
+        true,
+        true,
     )
 
 proc importFilename*(

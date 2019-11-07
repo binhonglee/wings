@@ -2,15 +2,18 @@ from strutils import indent
 import terminal
 
 type
+    GenericException* = object of Exception
+
+type
     AlertLevel* = enum
         FATAL = 0,
         ERROR = 1,
         SUCCESS = 2,
-        WARNING = 3,
-        DEPRECATED = 4,
+        DEPRECATED = 3,
+        WARNING = 4,
         INFO = 5,
 
-var LEVEL: AlertLevel = SUCCESS
+var LEVEL: AlertLevel = DEPRECATED
 
 proc prefix(level: AlertLevel): string =
     case level
@@ -39,9 +42,11 @@ proc prefix(level: AlertLevel): string =
             ansiForegroundColorCode(ForegroundColor.fgBlue) &
             "INFO" & ansiForegroundColorCode(ForegroundColor.fgDefault)
 
-proc LOG*(level: AlertLevel, message: string): void =
+proc LOG*(level: AlertLevel, message: string, exception: typedesc = GenericException): void =
     if LEVEL >= level:
         echo indent(message, 1, prefix(level) & ": ")
+    if level == FATAL:
+        raise newException(exception, message)
 
 proc setLevel*(level: AlertLevel): void =
     LEVEL = level

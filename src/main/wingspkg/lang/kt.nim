@@ -3,7 +3,7 @@ import contains, endsWith, indent, removePrefix, removeSuffix, replace, split, s
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
-import ../util/log, ../util/config
+import ../util/log
 import ../lib/wstruct, ../lib/wenum
 
 const filetype: string = "kt"

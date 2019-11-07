@@ -1,5 +1,5 @@
 from os
-import fileExists, paramCount, paramStr
+import createDir, fileExists, joinPath, paramCount, paramStr, parentDir, setCurrentDir
 from strutils
 import startsWith, endsWith
 import tables
@@ -11,15 +11,16 @@ var USER_CONFIG: Config = newConfig()
 
 proc toFile(path: string, content: string): void =
     try:
-        writeFile(path, content)
-        LOG(SUCCESS, "Successfully generated " & path)
+        for outputDir in USER_CONFIG.outputRootDirs:
+            if (outputDir.len() > 0):
+                setCurrentDir(outputDir)
+            else:
+                setCurrentDir(CALLER_DIR)
+            createDir(parentDir(path))
+            writeFile(path, content)
+            LOG(SUCCESS, "Successfully generated " & outputDir & "/" & path)
     except:
-        LOG(
-            ERROR,
-            "Failed to generate " &
-            path &
-            "\nPlease make sure the required folders are already created.",
-        )
+        LOG(ERROR, "Failed to generate " & path)
 
 proc init(count: int): void =
     if count < 1:
@@ -29,7 +30,7 @@ proc init(count: int): void =
     var setConfig: bool = false
     var wingsFiles: seq[string] = newSeq[string](0)
     for i in countup(1, count, 1):
-        var file = paramStr(i)
+        let file = paramStr(i)
         if not fileExists(file):
             LOG(ERROR, "Cannot find " & file & ". Skipping...")
         elif file.endsWith("wings.json"):

@@ -1,4 +1,4 @@
-subinclude('@pleasings//nim')
+subinclude('//build_defs/nim')
 
 nim_binary(
     name = 'wings',
@@ -11,14 +11,15 @@ nim_binary(
         'wingspkg/lang/nim.nim',
         'wingspkg/lang/py.nim',
         'wingspkg/lang/ts.nim',
-        'wingspkg/lib/config.nim',
-        'wingspkg/lib/filename.nim',
-        'wingspkg/lib/header.nim',
-        'wingspkg/lib/varname.nim',
         'wingspkg/lib/wenum.nim',
         'wingspkg/lib/winterface.nim',
+        'wingspkg/lib/wiutil.nim',
         'wingspkg/lib/wstruct.nim',
-        'wingspkg/util/wiutil.nim',
+        'wingspkg/util/config.nim',
+        'wingspkg/util/filename.nim',
+        'wingspkg/util/header.nim',
+        'wingspkg/util/log.nim',
+        'wingspkg/util/varname.nim',
     ],
     visibility = ['PUBLIC'],
 )

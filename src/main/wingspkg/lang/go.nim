@@ -4,7 +4,7 @@ import capitalizeAscii, contains, endsWith, indent, removePrefix,
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
-import ../util/log, ../util/config
+import ../util/log
 import ../lib/wstruct, ../lib/wenum
 
 proc types(imports: var HashSet[string], name: string, customTypes: HashSet[string] = initHashSet[string]()): string =
