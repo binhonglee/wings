@@ -2,47 +2,40 @@
 
 ## Imports
 
--   strutils
-    -   capitalizeAscii
-    -   contains
-    -   join
-    -   normalize
-    -   parseEnum
-    -   removeSuffix
-    -   split
-    -   splitWhitespace
+- strutils
+    - capitalizeAscii
+    - contains
+    - endsWith
+    - join
+    - normalize
+    - parseEnum
+    - removeSuffix
+    - split
+    - splitWhitespace
 -   tables
--   [lib/header](lib/header.md)
 -   [lib/wenum](lib/wenum.md)
 -   [lib/wstruct](lib/wstruct.md)
--   [util/wenumutil](util/wenumutil.md)
--   [util/wstructutil](util/wstructutil.md)
-
-## Constants
-
-| Name        | Type                 | Description                                                          |
-| :---------- | :------------------- | :------------------------------------------------------------------- |
-| `filetypes` | `Table[string, int]` | Table to iterate through as a collection of all supported filetypes. |
+-   [lib/winterface](lib/winterface.md)
+-   [lib/wiutil](lib/wiutil.md)
+-   [util/config](util/config.md)
+-   [util/log](util/log.md)
 
 ## Functions
 
-### `public`
-
-#### `fromFile: Table[string, string]`
+#### (DEPRECATED) `fromFile: Table[string, string]`
 
 Entry point to the file. It gets the file to read and returns a table of output to be written.
 
-| Argument            | Type     | Description                        |
-| :------------------ | :------- | :--------------------------------- |
-| `filename`          | `string` | Filename of the file to read from. |
-| `header` (Optional) | `string` | Customized header.                 |
+| Argument   | Type     | Description                        |
+| :--------- | :------- | :--------------------------------- |
+| `filename` | `string` | Filename of the file to read from. |
+| `header`   | `string` | Customized header.                 |
 
-### `private`
+#### `fromFiles: Table[string, Table[string, string]]`
 
-#### `newFileName: Table[string, string]`
+Entry point to the file. It gets all the files to read and returns a table of output to be written.
 
-Generate the appropriate filename based on the naming convention of the given file types. Output key represents the filetype while output value are the filename
-
-| Argument   | Type     | Description                  |
-| :--------- | :------- | :--------------------------- |
-| `filename` | `string` | Filename of the source file. |
+| Argument    | Type          | Description                         |
+| :---------- | :------------ | :---------------------------------- |
+| `filenames` | `seq[string]` | Filename of the files to read from. |
+| `config`    | `Config`      | User config.                        |

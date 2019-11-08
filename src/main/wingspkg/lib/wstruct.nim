@@ -23,7 +23,13 @@ proc newWStruct*(): WStruct =
     result.functions = initTable[string, string]()
     result.implement = initTable[string, string]()
 
-proc parseFile*(wstruct: var WStruct, file: File, filename: string, filepath: Table[string, string], config: Config): bool =
+proc parseFile*(
+    wstruct: var WStruct,
+    file: File,
+    filename: string,
+    filepath: Table[string, string],
+    config: Config
+): bool =
     LOG(INFO, "Parsing " & filename & "...")
     wstruct.filename = filename
     var line: string = ""

@@ -1,5 +1,6 @@
 from strutils
-import contains, endsWith, indent, intToStr, removePrefix, removeSuffix, replace, split, startsWith
+import contains, endsWith, indent, intToStr, removePrefix,
+    removeSuffix, replace, split, startsWith
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase

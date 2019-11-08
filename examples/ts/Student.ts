@@ -16,6 +16,7 @@ export default class Student implements People {
     public ID: number = -1;
     public name: string = '';
     public curClass: string = '';
+    public feeling: Emotion = Emotion.Meh;
     public isActive: boolean = true;
     public year: Date = new Date();
     public graduation: Date = new Date();
@@ -27,6 +28,7 @@ export default class Student implements People {
             this.ID = data.id;
             this.name = data.name;
             this.curClass = data.cur_class;
+            this.feeling = data.feeling;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
             this.graduation = new Date(data.graduation);
@@ -51,6 +53,9 @@ export default class Student implements People {
             }
             case 'curClass': {
                 return 'cur_class';
+            }
+            case 'feeling': {
+                return 'feeling';
             }
             case 'isActive': {
                 return 'is_active';

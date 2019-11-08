@@ -2,18 +2,23 @@
 
 ## Imports
 
--   strutils
-    -   contains
-    -   indent
-    -   intToStr
-    -   replace
-    -   split
--   tables
-    -   getOrDefault
--   [../lib/varname](../lib/varname)
-    -   camelCase
--   [../lib/wstruct](../lib/wstruct)
--   [../lib/wenum](../lib/wenum)
+- strutils
+    - contains
+    - endsWith
+    - indent
+    - intToStr
+    - removePrefix
+    - removeSuffix
+    - replace
+    - split
+    - startsWith
+- tables
+    - getOrDefault
+- [../util/varname](../util/varname.md)
+    - camelCase
+- [../util/log](../util/log.md)
+- [../lib/wstruct](../lib/wstruct.md)
+- [../lib/wenum](../lib/wenum.md)
 
 ## Functions
 

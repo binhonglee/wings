@@ -18,6 +18,7 @@ type Student struct {
     ID int `json:"id"`
     Name string `json:"name"`
     CurClass string `json:"cur_class"`
+    Feeling emotion.Emotion `json:"feeling"`
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
     Graduation time.Time `json:"graduation"`

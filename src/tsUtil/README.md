@@ -6,9 +6,13 @@
 
 ## Usage
 
+```sh
+npm install -D wings-ts-util
+```
+
 person.struct
 
-```text hl_lines="3 5"
+```text
 ts-filepath path/to/tsfile
 
 ts-import { IWingsStruct }:wings-ts-util
@@ -16,14 +20,14 @@ ts-import { IWingsStruct }:wings-ts-util
 ts-implement IWingsStruct
 
 Person {
-    id          int         id          -1
-    name        str         name
+    id      int     -1
+    name    str
 }
 ```
 
 TypeScript
 
-```ts hl_lines="1 6 10"
+```ts
 import { WingsStructUtil } from wings-ts-util;
 import Person from 'path/to/tsfile';
 

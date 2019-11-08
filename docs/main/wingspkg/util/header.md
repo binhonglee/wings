@@ -7,8 +7,6 @@
 
 ## Functions
 
-### `public`
-
 #### `genHeader: string`
 
 Returns a string of a header generated based on given expected output filetype (since different programming languages have different way of writing comments).

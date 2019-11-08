@@ -9,8 +9,6 @@ This was some early draft I wrote that I never got around to test if they actual
 
 ## Functions
 
-### `public`
-
 #### `goPlzBuild: string`
 
 Generate the `go_library()` declaration for please build file.
@@ -20,14 +18,3 @@ Generate the `go_library()` declaration for please build file.
 | `name`       | `string`      |             |
 | `dep`        | `seq[string]` |             |
 | `visibility` | `seq[string]` |             |
-
-### `private`
-
-#### `arr: string`
-
-Generate the correct please tool array format.
-
-| Argument | Type          | Description |
-| :------- | :------------ | :---------- |
-| `name`   | `string`      |             |
-| `arr`    | `seq[string]` |             |

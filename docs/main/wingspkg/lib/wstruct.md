@@ -2,44 +2,46 @@
 
 ## Imports
 
--   strutils
-    -   contains
-    -   join
-    -   removeSuffix
-    -   split
-    -   splitWhitespace
--   sequtils
-    -   foldr
--   tables
+- strutils
+    - contains
+    - endsWith
+    - join
+    - removeSuffix
+    - split
+    - splitWhitespace
+- sequtils
+    - foldr
+- sets
+- tables
+- [../util/config](../util/config.md)
+- [../util/log](../util/log.md)
+- [./winterface](./winterface.md)
+    - IWings
 
 ## Type
 
-### `WStruct: object`
+### `WStruct: ref object of [IWings](./winterface)`
 
-| Argument    | Type                         | Description                                        |
-| :---------- | :--------------------------- | :------------------------------------------------- |
-| `name`      | `string`                     | Struct type name.                                  |
-| `fields`    | `seq[string]`                | All the struct fields.                             |
-| `function`  | `Table[string, string]`      | Map of filetype and each of its function.          |
-| `implement` | `Table[string, string]`      | Map of filetype and each of its implement.         |
-| `package`   | `Table[string, string]`      | Map of filetype and each of its package.           |
-| `imports`   | `Table[string, seq[string]]` | Map of filetype and a sequence of their import(s). |
+| Argument   | Type                    | Description                               |
+| :--------- | :---------------------- | :---------------------------------------- |
+| `comment`  | `string`                | Struct type comment.                      |
+| `fields`   | `seq[string]`           | All the struct fields.                    |
+| `function` | `Table[string, string]` | Map of filetype and each of its function. |
 
 ## Functions
-
-### `public`
 
 #### `newWStruct: WStruct`
 
 Returns an empty initialized `WStruct`.
 
-#### `parseFile: void`
+#### `parseFile: bool`
 
 Parse the `WStruct` from the given file to the given `WStruct` object.
 
-| Argument   | Type                   | Description                                          |
-| :--------- | :--------------------- | :--------------------------------------------------- |
-| `wstruct`  | `WStruct`              | Target `WStruct` to parse the data from the file to. |
-| `file`     | `File`                 | Source file to parse data from.                      |
-| `filename` | `string`               | Name of source file.                                 |
-| `package`  | `Table[string, string]` | Package of the result file should be in.             |
+| Argument   | Type                    | Description                                          |
+| :--------- | :---------------------- | :--------------------------------------------------- |
+| `wstruct`  | `WStruct`               | Target `WStruct` to parse the data from the file to. |
+| `file`     | `File`                  | Source file to parse data from.                      |
+| `filename` | `string`                | Name of source file.                                 |
+| `filepath` | `Table[string, string]` | Filepath of the result file should be in.            |
+| `config`   | `Config`                | User config.                                         |

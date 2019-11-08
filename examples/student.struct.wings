@@ -14,10 +14,11 @@ ts-implement People
 # Student - Any person who is studying in a class
 
 Student {
-    id          int        -1
+    id          int         -1
     name        str
     cur_class   str
-    is_active   bool       true
+    feeling     Emotion     Emotion.Meh
+    is_active   bool        true
     year        date
     graduation  date
     homeworks   []Homework

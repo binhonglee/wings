@@ -1,5 +1,5 @@
 from strutils
-import capitalizeAscii, indent, replace, startsWith, endsWith, split
+import capitalizeAscii, endsWith, indent, replace, startsWith, split
 import sets
 from tables import getOrDefault
 import ../lib/wstruct, ../lib/wenum
@@ -30,19 +30,20 @@ proc typeInit(name: string): string =
         result = "list()"
     elif name.startsWith("Map<") and name.endsWith(">"):
         result = "{}"
-    case name
-    of "int":
-        result = "-1"
-    of "float":
-        result = "-0.1"
-    of "str":
-        result = "\"\""
-    of "bool":
-        result = "False"
-    of "date":
-        result = "date.today()"
     else:
-        result = name & "()"
+        case name
+        of "int":
+            result = "-1"
+        of "float":
+            result = "-0.1"
+        of "str":
+            result = "\"\""
+        of "bool":
+            result = "False"
+        of "date":
+            result = "date.today()"
+        else:
+            result = name & "()"
 
 proc wEnumFile(
     name: string,

@@ -17,7 +17,13 @@ proc newWEnum*(): WEnum =
     result.imports = initTable[string, HashSet[string]]()
     result.values = newSeq[string](0)
 
-proc parseFile*(wenum: var WEnum, file: File, filename: string, filepath: Table[string, string], config: Config): bool =
+proc parseFile*(
+    wenum: var WEnum,
+    file: File,
+    filename: string,
+    filepath: Table[string, string],
+    config: Config
+): bool =
     LOG(INFO, "Parsing " & filename & "...")
     wenum.filename = filename
     var line: string = ""

@@ -2,16 +2,17 @@
 
 ## Imports
 
--   strutils
-    -   capitalizeAscii
-    -   contains
-    -   indent
-    -   replace
-    -   split
--   tables
-    -   getOrDefault
--   [../lib/wstruct](../lib/wstruct)
--   [../lib/wenum](../lib/wenum)
+- strutils
+    - capitalizeAscii
+    - endsWith
+    - indent
+    - replace
+    - split
+    - startsWith
+- tables
+    - getOrDefault
+- [../lib/wstruct](../lib/wstruct.md)
+- [../lib/wenum](../lib/wenum.md)
 
 ## Functions
 

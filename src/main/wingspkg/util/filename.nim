@@ -1,10 +1,10 @@
 from os import unixToNativePath
 import tables
-import strutils
+from strutils import capitalizeAscii, join, split
 from sequtils import foldr
 import ./log
 
-let joiner: Table[string, char] = {"go": '/', "kt": '/', "nim": '/', "py": '.', "ts": '/'}.toTable
+const joiner: Table[string, char] = {"go": '/', "kt": '/', "nim": '/', "py": '.', "ts": '/'}.toTable
 
 proc similarity(first: seq[string], second: seq[string]): int =
     result = 0

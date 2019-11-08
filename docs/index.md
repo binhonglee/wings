@@ -2,38 +2,6 @@
 
 A simple cross language struct and enum file generator. (You might want to use a linter with this to clean up some trailing whitespaces and uneven tabbings.)
 
-[![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=master)](https://travis-ci.org/binhonglee/wings)
-[![codecov](https://codecov.io/gh/binhonglee/wings/branch/master/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
-[![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
-
-## Requirements
-
--   [Nim](https://nim-lang.org/)
-    -   [Nimble](https://github.com/nim-lang/nimble) - Bundled with Nim
--   [Please](https://please.build) (alternative to nimble)
-
-\*_Note: Replace `plz` with `./pleasew` if you do not have please installed._
-
-## Supported languages
-
--   [go](http://golang.org/)
--   [Kotlin](https://kotlinlang.org) (WIP)
--   [Nim](https://nim-lang.org/) (WIP)
--   [Python](https://www.python.org/)
--   [TypeScript](https://www.typescriptlang.org)
-    -   [Utility package](https://github.com/binhonglee/wings-ts-util)
-
-## Supported types
-
-| wings    | Go          | Kotlin            | Nim         | Python | TypeScript |
-| :------- | :---------- | :---------------- | :---------- | :----- | :--------- |
-| `int`    | `int`       | `Int`             | `int`       | `int`  | `number`   |
-| `str`    | `string`    | `String`          | `string`    | `str`  | `string`   |
-| `bool`   | `bool`      | `Boolean`         | `bool`      | `bool` | `boolean`  |
-| `date`   | `time.Time` | `Date`            | -           | `date` | `Date`     |
-| `[]type` | `[]type`    | `ArrayList<type>` | `seq[type]` | `list` | `[]`       |
-| `Map<type1, type2>` | `map[type1]type2` | `HashMap<type1, type2>` | `Table[type1, type2]` | `dict` | `Map<type1, type2>` |
-
 !!! info
     Unsupported types are initialized as custom struct / classes unless specified otherwise.
 
@@ -47,32 +15,31 @@ Run `nimble genFile "{filepath}"` or `plz run //src/main:wings -- "{filepath}"` 
 Input file:
 
 ```text
-go-filepath classroom
-kt-filepath another
-nim-filepath folder
-py-filepath python
-ts-filepath some/files
+go-filepath examples/go/classroom
+kt-filepath examples/kt
+nim-filepath examples/nim
+py-filepath examples/py
+ts-filepath examples/ts
 
-go-import time
-go-import homework:path/to/homework
-kt-import java.util.ArrayList
-nim-import times
-py-import datetime:date
-ts-import { IWingsStruct }:wings-ts-util
-ts-import Homework:path/to/Homework
+ts-import People:./People
+import examples/emotion.enum.wings
+import examples/homework.struct.wings
 
 py-implement People
 ts-implement People
 
-# Any person who is studying in a class
+# Student - Any person who is studying in a class
 
 Student {
-    id          int          -1
+    id          int         -1
     name        str
     cur_class   str
-    is_active   bool         true
+    feeling     Emotion     Emotion.Meh
+    is_active   bool        true
     year        date
+    graduation  date
     homeworks   []Homework
+    something   Map<str,str>
 }
 
 tsFunc(
@@ -84,92 +51,108 @@ tsFunc(
 
 Output files:
 
-```go tab="classroom/student.go"
+```go tab="examples/go/classroom/student.go"
 /*
  * This is a generated file
  *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- *
- * Source: student.struct
+ * Source: examples/student.struct.wings
  */
 
 package classroom
 
 import (
+    emotion "github.com/binhonglee/wings/examples/go"
     "time"
-    homework "path/to/homework"
 )
 
+// Student - Any person who is studying in a class
 type Student struct {
     ID int `json:"id"`
     Name string `json:"name"`
     CurClass string `json:"cur_class"`
+    Feeling emotion.Emotion `json:"feeling"`
     IsActive bool `json:"is_active"`
     Year time.Time `json:"year"`
-    Homeworks []homework.Homework `json:"homeworks"`
+    Graduation time.Time `json:"graduation"`
+    Homeworks []Homework `json:"homeworks"`
+    Something map[string]string `json:"something"`
 }
 
+// Students - An array of Student
 type Students []Student
 ```
 
-```kotlin tab="another/Student.kt"
+```kotlin tab="examples/kt/Student.kt"
 /*
  * This is a generated file
  *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- *
- * Source: student.struct
+ * Source: examples/student.struct.wings
  */
 
-package another
+package kt
 
 import java.util.ArrayList
+import java.util.HashMap
 
-// Any person who is studying in a class
+// Student - Any person who is studying in a class
 class Student {
     var ID: Int = -1
     var name: String = ""
     var curClass: String = ""
+    var feeling: Emotion = Emotion.Meh
     var isActive: Boolean = true
     var year: Date = Date()
+    var graduation: Date = Date()
     var homeworks: ArrayList<Homework> = ArrayList<Homework>()
+    var something: HashMap<String, String> = HashMap<String, String>()
 
     fun toJsonKey(key: string): string {
         when (key) {
             "ID" -> return "id"
             "name" -> return "name"
             "curClass" -> return "cur_class"
+            "feeling" -> return "feeling"
             "isActive" -> return "is_active"
             "year" -> return "year"
+            "graduation" -> return "graduation"
             "homeworks" -> return "homeworks"
+            "something" -> return "something"
             else -> return key
         }
     }
 }
 ```
 
-```nim tab="folder/student.nim"
+```nim tab="examples/nim/student.nim"
 # This is a generated file
 #
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-#
-# Source: student.struct
+# Source: examples/student.struct.wings
 
 import json
+import ./homework
 import times
+import tables
+import ./emotion
 
-# Any person who is studying in a class
+
+# Student - Any person who is studying in a class
 type
     Student* = object
         ID* : int
         name* : string
         curClass* : string
+        feeling* : Emotion
         isActive* : bool
         year* : DateTime
+        graduation* : DateTime
         homeworks* : seq[Homework]
+        something* : Table[string, string]
 
 proc parse*(student: var Student, data: string): void =
     let jsonOutput = parseJson(data)
@@ -177,69 +160,82 @@ proc parse*(student: var Student, data: string): void =
     student.ID = jsonOutput["id"].getInt()
     student.name = jsonOutput["name"].getStr()
     student.curClass = jsonOutput["cur_class"].getStr()
+    student.feeling = newEmotion(jsonOutput["feeling"].getStr())
     student.isActive = jsonOutput["is_active"].getBool()
-    student.year = now()  # as you can see, this isn't working
+    student.year = now()
+    student.graduation = now()
     student.homeworks = jsonOutput["homeworks"].getElems()
+    student.something = jsonOutput["something"].getElems()
 ```
 
-```py tab="python/student.py"
+```py tab="examples/py/student.py"
 # This is a generated file
 #
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-#
-# Source: student.struct
+# Source: examples/student.struct.wings
 
 import json
 from datetime import date
+import examples.py.emotion
+import examples.py.homework
 
-# Any person who is studying in a class
+# Student - Any person who is studying in a class
 class Student(People):
     id: int = -1
     name: str = ""
     cur_class: str = ""
+    feeling: Emotion = Emotion.Meh
     is_active: bool = True
     year: date = date.today()
+    graduation: date = date.today()
     homeworks: list = list()
+    something: dict = {}
 
     def init(self, data):
         self = json.loads(data)
 ```
 
-```ts tab="some/files/Student.ts"
+```ts tab="examples/ts/Student.ts"
 /*
  * This is a generated file
  *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- *
- * Source: student.struct
+ * Source: examples/student.struct.wings
  */
 
-import { IWingsStruct } from 'wings-ts-util';
-import Homework from 'path/to/Homework';
+import Homework from './Homework';
+import People from './People';
+import Emotion from './person/Emotion';
 
-// Any person who is studying in a class
+// Student - Any person who is studying in a class
 export default class Student implements People {
     [key: string]: any;
-    public id: number = -1;
+    public ID: number = -1;
     public name: string = '';
     public curClass: string = '';
+    public feeling: Emotion = Emotion.Meh;
     public isActive: boolean = true;
     public year: Date = new Date();
-    public homeworks: [] = [];
+    public graduation: Date = new Date();
+    public homeworks: Homework[] = [];
+    public something: Map<string, string> = new Map();
 
     public init(data: any): boolean {
         try {
-            this.id = data.id;
+            this.ID = data.id;
             this.name = data.name;
             this.curClass = data.cur_class;
+            this.feeling = data.feeling;
             this.isActive = data.is_active;
             this.year = new Date(data.year);
+            this.graduation = new Date(data.graduation);
 
-            if (data.homeworks !== "null") {
+            if (data.homeworks !== null) {
                 this.homeworks = data.homeworks;
             }
+            this.something = data.something;
         } catch (e) {
             return false;
         }
@@ -248,7 +244,7 @@ export default class Student implements People {
 
     public toJsonKey(key: string): string {
         switch (key) {
-            case 'id': {
+            case 'ID': {
                 return 'id';
             }
             case 'name': {
@@ -257,14 +253,23 @@ export default class Student implements People {
             case 'curClass': {
                 return 'cur_class';
             }
+            case 'feeling': {
+                return 'feeling';
+            }
             case 'isActive': {
                 return 'is_active';
             }
             case 'year': {
                 return 'year';
             }
+            case 'graduation': {
+                return 'graduation';
+            }
             case 'homeworks': {
                 return 'homeworks';
+            }
+            case 'something': {
+                return 'something';
             }
             default: {
                 return key;
@@ -287,11 +292,11 @@ _*Note: There is no gurranttee that "initialize as" field goes through a proper 
 Input file:
 
 ```text
-go-filepath path
-kt-filepath to
-nim-filepath some
-py-filepath python
-ts-filepath file/person
+go-filepath examples/go
+kt-filepath examples/kt
+nim-filepath examples/nim
+py-filepath examples/py
+ts-filepath examples/ts/person
 
 Emotion {
     Accomplished
@@ -309,17 +314,16 @@ Emotion {
 }
 ```
 
-```go tab="path/emotion.go"
+```go tab="examples/go/emotion.go"
 /*
  * This is a generated file
  *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- *
- * Source: emotion.enum
+ * Source: examples/emotion.enum.wings
  */
 
-package path
+package go
 
 type Emotion int
 
@@ -339,17 +343,16 @@ const (
 )
 ```
 
-```kotlin tab="to/Emotion.kt"
+```kotlin tab="examples/kt/Emotion.kt"
 /*
  * This is a generated file
  *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- *
- * Source: emotion.enum
+ * Source: examples/emotion.enum.wings
  */
 
-package to
+package kt
 
 enum class Emotion {
     Accomplished,
@@ -367,13 +370,12 @@ enum class Emotion {
 }
 ```
 
-```nim tab="some/emotion.nim"
+```nim tab="examples/nim/emotion.nim"
 # This is a generated file
 #
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-#
-# Source: emotion.enum
+# Source: examples/emotion.enum.wings
 
 type
     Emotion* = enum
@@ -391,13 +393,12 @@ type
         Satisfied,
 ```
 
-```py tab="python/emotion.py"
+```py tab="examples/py/emotion.py"
 # This is a generated file
 #
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-#
-# Source: emotion.enum
+# Source: examples/emotion.enum.wings
 
 from enum import Enum, auto
 
@@ -416,14 +417,13 @@ class Emotion(Enum):
     Satisfied = auto()
 ```
 
-```ts tab="file/person/Emotion.ts"
+```ts tab="examples/ts/person/Emotion.ts"
 /*
  * This is a generated file
  *
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- *
- * Source: emotion.enum
+ * Source: examples/emotion.enum.wings
  */
 
 enum Emotion{
@@ -444,20 +444,28 @@ enum Emotion{
 export default Emotion;
 ```
 
-## filepath
+## `{lang}-filepath`
 
 Basically the path location of where the generated file lives relative to where the build is ran (which if you use Please or Nimble as suggested, it will always be at the top level folder of this project - `wings/`).
 
 If the namespace for a specific language is not defined, the file for that language will not be generated.
 
-## import
+## `{lang}-import`
 
 Usually the `include` or `import` statement required for some part of the file to work properly. (In this case, its mostly external classes or enums for custom typing.)
 
-## implement
+## `import`
+
+Similar with above but this is specific to `include` or `import` another `wings` file.
+
+## `{lang}-implement`
 
 In many occassion, your struct or object might be implementing a separate interface class. Use this to specify the class that it is implementing. (There is not support for this in `go` since it would already inherently associate your struct to the interface if you implemented all the functions and variables defined in the interface.)
 
-## {lang}Func
+## `#` or `//`
+
+Comments for struct (usually description).
+
+## `{lang}Func`
 
 Specific functions for specific programming languages. Ideally, you should have a separate utility classes that do all the other operations. This is mostly designed to be used for defining functions in an interface that the struct / class is implementing.

@@ -16,6 +16,7 @@ class Student {
     var ID: Int = -1
     var name: String = ""
     var curClass: String = ""
+    var feeling: Emotion = Emotion.Meh
     var isActive: Boolean = true
     var year: Date = Date()
     var graduation: Date = Date()
@@ -27,6 +28,7 @@ class Student {
             "ID" -> return "id"
             "name" -> return "name"
             "curClass" -> return "cur_class"
+            "feeling" -> return "feeling"
             "isActive" -> return "is_active"
             "year" -> return "year"
             "graduation" -> return "graduation"

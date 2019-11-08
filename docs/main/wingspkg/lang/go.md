@@ -2,24 +2,28 @@
 
 ## Imports
 
--   strutils
-    -   capitalizeAscii
-    -   contains
-    -   toLowerAscii
-    -   replace
-    -   indent
-    -   split
-    -   unindent
--   tables
-    -   getOrDefault
--   [../lib/varname](../lib/varname)
-    -   camelCase
--   [../lib/wstruct](../lib/wstruct)
--   [../lib/wenum](../lib/wenum)
+- strutils
+    - capitalizeAscii
+    - contains
+    - endsWith
+    - indent
+    - removePrefix
+    - removeSuffix
+    - replace
+    - split
+    - startsWith
+    - toLowerAscii
+    - unindent
+- sets
+- tables
+    - getOrDefault
+- [../util/varname](../util/varname.md)
+    - camelCase
+- [../util/log](../util/log.md)
+- [../lib/wstruct](../lib/wstruct.md)
+- [../lib/wenum](../lib/wenum.md)
 
 ## Functions
-
-### `public`
 
 #### `genWEnum: string`
 
@@ -36,35 +40,3 @@ Converts the given `WStruct` object to a struct file.
 | Argument  | Type      | Description                         |
 | :-------- | :-------- | :---------------------------------- |
 | `wstruct` | `WStruct` | Object with all information needed. |
-
-### `private`
-
-#### `types: string`
-
-Converts `wings` type to Go type.
-
-| Argument | Type     | Description                               |
-| :------- | :------- | :---------------------------------------- |
-| `name`   | `string` | The defined `wings` type to be converted. |
-
-#### `wEnumFile: string`
-
-Generate the Go file with the given info.
-
-| Argument  | Type          | Description                        |
-| :-------- | :------------ | :--------------------------------- |
-| `name`    | `string`      | Name of the enum.                  |
-| `values`  | `seq[string]` | Values of the enum.                |
-| `package` | `string`      | The package where this enum is in. |
-
-#### `wStructFile: string`
-
-Generate the Go file with the given info.
-
-| Argument    | Type          | Description                          |
-| :---------- | :------------ | :----------------------------------- |
-| `name`      | `string`      | Name of the struct.                  |
-| `imports`   | `seq[string]` | File imports                         |
-| `fields`    | `seq[string]` | Struct fields.                       |
-| `functions` | `string`      | Additional self defined functions.   |
-| `package`   | `string`      | The package where this struct is in. |

@@ -1,39 +1,55 @@
-# wings-ts-util
+# index.ts
 
-## Requirements
+## Interface
 
-- [TypeScript](https://www.typescriptlang.org/)
+### `IWingsStruct`
 
-## Usage
+`toJsonKey`
 
-person.struct
+Converts given variable names into their predefined JSON key (in the original `.struct` / `.enum` file).
 
-```text hl_lines="3 5"
-ts-filepath path/to/tsfile
+| Argument | Type | Description |
+| :------- | :--- | :---------- |
+| `key` | `string` | Variable name to be converted into JSON key. |
 
-ts-import { IWingsStruct }:wings-ts-util
+## Class
 
-ts-implement IWingsStruct
+### `WingsStructUtil`
 
-Person {
-    id      int     -1
-    name    str
-}
-```
+_Note: All functions are static functions._
 
-TypeScript
+#### `public`
 
-```ts hl_lines="1 6 10"
-import { WingsStructUtil } from wings-ts-util;
-import Person from 'path/to/tsfile';
+`isIWingsStruct: arg is IWingsStruct`
 
-export class SomeClass {
-    public static someFunction(someone: Person): string {
-        return WingsStructUtil.stringify(someone);
-    }
+Returns if the object provided in `arg` is an `IWingsStruct`.
 
-    public static personIsWingsStruct(someone: Person): bool {
-        return WingsStructUtil.isIWingsStruct(someone);
-    }
-}
-```
+| Argument | Type | Description |
+| :------- | :--- | :---------- |
+| `arg` | `any` | Object to be tested. |
+
+`stringify: string`
+
+Returns a JSON in string format of the given object in `obj` .
+
+| Argument | Type | Description |
+| :------- | :--- | :---------- |
+| `obj` | `any` | Object to be stringified. |
+
+#### `private`
+
+`valString: string`
+
+Turns the given `val` into its appropriate string format to be included as part of the JSON output (for `stringify()`).
+
+| Argument | Type | Description |
+| :------- | :--- | :---------- |
+| `val` | `any` | Value to be turned into a `string`. |
+
+`wrap: string`
+
+Wrap and return the given string with a double quote around it.
+
+| Argument | Type | Description |
+| :------- | :--- | :---------- |
+| `toWrap` | `string` | String to be wrapped. |

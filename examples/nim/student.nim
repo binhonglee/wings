@@ -17,6 +17,7 @@ type
         ID* : int
         name* : string
         curClass* : string
+        feeling* : Emotion
         isActive* : bool
         year* : DateTime
         graduation* : DateTime
@@ -29,6 +30,7 @@ proc parse*(student: var Student, data: string): void =
     student.ID = jsonOutput["id"].getInt()
     student.name = jsonOutput["name"].getStr()
     student.curClass = jsonOutput["cur_class"].getStr()
+    student.feeling = newEmotion(jsonOutput["feeling"].getStr())
     student.isActive = jsonOutput["is_active"].getBool()
     student.year = now()
     student.graduation = now()

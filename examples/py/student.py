@@ -14,11 +14,12 @@ class Student(People):
     id: int = -1
     name: str = ""
     cur_class: str = ""
+    feeling: Emotion = Emotion.Meh
     is_active: bool = True
     year: date = date.today()
     graduation: date = date.today()
-    homeworks: list = []Homework()
-    something: dict = Map<str,str>()
+    homeworks: list = list()
+    something: dict = {}
     
     def init(self, data):
         self = json.loads(data)

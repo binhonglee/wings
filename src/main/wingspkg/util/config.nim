@@ -79,6 +79,7 @@ proc parse*(filename: string): Config =
         for field in outputRootDirs:
             result.outputRootDirs.add(verifyRootDir(field.getStr("")))
     else:
+        result.outputRootDirs.add("")
         LOG(
             INFO,
             "'outputRootDirs' is not set.\n" &

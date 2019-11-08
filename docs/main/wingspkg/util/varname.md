@@ -2,11 +2,11 @@
 
 ## Imports
 
--   strutils
-    -   capitalizeAscii
-    -   split
--   sequtils
-    -   foldr
+- strutils
+    - capitalizeAscii
+    - split
+- sequtils
+    - foldr
 
 ## Functions
 
