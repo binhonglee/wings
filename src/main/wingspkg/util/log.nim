@@ -29,14 +29,14 @@ proc prefix(level: AlertLevel): string =
         result =
             ansiForegroundColorCode(ForegroundColor.fgGreen) &
             "SUCCESS" & ansiForegroundColorCode(ForegroundColor.fgDefault)
-    of WARNING:
-        result =
-            ansiForegroundColorCode(ForegroundColor.fgYellow) &
-            "WARNING" & ansiForegroundColorCode(ForegroundColor.fgDefault)
     of DEPRECATED:
         result =
             ansiForegroundColorCode(ForegroundColor.fgYellow) &
             "DEPRECATED" & ansiForegroundColorCode(ForegroundColor.fgDefault)
+    of WARNING:
+        result =
+            ansiForegroundColorCode(ForegroundColor.fgYellow) &
+            "WARNING" & ansiForegroundColorCode(ForegroundColor.fgDefault)
     of INFO:
         result =
             ansiForegroundColorCode(ForegroundColor.fgBlue) &

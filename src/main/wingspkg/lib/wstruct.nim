@@ -1,5 +1,6 @@
 from strutils
-import contains, endsWith, join, removeSuffix, split, splitWhitespace
+import contains, endsWith, join, removePrefix,
+    removeSuffix, split, splitWhitespace, startsWith
 from sequtils import foldr
 import sets
 import tables
@@ -46,12 +47,19 @@ proc parseFile*(
 
         var words: seq[string] = line.splitWhitespace()
 
-        if not inWStruct and inFunc == "":
-            if words[0] == "#" or words[0] == "//":
-                words.delete(0)
-                if wstruct.comment.len() > 0:
-                    wstruct.comment &= "\n"
-                wstruct.comment &= " " & foldr(words, a & " " & b)
+        if inFunc == "" and words[0].startsWith("//"):
+            continue
+        elif not inWStruct and inFunc == "":
+            if words[0].startsWith("#"):
+                words[0].removePrefix("#")
+                while words[0].startsWith(" "):
+                    words[0].removePrefix(" ")
+                while words[0].len() < 1:
+                    words.delete(0)
+                if words.len() > 0:
+                    if wstruct.comment.len() > 0:
+                        wstruct.comment &= "\n"
+                    wstruct.comment &= " " & foldr(words, a & " " & b)
             elif words[0].endsWith("-implement"):
                 var toImplement: string = words[1]
                 words[0].removeSuffix("-implement")
@@ -73,7 +81,7 @@ proc parseFile*(
                 wstruct.name = words[0]
                 inWStruct = true
             elif words.len > 1:
-                LOG(ERROR, "Invalid input: " & join(words, " "))
+                LOG(FATAL, "Invalid input: " & join(words, " "))
                 return false
         elif inWStruct:
             if words[0] == "}":

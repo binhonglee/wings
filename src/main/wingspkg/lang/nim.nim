@@ -1,10 +1,10 @@
 from strutils
 import capitalizeAscii, contains, endsWith, indent, normalize,
-    removePrefix, removeSuffix, replace, split, startsWith
+    removePrefix, removeSuffix, replace, split, startsWith, unindent
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
-import ../util/log
+import ../util/config, ../util/log
 import ../lib/wstruct, ../lib/wenum
 
 proc types(imports: var HashSet[string], name: string): string =
@@ -15,8 +15,7 @@ proc types(imports: var HashSet[string], name: string): string =
         result.removeSuffix(">")
         var typeToProcess: seq[string] = result.split(",")
         if typeToProcess.len() != 2:
-            LOG(ERROR, "Invalid map types.")
-            result = ""
+            LOG(FATAL, "Invalid map types: " & name & ".")
         else:
             imports.incl("tables")
             result = "Table[" & types(imports, typeToProcess[0]) &
@@ -57,9 +56,10 @@ proc typeAssign(name: string, content: string): string =
 proc wEnumFile(
     name: string,
     values: seq[string],
+    config: Config,
 ): string =
     result = "type\n"
-    result &= indent(name & "* = enum", 4, " ") & "\n"
+    result &= indent(name & "* = enum", config.tabbing, " ") & "\n"
 
     var content: string = ""
     for value in values:
@@ -69,7 +69,7 @@ proc wEnumFile(
 
             content &= value & ","
 
-    result &= indent(content, 8, " ")
+    result &= indent(content, (config.tabbing * 2), " ")
 
 proc wStructFile(
     name: string,
@@ -78,6 +78,7 @@ proc wStructFile(
     functions: string,
     comment: string,
     implement: string,
+    config: Config,
 ): string =
     result = "import json\n"
     var mutImports = imports
@@ -116,22 +117,25 @@ proc wStructFile(
     if implement.len() > 0:
         objStr = "* = ref object of " & implement
 
-    result &= indent(name & objStr, 4, " ")
-    result &= "\n" & indent(declaration, 8, " ") & "\n\n"
+    result &= indent(name & objStr, config.tabbing, " ")
+    result &= "\n" & indent(declaration, (config.tabbing * 2), " ") & "\n\n"
 
     result &= "proc parse*(" & normalize(name) &
             ": var " & name & ", data: string): void =\n"
-    result &= indent("let jsonOutput = parseJson(data)\n\n" & parse, 4, " ")
+    result &= indent("let jsonOutput = parseJson(data)\n\n" & parse, config.tabbing, " ")
 
     if functions.len() > 0:
-        result &= "\n" & functions
+        var tabbing = "\n"
+        while functions.startsWith(tabbing):
+            tabbing &= " "
+        result &= unindent(functions, tabbing.len() - 2, " ") & "\n"
 
-proc genWEnum*(wenum: WEnum): string =
-    result = wEnumFile(wenum.name, wenum.values)
+proc genWEnum*(wenum: WEnum, config: Config): string =
+    result = wEnumFile(wenum.name, wenum.values, config)
 
-proc genWStruct*(wstruct: WStruct): string =
+proc genWStruct*(wstruct: WStruct, config: Config): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("nim"),
         wstruct.fields, wstruct.functions.getOrDefault("nim"),
-        wstruct.comment, wstruct.implement.getOrDefault("nim"),
+        wstruct.comment, wstruct.implement.getOrDefault("nim"), config,
     )

@@ -10,8 +10,11 @@
     - parentDir
 - strutils
     - join
+- sets
 - tables
 - [./log](./log.md)
+- [./varname](./varname.md)
+    - setAcronyms
 
 ## Variable
 
@@ -28,7 +31,7 @@
 | `header`         | `string`                | Header comment.                                       |
 | `prefixes`       | `Table[string, string]` | Map of language to import prefix (only `go` for now). |
 | `tabbing`        | `int`                   | Space count for tabbing (not currently used).         |
-| `outputRootDirs` | `seq[string]`           | Header comment.                                       |
+| `outputRootDirs` | `HashSet[string]`       | Output directory root path.                           |
 
 ## Functions
 
@@ -41,7 +44,7 @@ Create a config to be used.
 | `header`         | `string`                | Header comment.                                       |
 | `prefixes`       | `Table[string, string]` | Map of language to import prefix (only `go` for now). |
 | `tabbing`        | `int`                   | Space count for tabbing (not currently used).         |
-| `outputRootDirs` | `seq[string]`           | Header comment.                                       |
+| `outputRootDirs` | `HashSet[string]`       | Output directory root path.                           |
 
 #### `parse: Config`
 

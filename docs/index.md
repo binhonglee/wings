@@ -69,15 +69,15 @@ import (
 
 // Student - Any person who is studying in a class
 type Student struct {
-    ID int `json:"id"`
-    Name string `json:"name"`
-    CurClass string `json:"cur_class"`
-    Feeling emotion.Emotion `json:"feeling"`
-    IsActive bool `json:"is_active"`
-    Year time.Time `json:"year"`
-    Graduation time.Time `json:"graduation"`
-    Homeworks []Homework `json:"homeworks"`
-    Something map[string]string `json:"something"`
+    ID            int                  `json:"id"`
+    Name          string               `json:"name"`
+    CurClass      string               `json:"cur_class"`
+    Feeling       emotion.Emotion      `json:"feeling"`
+    IsActive      bool                 `json:"is_active"`
+    Year          time.Time            `json:"year"`
+    Graduation    time.Time            `json:"graduation"`
+    Homeworks     []Homework           `json:"homeworks"`
+    Something     map[string]string    `json:"something"`
 }
 
 // Students - An array of Student
@@ -444,28 +444,78 @@ enum Emotion{
 export default Emotion;
 ```
 
-## `{lang}-filepath`
+## Wings Syntax Keyword
+
+Simple explanation on how the syntax works with wings. Rows with unbounded and undefined keywords will lead to error being thrown.
+
+### `{lang}-filepath`
 
 Basically the path location of where the generated file lives relative to where the build is ran (which if you use Please or Nimble as suggested, it will always be at the top level folder of this project - `wings/`).
 
 If the namespace for a specific language is not defined, the file for that language will not be generated.
 
-## `{lang}-import`
+### `{lang}-import`
 
 Usually the `include` or `import` statement required for some part of the file to work properly. (In this case, its mostly external classes or enums for custom typing.)
 
-## `import`
+### `import`
 
-Similar with above but this is specific to `include` or `import` another `wings` file.
+Similar to the above but this is specific to `include` or `import` another `wings` file.
 
-## `{lang}-implement`
+### `{lang}-implement`
 
 In many occassion, your struct or object might be implementing a separate interface class. Use this to specify the class that it is implementing. (There is not support for this in `go` since it would already inherently associate your struct to the interface if you implemented all the functions and variables defined in the interface.)
 
-## `#` or `//`
-
-Comments for struct (usually description).
-
-## `{lang}Func`
+### `{lang}Func`
 
 Specific functions for specific programming languages. Ideally, you should have a separate utility classes that do all the other operations. This is mostly designed to be used for defining functions in an interface that the struct / class is implementing.
+
+### `#`
+
+Comments for struct (usually description). This comment will be carried forward and included in the generated file.
+
+### `//`
+
+Comment in file. Unlike `#`, lines that begins with `//` will be ignored by the parser unless it is written inside the `{lang}Func()` where it would then be copied over to the generated file exactly the way it is. (Tabbing does not matter.)
+
+## Config
+
+### logging: `int`
+
+The `int` value represents how verbose the logging do you expect. Logging levels are defined [here](main/wingspkg/util/log.md) as an Enum.
+
+### header: `[]str`
+
+This is the header comment to be added to the generated files. The array of strings will be joined with a `\n` character so you can have multiline comment by having each line of comment as a separate string in this array.
+
+```json
+{
+    "header": [
+        "Line 1",
+        "Line 2",
+        "etc..."
+    ]
+}
+```
+
+### prefixes: `Map<str, str>`
+
+This is mainly created for `go` since the import path isn't just relative from the file calling it nor the top level location of the project folder but rather, something that can be defined in the `go.mod` file. This allows `go` to have customized import path prefix.
+
+```json
+{
+    "prefixes": {
+        "go": "github.com/binhonglee/wings"
+    }
+}
+```
+
+### acronyms: `[]str`
+
+You can specify specific cases where a word in a parameter name should be full caps instead of just camelCase or PascalCase. For eg, `ID` instead of `id` or `Id`.
+
+### outputRootDirs: `[]str`
+
+There are scenario where you want to write the generated files to a different root path or write them to multiple different filepaths. You can clarify here which folder should be considered the root folder when creating the generated files. Empty string would mean the caller folder. Error will be thrown if a folder defined here cannot be found.
+
+_Note: The call should be made in the deeper of the different folder hierarchies._

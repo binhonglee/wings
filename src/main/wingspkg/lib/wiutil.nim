@@ -19,15 +19,15 @@ proc genWStructFiles*(this: var WStruct, config: Config): Table[string, string] 
         var fileContent: string = ""
         case filetype
         of "go":
-            fileContent = go.genWStruct(this)
+            fileContent = go.genWStruct(this, config)
         of "kt":
-            fileContent = kt.genWStruct(this)
+            fileContent = kt.genWStruct(this, config)
         of "nim":
-            fileContent = nim.genWStruct(this)
+            fileContent = nim.genWStruct(this, config)
         of "py":
-            fileContent = py.genWStruct(this)
+            fileContent = py.genWStruct(this, config)
         of "ts":
-            fileContent = ts.genWStruct(this)
+            fileContent = ts.genWStruct(this, config)
         else:
             continue
 
@@ -46,15 +46,15 @@ proc genWEnumFiles*(this: var WEnum, config: Config): Table[string, string] =
         var fileContent: string = ""
         case filetype
         of "go":
-            fileContent = go.genWEnum(this)
+            fileContent = go.genWEnum(this, config)
         of "kt":
-            fileContent = kt.genWEnum(this)
+            fileContent = kt.genWEnum(this, config)
         of "nim":
-            fileContent = nim.genWEnum(this)
+            fileContent = nim.genWEnum(this, config)
         of "py":
-            fileContent = py.genWEnum(this)
+            fileContent = py.genWEnum(this, config)
         of "ts":
-            fileContent = ts.genWEnum(this)
+            fileContent = ts.genWEnum(this, config)
         else:
             continue
 

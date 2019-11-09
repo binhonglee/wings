@@ -1,10 +1,10 @@
 from strutils
 import contains, endsWith, indent, removePrefix, removeSuffix,
-    replace, split, startsWith
+    replace, split, startsWith, unindent
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
-import ../util/log
+import ../util/config, ../util/log
 import ../lib/wstruct, ../lib/wenum
 
 const filetype: string = "kt"
@@ -17,8 +17,7 @@ proc types(imports: var HashSet[string], name: string): string =
         result.removeSuffix(">")
         var typeToProcess: seq[string] = result.split(",")
         if typeToProcess.len() != 2:
-            LOG(ERROR, "Invalid map types.")
-            result = ""
+            LOG(FATAL, "Invalid map types: " & name & ".")
         else:
             imports.incl("java.util.HashMap")
             result = "HashMap<" & types(imports, typeToProcess[0]) &
@@ -60,6 +59,7 @@ proc wEnumFile(
     name: string,
     values: seq[string],
     package: string,
+    config: Config,
 ): string =
     result = "package " & package & "\n\n"
     result &= "enum class " & name & " {"
@@ -69,7 +69,7 @@ proc wEnumFile(
         if value.len() > 0:
             content &= "\n" & value & ","
 
-    result &= indent(content, 4, " ") & "\n}\n"
+    result &= indent(content, config.tabbing, " ") & "\n}\n"
 
 proc wStructFile(
     name: string,
@@ -79,6 +79,7 @@ proc wStructFile(
     comment: string,
     implement: string,
     package: string,
+    config: Config,
 ): string =
     result = "package " & package & "\n\n"
     var typeDependentImports = imports
@@ -115,7 +116,7 @@ proc wStructFile(
         result &= " : " & implement
 
     result &= " {\n"
-    result &= indent(declaration, 4, " ")
+    result &= indent(declaration, config.tabbing, " ")
     result &= "\n\n"
 
     result &= indent(
@@ -124,9 +125,9 @@ proc wStructFile(
             "when (key) {\n" &
             indent(
                 jsonKey & "\n" &
-                "else -> return key", 4, " "
-            ) & "\n}", 4, " "
-        ) & "\n}", 4, " "
+                "else -> return key", config.tabbing, " "
+            ) & "\n}", config.tabbing, " "
+        ) & "\n}", config.tabbing, " "
     )
 
     if functions.len() > 0:
@@ -134,16 +135,16 @@ proc wStructFile(
 
     result &= "\n}\n"
 
-proc genWEnum*(wenum: WEnum): string =
+proc genWEnum*(wenum: WEnum, config: Config): string =
     var tempPackage: seq[string] = split(wenum.filepath.getOrDefault(filetype), '/')
-    result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1])
+    result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1], config)
 
-proc genWStruct*(wstruct: WStruct): string =
+proc genWStruct*(wstruct: WStruct, config: Config): string =
     var tempPackage: seq[string] = split(wstruct.filepath.getOrDefault(filetype), '/')
 
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault(filetype),
         wstruct.fields, wstruct.functions.getOrDefault(filetype),
         wstruct.comment, wstruct.implement.getOrDefault(filetype),
-        tempPackage[tempPackage.len() - 1],
+        tempPackage[tempPackage.len() - 1], config
     )

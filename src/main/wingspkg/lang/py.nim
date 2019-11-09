@@ -1,7 +1,8 @@
 from strutils
-import capitalizeAscii, endsWith, indent, replace, startsWith, split
+import capitalizeAscii, endsWith, indent, replace, startsWith, split, unindent
 import sets
 from tables import getOrDefault
+import ../util/config
 import ../lib/wstruct, ../lib/wenum
 
 proc types(imports: var HashSet[string], name: string): string =
@@ -48,6 +49,7 @@ proc typeInit(name: string): string =
 proc wEnumFile(
     name: string,
     values: seq[string],
+    config: Config,
 ): string =
     result = "from enum import Enum, auto\n\n"
     result &= "class " & name & "(Enum):\n"
@@ -59,7 +61,7 @@ proc wEnumFile(
                 content &= "\n"
             content &= value & " = auto()"
 
-    result &= indent(content, 4, " ")
+    result &= indent(content, config.tabbing, " ")
 
 proc wStructFile(
     name: string,
@@ -68,6 +70,7 @@ proc wStructFile(
     functions: string,
     comment: string,
     implement: string,
+    config: Config,
 ): string =
     result = "import json\n"
     var mutImports = imports
@@ -97,10 +100,7 @@ proc wStructFile(
             result &=  "from " & importDat[0] & " import " & importDat[1] & "\n"
 
     if comment.len() > 0:
-        result &= "\n" & indent(comment, 1, "#")
-
-    if imports.len() > 0:
-        result &= "\n"
+        result &= "\n" & indent(comment, 1, "#") & "\n"
 
     result &= "class " & name & "("
     if implement.len() < 1:
@@ -109,21 +109,24 @@ proc wStructFile(
         result &= implement
     result &= "):\n"
 
-    result &= indent(declaration, 4, " ") & "\n"
+    result &= indent(declaration, config.tabbing, " ") & "\n"
     result &= indent(
         "\ndef init(self, data):\n" &
-        indent("self = json.loads(data)", 4, " "), 4, " "
+        indent("self = json.loads(data)", config.tabbing, " "), config.tabbing, " "
     )
 
     if functions.len() > 0:
-        result &= "\n" & functions & "\n"
+        var tabbing = "\n"
+        while functions.startsWith(tabbing):
+            tabbing &= " "
+        result &= unindent(functions, tabbing.len() - 2, " ") & "\n"
 
-proc genWStruct*(wstruct: WStruct): string =
+proc genWStruct*(wstruct: WStruct, config: Config): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("py"),
         wstruct.fields, wstruct.functions.getOrDefault("py"),
-        wstruct.comment, wstruct.implement.getOrDefault("py"),
+        wstruct.comment, wstruct.implement.getOrDefault("py"), config,
     )
 
-proc genWEnum*(wenum: WEnum): string =
-    result = wEnumFile(wenum.name, wenum.values)
+proc genWEnum*(wenum: WEnum, config: Config): string =
+    result = wEnumFile(wenum.name, wenum.values, config)

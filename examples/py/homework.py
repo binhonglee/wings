@@ -7,7 +7,8 @@
 import json
 from datetime import date
 
-# Homework - Work to be done at homeclass Homework(object):
+# Homework - Work to be done at home
+class Homework(object):
     id: int = -1
     name: str = ""
     due_date: date = date.today()

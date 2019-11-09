@@ -12,3 +12,10 @@ Homework {
     due_date    date
     given_date  date
 }
+
+goFunc(
+    // Test - This comment should be included.
+    func Test() int {
+        return 0
+    }
+)

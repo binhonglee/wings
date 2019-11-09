@@ -4,7 +4,7 @@ import contains, endsWith, indent, intToStr, removePrefix,
 import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
-import ../util/log
+import ../util/config, ../util/log
 import ../lib/wstruct, ../lib/wenum
 
 proc types(name: string): string =
@@ -64,6 +64,7 @@ proc typeAssign(name: string, content: string): string =
 proc wEnumFile(
     name: string,
     values: seq[string],
+    config: Config,
 ): string =
     result = "enum " & name & "{"
 
@@ -72,7 +73,7 @@ proc wEnumFile(
         if value.len() > 0:
             content &= "\n" & value & ","
 
-    result &= indent(content, 4, " ") & "\n}\n"
+    result &= indent(content, config.tabbing, " ") & "\n}\n"
     result &= "\nexport default " & name & ";\n"
 
 
@@ -83,6 +84,7 @@ proc wStructFile(
     functions: string,
     comment: string,
     implement: string,
+    config: Config,
 ): string =
     result = ""
 
@@ -139,7 +141,7 @@ proc wStructFile(
             init &= indent(
                 "this." & fieldName &
                 " = " & typeAssign(field[1], "data." & field[0]) &
-                ";", 4, " "
+                ";", config.tabbing, " "
             )
             init &= "\n}"
         else:
@@ -147,35 +149,35 @@ proc wStructFile(
                 typeAssign(field[1], "data." & field[0]) & ";"
 
         jsonKey &= "case '" & fieldName & "': {\n"
-        jsonKey &= indent("return '" & field[0] & "';", 4, " ")
+        jsonKey &= indent("return '" & field[0] & "';", config.tabbing, " ")
         jsonKey &= "\n}"
 
-    result &= indent(declaration, 4, " ")
+    result &= indent(declaration, config.tabbing, " ")
     result &= "\n"
     result &= indent(
         "\npublic init(data: any): boolean {\n" &
         indent(
             "try {\n" &
-            indent(init, 4, " ") &
+            indent(init, config.tabbing, " ") &
             "\n} catch (e) {\n" &
-            indent("return false;", 4, " ") &
-            "\n}\nreturn true;", 4, " "
+            indent("return false;", config.tabbing, " ") &
+            "\n}\nreturn true;", config.tabbing, " "
         ) &
-        "\n}", 4, " "
+        "\n}", config.tabbing, " "
     )
     result &= "\n"
     result &= indent(
         "\npublic toJsonKey(key: string): string {\n" &
         indent(
             "switch (key) {\n" &
-            indent(jsonKey, 4, " ") &
+            indent(jsonKey, config.tabbing, " ") &
             "\n" &
             indent(
                 "default: {\n" &
-                indent("return key;", 4, " ") &
-                "\n}", 4, " "
-            ) & "\n}", 4, " "
-        ) & "\n}", 4, " "
+                indent("return key;", config.tabbing, " ") &
+                "\n}", config.tabbing, " "
+            ) & "\n}", config.tabbing, " "
+        ) & "\n}", config.tabbing, " "
     )
 
     if functions.len() > 0:
@@ -183,12 +185,12 @@ proc wStructFile(
 
     result &= "\n}\n"
 
-proc genWEnum*(wenum: WEnum): string =
-    result = wEnumFile(wenum.name, wenum.values)
+proc genWEnum*(wenum: WEnum, config: Config): string =
+    result = wEnumFile(wenum.name, wenum.values, config)
 
-proc genWStruct*(wstruct: WStruct): string =
+proc genWStruct*(wstruct: WStruct, config: Config): string =
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("ts"),
         wstruct.fields, wstruct.functions.getOrDefault("ts"),
-        wstruct.comment, wstruct.implement.getOrDefault("ts"),
+        wstruct.comment, wstruct.implement.getOrDefault("ts"), config
     )

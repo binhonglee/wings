@@ -2,6 +2,7 @@ from os
 import createDir, fileExists, joinPath, paramCount, paramStr, parentDir, setCurrentDir
 from strutils
 import startsWith, endsWith
+import sets
 import tables
 import wingspkg/core
 import wingspkg/util/config, wingspkg/util/log
@@ -11,8 +12,8 @@ var USER_CONFIG: Config = newConfig()
 
 proc toFile(path: string, content: string): void =
     try:
-        for outputDir in USER_CONFIG.outputRootDirs:
-            if (outputDir.len() > 0):
+        for outputDir in USER_CONFIG.outputRootDirs.items:
+            if outputDir.len() > 0:
                 setCurrentDir(outputDir)
             else:
                 setCurrentDir(CALLER_DIR)

@@ -4,6 +4,9 @@ nim-filepath examples/nim
 py-filepath examples/py
 ts-filepath examples/ts/person
 
+//Ignored comment
+// Another ignored comment
+
 Emotion {
     Accomplished
     Angry

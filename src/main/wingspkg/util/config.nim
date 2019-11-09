@@ -1,8 +1,10 @@
 import json
 from os import fileExists, getCurrentDir, lastPathPart, parentDir
 from strutils import join
+import sets
 import tables
 import ./log
+from ./varname import setAcronyms
 
 const DEFAULT_HEADER: string = """
 This is a generated file
@@ -20,13 +22,13 @@ type
         header*: string
         prefixes*: Table[string, string]
         tabbing*: int
-        outputRootDirs*: seq[string]
+        outputRootDirs*: HashSet[string]
 
 proc newConfig*(
     header: string = DEFAULT_HEADER,
     prefixes: Table[string, string] = DEFAULT_PREFIXES,
     tabbing: int = DEFAULT_TABBING,
-    outputRootDirs: seq[string] = newSeq[string](0)
+    outputRootDirs: HashSet[string] = initHashSet[string]()
 ): Config =
     result = Config()
     result.header = header
@@ -40,7 +42,7 @@ proc verifyRootDir(outputRootDir: string): string =
         while lastPathPart(result) != outputRootDir:
             result = parentDir(result)
             if result == "":
-                LOG(ERROR, "Directory named '" & outputRootDir & "' not found.")
+                LOG(FATAL, "Directory named '" & outputRootDir & "' not found.")
 
 proc parse*(filename: string): Config =
     result = newConfig()
@@ -61,7 +63,7 @@ proc parse*(filename: string): Config =
         if headerSeq.len() > 0:
             for line in headerSeq:
                 header.add(line.getStr())
-            result.header = header.join("\n")
+        result.header = header.join("\n")
     else:
         LOG(INFO, "'header' is not set. Using default 'header'.")
 
@@ -74,12 +76,22 @@ proc parse*(filename: string): Config =
                 prefixes.add(field, fieldStr)
         result.prefixes = prefixes
 
+    if jsonConfig.hasKey("acronyms"):
+        var userAcronyms: seq[string] = newSeq[string](0)
+        var acronyms: seq[JsonNode] = jsonConfig["acronyms"].getElems()
+        if acronyms.len() > 0:
+            for line in acronyms:
+                userAcronyms.add(line.getStr())
+        setAcronyms(userAcronyms)
+    else:
+        LOG(INFO, "'acronyms' is not set. Using default 'acronyms'.")
+
     if jsonConfig.hasKey("outputRootDirs"):
         let outputRootDirs = jsonConfig["outputRootDirs"].getElems()
         for field in outputRootDirs:
-            result.outputRootDirs.add(verifyRootDir(field.getStr("")))
+            result.outputRootDirs.incl(verifyRootDir(field.getStr("")))
     else:
-        result.outputRootDirs.add("")
+        result.outputRootDirs.incl("")
         LOG(
             INFO,
             "'outputRootDirs' is not set.\n" &
@@ -88,5 +100,7 @@ proc parse*(filename: string): Config =
         )
 
     if jsonConfig.hasKey("tabbing"):
-        LOG(INFO, "The \"tabbing\" field can be set but is not yet configured to be respected.")
         result.tabbing = jsonConfig["tabbing"].getInt(DEFAULT_TABBING)
+        LOG(INFO, "Set tabbing indentation to " & $result.tabbing)
+    else:
+        LOG(INFO, "'tabbing' is not set. Using default '4'.")

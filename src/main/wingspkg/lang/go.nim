@@ -1,13 +1,17 @@
 from strutils
-import capitalizeAscii, contains, endsWith, indent, removePrefix,
-    removeSuffix, replace, split, startsWith, toLowerAscii, unindent
+import alignLeft, capitalizeAscii, contains, endsWith, indent,
+    removePrefix, removeSuffix, split, startsWith, toLowerAscii, unindent
 import sets
 from tables import getOrDefault
-from ../util/varname import camelCase
-import ../util/log
+from ../util/varname import camelCase, alignment
+import ../util/config, ../util/log
 import ../lib/wstruct, ../lib/wenum
 
-proc types(imports: var HashSet[string], name: string, customTypes: HashSet[string] = initHashSet[string]()): string =
+proc types(
+    imports: var HashSet[string],
+    name: string,
+    customTypes: HashSet[string] = initHashSet[string]()
+): string =
     result = name
     var newCustoms: HashSet[string] = customTypes
 
@@ -23,10 +27,11 @@ proc types(imports: var HashSet[string], name: string, customTypes: HashSet[stri
         result.removeSuffix(">")
         var mapTypes: seq[string] = result.split(",")
         if mapTypes.len() != 2:
-            LOG(ERROR, "Invalid map type: " & name)
-            result = ""
+            LOG(FATAL, "Invalid map types: " & name & ".")
         else:
-            result = "map[" & imports.types(mapTypes[0]) & "]" & imports.types(mapTypes[1], newCustoms)
+            result = "map[" &
+                imports.types(mapTypes[0]) &
+                "]" & imports.types(mapTypes[1], newCustoms)
     elif startsWith(result, "[]"):
         result.removePrefix("[]")
         result = "[]" & imports.types(result)
@@ -51,6 +56,7 @@ proc wEnumFile(
     name: string,
     values: seq[string],
     package: string,
+    config: Config
 ): string =
     result = "package " & package & "\n\n"
     result &= "type " & name & " int\n\n"
@@ -68,7 +74,7 @@ proc wEnumFile(
 
         content &= "\n" & value & iota
 
-    result &= indent(content, 4, " ") & "\n)\n"
+    result &= indent(content, config.tabbing, " ") & "\n)\n"
 
 proc wStructFile(
     name: string,
@@ -77,18 +83,27 @@ proc wStructFile(
     functions: string,
     comment: string,
     package: string,
+    config: Config,
 ): string =
     result = "package " & package & "\n"
     var mutImports = imports
-    var fieldDec: string = ""
+    var fieldDec: seq[string] = newSeq[string](0)
 
     for fieldStr in fields:
-        var field = fieldStr.split(' ')
+        let field = fieldStr.split(' ')
         if field.len() > 1:
-            if fieldDec.len() > 1:
-                fieldDec &= "\n"
-            fieldDec &= capitalizeAscii(camelCase(field[0])) & " " &
-                mutImports.types(field[1]) & " `json:\"" & field[0] & "\"`"
+            fieldDec.add(capitalizeAscii(camelCase(field[0])) & " " &
+                mutImports.types(field[1]) & " `json:\"" & field[0] & "\"`")
+
+    let width: seq[int] = alignment(fieldDec)
+    var fieldStr: string = ""
+
+    for row in fieldDec:
+        if fieldStr.len() > 0:
+            fieldStr &= "\n"
+        let words: seq[string] = row.split(' ')
+        fieldStr &= alignLeft(words[0], width[0] + config.tabbing) &
+            alignLeft(words[1], width[1] + config.tabbing) & words[2]
 
     var importDec = ""
     if mutImports.len() > 0:
@@ -103,29 +118,32 @@ proc wStructFile(
             else:
                 importDec &=  "\n" & importDat[0] &
                     " \"" & importDat[1] & "\""
-        result &= "\nimport (" & indent(importDec, 4, " ") & "\n)\n"
+        result &= "\nimport (" & indent(importDec, config.tabbing, " ") & "\n)\n"
 
     if comment.len() > 0:
         result &= "\n" & indent(comment, 2, "/")
 
     result &= "\ntype " & name & " struct {\n" &
-        indent(fieldDec, 4, " ") & "\n}\n"
+        indent(fieldStr, config.tabbing, " ") & "\n}\n"
 
     if functions.len() > 0:
-        result &= unindent(functions, 4, " ") & "\n"
+        var tabbing = "\n"
+        while functions.startsWith(tabbing):
+            tabbing &= " "
+        result &= unindent(functions, tabbing.len() - 2, " ") & "\n"
 
     result &= "\n" & indent(" " & name & "s - An array of " & name, 2, "/")
     result &= "\ntype " & name & "s []" & name
 
-proc genWEnum*(wenum: WEnum): string =
+proc genWEnum*(wenum: WEnum, config: Config): string =
     var tempPackage: seq[string] = split(wenum.filepath.getOrDefault("go"), '/')
-    result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1])
+    result = wEnumFile(wenum.name, wenum.values, tempPackage[tempPackage.len() - 1], config)
 
-proc genWStruct*(wstruct: WStruct): string =
+proc genWStruct*(wstruct: WStruct, config: Config): string =
     var tempPackage: seq[string] = split(wstruct.filepath.getOrDefault("go"), '/')
 
     result = wStructFile(
         wstruct.name, wstruct.imports.getOrDefault("go"),
         wstruct.fields, wstruct.functions.getOrDefault("go"),
-        wstruct.comment, tempPackage[tempPackage.len() - 1],
+        wstruct.comment, tempPackage[tempPackage.len() - 1], config,
     )

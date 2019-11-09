@@ -10,5 +10,6 @@
     },
     "tabbing": 4,
     "logging": 5,
-    "outputRootDirs": ["wings"]
+    "acronyms": ["id"],
+    "outputRootDirs": ["", "wings"]
 }

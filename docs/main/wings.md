@@ -13,6 +13,7 @@
 - strutils
     - startsWith
     - endsWith
+- sets
 - tables
 - [wingspkg/core](wingspkg/core.md)
 - [wingspkg/util/config](wingspkg/util/config.md)
