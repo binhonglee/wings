@@ -4,6 +4,8 @@ nim-filepath examples/nim
 py-filepath examples/py
 ts-filepath examples/ts
 
+import examples/emotion.enum.wings
+
 # Homework - Work to be done at home
 
 Homework {
@@ -11,6 +13,7 @@ Homework {
     name        str
     due_date    date
     given_date  date
+    feeling     []Emotion
 }
 
 goFunc(

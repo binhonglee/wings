@@ -8,6 +8,7 @@
 
 package kt
 
+import java.util.ArrayList
 
 // Homework - Work to be done at home
 class Homework {
@@ -15,6 +16,7 @@ class Homework {
     var name: String = ""
     var dueDate: Date = Date()
     var givenDate: Date = Date()
+    var feeling: ArrayList<Emotion> = ArrayList<Emotion>()
 
     fun toJsonKey(key: string): string {
         when (key) {
@@ -22,6 +24,7 @@ class Homework {
             "name" -> return "name"
             "dueDate" -> return "due_date"
             "givenDate" -> return "given_date"
+            "feeling" -> return "feeling"
             else -> return key
         }
     }

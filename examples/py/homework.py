@@ -6,6 +6,7 @@
 
 import json
 from datetime import date
+import examples.py.emotion
 
 # Homework - Work to be done at home
 class Homework(object):
@@ -13,6 +14,7 @@ class Homework(object):
     name: str = ""
     due_date: date = date.today()
     given_date: date = date.today()
+    feeling: list = list()
     
     def init(self, data):
         self = json.loads(data)

@@ -6,6 +6,8 @@
 
 import json
 import times
+import ./emotion
+
 
 # Homework - Work to be done at home
 type
@@ -14,6 +16,7 @@ type
         name* : string
         dueDate* : DateTime
         givenDate* : DateTime
+        feeling* : seq[Emotion]
 
 proc parse*(homework: var Homework, data: string): void =
     let jsonOutput = parseJson(data)
@@ -22,3 +25,4 @@ proc parse*(homework: var Homework, data: string): void =
     homework.name = jsonOutput["name"].getStr()
     homework.dueDate = now()
     homework.givenDate = now()
+    homework.feeling = jsonOutput["feeling"].getElems()

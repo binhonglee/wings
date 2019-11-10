@@ -20,6 +20,11 @@ export class WingsStructUtil {
                 }
             }
         }
+
+        // This means that 'obj' is not iterable.
+        if (toReturn.length < 2) {
+            return obj;
+        }
         return toReturn.slice(0, -1) + '}';
     }
 

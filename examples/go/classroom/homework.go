@@ -9,15 +9,17 @@
 package classroom
 
 import (    
+    emotion "github.com/binhonglee/wings/examples/go"
     "time"
 )
 
 // Homework - Work to be done at home
 type Homework struct {
-    ID           int          `json:"id"`
-    Name         string       `json:"name"`
-    DueDate      time.Time    `json:"due_date"`
-    GivenDate    time.Time    `json:"given_date"`
+    ID           int                  `json:"id"`
+    Name         string               `json:"name"`
+    DueDate      time.Time            `json:"due_date"`
+    GivenDate    time.Time            `json:"given_date"`
+    Feeling      []emotion.Emotion    `json:"feeling"`
 }
 
 // Test - This comment should be included.

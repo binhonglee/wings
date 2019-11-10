@@ -1,15 +1,8 @@
-/*
- * This is a generated file
- *
- * If you would like to make any changes, please edit the source file instead.
- * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * Source: examples/homework.struct.wings
- */
-
 import Emotion from './person/Emotion';
+import { IWingsStruct } from "../index";
 
 // Homework - Work to be done at home
-export default class Homework {
+export default class Homework implements IWingsStruct {
     [key: string]: any;
     public ID: number = -1;
     public name: string = '';
