@@ -1,48 +1,16 @@
 import tables
-import ./winterface, ./wenum, ./wstruct
+import ./winterface
 import ../util/filename, ../util/header, ../util/config
 import ../lang/go, ../lang/kt, ../lang/nim, ../lang/py, ../lang/ts
 import ../util/log
 
-proc genWStructFiles*(this: var WStruct, config: Config): Table[string, string] =
-    if this.dependencies.len() > 0:
-        for dependency in this.dependencies:
-            LOG(WARNING, "Dependency (" & dependency & ") not yet fulfilled.")
-
-        LOG(WARNING, "Generated files may not work as intended.")
-
-    result = initTable[string, string]()
-    let filenames = outputFilename(this.filename, this.filepath)
-
-    for filetype in this.filepath.keys:
-        LOG(INFO, "Generating " & filenames[filetype] & "...")
-        var fileContent: string = ""
-        case filetype
-        of "go":
-            fileContent = go.genWStruct(this, config)
-        of "kt":
-            fileContent = kt.genWStruct(this, config)
-        of "nim":
-            fileContent = nim.genWStruct(this, config)
-        of "py":
-            fileContent = py.genWStruct(this, config)
-        of "ts":
-            fileContent = ts.genWStruct(this, config)
-        else:
-            continue
-
-        result.add(
-            filenames[filetype],
-            genHeader(filetype, this.filename, config.header) &
-                fileContent
-        )
-
 proc genWEnumFiles*(this: var WEnum, config: Config): Table[string, string] =
+    ## Generate the enum files for all the natively supported output types.
     result = initTable[string, string]()
     let filenames = outputFilename(this.filename, this.filepath)
 
     for filetype in this.filepath.keys:
-        LOG(INFO, "Generating " & filenames[filetype] & "...")
+        LOG(DEBUG, "Generating " & filenames[filetype] & "...")
         var fileContent: string = ""
         case filetype
         of "go":
@@ -64,7 +32,42 @@ proc genWEnumFiles*(this: var WEnum, config: Config): Table[string, string] =
                 fileContent
         )
 
+proc genWStructFiles*(this: var WStruct, config: Config): Table[string, string] =
+    ## Generate the struct files for all the natively supported output types.
+    if this.dependencies.len() > 0:
+        for dependency in this.dependencies:
+            LOG(WARNING, "Dependency (" & dependency & ") not yet fulfilled.")
+
+        LOG(WARNING, "Generated files may not work as intended.")
+
+    result = initTable[string, string]()
+    let filenames = outputFilename(this.filename, this.filepath)
+
+    for filetype in this.filepath.keys:
+        LOG(DEBUG, "Generating " & filenames[filetype] & "...")
+        var fileContent: string = ""
+        case filetype
+        of "go":
+            fileContent = go.genWStruct(this, config)
+        of "kt":
+            fileContent = kt.genWStruct(this, config)
+        of "nim":
+            fileContent = nim.genWStruct(this, config)
+        of "py":
+            fileContent = py.genWStruct(this, config)
+        of "ts":
+            fileContent = ts.genWStruct(this, config)
+        else:
+            continue
+
+        result.add(
+            filenames[filetype],
+            genHeader(filetype, this.filename, config.header) &
+                fileContent
+        )
+
 proc genFiles*(this: var IWings, config: Config): Table[string, string] =
+    ## Generate the corresponding files (WEnum or WStruct) for all the natively supported output types.
     if this of WEnum:
         result = WEnum(this).genWEnumFiles(config)
     elif this of WStruct:
@@ -92,25 +95,25 @@ proc dependencyGraph*(
     result = initTable[string, Table[string, string]]()
 
     var index = 0;
-    for wing in allWings:
-        filenameToObj[wing.filename] = wing
-        if wing.dependencies.len() == 0:
-            noDeps.add(wing.filename)
+    for wings in allWings:
+        filenameToObj[wings.filename] = wings
+        if wings.dependencies.len() == 0:
+            noDeps.add(wings.filename)
 
-        for dependency in wing.dependencies:
+        for dependency in wings.dependencies:
             if not reverseDependencyTable.hasKey(dependency):
                 reverseDependencyTable[dependency] = newSeq[string](0)
-            reverseDependencyTable[dependency].add(wing.filename)
+            reverseDependencyTable[dependency].add(wings.filename)
 
         index += 1
 
     # All noDeps can and should be generated in parallel if possible
     while noDeps.len() > 0:
-        var wing = filenameToObj[noDeps.pop()]
-        var name: string = wing.filename
-        LOG(INFO, "Generating files from " & name & "...")
+        var wings = filenameToObj[noDeps.pop()]
+        var name: string = wings.filename
+        LOG(DEBUG, "Generating files from " & name & "...")
 
-        result.add(name, wing.genFiles(config))
+        result.add(name, wings.genFiles(config))
         if reverseDependencyTable.hasKey(name):
             for dependant in reverseDependencyTable[name]:
                 var obj = filenameToObj[dependant]
@@ -118,7 +121,7 @@ proc dependencyGraph*(
                     name,
                     importFilename(
                         name,
-                        wing.filepath,
+                        wings.filepath,
                         filename(obj.filename, obj.filepath),
                         config.prefixes
                     )
@@ -136,7 +139,7 @@ proc dependencyGraph*(
 
             reverseDependencyTable.del(name)
 
-        allWings.delete(findWings(allWings, wing.filename))
+        allWings.delete(findWings(allWings, wings.filename))
 
     if allWings.len() > 0:
         let next = dependencyGraph(allWings, config)

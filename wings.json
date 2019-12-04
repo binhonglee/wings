@@ -9,7 +9,7 @@
         "go": "github.com/binhonglee/wings"
     },
     "tabbing": 4,
-    "logging": 5,
+    "logging": 6,
     "acronyms": ["id"],
     "outputRootDirs": ["", "wings"]
 }

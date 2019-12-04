@@ -15,10 +15,11 @@ run `nimble genFile "{SOURCE_FILE}"` upon completion.
 
 const DEFAULT_PREFIXES: Table[string, string] = initTable[string, string]()
 const DEFAULT_TABBING: int = 4
-let CALLER_DIR*: string = getCurrentDir()
+let CALLER_DIR*: string = getCurrentDir() ## Directory which `wings` is ran from.
 
 type
     Config* = object
+        ## An object that stores user configurations.
         header*: string
         prefixes*: Table[string, string]
         tabbing*: int
@@ -30,6 +31,7 @@ proc newConfig*(
     tabbing: int = DEFAULT_TABBING,
     outputRootDirs: HashSet[string] = initHashSet[string]()
 ): Config =
+    ## Create a config to be used.
     result = Config()
     result.header = header
     result.prefixes = prefixes
@@ -45,6 +47,7 @@ proc verifyRootDir(outputRootDir: string): string =
                 LOG(FATAL, "Directory named '" & outputRootDir & "' not found.")
 
 proc parse*(filename: string): Config =
+    ## Parse the given config file in the path.
     result = newConfig()
     if not fileExists(filename):
         return result

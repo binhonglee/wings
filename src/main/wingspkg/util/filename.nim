@@ -23,6 +23,7 @@ proc filename*(
     filetypeSuffix: bool = false,
     useNativePath: bool = false,
 ): Table[string, string] =
+    ## Generate the filename map of filetype to filename.
     var temp: seq[string] = filename.split('/')
     temp[temp.len() - 1] = temp[temp.len() - 1].split('.')[0]
     result = initTable[string, string]()
@@ -64,6 +65,7 @@ proc outputFilename*(
     filename: string,
     filepath: Table[string, string]
 ): Table[string, string] =
+    ## Generate the filename map of filetype to filename for output path.
     result = filename(
         filename,
         filepath,
@@ -78,6 +80,7 @@ proc importFilename*(
     callerFilepath: Table[string, string],
     prefixes: Table[string, string],
 ): Table[string, string] =
+    ## Generate the filename map of filetype to filename for import use.
     result = filename(filename, filepath)
 
     for filetype in filepath.keys:

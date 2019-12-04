@@ -5,7 +5,7 @@ import sets
 from tables import getOrDefault
 from ../util/varname import camelCase, alignment
 import ../util/config, ../util/log
-import ../lib/wstruct, ../lib/wenum
+import ../lib/winterface
 
 proc types(
     imports: var HashSet[string],

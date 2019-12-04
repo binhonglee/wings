@@ -3,7 +3,7 @@ import capitalizeAscii, endsWith, indent, replace, startsWith, split, unindent
 import sets
 from tables import getOrDefault
 import ../util/config
-import ../lib/wstruct, ../lib/wenum
+import ../lib/winterface
 
 proc types(imports: var HashSet[string], name: string): string =
     if name.startsWith("[]"):

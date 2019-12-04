@@ -1,11 +1,13 @@
 from strutils import capitalizeAscii, split, toUpperAscii
 
-var acronyms = @["api", "id", "json", "url", "ui", "xml"]
+var acronyms = newSeq[string](0)
 
 proc setAcronyms*(configAcronyms: seq[string]): void =
+    ## Setter for acronyms to always apply allcaps.
     acronyms = configAcronyms
 
 proc camelCase*(variable: string): string =
+    ## Converts the input string to camelCase.
     let words: seq[string] = variable.split("_")
     result = ""
 
@@ -18,6 +20,7 @@ proc camelCase*(variable: string): string =
             result &= capitalizeAscii(word)
 
 proc alignment*(fields: seq[string]): seq[int] =
+    ## Set the specific set of words (usually acronyms) that will use all caps instead of just capitalized.
     result = newSeq[int](0)
 
     for fieldStr in fields:

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-nimble genFile examples/emotion.enum examples/student.struct
+nimble genFile examples/emotion.wings examples/student.wings examples/homework.wings -c:wings.json
 
 STATUS=$(git status --porcelain)
 if [ "$STATUS" != "" ]; then
