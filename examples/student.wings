@@ -5,15 +5,15 @@ py-filepath examples/py
 ts-filepath examples/ts
 
 ts-import People:./People
-import examples/emotion.enum.wings
-import examples/homework.struct.wings
+import examples/emotion.wings
+import examples/homework.wings
 
 py-implement People
 ts-implement People
 
 # Student - Any person who is studying in a class
 
-Student {
+struct Student {
     id          int         -1
     name        str
     cur_class   str

@@ -14,4 +14,24 @@ def nim_binary(name:str, main:str, srcs:list=[], out:str=None, test_only:bool=Fa
         visibility = visibility,
     )
 
+def nim_doc(name:str, main:str, url:str, srcs:list=[], commit:str='master', test_only:bool=False, visibility:list=None, deps:list=[]):
+    cmd = " && ".join([
+        "HOME=\"/home/$USER\"",
+        "$TOOL doc --project --index:on -o:docs/ --git.url:" + url + " --git.commit:" + commit + " $PKG_DIR/" + main,
+        "$TOOL buildIndex -o:docs/theindex.html docs",
+    ])
+
+    return build_rule(
+        name = name,
+        srcs = srcs + [main],
+        outs = ["docs"],
+        tools = [CONFIG.NIM_TOOL],
+        cmd = cmd,
+        deps = deps,
+        requires = ["nim"],
+        test_only = test_only,
+        binary = True,
+        visibility = visibility,
+    )
+
 CONFIG.setdefault('NIM_TOOL', 'nim')

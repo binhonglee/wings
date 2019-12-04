@@ -3,7 +3,7 @@
  * 
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * Source: examples/student.struct.wings
+ * Source: examples/student.wings
  */
 
 package kt

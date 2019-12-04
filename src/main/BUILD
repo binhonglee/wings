@@ -3,6 +3,18 @@ subinclude('//build_defs/nim')
 nim_binary(
     name = 'wings',
     main = 'wings.nim',
+    deps = [':files'],
+)
+
+nim_doc(
+    name = 'wings_doc',
+    main = 'wings.nim',
+    deps = [':files'],
+    url = 'https://github.com/binhonglee/wings',
+)
+
+filegroup(
+    name = 'files',
     srcs = [
         'wingspkg/core.nim',
         'wingspkg/plz.nim',
@@ -21,5 +33,8 @@ nim_binary(
         'wingspkg/util/log.nim',
         'wingspkg/util/varname.nim',
     ],
-    visibility = ['PUBLIC'],
+    visibility =  [
+        ':wings',
+        ':wings_doc',
+    ]
 )

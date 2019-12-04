@@ -4,11 +4,11 @@ nim-filepath examples/nim
 py-filepath examples/py
 ts-filepath examples/ts
 
-import examples/emotion.enum.wings
+import examples/emotion.wings
 
 # Homework - Work to be done at home
 
-Homework {
+struct Homework {
     id          int
     name        str
     due_date    date

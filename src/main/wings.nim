@@ -1,7 +1,7 @@
 from os
 import createDir, fileExists, joinPath, paramCount, paramStr, parentDir, setCurrentDir
 from strutils
-import startsWith, endsWith
+import endsWith, removePrefix, startsWith
 import sets
 import tables
 import wingspkg/core
@@ -25,18 +25,24 @@ proc toFile(path: string, content: string): void =
 
 proc init(count: int): void =
     if count < 1:
-        LOG(ERROR, "Please add struct or enum files to be generated.")
+        LOG(FATAL, "Please add struct or enum files to be generated.")
         return
 
     var setConfig: bool = false
     var wingsFiles: seq[string] = newSeq[string](0)
     for i in countup(1, count, 1):
         let file = paramStr(i)
-        if not fileExists(file):
-            LOG(ERROR, "Cannot find " & file & ". Skipping...")
-        elif file.endsWith("wings.json"):
-            USER_CONFIG = config.parse(file)
+        if file.endsWith("wings.json") or file.startsWith("-c:"):
+            var configFile = file
+            if file.startsWith("-c:"):
+                configFile.removePrefix("-c:")
+            else:
+                LOG(DEPRECATED, "Config file should be defined with `-c:file.json`")
+
+            USER_CONFIG = config.parse(configFile)
             setConfig = true
+        elif not fileExists(file):
+            LOG(ERROR, "Cannot find " & file & ". Skipping...")
         else:
             wingsFiles.add(file)
 

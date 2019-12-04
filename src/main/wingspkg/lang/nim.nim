@@ -5,7 +5,7 @@ import sets
 from tables import getOrDefault
 from ../util/varname import camelCase
 import ../util/config, ../util/log
-import ../lib/wstruct, ../lib/wenum
+import ../lib/winterface
 
 proc types(imports: var HashSet[string], name: string): string =
     result = name

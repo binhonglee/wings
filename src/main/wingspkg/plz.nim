@@ -15,6 +15,7 @@ proc goPlzBuild*(
     deps: seq[string],
     visibility: seq[string]
 ): string =
+    ## Generate the `go_library()` declaration for please build file.
     var buildRule: string = ""
 
     result = "go_library("
