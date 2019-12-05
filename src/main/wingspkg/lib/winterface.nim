@@ -1,4 +1,5 @@
 from strutils import endsWith, join, removePrefix, removeSuffix, split, splitWhitespace, startsWith
+from os import fileExists
 import sets
 import tables
 import ../util/log
@@ -10,8 +11,9 @@ type
         dependencies*: seq[string]
         filename*: string
         filepath*: Table[string, string]
-        imports*: Table[string, HashSet[string]]
         implement*: Table[string, string]
+        imported*: bool
+        imports*: Table[string, HashSet[string]]
         name*: string
 
 type
@@ -34,6 +36,7 @@ proc initIWings*(): IWings =
     result.filepath = initTable[string, string]()
     result.implement = initTable[string, string]()
     result.imports = initTable[string, HashSet[string]]()
+    result.imported = false
     result.name = ""
 
 proc initWEnum(winterface: IWings = initIWings()): WEnum =
@@ -44,6 +47,7 @@ proc initWEnum(winterface: IWings = initIWings()): WEnum =
     result.filename = winterface.filename
     result.filepath = winterface.filepath
     result.implement = winterface.implement
+    result.imported = winterface.imported
     result.imports = winterface.imports
     result.name = winterface.name
     result.values = newSeq[string](0)
@@ -58,6 +62,7 @@ proc initWStruct(winterface: IWings = initIWings()): WStruct =
     result.filepath = winterface.filepath
     result.functions = initTable[string, string]()
     result.implement = winterface.implement
+    result.imported = winterface.imported
     result.imports = winterface.imports
     result.name = winterface.name
 
@@ -66,6 +71,9 @@ proc addImport(iwings: var IWings, newImport: string, importLang: string): void 
         iwings.imports.add(importLang, initHashSet[string]())
 
     iwings.imports[importLang].incl(newImport)
+
+proc error(line: int, message: string): void =
+    LOG(FATAL, "Line " & $line & ": " & message)
 
 proc fulfillDependency*(iwings: var IWings, dependency: string, imports: Table[string, string]): bool =
     ## Fulfill the required dependency (after dependant file is generated).
@@ -152,7 +160,7 @@ proc parseFileIWings*(
                 else:
                     inObj = parseFunc(WStruct(winterface), words, line, inObj)
             else:
-                LOG(FATAL, "Unexpected code path! `winterface` should be either a `WEnum` or a `WStruct`.")
+                error(lineNo, "Unexpected code path! `winterface` should be either a `WEnum` or a `WStruct`.")
         elif words[0].startsWith("#"):
             words[0].removePrefix("#")
             while words[0].startsWith(" "):
@@ -175,6 +183,10 @@ proc parseFileIWings*(
                 winterface.imports.add(key, initHashSet[string]())
             winterface.imports[key].incl(join(words, " "))
         elif words[0].endsWith("import"):
+            if words.len() != 2:
+                error(lineNo, "Invalid import file argument.")
+            if not fileExists(words[1]):
+                error(lineNo, "Could not find import file '" & words[1] & "'.")
             winterface.dependencies.add(words[1])
         elif words.len > 2 and words[2] == "{":
             case words[0]
@@ -183,18 +195,40 @@ proc parseFileIWings*(
             of "enum":
                 winterface = initWEnum(winterface)
             else:
-                LOG(FATAL, "Line " & $lineNo & ": Invalid type \"" & words[0] & "\" defined.")
+                error(lineNo, "Invalid type \"" & words[0] & "\" defined.")
             winterface.name = words[1]
             inObj = "WObj"
         elif words[0].endsWith("Func("):
             if not (winterface of WStruct):
-                LOG(FATAL, "Line " & $lineNo & ": `{lang}Func()` should only be used when defining a `struct`.")
+                error(lineNo, "`{lang}Func()` should only be used when defining a `struct`.")
             words[0].removeSuffix("Func(")
             inObj = words[0]
         else:
-            echo inObj
-            LOG(FATAL, "Line " & $lineNo & ": Unrecognized syntax \"" & join(words, " ") & "\"")
+            error(lineNo, "Unrecognized syntax \"" & join(words, " ") & "\"")
 
         lineNo += 1
 
     result = true
+
+proc parseFile*(
+    file: File,
+    filename: string,
+    skipImport: bool,
+): Table[string, IWings] =
+    result = initTable[string, IWings]()
+    var winterface = initIWings()
+
+    if winterface.parseFileIWings(file, filename):
+        result.add(filename, winterface)
+        let deps = winterface.dependencies
+        for imports in deps:
+            winterface = initIWings()
+            winterface.imported = skipImport
+            let newFile: File = open(imports)
+            if winterface.parseFileIWings(newFile, imports):
+                result.add(imports, winterface)
+            else:
+                LOG(FATAL, "Failed to parse '" & imports & "' imported in " & filename & ".")
+            newFile.close()
+    else:
+        LOG(FATAL, "Failed to parse '" & filename & "'.")

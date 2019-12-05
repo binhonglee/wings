@@ -13,7 +13,9 @@ If you would like to make any changes, please edit the source file instead.
 run `nimble genFile "{SOURCE_FILE}"` upon completion.
 """
 
+const DEFAULT_OUTPUT_ROOT_DIRS: HashSet[string] = initHashSet[string]()
 const DEFAULT_PREFIXES: Table[string, string] = initTable[string, string]()
+const DEFAULT_SKIP_IMPORT: bool = false
 const DEFAULT_TABBING: int = 4
 let CALLER_DIR*: string = getCurrentDir() ## Directory which `wings` is ran from.
 
@@ -21,22 +23,25 @@ type
     Config* = object
         ## An object that stores user configurations.
         header*: string
-        prefixes*: Table[string, string]
-        tabbing*: int
         outputRootDirs*: HashSet[string]
+        prefixes*: Table[string, string]
+        skipImport*: bool
+        tabbing*: int
 
 proc newConfig*(
     header: string = DEFAULT_HEADER,
+    outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS,
     prefixes: Table[string, string] = DEFAULT_PREFIXES,
+    skipImport: bool = DEFAULT_SKIP_IMPORT,
     tabbing: int = DEFAULT_TABBING,
-    outputRootDirs: HashSet[string] = initHashSet[string]()
 ): Config =
     ## Create a config to be used.
     result = Config()
     result.header = header
-    result.prefixes = prefixes
-    result.tabbing = tabbing
     result.outputRootDirs = outputRootDirs
+    result.prefixes = prefixes
+    result.skipImport = skipImport
+    result.tabbing = tabbing
 
 proc verifyRootDir(outputRootDir: string): string =
     result = getCurrentDir()
@@ -53,11 +58,16 @@ proc parse*(filename: string): Config =
         return result
 
     var jsonConfig: JsonNode = parseFile(filename)
-    if jsonConfig.hasKey("logging"):
-        setLevel(AlertLevel(jsonConfig["logging"].getInt(int(SUCCESS))))
+
+    if jsonConfig.hasKey("acronyms"):
+        var userAcronyms: seq[string] = newSeq[string](0)
+        var acronyms: seq[JsonNode] = jsonConfig["acronyms"].getElems()
+        if acronyms.len() > 0:
+            for line in acronyms:
+                userAcronyms.add(line.getStr())
+        setAcronyms(userAcronyms)
     else:
-        # This should never be shown lol
-        LOG(INFO, "'logging' is not set. Using default ('DEPRECATED').")
+        LOG(INFO, "'acronyms' is not set. Using default 'acronyms'.")
 
     if jsonConfig.hasKey("header"):
         var header: seq[string] = newSeq[string](0)
@@ -70,24 +80,11 @@ proc parse*(filename: string): Config =
     else:
         LOG(INFO, "'header' is not set. Using default 'header'.")
 
-    if jsonConfig.hasKey("prefixes"):
-        var prefixes: Table[string, string] = initTable[string, string]()
-        let prefixFields: OrderedTable[string, JsonNode] = jsonConfig["prefixes"].getFields()
-        for field in prefixFields.keys:
-            let fieldStr: string = prefixFields[field].getStr("")
-            if fieldStr != "":
-                prefixes.add(field, fieldStr)
-        result.prefixes = prefixes
-
-    if jsonConfig.hasKey("acronyms"):
-        var userAcronyms: seq[string] = newSeq[string](0)
-        var acronyms: seq[JsonNode] = jsonConfig["acronyms"].getElems()
-        if acronyms.len() > 0:
-            for line in acronyms:
-                userAcronyms.add(line.getStr())
-        setAcronyms(userAcronyms)
+    if jsonConfig.hasKey("logging"):
+        setLevel(AlertLevel(jsonConfig["logging"].getInt(int(SUCCESS))))
     else:
-        LOG(INFO, "'acronyms' is not set. Using default 'acronyms'.")
+        # This should never be shown lol
+        LOG(INFO, "'logging' is not set. Using default ('DEPRECATED').")
 
     if jsonConfig.hasKey("outputRootDirs"):
         let outputRootDirs = jsonConfig["outputRootDirs"].getElems()
@@ -102,8 +99,23 @@ proc parse*(filename: string): Config =
             getCurrentDir()
         )
 
+    if jsonConfig.hasKey("prefixes"):
+        var prefixes: Table[string, string] = initTable[string, string]()
+        let prefixFields: OrderedTable[string, JsonNode] = jsonConfig["prefixes"].getFields()
+        for field in prefixFields.keys:
+            let fieldStr: string = prefixFields[field].getStr("")
+            if fieldStr != "":
+                prefixes.add(field, fieldStr)
+        result.prefixes = prefixes
+
+    if jsonConfig.hasKey("skipImport"):
+        result.skipImport = jsonConfig["skipImport"].getBool(DEFAULT_SKIP_IMPORT)
+        LOG(INFO, "Set 'skipImport' to " & $result.skipImport & ".")
+    else:
+        LOG(INFO, "'skipImport' is not set. Using default " & $DEFAULT_SKIP_IMPORT & ".")
+
     if jsonConfig.hasKey("tabbing"):
         result.tabbing = jsonConfig["tabbing"].getInt(DEFAULT_TABBING)
-        LOG(INFO, "Set tabbing indentation to " & $result.tabbing)
+        LOG(INFO, "Set 'tabbing' to " & $result.tabbing & ".")
     else:
-        LOG(INFO, "'tabbing' is not set. Using default '4'.")
+        LOG(INFO, "'tabbing' is not set. Using default " & $DEFAULT_TABBING & ".")
