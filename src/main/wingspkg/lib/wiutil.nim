@@ -73,21 +73,11 @@ proc genFiles*(this: var IWings, config: Config): Table[string, string] =
     elif this of WStruct:
         result = WStruct(this).genWStructFiles(config)
 
-proc findWings(allWings: seq[IWings], filename: string): int =
-    var i = 0
-    while i < allWings.len():
-        if allWings[i].filename == filename:
-            return i
-        i += 1
-
-    LOG(ERROR, filename & " not found.")
-    result = -1
-
-
 proc dependencyGraph*(
-    allWings: var seq[IWings],
+    allWings: var Table[string, IWings],
     config: Config,
 ): Table[string, Table[string, string]] =
+    ## Generate and fulfill all dependencies in its intended succession.
     var noDeps: seq[string] = newSeq[string](0)
     var filenameToObj: Table[string, IWings] = initTable[string, IWings]()
     var reverseDependencyTable: Table[string, seq[string]] =
@@ -95,7 +85,7 @@ proc dependencyGraph*(
     result = initTable[string, Table[string, string]]()
 
     var index = 0;
-    for wings in allWings:
+    for wings in allWings.values:
         filenameToObj[wings.filename] = wings
         if wings.dependencies.len() == 0:
             noDeps.add(wings.filename)
@@ -113,7 +103,8 @@ proc dependencyGraph*(
         var name: string = wings.filename
         LOG(DEBUG, "Generating files from " & name & "...")
 
-        result.add(name, wings.genFiles(config))
+        if not (config.skipImport and wings.imported):
+            result.add(name, wings.genFiles(config))
         if reverseDependencyTable.hasKey(name):
             for dependant in reverseDependencyTable[name]:
                 var obj = filenameToObj[dependant]
@@ -123,7 +114,7 @@ proc dependencyGraph*(
                         name,
                         wings.filepath,
                         filename(obj.filename, obj.filepath),
-                        config.prefixes
+                        config.prefixes,
                     )
                 )
                 if not fulfillDep:
@@ -135,11 +126,11 @@ proc dependencyGraph*(
                         obj.name,
                     )
                 else:
-                    allWings[findWings(allWings, obj.filename)] = obj
+                    allWings[obj.filename] = obj
 
             reverseDependencyTable.del(name)
 
-        allWings.delete(findWings(allWings, wings.filename))
+        allWings.del(wings.filename)
 
     if allWings.len() > 0:
         let next = dependencyGraph(allWings, config)

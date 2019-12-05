@@ -1,15 +1,16 @@
 {
+    "acronyms": ["id"],
     "header": [
         "This is a generated file",
         "",
         "If you would like to make any changes, please edit the source file instead.",
         "run `nimble genFile \"{SOURCE_FILE}\"` upon completion."
     ],
+    "logging": 6,
+    "outputRootDirs": ["", "wings"],
     "prefixes": {
         "go": "github.com/binhonglee/wings"
     },
-    "tabbing": 4,
-    "logging": 6,
-    "acronyms": ["id"],
-    "outputRootDirs": ["", "wings"]
+    "skipImport": false,
+    "tabbing": 4
 }
