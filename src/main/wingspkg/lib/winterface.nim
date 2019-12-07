@@ -117,7 +117,7 @@ proc parseFunc(wstruct: var WStruct, words: seq[string], line: string, lang: str
         wstruct.functions[lang] &= "\n" & line
         result = lang
 
-proc parseFileIWings*(
+proc parseFileIWings(
     winterface: var IWings,
     file: File,
     filename: string,

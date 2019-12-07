@@ -2,12 +2,12 @@
 # 
 # If you would like to make any changes, please edit the source file instead.
 # run `nimble genFile "{SOURCE_FILE}"` upon completion.
-# Source: examples/student.wings
+# Source: examples/input/student.wings
 
 import json
 from datetime import date
-import examples.py.emotion
-import examples.py.homework
+import examples.output.py.homework
+import examples.output.py.emotion
 
 # Student - Any person who is studying in a class
 class Student(People):

@@ -1,8 +1,8 @@
-go-filepath examples/go
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts/person
+go-filepath examples/output/go
+kt-filepath examples/output/kt
+nim-filepath examples/output/nim
+py-filepath examples/output/py
+ts-filepath examples/output/ts/person
 
 //Ignored comment
 // Another ignored comment

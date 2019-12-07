@@ -1,12 +1,12 @@
-go-filepath examples/go/classroom
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts
+go-filepath examples/output/go/classroom
+kt-filepath examples/output/kt
+nim-filepath examples/output/nim
+py-filepath examples/output/py
+ts-filepath examples/output/ts
 
 ts-import People:./People
-import examples/emotion.wings
-import examples/homework.wings
+import examples/input/emotion.wings
+import examples/input/homework.wings
 
 py-implement People
 ts-implement People
