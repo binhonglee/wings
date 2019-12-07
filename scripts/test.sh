@@ -1,6 +1,7 @@
 #!/bin/sh
 
-nimble genFile examples/emotion.wings examples/student.wings examples/homework.wings -c:wings.json
+rm -rf examples/output/go examples/output/kt examples/output/nim examples/output/py examples/output/ts
+nimble genFile examples/input/student.wings -c:wings.json
 
 STATUS=$(git status --porcelain)
 if [ "$STATUS" != "" ]; then

@@ -10,7 +10,7 @@ const DEFAULT_HEADER: string = """
 This is a generated file
 
 If you would like to make any changes, please edit the source file instead.
-run `nimble genFile "{SOURCE_FILE}"` upon completion.
+run `wings "{SOURCE_FILE}"` upon completion.
 """
 
 const DEFAULT_OUTPUT_ROOT_DIRS: HashSet[string] = initHashSet[string]()

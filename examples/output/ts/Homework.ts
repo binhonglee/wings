@@ -3,7 +3,7 @@
  * 
  * If you would like to make any changes, please edit the source file instead.
  * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * Source: examples/homework.wings
+ * Source: examples/input/homework.wings
  */
 
 import Emotion from './person/Emotion';

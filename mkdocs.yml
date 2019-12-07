@@ -15,28 +15,6 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Main package:
-    - wings.nim: main/wings.md
-    - wingspkg:
-      - core.nim: main/wingspkg/core.md
-      - plz.nim: main/wingspkg/plz.md
-      - lang:
-        - Go: main/wingspkg/lang/go.md
-        - Kotlin: main/wingspkg/lang/kt.md
-        - Nim: main/wingspkg/lang/nim.md
-        - Python: main/wingspkg/lang/py.md
-        - TypeScript: main/wingspkg/lang/ts.md
-      - lib:
-        - wenum.nim: main/wingspkg/lib/wenum.md
-        - winterface.nim: main/wingspkg/lib/winterface.md
-        - wiutil.nim: main/wingspkg/lib/wiutil.md
-        - wstruct.nim: main/wingspkg/lib/wstruct.md
-      - util:
-        - config.nim: main/wingspkg/util/config.md
-        - filename.nim: main/wingspkg/util/filename.md
-        - header.nim: main/wingspkg/util/header.md
-        - log.nim: main/wingspkg/util/log.md
-        - varname.nim: main/wingspkg/util/varname.md
   - Utility classes:
     - TypeScript:
       - index.ts: tsUtil/index.md

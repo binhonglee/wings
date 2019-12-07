@@ -8,7 +8,11 @@ A simple cross language struct and enum file generator. (You might want to use a
 !!! warning "Nim `date`"
     It is currently unsupported since I haven't figure out how to parse ISOString time properly from `string` in Nim.
 
-Run `nimble genFile "{filepath}"` or `plz run //src/main:wings -- "{filepath}"` to generate the files.
+**Usage**
+
+- Download the appropriate binary [here](https://github.com/binhonglee/wings/releases/tag/v0.0.2-alpha).
+- Add binary to the included path (and rename it to `wings`).
+- Run `wings -c:{config_file} {filepath}` to generate the files.
 
 ## Struct
 
@@ -30,7 +34,7 @@ ts-implement People
 
 # Student - Any person who is studying in a class
 
-Student {
+struct Student {
     id          int         -1
     name        str
     cur_class   str
@@ -298,7 +302,7 @@ nim-filepath examples/nim
 py-filepath examples/py
 ts-filepath examples/ts/person
 
-Emotion {
+enum Emotion {
     Accomplished
     Angry
     Annoyed
