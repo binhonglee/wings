@@ -3,7 +3,7 @@ import alignLeft, capitalizeAscii, contains, endsWith, indent,
     removePrefix, removeSuffix, split, startsWith, toLowerAscii, unindent
 import sets
 from tables import getOrDefault
-from ../util/varname import camelCase, alignment
+from ../util/varname import pascalCase, maxWidth
 import ../util/config, ../util/log
 import ../lib/winterface
 
@@ -92,10 +92,10 @@ proc wStructFile(
     for fieldStr in fields:
         let field = fieldStr.split(' ')
         if field.len() > 1:
-            fieldDec.add(capitalizeAscii(camelCase(field[0])) & " " &
+            fieldDec.add(pascalCase(field[0]) & " " &
                 mutImports.types(field[1]) & " `json:\"" & field[0] & "\"`")
 
-    let width: seq[int] = alignment(fieldDec)
+    let width: seq[int] = maxWidth(fieldDec)
     var fieldStr: string = ""
 
     for row in fieldDec:

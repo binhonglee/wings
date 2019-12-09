@@ -1,0 +1,25 @@
+{
+    "filename": "lower",
+    "filetype": "go",
+    "importPath": {
+        "pathType": "absolute",
+        "prefix": "",
+        "level": 1
+    },
+    "templates": {
+        "struct": "examples/input/templates/struct.go",
+        "enum": "examples/input/templates/enum.go"
+    },
+    "types": {
+        "int": "int",
+        "flt": "float",
+        "dbl": "double",
+        "str": "string",
+        "bool": "boolean",
+        "date": "time.Time",
+        "[]{TYPE}": "[]{TYPE}",
+        "Map<{TYPE1}, {TYPE2}>": "map[{TYPE1}]{TYPE2}",
+        "!imported": "PATH0.{TYPE_PASCAL}",
+        "!unimported": "{TYPE_PASCAL}"
+    }
+}

@@ -5,6 +5,12 @@ import tables
 import ../util/log
 
 type
+    WingsType* = enum
+        default = "unknown"
+        structw = "struct"
+        enumw = "enum"
+
+type
     IWings* = ref object of RootObj
         ## A wings object interface.
         comment*: string
@@ -15,6 +21,7 @@ type
         imported*: bool
         imports*: Table[string, HashSet[string]]
         name*: string
+        wingsType*: WingsType
 
 type
     WEnum* = ref object of IWings
@@ -38,6 +45,7 @@ proc initIWings*(): IWings =
     result.imports = initTable[string, HashSet[string]]()
     result.imported = false
     result.name = ""
+    result.wingsType = WingsType.default
 
 proc initWEnum(winterface: IWings = initIWings()): WEnum =
     ## Returns an empty initialized `WEnum`.
@@ -51,6 +59,7 @@ proc initWEnum(winterface: IWings = initIWings()): WEnum =
     result.imports = winterface.imports
     result.name = winterface.name
     result.values = newSeq[string](0)
+    result.wingsType = WingsType.enumw
 
 proc initWStruct(winterface: IWings = initIWings()): WStruct =
     ## Returns an empty initialized `WStruct`.
@@ -65,6 +74,7 @@ proc initWStruct(winterface: IWings = initIWings()): WStruct =
     result.imported = winterface.imported
     result.imports = winterface.imports
     result.name = winterface.name
+    result.wingsType = WingsType.structw
 
 proc addImport(iwings: var IWings, newImport: string, importLang: string): void =
     if not iwings.imports.hasKey(importLang):
@@ -161,7 +171,7 @@ proc parseFileIWings(
                     inObj = parseFunc(WStruct(winterface), words, line, inObj)
             else:
                 error(lineNo, "Unexpected code path! `winterface` should be either a `WEnum` or a `WStruct`.")
-        elif words[0].startsWith("#"):
+        elif words[0] == "#":
             words[0].removePrefix("#")
             while words[0].startsWith(" "):
                 words[0].removePrefix(" ")
@@ -170,7 +180,7 @@ proc parseFileIWings(
             if words.len() > 0:
                 if winterface.comment.len() > 0:
                     winterface.comment &= "\n"
-                winterface.comment &= " " & join(words, " ")
+                winterface.comment &= join(words, " ")
         elif words[0].endsWith("-implement"):
             var toImplement: string = words[1]
             words[0].removeSuffix("-implement")

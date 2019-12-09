@@ -6,7 +6,7 @@ ts-filepath examples/output/ts
 
 import examples/input/emotion.wings
 
-# Homework - Work to be done at home
+# Work to be done at home
 
 struct Homework {
     id          int

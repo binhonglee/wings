@@ -8,7 +8,7 @@ import json
 from datetime import date
 import examples.output.py.emotion
 
-# Homework - Work to be done at home
+#Work to be done at home
 class Homework(object):
     id: int = -1
     name: str = ""

@@ -9,7 +9,7 @@ import wingspkg/core
 import wingspkg/util/config, wingspkg/util/log
 
 const DEFAULT_CONFIG_FILE: string = "wings.json"
-var USER_CONFIG: Config = newConfig()
+var USER_CONFIG: Config = initConfig()
 
 proc toFile(path: string, content: string): void =
     try:

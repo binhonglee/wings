@@ -9,7 +9,7 @@ from datetime import date
 import examples.output.py.homework
 import examples.output.py.emotion
 
-# Student - Any person who is studying in a class
+#Any person who is studying in a class
 class Student(People):
     id: int = -1
     name: str = ""

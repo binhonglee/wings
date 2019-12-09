@@ -9,7 +9,7 @@ import times
 import ./emotion
 
 
-# Homework - Work to be done at home
+#Work to be done at home
 type
     Homework* = object
         ID* : int
