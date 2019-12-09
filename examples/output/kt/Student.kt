@@ -11,7 +11,7 @@ package kt
 import java.util.ArrayList
 import java.util.HashMap
 
-// Student - Any person who is studying in a class
+//Any person who is studying in a class
 class Student {
     var ID: Int = -1
     var name: String = ""

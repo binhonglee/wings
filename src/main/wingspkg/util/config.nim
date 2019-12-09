@@ -28,7 +28,7 @@ type
         skipImport*: bool
         tabbing*: int
 
-proc newConfig*(
+proc initConfig*(
     header: string = DEFAULT_HEADER,
     outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS,
     prefixes: Table[string, string] = DEFAULT_PREFIXES,
@@ -53,18 +53,18 @@ proc verifyRootDir(outputRootDir: string): string =
 
 proc parse*(filename: string): Config =
     ## Parse the given config file in the path.
-    result = newConfig()
+    result = initConfig()
     if not fileExists(filename):
         return result
 
-    var jsonConfig: JsonNode = parseFile(filename)
+    let jsonConfig: JsonNode = parseFile(filename)
 
     if jsonConfig.hasKey("acronyms"):
-        var userAcronyms: seq[string] = newSeq[string](0)
-        var acronyms: seq[JsonNode] = jsonConfig["acronyms"].getElems()
+        var userAcronyms: HashSet[string] = initHashSet[string]()
+        let acronyms: seq[JsonNode] = jsonConfig["acronyms"].getElems()
         if acronyms.len() > 0:
             for line in acronyms:
-                userAcronyms.add(line.getStr())
+                userAcronyms.incl(line.getStr())
         setAcronyms(userAcronyms)
     else:
         LOG(INFO, "'acronyms' is not set. Using default 'acronyms'.")
@@ -83,7 +83,6 @@ proc parse*(filename: string): Config =
     if jsonConfig.hasKey("logging"):
         setLevel(AlertLevel(jsonConfig["logging"].getInt(int(SUCCESS))))
     else:
-        # This should never be shown lol
         LOG(INFO, "'logging' is not set. Using default ('DEPRECATED').")
 
     if jsonConfig.hasKey("outputRootDirs"):

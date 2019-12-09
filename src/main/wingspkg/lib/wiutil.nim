@@ -1,8 +1,7 @@
 import tables
 import ./winterface
-import ../util/filename, ../util/header, ../util/config
+import ../util/filename, ../util/header, ../util/config, ../util/log
 import ../lang/go, ../lang/kt, ../lang/nim, ../lang/py, ../lang/ts
-import ../util/log
 
 proc genWEnumFiles*(this: var WEnum, config: Config): Table[string, string] =
     ## Generate the enum files for all the natively supported output types.
@@ -97,9 +96,9 @@ proc dependencyGraph*(
 
         index += 1
 
-    # All noDeps can and should be generated in parallel if possible
+    # TODO: Multithread this
     while noDeps.len() > 0:
-        var wings = filenameToObj[noDeps.pop()]
+        var wings: IWings = filenameToObj[noDeps.pop()]
         var name: string = wings.filename
         LOG(DEBUG, "Generating files from " & name & "...")
 

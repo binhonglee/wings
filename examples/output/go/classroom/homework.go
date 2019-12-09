@@ -13,7 +13,7 @@ import (
     emotion "github.com/binhonglee/wings/examples/output/go"
 )
 
-// Homework - Work to be done at home
+//Work to be done at home
 type Homework struct {
     ID           int                  `json:"id"`
     Name         string               `json:"name"`

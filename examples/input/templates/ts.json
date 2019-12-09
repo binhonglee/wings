@@ -1,0 +1,34 @@
+{
+    "filename": "pascal",
+    "filetype": "ts",
+    "importPath": {
+        "pathType": "relative",
+        "level": 0
+    },
+    "templates": {
+        "struct": "examples/input/templates/struct.ts",
+        "enum": "examples/input/templates/enum.ts"
+    },
+    "types": {
+        "int": "number",
+        "flt": "number",
+        "dbl": "number",
+        "str": "string",
+        "bool": "boolean",
+        "date": "Date",
+        "[]{TYPE}": "{TYPE}[]",
+        "Map<{TYPE1}, {TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
+        "!imported": "{TYPE_PASCAL}",
+        "!unimported": "{TYPE_PASCAL}"
+    },
+    "init": {
+        "int": "0",
+        "flt": "0",
+        "dbl": "0",
+        "str": "''",
+        "bool": "false",
+        "[]{TYPE}": "[]",
+        "!imported": "new {TYPE_PASCAL}()",
+        "!unimported": "new {TYPE_PASCAL}()"
+    }
+}

@@ -8,7 +8,7 @@
 
 import Emotion from './person/Emotion';
 
-// Homework - Work to be done at home
+//Work to be done at home
 export default class Homework {
     [key: string]: any;
     public ID: number = -1;

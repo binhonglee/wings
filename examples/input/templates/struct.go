@@ -1,0 +1,23 @@
+package {#FOLDER}
+
+// #BEGIN_IMPORT
+import (
+	// #IMPORT2 {#IMPORT_1} "{#IMPORT_2}"
+	// #IMPORT2 {#IMPORT_2} "{#IMPORT_1}"
+	// #IMPORT1 "{#IMPORT_1}"
+)
+// #END_IMPORT
+
+// {#NAME_PASCAL} - {#COMMENT}
+type {#NAME_PASCAL} struct {
+// #BEGIN_VAR
+	// #VAR {#VARNAME_PASCAL} {#SPACED} {#TYPE} {#SPACED} `json:"{#VARNAME_JSON}"`
+// #END_VAR
+}
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS
+
+// {#NAME_PASCAL}s - An array of {#NAME_PASCAL}
+type {#NAME_PASCAL}s []{#NAME_PASCAL}

@@ -10,7 +10,7 @@ package kt
 
 import java.util.ArrayList
 
-// Homework - Work to be done at home
+//Work to be done at home
 class Homework {
     var ID: Int = -1
     var name: String = ""

@@ -13,7 +13,7 @@ import (
     emotion "github.com/binhonglee/wings/examples/output/go"
 )
 
-// Student - Any person who is studying in a class
+//Any person who is studying in a class
 type Student struct {
     ID            int                  `json:"id"`
     Name          string               `json:"name"`

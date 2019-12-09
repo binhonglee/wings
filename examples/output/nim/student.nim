@@ -11,7 +11,7 @@ import tables
 import ./emotion
 
 
-# Student - Any person who is studying in a class
+#Any person who is studying in a class
 type
     Student* = object
         ID* : int

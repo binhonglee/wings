@@ -11,7 +11,7 @@ import examples/input/homework.wings
 py-implement People
 ts-implement People
 
-# Student - Any person who is studying in a class
+# Any person who is studying in a class
 
 struct Student {
     id          int         -1

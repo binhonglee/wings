@@ -10,7 +10,7 @@ import Homework from './Homework';
 import People from './People';
 import Emotion from './person/Emotion';
 
-// Student - Any person who is studying in a class
+//Any person who is studying in a class
 export default class Student implements People {
     [key: string]: any;
     public ID: number = -1;
