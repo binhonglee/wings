@@ -1,12 +1,18 @@
 def nim_binary(name:str, main:str, srcs:list=[], out:str=None, test_only:bool=False, visibility:list=None, deps:list=[]):
     out = out or name
 
+    cmd = ' && '.join([
+        "HOME=\"/home/$USER\"",
+        _nimble_path(),
+        "$TOOL --verbosity:2 --NimblePath:$NIMBLE_PATH/pkgs -o:" + out + " c $PKG_DIR/" + main,
+    ])
+
     return build_rule(
         name = name,
         srcs = srcs + [main],
         outs = [out],
         tools = [CONFIG.NIM_TOOL],
-        cmd = "HOME=\"/home/$USER\" && $TOOL -o:" + out + " c $PKG_DIR/" + main,
+        cmd = cmd,
         deps = deps,
         requires = ["nim"],
         test_only = test_only,
@@ -14,10 +20,35 @@ def nim_binary(name:str, main:str, srcs:list=[], out:str=None, test_only:bool=Fa
         visibility = visibility,
     )
 
+def nimble_install(name:str, pkg_name:str=None, revision:str=None, test_only:bool=False, visibility:list=None, deps:list=[]):
+    pkg_name = pkg_name or name
+    revision = revision or "#head"
+    pkg = pkg_name + "@" + revision
+
+    cmd = ' && '.join([
+        "HOME=\"/home/$USER\"",
+        _nimble_path(),
+        "$TOOL --accept --verbose --nimbleDir:$NIMBLE_PATH install " + pkg,
+        "ln -s $NIMBLE_PATH/pkgs/" + pkg_name + "* ./",
+    ])
+
+    return build_rule(
+        name = name,
+        tools = [CONFIG.NIMBLE_TOOL],
+        cmd = cmd,
+        deps = deps,
+        outs = [pkg_name + "-" + revision],
+        requires = ["nimble"],
+        test_only = test_only,
+        visibility = visibility,
+)
+
 def nim_doc(name:str, main:str, url:str, srcs:list=[], commit:str='master', test_only:bool=False, visibility:list=None, deps:list=[]):
     cmd = " && ".join([
         "HOME=\"/home/$USER\"",
-        "$TOOL doc --project --index:on -o:docs/ --git.url:" + url + " --git.commit:" + commit + " $PKG_DIR/" + main,
+        _nimble_path(),
+        "BRANCH=$(git rev-parse --abbrev-ref HEAD)",
+        "$TOOL --NimblePath:$NIMBLE_PATH/pkgs doc --project --index:on -o:docs/ --git.url:" + url + " --git.commit:\"$BRANCH\" --git.devel:\"$BRANCH\" $PKG_DIR/" + main,
         "$TOOL buildIndex -o:docs/theindex.html docs",
     ])
 
@@ -34,4 +65,8 @@ def nim_doc(name:str, main:str, url:str, srcs:list=[], commit:str='master', test
         visibility = visibility,
     )
 
+def _nimble_path():
+    return "NIMBLE_PATH=$(pwd | awk -F'plz-out' '{print $1}')\"plz-out/.nimble\""
+
 CONFIG.setdefault('NIM_TOOL', 'nim')
+CONFIG.setdefault('NIMBLE_TOOL', 'nimble')

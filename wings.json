@@ -12,5 +12,9 @@
         "go": "github.com/binhonglee/wings"
     },
     "skipImport": false,
-    "tabbing": 4
+    "tabbing": 4,
+    "langConfig": [
+        "examples/input/templates/go.json",
+        "examples/input/templates/ts.json"
+    ]
 }

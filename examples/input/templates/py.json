@@ -1,0 +1,38 @@
+{
+    "filename": "lower",
+    "filetype": "py",
+    "implementFormat": "{#IMPLEMENT}",
+    "importPath": {
+        "format": "{#IMPORT}",
+        "pathType": "absolute",
+        "prefix": "",
+        "level": 0
+    },
+    "templates": {
+        "struct": "examples/input/templates/struct.py",
+        "enum": "examples/input/templates/enum.py"
+    },
+    "types": {
+        "int": "int",
+        "flt": "float",
+        "dbl": "double",
+        "str": "str",
+        "bool": "bool",
+        "date": "DateTime",
+        "[]{TYPE}": "list",
+        "Map<{TYPE1},{TYPE2}>": "dict",
+        "!imported": "{#TYPE_PASCAL}",
+        "!unimported": "{#TYPE_PASCAL}"
+    },
+    "init": {
+        "int": "0",
+        "flt": "0",
+        "dbl": "0",
+        "str": "\"\"",
+        "bool": "false",
+        "[]{TYPE}": "[]",
+        "Map<{TYPE1},{TYPE2}>": "{}",
+        "!imported": "new {#TYPE_PASCAL}()",
+        "!unimported": "new {#TYPE_PASCAL}()"
+    }
+}

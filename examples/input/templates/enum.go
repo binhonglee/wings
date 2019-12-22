@@ -1,9 +1,9 @@
-package {#FOLDER}
+package {#1}
 
 type {#NAME} int
 
-const (
 // #BEGIN_VAR
+const (
 	// #VAR {#VARNAME_PASCAL} = iota
-// #END_VAR
 )
+// #END_VAR

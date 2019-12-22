@@ -1,10 +1,10 @@
-import json
 from os import fileExists, getCurrentDir, lastPathPart, parentDir
 from strutils import join
+from strlib import setAcronyms
+import json
+import log
 import sets
 import tables
-import ./log
-from ./varname import setAcronyms
 
 const DEFAULT_HEADER: string = """
 This is a generated file

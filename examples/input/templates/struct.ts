@@ -3,16 +3,16 @@
 // #END_IMPORT
 
 // {#COMMENT}
-export default class {#NAME_PASCAL} implements {#IMPLEMENT} {
+export default class {#NAME_PASCAL} {#IMPLEMENT}{
     [key: string]: any;
 // #BEGIN_VAR
-    // #VAR public {#VARNAME_PASCAL}: {#TYPE} = {#TYPE_INIT};
+    // #VAR public {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT};
 // #END_VAR
 
     public init(data: any): boolean {
         try {
 // #BEGIN_INIT
-            // #INIT this.{#VARNAME_PASCAL} = data.{#VARNAME_JSON};
+            // #INIT this.{#VARNAME_CAMEL} = data.{#VARNAME_JSON};
 // #END_INIT
         } catch (e) {
             return false;

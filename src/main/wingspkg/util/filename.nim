@@ -1,119 +1,113 @@
-from os import unixToNativePath
-import tables
+from os import DirSep, unixToNativePath
 from strutils import capitalizeAscii, join, split
 from sequtils import foldr
-import ./log
-
-const joiner: Table[string, char] = {"go": '/', "kt": '/', "nim": '/', "py": '.', "ts": '/'}.toTable
+import strlib
+import ../lib/tconfig
 
 proc similarity(first: seq[string], second: seq[string]): int =
     result = 0
     var same: bool = true
 
     while same:
-        if first[result] != second[result]:
+        if result >= first.len() or result >= second.len() or first[result] != second[result]:
             same = false
         else:
             result += 1
 
-proc filename*(
+proc filename(
     filename: string,
-    filepath: Table[string, string],
-    customJoin: Table[string, char] = joiner,
+    filepath: string,
+    langConfig: TConfig,
     filetypeSuffix: bool = false,
     useNativePath: bool = false,
-): Table[string, string] =
-    ## Generate the filename map of filetype to filename.
-    var temp: seq[string] = filename.split('/')
-    temp[temp.len() - 1] = temp[temp.len() - 1].split('.')[0]
-    result = initTable[string, string]()
+): string =
+    var separator: char = DirSep
+    if not useNativePath:
+        separator = langConfig.importPath.separator
+    let temp: seq[string] = filename.split(DirSep)
+    let name = temp[temp.len() - 1].split('.')[0]
+    result = ""
 
-    for filetype in filepath.keys:
-        let prefix: string = foldr(
-            filepath[filetype].split('/'),
-            a & customJoin[filetype] & b
-        ) & customJoin[filetype]
-        var suffix: string = ""
-        if filetypeSuffix:
-            suffix = "." & filetype
-        case filetype
-        of "go", "nim", "py":
-            var file = prefix &
-                join(
-                    split(
-                        temp[temp.len() - 1], '_'
-                    )
-                ) & suffix
-            if useNativePath:
-                file = unixToNativePath(file)
-            result.add(
-                filetype,
-                file
-            )
-        of "kt", "ts":
-            var words = split(temp[temp.len() - 1], '_')
-            for i in countup(0, words.len() - 1, 1):
-                words[i] = capitalizeAscii(words[i])
-            var file = prefix & join(words) & suffix
-            if useNativePath:
-                file = unixToNativePath(file)
-            result.add(filetype, file)
-        else:
-            LOG(ERROR, "Unsupported type given.")
+    var prefix: string = foldr(
+        filepath.split(DirSep),
+        a & separator & b,
+    ) & separator
+
+    var suffix: string = ""
+    if filetypeSuffix:
+        suffix = "." & langConfig.filetype
+
+    if langConfig.importPath.prefix.len() > 0:
+        prefix = langConfig.importPath.prefix & separator & prefix
+
+    result = prefix & format(langConfig.filename, name) & suffix
+    if useNativePath:
+        result =  unixToNativePath(result)
 
 proc outputFilename*(
     filename: string,
-    filepath: Table[string, string]
-): Table[string, string] =
-    ## Generate the filename map of filetype to filename for output path.
-    result = filename(
-        filename,
-        filepath,
-        {"go": '/', "kt": '/', "nim": '/', "py": '/', "ts": '/'}.toTable,
-        true,
-        true,
-    )
+    filepath: string,
+    langConfig: TConfig,
+): string =
+    filename(filename, filepath, langConfig, true, true)
 
 proc importFilename*(
     filename: string,
-    filepath: Table[string, string],
-    callerFilepath: Table[string, string],
-    prefixes: Table[string, string],
-): Table[string, string] =
-    ## Generate the filename map of filetype to filename for import use.
-    result = filename(filename, filepath)
+    filepath: string,
+    callerFilename: string,
+    callerFilepath: string,
+    langConfig: TConfig,
+): string =
+    result = ""
+    if langConfig.importPath.pathType != ImportPathType.Never:
+        var selfPath: seq[string] = filename(
+            filename,
+            filepath,
+            langConfig,
+        ).split(langConfig.importPath.separator)
+        let callerPath: seq[string] = filename(
+            callerFilename,
+            callerFilepath,
+            langConfig,
+        ).split(langConfig.importPath.separator)
 
-    for filetype in filepath.keys:
-        let selfPath: seq[string] = result[filetype].split(joiner[filetype])
-        let callerPath: seq[string] = callerFilepath[filetype].split(joiner[filetype])
+        var prefix: string = ""
+        if langConfig.importPath.prefix.len() > 0:
+            prefix = langConfig.importPath.prefix &
+                $langConfig.importPath.separator
 
-        var pos: int = similarity(selfPath, callerPath)
+        if langConfig.importPath.pathType == ImportPathType.Absolute:
+            var tempCaller = callerPath
+            tempCaller.setLen(tempCaller.len() - langConfig.importPath.level)
+            var tempSelf = selfPath
+            tempSelf.setLen(tempSelf.len() - langConfig.importPath.level)
 
-        if filetype == "go" and pos > callerPath.len() - 2:
-            result.del("go")
-            continue
-        elif prefixes.contains(filetype):
-            result[filetype] = prefixes[filetype] & joiner[filetype] & result[filetype]
-            continue
-        elif filetype == "py" or filetype == "go":
-            continue
+            let pos: int = similarity(tempSelf, tempCaller)
+            if pos == tempSelf.len() and pos == tempCaller.len():
+                result = ""
+            else:
+                result = prefix &
+                    selfPath.join($langConfig.importPath.separator)
+        elif langConfig.importPath.pathType == ImportPathType.Relative:
+            let pos: int = similarity(selfPath, callerPath)
 
-        var output: string = ""
-        for i in countup(pos, callerPath.len() - 2, 1):
-            if output != "":
-                output &= joiner[filetype]
-            output &= ".."
+            for i in countup(pos, callerPath.len() - 2, 1):
+                if result != "":
+                    result &= langConfig.importPath.separator
+                result &= ".."
 
-        if output == "":
-            output &= "."
+            if result == "":
+                result &= "."
 
-        for i in countup(pos, selfPath.len() - 1, 1):
-            output &= joiner[filetype] & selfPath[i]
+            for i in countup(pos, selfPath.len() - 1, 1):
+                result &= langConfig.importPath.separator & selfPath[i]
 
-        result[filetype] = output
-
-    if result.contains("go"):
-        var words = result["go"].split('/')
-        let name = words[words.len() - 1]
-        words.delete(words.len() - 1)
-        result["go"] = name & ":" & foldr(words, a & "/" & b)
+proc tFilename*(filename: string, filepath: string): string =
+    result = importFilename(
+        filename,
+        filepath, "", "",
+        initTConfig(
+            ipt = ImportPathType.Absolute,
+            level = 0
+        )
+    )
