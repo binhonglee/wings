@@ -3,36 +3,45 @@ subinclude('//build_defs/nim')
 nim_binary(
     name = 'wings',
     main = 'wings.nim',
-    deps = [':files'],
+    deps = [
+        ':files',
+        ':stones',
+    ],
+)
+
+nimble_install(
+    name = "stones",
+    pkg_name = "stones",
+    visibility = [':wings'],
 )
 
 nim_doc(
     name = 'wings_doc',
     main = 'wings.nim',
-    deps = [':files'],
+    deps = [
+        ':files',
+        ':stones',
+    ],
     url = 'https://github.com/binhonglee/wings',
 )
 
 filegroup(
     name = 'files',
-    srcs = [
-        'wingspkg/core.nim',
-        'wingspkg/plz.nim',
-        'wingspkg/lang/go.nim',
-        'wingspkg/lang/kt.nim',
-        'wingspkg/lang/nim.nim',
-        'wingspkg/lang/py.nim',
-        'wingspkg/lang/ts.nim',
-        'wingspkg/lib/winterface.nim',
-        'wingspkg/lib/wiutil.nim',
-        'wingspkg/util/config.nim',
-        'wingspkg/util/filename.nim',
-        'wingspkg/util/header.nim',
-        'wingspkg/util/log.nim',
-        'wingspkg/util/varname.nim',
-    ],
-    visibility =  [
+    srcs = [],
+    visibility = [
         ':wings',
         ':wings_doc',
-    ]
+    ],
+    deps = [
+        '//src/main/wingspkg',
+        '//src/main/wingspkg/lang',
+        '//src/main/wingspkg/lib',
+        '//src/main/wingspkg/util',
+    ],
+    exported_deps = [
+        '//src/main/wingspkg',
+        '//src/main/wingspkg/lang',
+        '//src/main/wingspkg/lib',
+        '//src/main/wingspkg/util',
+    ],
 )

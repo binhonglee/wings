@@ -1,7 +1,9 @@
 {
     "filename": "pascal",
     "filetype": "ts",
+    "implementFormat": "implements {#IMPLEMENT} ",
     "importPath": {
+        "format": "{#0}:{#IMPORT}",
         "pathType": "relative",
         "level": 0
     },
@@ -17,9 +19,9 @@
         "bool": "boolean",
         "date": "Date",
         "[]{TYPE}": "{TYPE}[]",
-        "Map<{TYPE1}, {TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
-        "!imported": "{TYPE_PASCAL}",
-        "!unimported": "{TYPE_PASCAL}"
+        "Map<{TYPE1},{TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
+        "!imported": "{#TYPE_PASCAL}",
+        "!unimported": "{#TYPE_PASCAL}"
     },
     "init": {
         "int": "0",
@@ -28,7 +30,7 @@
         "str": "''",
         "bool": "false",
         "[]{TYPE}": "[]",
-        "!imported": "new {TYPE_PASCAL}()",
-        "!unimported": "new {TYPE_PASCAL}()"
+        "!imported": "new {#TYPE_PASCAL}()",
+        "!unimported": "new {#TYPE_PASCAL}()"
     }
 }

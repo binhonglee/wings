@@ -2,6 +2,7 @@
     "filename": "lower",
     "filetype": "go",
     "importPath": {
+        "format": "{#0}:{#IMPORT}",
         "pathType": "absolute",
         "prefix": "",
         "level": 1
@@ -19,7 +20,7 @@
         "date": "time.Time",
         "[]{TYPE}": "[]{TYPE}",
         "Map<{TYPE1}, {TYPE2}>": "map[{TYPE1}]{TYPE2}",
-        "!imported": "PATH0.{TYPE_PASCAL}",
-        "!unimported": "{TYPE_PASCAL}"
+        "!imported": "PATH0.{#TYPE_PASCAL}",
+        "!unimported": "{#TYPE_PASCAL}"
     }
 }

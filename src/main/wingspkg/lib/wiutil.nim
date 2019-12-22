@@ -1,76 +1,61 @@
+from sequtils import toSeq
+from strlib import replace, seqCharToString
+from strutils import join, split
+import log
+import sets
 import tables
-import ./winterface
-import ../util/filename, ../util/header, ../util/config, ../util/log
-import ../lang/go, ../lang/kt, ../lang/nim, ../lang/py, ../lang/ts
+import ./winterface, ./tconfig, ./tconstant, ./templating, ./templatable
+import ../util/filename, ../util/header, ../util/config
+import ../lang/defaults
 
-proc genWEnumFiles*(this: var WEnum, config: Config): Table[string, string] =
-    ## Generate the enum files for all the natively supported output types.
-    result = initTable[string, string]()
-    let filenames = outputFilename(this.filename, this.filepath)
+proc addImport(iwings: var IWings, newImport: string, importLang: string): void =
+    if not iwings.imports.hasKey(importLang):
+        iwings.imports.add(importLang, initHashSet[string]())
+    iwings.imports[importLang].incl(newImport)
 
-    for filetype in this.filepath.keys:
-        LOG(DEBUG, "Generating " & filenames[filetype] & "...")
-        var fileContent: string = ""
-        case filetype
-        of "go":
-            fileContent = go.genWEnum(this, config)
-        of "kt":
-            fileContent = kt.genWEnum(this, config)
-        of "nim":
-            fileContent = nim.genWEnum(this, config)
-        of "py":
-            fileContent = py.genWEnum(this, config)
-        of "ts":
-            fileContent = ts.genWEnum(this, config)
-        else:
-            continue
+proc fulfillDependency(
+    iwings: var IWings,
+    dependency: string,
+    imports: Table[string, string],
+    langConfig: Table[string, TConfig] = initTable[string, TConfig](),
+): bool =
+    ## Fulfill the required dependency (after dependant file is generated).
+    if not iwings.dependencies.contains(dependency):
+        result = false
+    else:
+        for importType in imports.keys:
+            if langConfig[importType].importPath.pathType == ImportPathType.Never:
+                continue
+            var ipString: string = imports[importType]
+            if langConfig[importType].importPath.format.len() > 0:
+                var i: int = 1
+                var replaceMap: Table[string, string] = initTable[string, string]()
+                var words: seq[string] = ipString.split(
+                    langConfig[importType].importPath.separator
+                )
+                for w in words:
+                    var word: string = w
+                    var s: string = wrap($(words.len() - i))
+                    if word == "." or word == "..":
+                        s &= ":"
+                        word = ""
+                    replaceMap.add(s, word)
+                    inc(i)
+                words.setLen(words.len() - langConfig[importType].importPath.level)
+                replaceMap.add(
+                    wrap(TK_IMPORT),
+                    words.join($langConfig[importType].importPath.separator),
+                )
+                ipString = seqCharToString(
+                    toSeq(
+                        langConfig[importType].importPath.format.items
+                    ).replace(replaceMap)
+                )
+            iwings.addImport(ipString, importType)
 
-        result.add(
-            filenames[filetype],
-            genHeader(filetype, this.filename, config.header) &
-                fileContent
-        )
-
-proc genWStructFiles*(this: var WStruct, config: Config): Table[string, string] =
-    ## Generate the struct files for all the natively supported output types.
-    if this.dependencies.len() > 0:
-        for dependency in this.dependencies:
-            LOG(WARNING, "Dependency (" & dependency & ") not yet fulfilled.")
-
-        LOG(WARNING, "Generated files may not work as intended.")
-
-    result = initTable[string, string]()
-    let filenames = outputFilename(this.filename, this.filepath)
-
-    for filetype in this.filepath.keys:
-        LOG(DEBUG, "Generating " & filenames[filetype] & "...")
-        var fileContent: string = ""
-        case filetype
-        of "go":
-            fileContent = go.genWStruct(this, config)
-        of "kt":
-            fileContent = kt.genWStruct(this, config)
-        of "nim":
-            fileContent = nim.genWStruct(this, config)
-        of "py":
-            fileContent = py.genWStruct(this, config)
-        of "ts":
-            fileContent = ts.genWStruct(this, config)
-        else:
-            continue
-
-        result.add(
-            filenames[filetype],
-            genHeader(filetype, this.filename, config.header) &
-                fileContent
-        )
-
-proc genFiles*(this: var IWings, config: Config): Table[string, string] =
-    ## Generate the corresponding files (WEnum or WStruct) for all the natively supported output types.
-    if this of WEnum:
-        result = WEnum(this).genWEnumFiles(config)
-    elif this of WStruct:
-        result = WStruct(this).genWStructFiles(config)
+        var location: int = iwings.dependencies.find(dependency)
+        iwings.dependencies.delete(location)
+        result = true
 
 proc dependencyGraph*(
     allWings: var Table[string, IWings],
@@ -102,20 +87,47 @@ proc dependencyGraph*(
         var name: string = wings.filename
         LOG(DEBUG, "Generating files from " & name & "...")
 
+        # discard tconfig.parse("examples/input/templates/ts.json")
+
         if not (config.skipImport and wings.imported):
-            result.add(name, wings.genFiles(config))
+            var files: Table[string, string] = initTable[string, string]()
+            for lang in DEFAULT_CONFIGS.keys:
+                if wings.filepath.hasKey(lang):
+                    files.add(
+                        outputFilename(
+                            wings.filename,
+                            wings.filepath[lang],
+                            DEFAULT_CONFIGS[lang],
+                        ),
+                        genFile(
+                            wingsToTemplatable(
+                                wings,
+                                DEFAULT_CONFIGS[lang]
+                            ),
+                            DEFAULT_CONFIGS[lang],
+                            wings.wingsType
+                        )
+                    )
+            result.add(name, files)
+
         if reverseDependencyTable.hasKey(name):
             for dependant in reverseDependencyTable[name]:
                 var obj = filenameToObj[dependant]
-                let fulfillDep = obj.fulfillDependency(
-                    name,
-                    importFilename(
-                        name,
-                        wings.filepath,
-                        filename(obj.filename, obj.filepath),
-                        config.prefixes,
-                    )
-                )
+                var importFilenames: Table[string, string] = initTable[string, string]()
+                for lang in DEFAULT_CONFIGS.keys:
+                    if wings.filepath.hasKey(lang):
+                        let ip: string = importFilename(
+                            wings.filename,
+                            wings.filepath[lang],
+                            obj.filename,
+                            obj.filepath[lang],
+                            DEFAULT_CONFIGS[lang],
+                        )
+
+                        if ip.len() > 0:
+                            importFilenames.add(lang,ip)
+
+                let fulfillDep: bool = obj.fulfillDependency(name, importFilenames, DEFAULT_CONFIGS)
                 if not fulfillDep:
                     LOG(
                         ERROR,

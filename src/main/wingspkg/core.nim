@@ -2,8 +2,9 @@ from strutils
 import capitalizeAscii, contains, endsWith, join, normalize,
     parseEnum, removeSuffix, split, splitWhitespace
 import tables
+import log
 import lib/winterface, lib/wiutil
-import util/config, util/log
+import util/config
 
 proc fromFiles*(
     filenames: seq[string], config: Config,

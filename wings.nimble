@@ -10,6 +10,7 @@ srcDir        = "src/main"
 installExt    = @["nim"]
 
 requires "nim >= 1.0.0"
+requires "stones >= 0.0.1"
 
 task genFile, "Generate file(s)":
     exec "nimble build"
