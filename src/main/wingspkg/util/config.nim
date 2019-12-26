@@ -5,6 +5,7 @@ import json
 import log
 import sets
 import tables
+import ../lang/defaults, ../lib/tconfig
 
 const DEFAULT_HEADER: string = """
 This is a generated file
@@ -14,32 +15,31 @@ run `wings "{SOURCE_FILE}"` upon completion.
 """
 
 const DEFAULT_OUTPUT_ROOT_DIRS: HashSet[string] = initHashSet[string]()
-const DEFAULT_PREFIXES: Table[string, string] = initTable[string, string]()
 const DEFAULT_SKIP_IMPORT: bool = false
 const DEFAULT_TABBING: int = 4
-let CALLER_DIR*: string = getCurrentDir() ## Directory which `wings` is ran from.
+let CALLER_DIR*: string = getCurrentDir() ## Directory from which `wings` is ran from.
 
 type
     Config* = object
         ## An object that stores user configurations.
         header*: string
+        langConfigs*: Table[string, TConfig]
         outputRootDirs*: HashSet[string]
-        prefixes*: Table[string, string]
         skipImport*: bool
         tabbing*: int
 
 proc initConfig*(
     header: string = DEFAULT_HEADER,
+    langConfigs: Table[string, TConfig] = DEFAULT_CONFIGS,
     outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS,
-    prefixes: Table[string, string] = DEFAULT_PREFIXES,
     skipImport: bool = DEFAULT_SKIP_IMPORT,
     tabbing: int = DEFAULT_TABBING,
 ): Config =
     ## Create a config to be used.
     result = Config()
     result.header = header
+    result.langConfigs = langConfigs
     result.outputRootDirs = outputRootDirs
-    result.prefixes = prefixes
     result.skipImport = skipImport
     result.tabbing = tabbing
 
@@ -98,15 +98,6 @@ proc parse*(filename: string): Config =
             getCurrentDir()
         )
 
-    if jsonConfig.hasKey("prefixes"):
-        var prefixes: Table[string, string] = initTable[string, string]()
-        let prefixFields: OrderedTable[string, JsonNode] = jsonConfig["prefixes"].getFields()
-        for field in prefixFields.keys:
-            let fieldStr: string = prefixFields[field].getStr("")
-            if fieldStr != "":
-                prefixes.add(field, fieldStr)
-        result.prefixes = prefixes
-
     if jsonConfig.hasKey("skipImport"):
         result.skipImport = jsonConfig["skipImport"].getBool(DEFAULT_SKIP_IMPORT)
         LOG(INFO, "Set 'skipImport' to " & $result.skipImport & ".")
@@ -118,3 +109,19 @@ proc parse*(filename: string): Config =
         LOG(INFO, "Set 'tabbing' to " & $result.tabbing & ".")
     else:
         LOG(INFO, "'tabbing' is not set. Using default " & $DEFAULT_TABBING & ".")
+
+    if jsonConfig.hasKey("langConfigs"):
+        let langConfigs: seq[JsonNode] = jsonConfig["langConfigs"].getElems()
+        for configNode in langConfigs:
+            let config: TConfig = tconfig.parse(configNode.getStr(""))
+            if result.langConfigs.hasKey(config.filetype):
+                result.langConfigs[config.filetype] = config
+            else:
+                result.langConfigs.add(config.filetype, config)
+
+    if jsonConfig.hasKey("prefixes"):
+        let prefixFields: OrderedTable[string, JsonNode] = jsonConfig["prefixes"].getFields()
+        for field in prefixFields.keys:
+            let fieldStr: string = prefixFields[field].getStr("")
+            if fieldStr != "" and result.langConfigs.hasKey(field):
+                result.langConfigs[field].importPath.prefix = fieldStr

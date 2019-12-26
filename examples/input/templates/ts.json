@@ -1,4 +1,5 @@
 {
+    "comment": "//",
     "filename": "pascal",
     "filetype": "ts",
     "implementFormat": "implements {#IMPLEMENT} ",
@@ -18,7 +19,7 @@
         "str": "string",
         "bool": "boolean",
         "date": "Date",
-        "[]{TYPE}": "{TYPE}[]",
+        "[]{TYPE}": "{TYPE1}[]",
         "Map<{TYPE1},{TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
         "!imported": "{#TYPE_PASCAL}",
         "!unimported": "{#TYPE_PASCAL}"

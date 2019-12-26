@@ -1,17 +1,22 @@
+// This is a generated file
+//
+// If you would like to make any changes, please edit the source file instead.
+// run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+// Source: examples/input/homework.wings
 
 package classroom
 
 import (
-	emotion "examples/output/go"
+	person "github.com/binhonglee/wings/examples/output/go/person"
 )
 
 // Homework - Work to be done at home
 type Homework struct {
-	ID           int          `json:"id"`
-	Name         string       `json:"name"`
-	DueDate      time.Time    `json:"due_date"`
-	GivenDate    time.Time    `json:"given_date"`
-	Feeling      []Emotion    `json:"feeling"`
+	ID           int                 `json:"id"`
+	Name         string              `json:"name"`
+	DueDate      time.Time           `json:"due_date"`
+	GivenDate    time.Time           `json:"given_date"`
+	Feeling      []person.Emotion    `json:"feeling"`
 }
 
     // Test - This comment should be included.

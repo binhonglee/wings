@@ -8,6 +8,7 @@ import tables
 import ./tconstant
 
 const DEFAULT_SEPARATOR: char = '/'
+const DEFAULT_COMMENT: string = "//"
 
 type
     ImportPathType* = enum
@@ -26,6 +27,7 @@ type
 
 type
     TypeInterpreter* = object
+        ## Post processed custom types
         prefix*: string
         separators*: string
         postfix*: string
@@ -34,6 +36,7 @@ type
 type
     TConfig* = object
         ## Object of template config.
+        comment*: string
         customTypes*: Table[string, TypeInterpreter]
         customTypeInits*: Table[string, TypeInterpreter]
         filename*: Case
@@ -57,6 +60,7 @@ proc initTypeInterpreter(
     result.output = output
 
 proc interpretType*(inputType: string, outputType: string): TypeInterpreter =
+    ## Interpret custom types.
     if not inputType.contains(TYPE_PREFIX):
         LOG(
             ERROR,
@@ -110,6 +114,7 @@ proc interpretType*(inputType: string, outputType: string): TypeInterpreter =
     result.output = outputType
 
 proc initTConfig*(
+    cmt: string = DEFAULT_COMMENT,
     ct: Table[string, TypeInterpreter] = initTable[string, TypeInterpreter](),
     cti: Table[string, TypeInterpreter] = initTable[string, TypeInterpreter](),
     c: Case = Case.Default,
@@ -126,6 +131,7 @@ proc initTConfig*(
 ): TConfig =
     ## Create an initialized template config.
     result = TConfig()
+    result.comment = cmt
     result.customTypes = ct
     result.customTypeInits = cti
     result.filename = c
@@ -189,6 +195,11 @@ proc parse*(filename: string): TConfig =
     let jsonConfig: JsonNode = parseFile(filename)
     let errorMsg: string = " is not found or invalid."
 
+    if jsonConfig.hasKey("comment"):
+        result.comment = jsonConfig["comment"].getStr(DEFAULT_COMMENT)
+    else:
+        result.comment = DEFAULT_COMMENT
+
     let filenameErrMsg: string = "filename" & errorMsg
     if jsonConfig.hasKey("filename"):
         result.filename = getCase(jsonConfig["filename"].getStr(""), FATAL, filenameErrMsg)
@@ -207,10 +218,13 @@ proc parse*(filename: string): TConfig =
     if jsonConfig.hasKey("implementFormat"):
         result.implementFormat = jsonConfig["implementFormat"].getStr("")
     else:
-        result.implementFormat = "{#IMPLEMENT}"
+        result.implementFormat = wrap(TK_IMPLEMENT)
 
     if jsonConfig.hasKey("importPath"):
         let importPath: OrderedTable[string, JsonNode] = jsonConfig["importPath"].getFields()
+
+        if importPath.hasKey("format"):
+            result.importPath.format = importPath["format"].getStr("")
 
         let importPathTypeErrMsg: string = "importPath:pathType" & errorMsg
         if importPath.hasKey("pathType"):
@@ -282,7 +296,11 @@ proc parse*(filename: string): TConfig =
         for key in init.keys:
             let givenInit: string = init[key].getStr("")
             if givenInit != "":
-                result.typeInits.add(key, givenInit)
+                if key.contains(TYPE_PREFIX):
+                    let temp: TypeInterpreter = interpretType(key, givenInit)
+                    result.customTypeInits.add(temp.prefix, temp)
+                else:
+                    result.typeInits.add(key, givenInit)
             else:
                 LOG(ERROR, "Failed to read counterpart type for '" & key & "'. Skipping...")
     else:

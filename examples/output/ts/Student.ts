@@ -1,3 +1,8 @@
+// This is a generated file
+//
+// If you would like to make any changes, please edit the source file instead.
+// run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+// Source: examples/input/student.wings
 
 import People from './People';
 import Homework from './Homework';
@@ -6,11 +11,11 @@ import Emotion from './person/Emotion';
 // Any person who is studying in a class
 export default class Student implements People {
     [key: string]: any;
-    public ID: number = 0;
+    public ID: number = -1;
     public name: string = '';
     public curClass: string = '';
-    public feeling: Emotion = new Emotion();
-    public isActive: boolean = false;
+    public feeling: Emotion = Emotion.Meh;
+    public isActive: boolean = true;
     public year: Date = new Date();
     public graduation: Date = new Date();
     public homeworks: Homework[] = [];
@@ -67,7 +72,7 @@ export default class Student implements People {
             }
         }
     }
-    
+
     public addHomework(hw: Homework): void {
         this.Homeworks.push(hw);
     }

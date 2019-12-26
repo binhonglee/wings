@@ -2,6 +2,7 @@ from strlib import Case
 import tables
 import ../lib/tconfig
 
+const COMMENT: string = "#"
 const FILENAME: Case = Case.Lower
 const FILETYPE: string = "nim"
 const IMPLEMENT_FORMAT: string = " of {#IMPLEMENT}"
@@ -55,6 +56,7 @@ const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let NIM_CONFIG*: TConfig = initTConfig(
+    COMMENT,
     CUSTOM_TYPES,
     initTable[string, TypeInterpreter](),
     FILENAME,

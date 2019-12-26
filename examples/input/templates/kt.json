@@ -1,4 +1,5 @@
 {
+    "comment": "//",
     "filename": "pascal",
     "filetype": "kt",
     "implementFormat": ": {#IMPLEMENT} ",

@@ -1,12 +1,11 @@
 from sequtils import toSeq
-from strlib import replace, seqCharToString
+from strlib import allCases, replace, seqCharToString
 from strutils import join, split
 import log
 import sets
 import tables
 import ./winterface, ./tconfig, ./tconstant, ./templating, ./templatable
 import ../util/filename, ../util/header, ../util/config
-import ../lang/defaults
 
 proc addImport(iwings: var IWings, newImport: string, importLang: string): void =
     if not iwings.imports.hasKey(importLang):
@@ -17,7 +16,8 @@ proc fulfillDependency(
     iwings: var IWings,
     dependency: string,
     imports: Table[string, string],
-    langConfig: Table[string, TConfig] = initTable[string, TConfig](),
+    langConfig: Table[string, TConfig],
+    name: string,
 ): bool =
     ## Fulfill the required dependency (after dependant file is generated).
     if not iwings.dependencies.contains(dependency):
@@ -27,20 +27,20 @@ proc fulfillDependency(
             if langConfig[importType].importPath.pathType == ImportPathType.Never:
                 continue
             var ipString: string = imports[importType]
+            var i: int = 1
+            var replaceMap: Table[string, string] = initTable[string, string]()
+            var words: seq[string] = ipString.split(
+                langConfig[importType].importPath.separator
+            )
+            for w in words:
+                var word: string = w
+                var s: string = wrap($(words.len() - i))
+                if word == "." or word == "..":
+                    s &= ":"
+                    word = ""
+                replaceMap.add(s, word)
+                inc(i)
             if langConfig[importType].importPath.format.len() > 0:
-                var i: int = 1
-                var replaceMap: Table[string, string] = initTable[string, string]()
-                var words: seq[string] = ipString.split(
-                    langConfig[importType].importPath.separator
-                )
-                for w in words:
-                    var word: string = w
-                    var s: string = wrap($(words.len() - i))
-                    if word == "." or word == "..":
-                        s &= ":"
-                        word = ""
-                    replaceMap.add(s, word)
-                    inc(i)
                 words.setLen(words.len() - langConfig[importType].importPath.level)
                 replaceMap.add(
                     wrap(TK_IMPORT),
@@ -51,6 +51,32 @@ proc fulfillDependency(
                         langConfig[importType].importPath.format.items
                     ).replace(replaceMap)
                 )
+
+            if not iwings.typesImported.hasKey(importType):
+                iwings.typesImported.add(importType, initTable[string, ImportedWingsType]())
+
+            for k, v in allCases(name).pairs:
+                replaceMap.add(wrap(TK_TYPE, $k), v)
+
+            var s: string = ""
+            if langConfig[importType].typeInits.hasKey(TYPE_IMPORTED):
+                s = seqCharToString(
+                    toSeq(
+                        langConfig[importType].typeInits[TYPE_IMPORTED].items
+                    ).replace(replaceMap)
+                )
+            let iptwt: ImportedWingsType = initImportedWingsType(
+                seqCharToString(
+                    toSeq(
+                        langConfig[importType].types[TYPE_IMPORTED].items
+                    ).replace(replaceMap)
+                ), s,
+            )
+
+            iwings.typesImported[importType].add(
+                name,
+                iptwt
+            )
             iwings.addImport(ipString, importType)
 
         var location: int = iwings.dependencies.find(dependency)
@@ -81,30 +107,32 @@ proc dependencyGraph*(
 
         index += 1
 
-    # TODO: Multithread this
+    # TODO: Multithread this?
     while noDeps.len() > 0:
         var wings: IWings = filenameToObj[noDeps.pop()]
         var name: string = wings.filename
         LOG(DEBUG, "Generating files from " & name & "...")
 
-        # discard tconfig.parse("examples/input/templates/ts.json")
-
         if not (config.skipImport and wings.imported):
             var files: Table[string, string] = initTable[string, string]()
-            for lang in DEFAULT_CONFIGS.keys:
+            for lang in config.langConfigs.keys:
                 if wings.filepath.hasKey(lang):
                     files.add(
                         outputFilename(
                             wings.filename,
                             wings.filepath[lang],
-                            DEFAULT_CONFIGS[lang],
+                            config.langConfigs[lang],
                         ),
-                        genFile(
+                        genHeader(
+                            config.langConfigs[lang].comment,
+                            wings.filename,
+                            config.header,
+                        ) & genFile(
                             wingsToTemplatable(
                                 wings,
-                                DEFAULT_CONFIGS[lang]
+                                config.langConfigs[lang]
                             ),
-                            DEFAULT_CONFIGS[lang],
+                            config.langConfigs[lang],
                             wings.wingsType
                         )
                     )
@@ -114,20 +142,25 @@ proc dependencyGraph*(
             for dependant in reverseDependencyTable[name]:
                 var obj = filenameToObj[dependant]
                 var importFilenames: Table[string, string] = initTable[string, string]()
-                for lang in DEFAULT_CONFIGS.keys:
+                for lang in config.langConfigs.keys:
                     if wings.filepath.hasKey(lang):
                         let ip: string = importFilename(
                             wings.filename,
                             wings.filepath[lang],
                             obj.filename,
                             obj.filepath[lang],
-                            DEFAULT_CONFIGS[lang],
+                            config.langConfigs[lang],
                         )
 
                         if ip.len() > 0:
                             importFilenames.add(lang,ip)
 
-                let fulfillDep: bool = obj.fulfillDependency(name, importFilenames, DEFAULT_CONFIGS)
+                let fulfillDep: bool = obj.fulfillDependency(
+                    name,
+                    importFilenames,
+                    config.langConfigs,
+                    wings.name,
+                )
                 if not fulfillDep:
                     LOG(
                         ERROR,
