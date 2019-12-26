@@ -1,4 +1,5 @@
 {
+    "comment": "#",
     "filename": "lower",
     "filetype": "nim",
     "implementFormat": " of {#IMPLEMENT} ",

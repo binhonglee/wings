@@ -2,6 +2,7 @@ from strlib import Case
 import tables
 import ../lib/tconfig
 
+const COMMENT: string = "#"
 const FILENAME: Case = Case.Lower
 const FILETYPE: string = "py"
 const IMPLEMENT_FORMAT: string = "{#IMPLEMENT}"
@@ -58,6 +59,7 @@ const TYPE_INITS: Table[string, string] = {
     "dbl": "0",
     "str": "\"\"",
     "bool": "false",
+    "date": "date.today()",
     "!imported": "new {#TYPE_PASCAL}()",
     "!unimported": "new {#TYPE_PASCAL}()"
 }.toTable
@@ -73,6 +75,7 @@ const CUSTOM_TYPE_INITS: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let PY_CONFIG*: TConfig = initTConfig(
+    COMMENT,
     CUSTOM_TYPES,
     CUSTOM_TYPE_INITS,
     FILENAME,

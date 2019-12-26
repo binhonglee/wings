@@ -37,9 +37,6 @@ proc filename(
     if filetypeSuffix:
         suffix = "." & langConfig.filetype
 
-    if langConfig.importPath.prefix.len() > 0:
-        prefix = langConfig.importPath.prefix & separator & prefix
-
     result = prefix & format(langConfig.filename, name) & suffix
     if useNativePath:
         result =  unixToNativePath(result)

@@ -1,6 +1,7 @@
-from times import cpuTime
+from times import epochTime
 from os
-import createDir, fileExists, joinPath, paramCount, paramStr, parentDir, setCurrentDir
+import createDir, fileExists, joinPath, paramCount,
+    paramStr, parentDir, setCurrentDir
 from strutils
 import endsWith, removePrefix, startsWith
 import genlib
@@ -27,7 +28,7 @@ proc toFile(path: string, content: string): void =
         LOG(ERROR, "Failed to generate " & path)
 
 proc init(count: int): void =
-    let startTime = cpuTime()
+    let startTime = epochTime()
     if count < 1:
         LOG(FATAL, "Please add struct or enum files to be generated.")
         return
@@ -49,6 +50,6 @@ proc init(count: int): void =
         for filetype in outputFiles[files].keys:
             toFile(filetype, outputFiles[files][filetype])
 
-    LOG(INFO, "Time taken: " & $(cpuTime() - startTime))
+    LOG(INFO, "Time taken: " & $(epochTime() - startTime) & "s")
 
 init(paramCount())

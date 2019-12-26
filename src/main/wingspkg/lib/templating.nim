@@ -39,17 +39,9 @@ proc rows(format: string, replacements: seq[Table[string, string]]): string =
             result &= "\n"
         result &= line
 
-proc multiRow(
-    keyword: string,
-    inputs: seq[Table[string, string]],
-    givenTemplate: string
-): string =
+proc multiRow(kw: string, inputs: seq[Table[string, string]], t: string): string =
     result = ""
-    let format: string = givenTemplate.replace(
-        MK_PREFIX &
-        keyword & " ",
-        ""
-    )
+    let format: string = t.replace(MK_PREFIX & kw & " ", "")
     result = rows(format, inputs)
 
 proc multiWords(keyword: string, inputs: HashSet[string], givenTemplate: string): string =
@@ -113,52 +105,30 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
             result &= "\n" & line
         elif line.startsWith(MK_PREFIX & MK_BEGIN):
             var keyword = line
-            keyword.removePrefix(
-                MK_PREFIX &
-                MK_BEGIN
-            )
+            keyword.removePrefix(MK_PREFIX & MK_BEGIN)
             var prefix: string = ""
             while givenTemplate.readLine(line) and not line.contains(
-                MK_PREFIX &
-                keyword
-            ) and not line.startsWith(
-                MK_PREFIX &
-                MK_END &
-                keyword
-            ):
+                MK_PREFIX & keyword
+            ) and not line.startsWith(MK_PREFIX & MK_END & keyword):
                 if prefix.len() > 0:
                     prefix &= "\n"
                 prefix &= line
                 inc(lineNo)
             var templateText: string = ""
-            if not line.startsWith(
-                MK_PREFIX &
-                MK_END &
-                keyword
-            ):
+            if not line.startsWith(MK_PREFIX & MK_END & keyword):
                 templateText = line
                 while givenTemplate.readLine(line) and line.contains(
-                    MK_PREFIX &
-                    keyword
-                ) and not line.startsWith(
-                    MK_PREFIX &
-                    MK_END &
-                    keyword
-                ):
+                    MK_PREFIX & keyword
+                ) and not line.startsWith(MK_PREFIX & MK_END & keyword):
                     if templateText.len() > 0:
                         templateText &= "\n"
                     templateText &= line
                     inc(lineNo)
             var postfix: string = ""
-            if not line.startsWith(
-                MK_PREFIX &
-                MK_END &
-                keyword
-            ):
+            if not line.startsWith(MK_PREFIX & MK_END & keyword):
                 postfix = line
                 while givenTemplate.readLine(line) and not line.startsWith(
-                    MK_PREFIX &
-                    MK_END & keyword
+                    MK_PREFIX & MK_END & keyword
                 ):
                     if postfix.len() > 0:
                         postfix &= "\n"
@@ -192,12 +162,8 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
             LOG(
                 ERROR,
                 "Multiline declarations should have `" &
-                MK_PREFIX &
-                MK_BEGIN &
-                "{KEYWORD}` and `" &
-                MK_PREFIX &
-                MK_BEGIN &
-                "{KEYWORD}` declarations"
+                MK_PREFIX & MK_BEGIN & "{KEYWORD}` and `" &
+                MK_PREFIX & MK_BEGIN & "{KEYWORD}` declarations"
             )
 
         inc(lineNo)

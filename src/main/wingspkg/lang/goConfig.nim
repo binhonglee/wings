@@ -2,9 +2,10 @@ from strlib import Case
 import tables
 import ../lib/tconfig
 
+const COMMENT: string = "//"
 const FILENAME: Case = Case.Lower
 const FILETYPE: string = "go"
-const IMPORT_PATH_FORMAT: string = "{#0}:{#IMPORT}"
+const IMPORT_PATH_FORMAT: string = "{#1}:{#IMPORT}"
 const IMPORT_PATH_TYPE: ImportPathType = ImportPathType.Absolute
 const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '/'
@@ -64,6 +65,7 @@ const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let GO_CONFIG*: TConfig = initTConfig(
+    COMMENT,
     CUSTOM_TYPES,
     initTable[string, TypeInterpreter](),
     FILENAME,

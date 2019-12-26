@@ -16,13 +16,18 @@ type
         langBasedMultireps*: Table[string, Table[string, HashSet[string]]]
         langBasedFields*: Table[string, seq[Table[string, string]]]
 
-proc parseType(s: string, langConfig: TConfig): Table[string, string]
+proc parseType(
+    s: string,
+    langConfig: TConfig,
+    typesImported: Table[string, ImportedWingsType] = initTable[string, ImportedWingsType](),
+): Table[string, string]
 
 proc processCustomType(
     s: string,
     ti: TypeInterpreter,
     tc: TConfig,
     kw: string,
+    timpt: Table[string, ImportedWingsType],
 ): Table[string, string] =
     result = initTable[string, string]()
     var str: string = s
@@ -40,7 +45,7 @@ proc processCustomType(
     for t in types:
         ts.add(
             TYPE_PREFIX & $i & TYPE_POSTFIX,
-            parseType(t, tc)[wrap(TK_TYPE)]
+            parseType(t, tc, timpt)[wrap(TK_TYPE)]
         )
         inc(i)
 
@@ -53,9 +58,17 @@ proc processCustomType(
         )
     result.add(wrap(kw), str)
 
-proc parseType(s: string, langConfig: TConfig): Table[string, string] =
+proc parseType(
+    s: string,
+    langConfig: TConfig,
+    typesImported: Table[string, ImportedWingsType] = initTable[string, ImportedWingsType](),
+): Table[string, string] =
     result = initTable[string, string]()
     var hit: bool = false
+
+    if typesImported.hasKey(s):
+        result.add(wrap(TK_TYPE), typesImported[s].name)
+        result.add(wrap(TK_TYPE, TK_INIT), typesImported[s].init)
 
     for key in langConfig.customTypes.keys:
         if key.len() > 0 and s.startsWith(key):
@@ -64,6 +77,7 @@ proc parseType(s: string, langConfig: TConfig): Table[string, string] =
                 langConfig.customTypes[key],
                 langConfig,
                 TK_TYPE,
+                typesImported,
             )
             if not r.len() > 0:
                 continue
@@ -79,6 +93,7 @@ proc parseType(s: string, langConfig: TConfig): Table[string, string] =
                     langConfig.customTypeInits[key],
                     langConfig,
                     TK_TYPE & TK_SEPARATOR & TK_INIT,
+                    typesImported,
                 )
                 if not r.len() > 0:
                     continue
@@ -86,17 +101,9 @@ proc parseType(s: string, langConfig: TConfig): Table[string, string] =
                 result.merge(r)
 
         if not result.hasKey(
-            wrap(
-                TK_TYPE, TK_INIT
-            )
-        ) and langConfig.typeInits.hasKey("!unimported"):
-            result.add(
-                wrap(
-                    TK_TYPE,
-                    TK_INIT,
-                ),
-                langConfig.typeInits["!unimported"]
-            )
+            wrap(TK_TYPE, TK_INIT)
+        ) and langConfig.typeInits.hasKey(TYPE_UNIMPORTED):
+            result.add(wrap(TK_TYPE, TK_INIT), langConfig.typeInits[TYPE_UNIMPORTED])
 
     if not hit and langConfig.types.hasKey(s):
         result.add(
@@ -117,12 +124,12 @@ proc parseType(s: string, langConfig: TConfig): Table[string, string] =
                     types[key]
                 )
 
-            if langConfig.typeInits.hasKey("!unimported"):
+            if langConfig.typeInits.hasKey(TYPE_UNIMPORTED):
                 result.add(
                     wrap(TK_TYPE, TK_INIT),
                     seqCharToString(
                         toSeq(
-                            langConfig.typeInits["!unimported"].items
+                            langConfig.typeInits[TYPE_UNIMPORTED].items
                         ).replace(temp)
                     )
                 )
@@ -137,16 +144,16 @@ proc parseType(s: string, langConfig: TConfig): Table[string, string] =
         result.add(
             wrap(TK_TYPE),
             seqCharToString(
-                toSeq(langConfig.types["!unimported"].items).replace(temp)
+                toSeq(langConfig.types[TYPE_UNIMPORTED].items).replace(temp)
             ),
         )
 
-        if langConfig.typeInits.hasKey("!unimported"):
+        if langConfig.typeInits.hasKey(TYPE_UNIMPORTED):
             result.add(
                 wrap(TK_TYPE, TK_INIT),
                 seqCharToString(
                     toSeq(
-                        langConfig.typeInits["!unimported"].items
+                        langConfig.typeInits[TYPE_UNIMPORTED].items
                     ).replace(temp)
                 )
             )
@@ -159,6 +166,7 @@ proc initTemplatable(): Templatable =
     result.fields = newSeq[Table[string, string]](0)
 
 proc wingsToTemplatable*(winterface: IWings, tconfig: TConfig): Templatable =
+    ## Convert IWings to TConfig.
     result = initTemplatable()
     if winterface.dependencies.len() > 0:
         LOG(
@@ -233,7 +241,14 @@ proc wingsToTemplatable*(winterface: IWings, tconfig: TConfig): Templatable =
             for key in varnames.keys:
                 variables.add(wrap(TK_VARNAME, $key), varnames[key])
 
-            variables.merge(parseType(fields[1], tConfig))
+            variables.merge(
+                parseType(fields[1], tConfig, winterface.typesImported.getOrDefault(lang))
+            )
+            if fields.len() > 2:
+                if variables.hasKey(wrap(TK_TYPE, TK_INIT)):
+                    variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
+                else:
+                    variables.add(wrap(TK_TYPE, TK_INIT), fields[2])
             result.fields.add(variables)
     of WingsType.enumw:
         let wenum: WEnum = WEnum(winterface)

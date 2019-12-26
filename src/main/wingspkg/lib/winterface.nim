@@ -27,6 +27,11 @@ type
         wingsImport = "import"
 
 type
+    ImportedWingsType* = ref object
+        name*: string
+        init*: string
+
+type
     IWings* = ref object of RootObj
         ## A wings object interface.
         comment*: string
@@ -37,6 +42,7 @@ type
         imported*: bool
         imports*: Table[string, HashSet[string]]
         name*: string
+        typesImported*: Table[string, Table[string, ImportedWingsType]]
         wingsType*: WingsType
 
 type
@@ -50,6 +56,11 @@ type
         fields*: seq[string]
         functions*: Table[string, string]
 
+proc initImportedWingsType*(name: string = "", init: string = ""): ImportedWingsType =
+    result = ImportedWingsType()
+    result.name = name
+    result.init = init
+
 proc initIWings(): IWings =
     ## Returns an empty initialized `IWings`.
     result = IWings()
@@ -61,6 +72,7 @@ proc initIWings(): IWings =
     result.imports = initTable[string, HashSet[string]]()
     result.imported = false
     result.name = ""
+    result.typesImported = initTable[string, Table[string, ImportedWingsType]]()
     result.wingsType = WingsType.default
 
 proc initWEnum(winterface: IWings = initIWings()): WEnum =
@@ -74,6 +86,7 @@ proc initWEnum(winterface: IWings = initIWings()): WEnum =
     result.imported = winterface.imported
     result.imports = winterface.imports
     result.name = winterface.name
+    result.typesImported = winterface.typesImported
     result.values = newSeq[string](0)
     result.wingsType = WingsType.enumw
 

@@ -2,6 +2,7 @@ from strlib import Case
 import tables
 import ../lib/tconfig
 
+const COMMENT: string = "//"
 const FILENAME: Case = Case.Pascal
 const FILETYPE: string = "ts"
 const IMPLEMENT_FORMAT: string = "implements {#IMPLEMENT} "
@@ -94,6 +95,7 @@ const CUSTOM_TYPE_INITS: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let TS_CONFIG*: TConfig = initTConfig(
+    COMMENT,
     CUSTOM_TYPES,
     CUSTOM_TYPE_INITS,
     FILENAME,
