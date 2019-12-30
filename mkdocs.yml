@@ -15,6 +15,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Main: main/index.html
   - Utility classes:
     - TypeScript:
       - index.ts: tsUtil/index.md

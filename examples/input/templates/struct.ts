@@ -9,16 +9,13 @@ export default class {#NAME_PASCAL} {#IMPLEMENT}{
     // #VAR public {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT};
 // #END_VAR
 
-    public init(data: any): boolean {
-        try {
-// #BEGIN_INIT
-            // #INIT this.{#VARNAME_CAMEL} = data.{#VARNAME_JSON};
-// #END_INIT
-        } catch (e) {
-            return false;
+// #BEGIN_CONSTRUCTOR
+    public constructor(obj?: any) {
+        if (obj) {
+            // #CONSTRUCTOR this.{#VARNAME_CAMEL} = obj.{#VARNAME_JSON} || {#TYPE_INIT}
         }
-        return true;
     }
+// #END_CONSTRUCTOR
 
     public toJsonKey(key: string): string {
         switch (key) {

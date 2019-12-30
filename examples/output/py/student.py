@@ -20,6 +20,6 @@ class Student(People):
     homeworks: list = []
     something: dict = {}
 
-    def init(self, data):
+    def __init__(self, data):
         self = json.loads(data)
     

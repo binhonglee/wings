@@ -2,8 +2,7 @@ from times import epochTime
 from os
 import createDir, fileExists, joinPath, paramCount,
     paramStr, parentDir, setCurrentDir
-from strutils
-import endsWith, removePrefix, startsWith
+from strutils import endsWith, removePrefix, startsWith
 import genlib
 import log
 import sets

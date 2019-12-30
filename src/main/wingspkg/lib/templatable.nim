@@ -5,7 +5,7 @@ import log
 import sets
 import strlib
 import tables
-import ./tconfig, ./tconstant, ./winterface
+import ./tconfig, ./tempconst, ./winterface
 import ../util/filename
 
 type

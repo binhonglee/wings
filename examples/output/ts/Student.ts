@@ -4,8 +4,8 @@
 // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
 // Source: examples/input/student.wings
 
-import People from './People';
 import Homework from './Homework';
+import ts-import People from './People';
 import Emotion from './person/Emotion';
 
 // Any person who is studying in a class
@@ -21,21 +21,18 @@ export default class Student implements People {
     public homeworks: Homework[] = [];
     public something: Map<string, string> = new Map<string, string>();
 
-    public init(data: any): boolean {
-        try {
-            this.ID = data.id;
-            this.name = data.name;
-            this.curClass = data.cur_class;
-            this.feeling = data.feeling;
-            this.isActive = data.is_active;
-            this.year = data.year;
-            this.graduation = data.graduation;
-            this.homeworks = data.homeworks;
-            this.something = data.something;
-        } catch (e) {
-            return false;
+    public constructor(obj?: any) {
+        if (obj) {
+            this.ID = obj.id || -1
+            this.name = obj.name || ''
+            this.curClass = obj.cur_class || ''
+            this.feeling = obj.feeling || Emotion.Meh
+            this.isActive = obj.is_active || true
+            this.year = obj.year || new Date()
+            this.graduation = obj.graduation || new Date()
+            this.homeworks = obj.homeworks || []
+            this.something = obj.something || new Map<string, string>()
         }
-        return true;
     }
 
     public toJsonKey(key: string): string {

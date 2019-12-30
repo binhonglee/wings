@@ -1,10 +1,10 @@
+import { IWingsStruct } from '../index';
 import Emotion from './person/Emotion';
-import { IWingsStruct } from "../index";
 
-// Homework - Work to be done at home
+// Work to be done at home
 export default class Homework implements IWingsStruct {
     [key: string]: any;
-    public ID: number = -1;
+    public ID: number = 0;
     public name: string = '';
     public dueDate: Date = new Date();
     public givenDate: Date = new Date();
@@ -16,10 +16,7 @@ export default class Homework implements IWingsStruct {
             this.name = data.name;
             this.dueDate = new Date(data.due_date);
             this.givenDate = new Date(data.given_date);
-
-            if (data.feeling !== null) {
-                this.feeling = data.feeling;
-            }
+            this.feeling = data.feeling;
         } catch (e) {
             return false;
         }

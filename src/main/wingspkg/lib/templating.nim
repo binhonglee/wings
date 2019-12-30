@@ -1,12 +1,12 @@
 from sequtils import toSeq
 from strutils import contains, parseInt, removePrefix,
     spaces, replace, split, splitWhitespace, startsWith, strip
-from tconstant import wrap
+from tempconst import wrap, TK_SPACED
 import streams
 import sets
 import tables
 import log, strlib, genlib
-import ./tconfig, ./tconstant, ./templatable, ./winterface
+import ./tconfig, ./templatable, ./winterface
 
 const MK_BEGIN: string = "BEGIN_"
 const MK_END: string = "END_"

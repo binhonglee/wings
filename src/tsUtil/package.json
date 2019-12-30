@@ -9,7 +9,7 @@
         "test": "mocha",
         "cover": "nyc mocha",
         "clean": "rm -rf dist",
-        "prepare": "npm run build"
+        "prepublishOnly": "npm run build"
     },
     "repository": {
         "type": "git",

@@ -4,7 +4,7 @@ from strutils import join, split
 import log
 import sets
 import tables
-import ./winterface, ./tconfig, ./tconstant, ./templating, ./templatable
+import ./winterface, ./tconfig, ./tempconst, ./templating, ./templatable
 import ../util/filename, ../util/header, ../util/config
 
 proc addImport(iwings: var IWings, newImport: string, importLang: string): void =
@@ -105,7 +105,7 @@ proc dependencyGraph*(
                 reverseDependencyTable[dependency] = newSeq[string](0)
             reverseDependencyTable[dependency].add(wings.filename)
 
-        index += 1
+        inc(index)
 
     # TODO: Multithread this?
     while noDeps.len() > 0:
