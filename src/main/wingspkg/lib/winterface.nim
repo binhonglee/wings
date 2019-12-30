@@ -13,18 +13,18 @@ type
         structw = "struct"
         enumw = "enum"
 
-type
-    SyntaxKeywords* = enum
-        comment = "//"
-        wingsOpen = "{"
-        wingsClose = "}"
-        typeFilepath = "-filepath"
-        typeFunctionOpen = "Func("
-        typeFunctionClose = ")"
-        typeImplement = "-implement"
-        typeImport = "-import"
-        wingsComment = "#"
-        wingsImport = "import"
+const COMMENT = "//"
+
+const TYPE_FILEPATH = "filepath"
+const TYPE_FUNCTION_OPEN = "func("
+const TYPE_FUNCTION_CLOSE = ")"
+const TYPE_IMPLEMENT = "implement"
+const TYPE_IMPORT = "import"
+
+const WINGS_OPEN = "{"
+const WINGS_CLOSE = "}"
+const WINGS_COMMENT = "#"
+const WINGS_IMPORT = "import"
 
 type
     ImportedWingsType* = ref object
@@ -112,14 +112,14 @@ proc parseWEnum(wenum: var WEnum, words: seq[string]): string =
     if words.len() > 1:
         LOG(FATAL, "Unexpected input: " & join(words, " "))
 
-    if words[0] == $SyntaxKeywords.wingsClose:
+    if words[0] == WINGS_CLOSE:
         result = ""
     else:
         wenum.values.add(words[0])
         result = $WingsType.default
 
 proc parseWStruct(wstruct: var WStruct, words: seq[string]): string =
-    if words[0] == $SyntaxKeywords.wingsClose:
+    if words[0] == WINGS_CLOSE:
         result = ""
     elif words.len() < 2 or words.len() > 3:
         LOG(FATAL, "Unexpected input: " & join(words, " "))
@@ -133,7 +133,7 @@ proc parseFunc(
     line: string,
     lang: string
 ): string =
-    if words.len() > 0 and words[0] == $SyntaxKeywords.typeFunctionClose:
+    if words.len() > 0 and words[0] == TYPE_FUNCTION_CLOSE:
         result = ""
     else:
         if not wstruct.functions.hasKey(lang):
@@ -143,7 +143,6 @@ proc parseFunc(
 
 proc parseFileIWings(
     winterface: var IWings,
-    file: File,
     filename: string,
 ): bool =
     ## Parse the `IWings` from the given file.
@@ -151,31 +150,21 @@ proc parseFileIWings(
     winterface.filename = filename
     var line: string = ""
     var lineNo: int = 1
-
-    while readLine(file, line):
-        let words: seq[string] = line.splitWhitespace()
-        if line.len() < 1 or not words[0].endsWith($SyntaxKeywords.typeFilepath):
-            lineNo += 1
-            break;
-
-        let filepath: seq[string] = words[0].split('-')
-        winterface.filepath.add(filepath[0], words[1])
-        lineNo += 1
-
     var inObj: string = ""
-    while readLine(file, line):
-        if line.len() < 1:
-            lineNo += 1
-            continue;
 
+    let file: File = open(filename)
+    while readLine(file, line):
         var words: seq[string] = line.splitWhitespace()
 
         if (
             inObj == "" or
             inObj == $WingsType.structw or
             inObj == $WingsType.enumw
-        ) and words[0].startsWith($SyntaxKeywords.comment):
-            lineNo += 1
+        ) and (
+            line.len() < 1 or
+            words[0].startsWith(COMMENT)
+        ):
+            inc(lineNo)
             continue
 
         if inObj != "":
@@ -193,29 +182,22 @@ proc parseFileIWings(
                     $WingsType.structw & "` or a `" &
                     $WingsType.enumw & "`."
                 )
-        elif words[0] == $SyntaxKeywords.wingsComment:
+            continue
+
+        case words[0]
+        of WINGS_COMMENT:
             words.delete(0)
             if words.len() > 0:
                 if winterface.comment.len() > 0:
                     winterface.comment &= "\n"
                 winterface.comment &= join(words, " ")
-        elif words[0].endsWith($SyntaxKeywords.typeImplement):
-            words[0].setLen(words[0].len() - ($SyntaxKeywords.typeImplement).len())
-            winterface.implement.add(words[0], words[1])
-        elif words[0].endsWith($SyntaxKeywords.typeImport):
-            var key: string = words[0]
-            words.delete(0)
-            key.setLen(key.len() - ($SyntaxKeywords.typeImport).len())
-            if not winterface.imports.hasKey(key):
-                winterface.imports.add(key, initHashSet[string]())
-            winterface.imports[key].incl(join(words, " "))
-        elif words[0] == $SyntaxKeywords.wingsImport:
+        of WINGS_IMPORT:
             if words.len() != 2:
                 error(lineNo, "Invalid import file argument.")
             if not fileExists(words[1]):
                 error(lineNo, "Could not find import file '" & words[1] & "'.")
             winterface.dependencies.add(words[1])
-        elif words.len > 2 and words[2] == $SyntaxKeywords.wingsOpen:
+        elif words.len > 2 and words[2] == WINGS_OPEN:
             case words[0]
             of $WingsType.structw:
                 winterface = initWStruct(winterface)
@@ -230,22 +212,35 @@ proc parseFileIWings(
                 )
             winterface.name = words[1]
             inObj = $WingsType.default
-        elif words[0].endsWith($SyntaxKeywords.typeFunctionOpen):
-            if not (winterface of WStruct):
-                error(lineNo, "`{lang}Func()` should only be used when defining a `struct`.")
-            words[0].setLen(words[0].len() - ($SyntaxKeywords.typeFunctionOpen).len())
-            inObj = words[0]
         else:
-            if words[1] == $SyntaxKeywords.wingsOpen:
-                error(lineNo, "Use of \"{NAME} {\" is no longer supported.")
-            error(lineNo, "Unrecognized syntax \"" & join(words, " ") & "\"")
+            let ss: seq[string] = words[0].split('-')
+            if ss.len() != 2:
+                error(lineNo, "Unsupported syntax '" & words[0] & "'.")
 
-        lineNo += 1
+            case ss[1]
+            of TYPE_FILEPATH:
+                winterface.filepath.add(ss[0], words[1])
+            of TYPE_IMPLEMENT:
+                winterface.implement.add(ss[0], words[1])
+            of TYPE_IMPORT:
+                if not winterface.imports.hasKey(ss[0]):
+                    winterface.imports.add(ss[0], initHashSet[string]())
+                winterface.imports[ss[0]].incl(join(words, " "))
+            of TYPE_FUNCTION_OPEN:
+                if not (winterface of WStruct):
+                    error(lineNo, "`{lang}Func()` should only be used when defining a `struct`.")
+                inObj = ss[0]
+            else:
+                if words[1] == WINGS_OPEN:
+                    error(lineNo, "Use of \"{NAME} {\" is no longer supported.")
+                error(lineNo, "Unrecognized syntax \"" & join(words, " ") & "\"")
 
+        inc(lineNo)
+
+    file.close()
     result = true
 
 proc parseFile*(
-    file: File,
     filename: string,
     skipImport: bool,
 ): Table[string, IWings] =
@@ -253,17 +248,15 @@ proc parseFile*(
     result = initTable[string, IWings]()
     var winterface = initIWings()
 
-    if winterface.parseFileIWings(file, filename):
+    if winterface.parseFileIWings(filename):
         result.add(filename, winterface)
         let deps = winterface.dependencies
         for imports in deps:
             winterface = initIWings()
             winterface.imported = skipImport
-            let newFile: File = open(imports)
-            if winterface.parseFileIWings(newFile, imports):
+            if winterface.parseFileIWings(imports):
                 result.add(imports, winterface)
             else:
                 LOG(FATAL, "Failed to parse '" & imports & "' imported in " & filename & ".")
-            newFile.close()
     else:
         LOG(FATAL, "Failed to parse '" & filename & "'.")

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-rm -rf examples/output/go examples/output/kt examples/output/nim examples/output/py examples/output/ts
-./pleasew genFile -- examples/input/student.wings -c:wings.json
+rm -rf examples/output
+nimble --accept genFile examples/input/student.wings -c:wings.json
 
 STATUS=$(git status --porcelain)
 if [ "$STATUS" != "" ]; then

@@ -11,43 +11,43 @@ const IMPORT_PATH_TYPE: ImportPathType = ImportPathType.Relative
 const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '/'
 const IMPORT_PATH_LEVEL: int = 0
+const PARSE_FORMAT: string = "obj.{#VARNAME_JSON}"
+
 const TEMPLATE_STRUCT: string = """
 // #BEGIN_IMPORT
 // #IMPORT2 import {#IMPORT_1} from '{#IMPORT_2}';
 // #END_IMPORT
 
 // {#COMMENT}
-// #BEGIN_VAR
 export default class {#NAME_PASCAL} {#IMPLEMENT}{
     [key: string]: any;
+// #BEGIN_VAR
     // #VAR public {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT};
 // #END_VAR
 
-// #BEGIN_INIT
-    public init(data: any): boolean {
-        try {
-            // #INIT this.{#VARNAME_CAMEL} = data.{#VARNAME_JSON};
-        } catch (e) {
-            return false;
+// #BEGIN_CONSTRUCTOR
+    public constructor(obj?: any) {
+        if (obj) {
+            // #CONSTRUCTOR this.{#VARNAME_CAMEL} = obj.{#VARNAME_JSON} || {#TYPE_INIT}
         }
-        return true;
     }
-// #END_INIT
+// #END_CONSTRUCTOR
 
-// #BEGIN_JSON
     public toJsonKey(key: string): string {
         switch (key) {
+// #BEGIN_JSON
             // #JSON case '{#VARNAME_CAMEL}': {
             // #JSON     return '{#VARNAME_JSON}';
             // #JSON }
+// #END_JSON
             default: {
                 return key;
             }
         }
     }
-// #END_JSON
 // #BEGIN_FUNCTIONS
-    // #FUNCTIONS {#FUNCTIONS}
+
+// #FUNCTIONS {#FUNCTIONS}
 // #END_FUNCTIONS
 }
 
@@ -95,21 +95,22 @@ const CUSTOM_TYPE_INITS: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let TS_CONFIG*: TConfig = initTConfig(
-    COMMENT,
-    CUSTOM_TYPES,
-    CUSTOM_TYPE_INITS,
-    FILENAME,
-    FILETYPE,
-    IMPLEMENT_FORMAT,
-    IMPORT_PATH_FORMAT,
-    IMPORT_PATH_TYPE,
-    IMPORT_PATH_PREFIX,
-    IMPORT_PATH_SEPARATOR,
-    IMPORT_PATH_LEVEL,
-    {
+    cmt = COMMENT,
+    ct = CUSTOM_TYPES,
+    cti = CUSTOM_TYPE_INITS,
+    c = FILENAME,
+    ft = FILETYPE,
+    ifmt = IMPLEMENT_FORMAT,
+    ipfmt = IMPORT_PATH_FORMAT,
+    ipt = IMPORT_PATH_TYPE,
+    pfx = IMPORT_PATH_PREFIX,
+    sep = IMPORT_PATH_SEPARATOR,
+    level = IMPORT_PATH_LEVEL,
+    pfmt = PARSE_FORMAT,
+    temp = {
         "struct": TEMPLATE_STRUCT,
         "enum": TEMPLATE_ENUM,
     }.toTable(),
-    TYPES,
-    TYPE_INITS,
+    ty = TYPES,
+    ti = TYPE_INITS,
 )

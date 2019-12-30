@@ -24,7 +24,7 @@ class {#NAME}({#IMPLEMENT}):
     // #VAR {#VARNAME_SNAKE}: {#TYPE} = {#TYPE_INIT}
 // #END_VAR
 
-    def init(self, data):
+    def __init__(self, data):
         self = json.loads(data)
 // #BEGIN_FUNCTIONS
     // #FUNCTIONS {#FUNCTIONS}
@@ -75,21 +75,21 @@ const CUSTOM_TYPE_INITS: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let PY_CONFIG*: TConfig = initTConfig(
-    COMMENT,
-    CUSTOM_TYPES,
-    CUSTOM_TYPE_INITS,
-    FILENAME,
-    FILETYPE,
-    IMPLEMENT_FORMAT,
-    IMPORT_PATH_FORMAT,
-    IMPORT_PATH_TYPE,
-    IMPORT_PATH_PREFIX,
-    IMPORT_PATH_SEPARATOR,
-    IMPORT_PATH_LEVEL,
-    {
+    cmt = COMMENT,
+    ct = CUSTOM_TYPES,
+    cti = CUSTOM_TYPE_INITS,
+    c = FILENAME,
+    ft = FILETYPE,
+    ifmt = IMPLEMENT_FORMAT,
+    ipfmt = IMPORT_PATH_FORMAT,
+    ipt = IMPORT_PATH_TYPE,
+    pfx = IMPORT_PATH_PREFIX,
+    sep = IMPORT_PATH_SEPARATOR,
+    level = IMPORT_PATH_LEVEL,
+    temp = {
         "struct": TEMPLATE_STRUCT,
         "enum": TEMPLATE_ENUM,
     }.toTable(),
-    TYPES,
-    TYPE_INITS,
+    ty = TYPES,
+    ti = TYPE_INITS,
 )

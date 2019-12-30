@@ -19,13 +19,9 @@ proc fromFiles*(
         if winterfaces.hasKey(rawFilename) and not winterfaces[rawFilename].imported:
             continue
 
-        let file: File = open(rawFilename)
-
-        for filename, winterface in parseFile(file, rawFilename, config.skipImport).pairs:
+        for filename, winterface in parseFile(rawFilename, config.skipImport).pairs:
             if winterfaces.hasKey(filename) and winterface.imported:
                 continue
             winterfaces[filename] = winterface
-
-        file.close()
 
     result = dependencyGraph(winterfaces, config)

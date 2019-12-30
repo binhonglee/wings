@@ -15,6 +15,6 @@ class Homework():
     given_date: DateTime = date.today()
     feeling: list = []
 
-    def init(self, data):
+    def __init__(self, data):
         self = json.loads(data)
     

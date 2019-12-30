@@ -1,0 +1,4 @@
+CALLER_DIR	wingspkg/util/config.html#CALLER_DIR	config: CALLER_DIR	
+Config	wingspkg/util/config.html#Config	config: Config	
+initConfig	wingspkg/util/config.html#initConfig,string,Table[string,TConfig],HashSet[string],bool,int	config: initConfig(header: string = DEFAULT_HEADER;\n           langConfigs: Table[string, TConfig] = DEFAULT_CONFIGS;\n           outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS;\n           skipImport: bool = DEFAULT_SKIP_IMPORT; tabbing: int = DEFAULT_TABBING): Config	
+parse	wingspkg/util/config.html#parse,string	config: parse(filename: string): Config	

@@ -12,7 +12,7 @@ proc similarity(first: seq[string], second: seq[string]): int =
         if result >= first.len() or result >= second.len() or first[result] != second[result]:
             same = false
         else:
-            result += 1
+            inc(result)
 
 proc filename(
     filename: string,

@@ -10,7 +10,7 @@ class {#NAME}({#IMPLEMENT}):
     // #VAR {#VARNAME_SNAKE}: {#TYPE} = {#TYPE_INIT}
 // #END_VAR
 
-    def init(self, data):
+    def __init__(self, data):
         self = json.loads(data)
 // #BEGIN_FUNCTIONS
     // #FUNCTIONS {#FUNCTIONS}

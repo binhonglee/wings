@@ -4,7 +4,10 @@ nim-filepath examples/output/nim
 py-filepath examples/output/py
 ts-filepath examples/output/ts
 
+ts-import { IWingsStruct }:wings-ts-util
 import examples/input/emotion.wings
+
+ts-implement IWingsStruct
 
 # Work to be done at home
 
@@ -16,7 +19,7 @@ struct Homework {
     feeling     []Emotion
 }
 
-goFunc(
+go-func(
     // Test - This comment should be included.
     func Test() int {
         return 0

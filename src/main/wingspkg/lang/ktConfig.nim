@@ -77,21 +77,20 @@ const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
 }.toTable()
 
 let KT_CONFIG*: TConfig = initTConfig(
-    COMMENT,
-    CUSTOM_TYPES,
-    initTable[string, TypeInterpreter](),
-    FILENAME,
-    FILETYPE,
-    IMPLEMENT_FORMAT,
-    IMPORT_PATH_FORMAT,
-    IMPORT_PATH_TYPE,
-    IMPORT_PATH_PREFIX,
-    IMPORT_PATH_SEPARATOR,
-    IMPORT_PATH_LEVEL,
-    {
+    cmt = COMMENT,
+    ct = CUSTOM_TYPES,
+    c = FILENAME,
+    ft = FILETYPE,
+    ifmt = IMPLEMENT_FORMAT,
+    ipfmt = IMPORT_PATH_FORMAT,
+    ipt = IMPORT_PATH_TYPE,
+    pfx = IMPORT_PATH_PREFIX,
+    sep = IMPORT_PATH_SEPARATOR,
+    level = IMPORT_PATH_LEVEL,
+    temp = {
         "struct": TEMPLATE_STRUCT,
         "enum": TEMPLATE_ENUM,
     }.toTable(),
-    TYPES,
-    TYPE_INITS,
+    ty = TYPES,
+    ti = TYPE_INITS,
 )

@@ -5,7 +5,7 @@ import json
 import log
 import sets
 import tables
-import ../lang/defaults, ../lib/tconfig
+import ../lang/defaults, ../lib/tconfig, ../lib/tutil
 
 const DEFAULT_HEADER: string = """
 This is a generated file
@@ -113,7 +113,7 @@ proc parse*(filename: string): Config =
     if jsonConfig.hasKey("langConfigs"):
         let langConfigs: seq[JsonNode] = jsonConfig["langConfigs"].getElems()
         for configNode in langConfigs:
-            let config: TConfig = tconfig.parse(configNode.getStr(""))
+            let config: TConfig = tutil.parse(configNode.getStr(""))
             if result.langConfigs.hasKey(config.filetype):
                 result.langConfigs[config.filetype] = config
             else:

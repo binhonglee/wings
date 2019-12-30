@@ -1,14 +1,12 @@
 from genlib import getResult
-from os import fileExists, lastPathPart, parentDir
 from strlib import Case
 from strutils import contains, endsWith, removePrefix, split, startsWith
-import json
 import log
 import tables
-import ./tconstant
+import ./tempconst
 
-const DEFAULT_SEPARATOR: char = '/'
-const DEFAULT_COMMENT: string = "//"
+const DEFAULT_SEPARATOR*: char = '/'
+const DEFAULT_COMMENT*: string = "//"
 
 type
     ImportPathType* = enum
@@ -43,6 +41,7 @@ type
         filetype*: string
         implementFormat*: string
         importPath*: ImportPath
+        parseFormat*: string
         templates*: Table[string, string]
         types*: Table[string, string]
         typeInits*: Table[string, string]
@@ -125,6 +124,7 @@ proc initTConfig*(
     pfx: string = "",
     sep: char = DEFAULT_SEPARATOR,
     level: int = 0,
+    pfmt: string = "",
     temp: Table[string, string] = initTable[string, string](),
     ty: Table[string, string] = initTable[string, string](),
     ti: Table[string, string] = initTable[string, string](),
@@ -143,165 +143,7 @@ proc initTConfig*(
     result.importPath.prefix = pfx
     result.importPath.separator = sep
     result.importPath.level = level
+    result.parseFormat = pfmt
     result.templates = temp
     result.types = ty
     result.typeInits = ti
-
-proc getCase(
-    input: string,
-    logLevel: AlertLevel = ERROR,
-    errorMsg: string = "Given input is not a supported case."
-): Case =
-    case input
-    of "default":
-        result = Case.Default
-    of "camel":
-        result = Case.Camel
-    of "kebab":
-        result = Case.Kebab
-    of "lower":
-        result = Case.Lower
-    of "pascal":
-        result = Case.Pascal
-    of "snake":
-        result = Case.Snake
-    of "upper":
-        result = Case.Upper
-    else:
-        LOG(logLevel, errorMsg)
-
-proc getImportPathType(
-    input: string,
-    logLevel: AlertLevel = FATAL,
-    errorMsg: string = "Given input is not a supported import path type."
-): ImportPathType =
-    case input
-    of "never":
-        result = ImportPathType.Never
-    of "absolute":
-        result = ImportPathType.Absolute
-    of "relative":
-        result = ImportPathType.Relative
-    else:
-        LOG(logLevel, errorMsg)
-
-proc parse*(filename: string): TConfig =
-    ## Parse template config file into `TConfig`.
-    LOG(DEBUG, "Parsing file: '" & filename & "'.")
-    result = initTConfig()
-    if not fileExists(filename):
-        LOG(FATAL, "Template config file not found: " & filename)
-
-    let jsonConfig: JsonNode = parseFile(filename)
-    let errorMsg: string = " is not found or invalid."
-
-    if jsonConfig.hasKey("comment"):
-        result.comment = jsonConfig["comment"].getStr(DEFAULT_COMMENT)
-    else:
-        result.comment = DEFAULT_COMMENT
-
-    let filenameErrMsg: string = "filename" & errorMsg
-    if jsonConfig.hasKey("filename"):
-        result.filename = getCase(jsonConfig["filename"].getStr(""), FATAL, filenameErrMsg)
-    else:
-        LOG(FATAL, filenameErrMsg)
-
-    let filetypeErrMsg: string = "filetype" & errorMsg
-    if jsonConfig.hasKey("filetype"):
-        let filetype: string = jsonConfig["filetype"].getStr("")
-        if filename.len() < 1:
-            LOG(FATAL, filetypeErrMsg)
-        result.filetype = filetype
-    else:
-        LOG(FATAL, filetypeErrMsg)
-
-    if jsonConfig.hasKey("implementFormat"):
-        result.implementFormat = jsonConfig["implementFormat"].getStr("")
-    else:
-        result.implementFormat = wrap(TK_IMPLEMENT)
-
-    if jsonConfig.hasKey("importPath"):
-        let importPath: OrderedTable[string, JsonNode] = jsonConfig["importPath"].getFields()
-
-        if importPath.hasKey("format"):
-            result.importPath.format = importPath["format"].getStr("")
-
-        let importPathTypeErrMsg: string = "importPath:pathType" & errorMsg
-        if importPath.hasKey("pathType"):
-            result.importPath.pathType = getImportPathType(
-                importPath["pathType"].getStr(""),
-                FATAL,
-                importPathTypeErrMsg
-            )
-        else:
-            LOG(FATAL, importPathTypeErrMsg)
-
-        try:
-            result.importPath.separator = importPath["separator"].getStr($DEFAULT_SEPARATOR)[0]
-        except:
-            LOG(DEBUG, "Using default separator: '" & $DEFAULT_SEPARATOR & "'.")
-            result.importPath.separator = DEFAULT_SEPARATOR
-
-        if result.importPath.pathType != ImportPathType.Never:
-            try:
-                result.importPath.prefix = importPath["prefix"].getStr("")
-            except:
-                LOG(DEBUG, "Setting prefix to empty.")
-                result.importPath.prefix = ""
-
-            try:
-                let pathLevel: int = importPath["level"].getInt(-1)
-                if pathLevel < 0:
-                    LOG(FATAL, "importPath:level" & errorMsg)
-                else:
-                    result.importPath.level = pathLevel
-            except:
-                LOG(FATAL, "importPath:level" & errorMsg)
-    else:
-        LOG(FATAL, "importPath" & errorMsg)
-
-    if jsonConfig.haskey("templates"):
-        let templates: OrderedTable[string, JsonNode] = jsonConfig["templates"].getFields()
-        for key in templates.keys:
-            let file: string = templates[key].getStr("")
-
-            if not fileExists(file):
-                LOG(FATAL, "'" & file & "' referenced in '" & filename & "' does not exists.")
-
-            if file != "":
-                result.templates.add(key, readFile(file))
-    else:
-        LOG(FATAL, "templates" & errorMsg)
-
-    if jsonConfig.hasKey("types"):
-        let types: OrderedTable[string, JsonNode] = jsonConfig["types"].getFields()
-
-        for key in types.keys:
-            let givenType: string = types[key].getStr("")
-            if givenType != "":
-                if key.contains(TYPE_PREFIX):
-                    let temp: TypeInterpreter = interpretType(key, givenType)
-                    result.customTypes.add(temp.prefix, temp)
-                else:
-                    result.types.add(key, givenType)
-            else:
-                LOG(ERROR, "Failed to read counterpart type for '" & key & "'. Skipping...")
-    else:
-        LOG(FATAL, "types" & errorMsg)
-
-
-    if jsonConfig.hasKey("init"):
-        let init: OrderedTable[string, JsonNode] = jsonConfig["init"].getFields()
-
-        for key in init.keys:
-            let givenInit: string = init[key].getStr("")
-            if givenInit != "":
-                if key.contains(TYPE_PREFIX):
-                    let temp: TypeInterpreter = interpretType(key, givenInit)
-                    result.customTypeInits.add(temp.prefix, temp)
-                else:
-                    result.typeInits.add(key, givenInit)
-            else:
-                LOG(ERROR, "Failed to read counterpart type for '" & key & "'. Skipping...")
-    else:
-        LOG(DEBUG, "init" & errorMsg)

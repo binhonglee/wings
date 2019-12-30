@@ -8,6 +8,7 @@
         "pathType": "relative",
         "level": 0
     },
+    "parseFormat": "obj.{#VARNAME_JSON}",
     "templates": {
         "struct": "examples/input/templates/struct.ts",
         "enum": "examples/input/templates/enum.ts"

@@ -46,7 +46,7 @@ struct Student {
     something   Map<str,str>
 }
 
-tsFunc(
+ts-func(
     public addHomework(hw: Homework): void {
         this.Homeworks.push(hw);
     }
@@ -470,7 +470,7 @@ Similar to the above but this is specific to `include` or `import` another `wing
 
 In many occassion, your struct or object might be implementing a separate interface class. Use this to specify the class that it is implementing. (There is not support for this in `go` since it would already inherently associate your struct to the interface if you implemented all the functions and variables defined in the interface.)
 
-### `{lang}Func`
+### `{lang}-func`
 
 Specific functions for specific programming languages. Ideally, you should have a separate utility classes that do all the other operations. This is mostly designed to be used for defining functions in an interface that the struct / class is implementing.
 

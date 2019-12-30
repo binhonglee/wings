@@ -15,16 +15,6 @@ nimble_install(
     visibility = [':wings'],
 )
 
-nim_doc(
-    name = 'wings_doc',
-    main = 'wings.nim',
-    deps = [
-        ':files',
-        ':stones',
-    ],
-    url = 'https://github.com/binhonglee/wings',
-)
-
 filegroup(
     name = 'files',
     srcs = [],
