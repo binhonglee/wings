@@ -1,38 +1,42 @@
 {
-    "comment": "//",
-    "filename": "pascal",
-    "filetype": "ts",
-    "implementFormat": "implements {#IMPLEMENT} ",
-    "importPath": {
-        "format": "{#0}:{#IMPORT}",
-        "pathType": "relative",
-        "level": 0
-    },
-    "parseFormat": "obj.{#VARNAME_JSON}",
-    "templates": {
-        "struct": "examples/input/templates/struct.ts",
-        "enum": "examples/input/templates/enum.ts"
-    },
-    "types": {
-        "int": "number",
-        "flt": "number",
-        "dbl": "number",
-        "str": "string",
-        "bool": "boolean",
-        "date": "Date",
-        "[]{TYPE}": "{TYPE1}[]",
-        "Map<{TYPE1},{TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
-        "!imported": "{#TYPE_PASCAL}",
-        "!unimported": "{#TYPE_PASCAL}"
-    },
-    "init": {
-        "int": "0",
-        "flt": "0",
-        "dbl": "0",
-        "str": "''",
-        "bool": "false",
-        "[]{TYPE}": "[]",
-        "!imported": "new {#TYPE_PASCAL}()",
-        "!unimported": "new {#TYPE_PASCAL}()"
-    }
+  "comment": "//",
+  "filename": "pascal",
+  "filetype": "ts",
+  "implementFormat": "implements {#IMPLEMENT} ",
+  "importPath": {
+    "format": "{#0}:{#IMPORT}",
+    "pathType": "relative",
+    "level": 0
+  },
+  "indentation": {
+    "spacing": "  ",
+    "preIndent": true
+  },
+  "parseFormat": "obj.{#VARNAME_JSON}",
+  "templates": {
+    "struct": "examples/input/templates/struct.ts",
+    "enum": "examples/input/templates/enum.ts"
+  },
+  "types": {
+    "int": "number",
+    "flt": "number",
+    "dbl": "number",
+    "str": "string",
+    "bool": "boolean",
+    "date": "Date",
+    "[]{TYPE}": "{TYPE1}[]",
+    "Map<{TYPE1},{TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
+    "!imported": "{#TYPE_PASCAL}",
+    "!unimported": "{#TYPE_PASCAL}"
+  },
+  "init": {
+    "int": "0",
+    "flt": "0",
+    "dbl": "0",
+    "str": "''",
+    "bool": "false",
+    "[]{TYPE}": "[]",
+    "!imported": "new {#TYPE_PASCAL}()",
+    "!unimported": "new {#TYPE_PASCAL}()"
+  }
 }

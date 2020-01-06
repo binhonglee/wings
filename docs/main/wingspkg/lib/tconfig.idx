@@ -1,23 +1,11 @@
 DEFAULT_SEPARATOR	wingspkg/lib/tconfig.html#DEFAULT_SEPARATOR	tconfig: DEFAULT_SEPARATOR	
 DEFAULT_COMMENT	wingspkg/lib/tconfig.html#DEFAULT_COMMENT	tconfig: DEFAULT_COMMENT	
-FN	wingspkg/lib/tconfig.html#FN	tconfig: FN	
-FT	wingspkg/lib/tconfig.html#FT	tconfig: FT	
-I_FMT	wingspkg/lib/tconfig.html#I_FMT	tconfig: I_FMT	
-IP_FMT	wingspkg/lib/tconfig.html#IP_FMT	tconfig: IP_FMT	
-FMT	wingspkg/lib/tconfig.html#FMT	tconfig: FMT	
-P_TY	wingspkg/lib/tconfig.html#P_TY	tconfig: P_TY	
-SEP	wingspkg/lib/tconfig.html#SEP	tconfig: SEP	
-PFX	wingspkg/lib/tconfig.html#PFX	tconfig: PFX	
-LEVEL	wingspkg/lib/tconfig.html#LEVEL	tconfig: LEVEL	
-P_FMT	wingspkg/lib/tconfig.html#P_FMT	tconfig: P_FMT	
-TEMP	wingspkg/lib/tconfig.html#TEMP	tconfig: TEMP	
-TY	wingspkg/lib/tconfig.html#TY	tconfig: TY	
-IN	wingspkg/lib/tconfig.html#IN	tconfig: IN	
 Never	wingspkg/lib/tconfig.html#Never	ImportPathType.Never	
 Absolute	wingspkg/lib/tconfig.html#Absolute	ImportPathType.Absolute	
 Relative	wingspkg/lib/tconfig.html#Relative	ImportPathType.Relative	
 ImportPathType	wingspkg/lib/tconfig.html#ImportPathType	tconfig: ImportPathType	
 TypeInterpreter	wingspkg/lib/tconfig.html#TypeInterpreter	tconfig: TypeInterpreter	
+Indentation	wingspkg/lib/tconfig.html#Indentation	tconfig: Indentation	
 TConfig	wingspkg/lib/tconfig.html#TConfig	tconfig: TConfig	
 interpretType	wingspkg/lib/tconfig.html#interpretType,string,string	tconfig: interpretType(inputType: string; outputType: string): TypeInterpreter	
-initTConfig	wingspkg/lib/tconfig.html#initTConfig,string,Table[string,TypeInterpreter],Table[string,TypeInterpreter],Case,string,string,string,ImportPathType,string,char,int,string,Table[string,string],Table[string,string],Table[string,string]	tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;\n            ct: Table[string, TypeInterpreter] = initTable();\n            cti: Table[string, TypeInterpreter] = initTable();\n            c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;\n            ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;\n            sep: char = DEFAULT_SEPARATOR; level: int = 0; pfmt: string = &quot;&quot;;\n            temp: Table[string, string] = initTable();\n            ty: Table[string, string] = initTable();\n            ti: Table[string, string] = initTable()): TConfig	
+initTConfig	wingspkg/lib/tconfig.html#initTConfig,string,Table[string,TypeInterpreter],Table[string,TypeInterpreter],Case,string,string,string,ImportPathType,string,char,int,string,bool,string,Table[string,string],Table[string,string],Table[string,string]	tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;\n            ct: Table[string, TypeInterpreter] = initTable();\n            cti: Table[string, TypeInterpreter] = initTable();\n            c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;\n            ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;\n            sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;\n            pi: bool = false; pfmt: string = &quot;&quot;;\n            temp: Table[string, string] = initTable();\n            ty: Table[string, string] = initTable();\n            ti: Table[string, string] = initTable()): TConfig	

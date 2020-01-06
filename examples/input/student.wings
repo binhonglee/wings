@@ -14,19 +14,19 @@ ts-implement People
 # Any person who is studying in a class
 
 struct Student {
-    id          int         -1
-    name        str
-    cur_class   str
-    feeling     Emotion     Emotion.Meh
-    is_active   bool        true
-    year        date
-    graduation  date
-    homeworks   []Homework
-    something   Map<str,str>
+  id          int       -1
+  name        str
+  cur_class   str
+  feeling     Emotion   Emotion.Meh
+  is_active   bool      true
+  year        date
+  graduation  date
+  homeworks   []Homework
+  something   Map<str,str>
 }
 
 ts-func(
-    public addHomework(hw: Homework): void {
-        this.Homeworks.push(hw);
-    }
+  public addHomework(hw: Homework): void {
+    this.Homeworks.push(hw);
+  }
 )

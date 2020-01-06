@@ -1,4 +1,4 @@
-from strlib import Case
+from stones/cases import Case
 import tables
 import ../lib/tconfig
 
@@ -21,16 +21,16 @@ package {#1}
 // {#COMMENT}
 class {#NAME} {#IMPLEMENT}{
 // #BEGIN_VAR
-    // #VAR var {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT}
+  // #VAR var {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT}
 // #END_VAR
 
 // #BEGIN_JSON
-    fun toJsonKey(key: string): string {
-        when (key) {
-            // #JSON "{#VARNAME_CAMEL}" -> return "{#VARNAME_JSON}"
-            else -> return key
-        }
+  fun toJsonKey(key: string): string {
+    when (key) {
+      // #JSON "{#VARNAME_CAMEL}" -> return "{#VARNAME_JSON}"
+      else -> return key
     }
+  }
 // #END_JSON
 // #BEGIN_FUNCTIONS
 // #FUNCTIONS {#FUNCTIONS}
@@ -44,53 +44,53 @@ package {#1}
 
 // #BEGIN_VAR
 enum class {#NAME} {
-    // #VAR {#VARNAME_PASCAL}
+  // #VAR {#VARNAME_PASCAL}
 }
 // #END_VAR
 
 """
 
 const TYPES: Table[string, string] = {
-    "int": "Int",
-    "flt": "Float",
-    "dbl": "Double",
-    "str": "String",
-    "bool": "Boolean",
-    "date": "Date",
-    "!imported": "{#TYPE_PASCAL}",
-    "!unimported": "{#TYPE_PASCAL}"
+  "int": "Int",
+  "flt": "Float",
+  "dbl": "Double",
+  "str": "String",
+  "bool": "Boolean",
+  "date": "Date",
+  "!imported": "{#TYPE_PASCAL}",
+  "!unimported": "{#TYPE_PASCAL}"
 }.toTable()
 
 const TYPE_INITS: Table[string, string] = {
-    "int": "0",
-    "flt": "0",
-    "dbl": "0",
-    "str": "\"\"",
-    "bool": "false",
-    "!imported": " {#TYPE_PASCAL}()",
-    "!unimported": " {#TYPE_PASCAL}()"
+  "int": "0",
+  "flt": "0",
+  "dbl": "0",
+  "str": "\"\"",
+  "bool": "false",
+  "!imported": " {#TYPE_PASCAL}()",
+  "!unimported": " {#TYPE_PASCAL}()"
 }.toTable
 
 const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-    "[]": interpretType("[]{TYPE}", "ArrayList<{TYPE1}>"),
-    "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "HashMap<{TYPE1}, {TYPE2}>"),
+  "[]": interpretType("[]{TYPE}", "ArrayList<{TYPE1}>"),
+  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "HashMap<{TYPE1}, {TYPE2}>"),
 }.toTable()
 
 let KT_CONFIG*: TConfig = initTConfig(
-    cmt = COMMENT,
-    ct = CUSTOM_TYPES,
-    c = FILENAME,
-    ft = FILETYPE,
-    ifmt = IMPLEMENT_FORMAT,
-    ipfmt = IMPORT_PATH_FORMAT,
-    ipt = IMPORT_PATH_TYPE,
-    pfx = IMPORT_PATH_PREFIX,
-    sep = IMPORT_PATH_SEPARATOR,
-    level = IMPORT_PATH_LEVEL,
-    temp = {
-        "struct": TEMPLATE_STRUCT,
-        "enum": TEMPLATE_ENUM,
-    }.toTable(),
-    ty = TYPES,
-    ti = TYPE_INITS,
+  cmt = COMMENT,
+  ct = CUSTOM_TYPES,
+  c = FILENAME,
+  ft = FILETYPE,
+  ifmt = IMPLEMENT_FORMAT,
+  ipfmt = IMPORT_PATH_FORMAT,
+  ipt = IMPORT_PATH_TYPE,
+  pfx = IMPORT_PATH_PREFIX,
+  sep = IMPORT_PATH_SEPARATOR,
+  level = IMPORT_PATH_LEVEL,
+  temp = {
+    "struct": TEMPLATE_STRUCT,
+    "enum": TEMPLATE_ENUM,
+  }.toTable(),
+  ty = TYPES,
+  ti = TYPE_INITS,
 )

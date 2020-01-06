@@ -14,74 +14,73 @@ A simple cross language struct and enum file generator. (You might want to use a
 - Add binary to the included path (and rename it to `wings`).
 - Run `wings -c:{config_file} {filepath}` to generate the files.
 
+or if you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can just do `nimble install wings`
+
 ## Struct
 
 Input file:
 
 ```text
-go-filepath examples/go/classroom
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts
+go-filepath examples/output/go/classroom
+kt-filepath examples/output/kt
+nim-filepath examples/output/nim
+py-filepath examples/output/py
+ts-filepath examples/output/ts
 
 ts-import People:./People
-import examples/emotion.enum.wings
-import examples/homework.struct.wings
+import examples/input/emotion.wings
+import examples/input/homework.wings
 
 py-implement People
 ts-implement People
 
-# Student - Any person who is studying in a class
+# Any person who is studying in a class
 
 struct Student {
-    id          int         -1
-    name        str
-    cur_class   str
-    feeling     Emotion     Emotion.Meh
-    is_active   bool        true
-    year        date
-    graduation  date
-    homeworks   []Homework
-    something   Map<str,str>
+  id          int       -1
+  name        str
+  cur_class   str
+  feeling     Emotion   Emotion.Meh
+  is_active   bool      true
+  year        date
+  graduation  date
+  homeworks   []Homework
+  something   Map<str,str>
 }
 
 ts-func(
-    public addHomework(hw: Homework): void {
-        this.Homeworks.push(hw);
-    }
+  public addHomework(hw: Homework): void {
+    this.Homeworks.push(hw);
+  }
 )
 ```
 
 Output files:
 
 ```go tab="examples/go/classroom/student.go"
-/*
- * This is a generated file
- *
- * If you would like to make any changes, please edit the source file instead.
- * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * Source: examples/student.struct.wings
- */
+// This is a generated file
+//
+// If you would like to make any changes, please edit the source file instead.
+// run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+// Source: examples/input/student.wings
 
 package classroom
 
 import (
-    emotion "github.com/binhonglee/wings/examples/go"
-    "time"
+	person "github.com/binhonglee/wings/examples/output/go/person"
 )
 
 // Student - Any person who is studying in a class
 type Student struct {
-    ID            int                  `json:"id"`
-    Name          string               `json:"name"`
-    CurClass      string               `json:"cur_class"`
-    Feeling       emotion.Emotion      `json:"feeling"`
-    IsActive      bool                 `json:"is_active"`
-    Year          time.Time            `json:"year"`
-    Graduation    time.Time            `json:"graduation"`
-    Homeworks     []Homework           `json:"homeworks"`
-    Something     map[string]string    `json:"something"`
+	ID            int                  `json:"id"`
+	Name          string               `json:"name"`
+	CurClass      string               `json:"cur_class"`
+	Feeling       person.Emotion       `json:"feeling"`
+	IsActive      boolean              `json:"is_active"`
+	Year          time.Time            `json:"year"`
+	Graduation    time.Time            `json:"graduation"`
+	Homeworks     []Homework           `json:"homeworks"`
+	Something     map[string]string    `json:"something"`
 }
 
 // Students - An array of Student
@@ -89,45 +88,40 @@ type Students []Student
 ```
 
 ```kotlin tab="examples/kt/Student.kt"
-/*
- * This is a generated file
- *
- * If you would like to make any changes, please edit the source file instead.
- * run `nimble genFile "{SOURCE_FILE}"` upon completion.
- * Source: examples/student.struct.wings
- */
+// This is a generated file
+//
+// If you would like to make any changes, please edit the source file instead.
+// run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+// Source: examples/input/student.wings
 
 package kt
 
-import java.util.ArrayList
-import java.util.HashMap
-
-// Student - Any person who is studying in a class
+// Any person who is studying in a class
 class Student {
-    var ID: Int = -1
-    var name: String = ""
-    var curClass: String = ""
-    var feeling: Emotion = Emotion.Meh
-    var isActive: Boolean = true
-    var year: Date = Date()
-    var graduation: Date = Date()
-    var homeworks: ArrayList<Homework> = ArrayList<Homework>()
-    var something: HashMap<String, String> = HashMap<String, String>()
+  var ID: Int = -1
+  var name: String = ""
+  var curClass: String = ""
+  var feeling: Emotion = Emotion.Meh
+  var isActive: Boolean = true
+  var year: Date =  Date()
+  var graduation: Date =  Date()
+  var homeworks: ArrayList<Homework> =  {#TYPE_PASCAL}()
+  var something: HashMap<String, String> =  {#TYPE_PASCAL}()
 
-    fun toJsonKey(key: string): string {
-        when (key) {
-            "ID" -> return "id"
-            "name" -> return "name"
-            "curClass" -> return "cur_class"
-            "feeling" -> return "feeling"
-            "isActive" -> return "is_active"
-            "year" -> return "year"
-            "graduation" -> return "graduation"
-            "homeworks" -> return "homeworks"
-            "something" -> return "something"
-            else -> return key
-        }
+  fun toJsonKey(key: string): string {
+    when (key) {
+      "ID" -> return "id"
+      "name" -> return "name"
+      "curClass" -> return "cur_class"
+      "feeling" -> return "feeling"
+      "isActive" -> return "is_active"
+      "year" -> return "year"
+      "graduation" -> return "graduation"
+      "homeworks" -> return "homeworks"
+      "something" -> return "something"
+      else -> return key
     }
+  }
 }
 ```
 

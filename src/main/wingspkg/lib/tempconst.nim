@@ -22,7 +22,7 @@ const TYPE_IMPORTED*: string = "!imported"
 const TYPE_UNIMPORTED*: string = "!unimported"
 
 proc wrap*(s: string, ss: varargs[string]): string =
-    result = TK_PREFIX & s
-    for str in ss:
-        result &= TK_SEPARATOR & str
-    result &= TK_POSTFIX
+  result = TK_PREFIX & s
+  for str in ss:
+    result &= TK_SEPARATOR & str
+  result &= TK_POSTFIX

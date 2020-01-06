@@ -841,6 +841,10 @@ function main() {
   separators*: string
   postfix*: string
   output*: string"><wbr />Type<wbr />Interpreter<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#Indentation"
+    title="Indentation = object
+  spacing*: string
+  preIndent*: bool"><wbr />Indentation<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#TConfig"
     title="TConfig = object
   comment*: string
@@ -850,6 +854,7 @@ function main() {
   filetype*: string
   implementFormat*: string
   importPath*: ImportPath
+  indentation*: Indentation
   parseFormat*: string
   templates*: Table[string, string]
   types*: Table[string, string]
@@ -864,32 +869,6 @@ function main() {
     title="DEFAULT_SEPARATOR: char = &apos;/&apos;"><wbr />DEFAULT_<wbr />SEPARATOR<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#DEFAULT_COMMENT"
     title="DEFAULT_COMMENT: string = &quot;//&quot;"><wbr />DEFAULT_<wbr />COMMENT<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#FN"
-    title="FN = &quot;filename&quot;"><wbr />FN<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#FT"
-    title="FT = &quot;filetype&quot;"><wbr />FT<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#I_FMT"
-    title="I_FMT = &quot;implementFormat&quot;"><wbr />I_<wbr />FMT<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#IP_FMT"
-    title="IP_FMT = &quot;importPath&quot;"><wbr />IP_<wbr />FMT<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#FMT"
-    title="FMT = &quot;format&quot;"><wbr />FMT<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#P_TY"
-    title="P_TY = &quot;pathType&quot;"><wbr />P_<wbr />TY<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#SEP"
-    title="SEP = &quot;separator&quot;"><wbr />SEP<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#PFX"
-    title="PFX = &quot;prefix&quot;"><wbr />PFX<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#LEVEL"
-    title="LEVEL = &quot;level&quot;"><wbr />LEVEL<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#P_FMT"
-    title="P_FMT = &quot;parseFormat&quot;"><wbr />P_<wbr />FMT<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#TEMP"
-    title="TEMP = &quot;templates&quot;"><wbr />TEMP<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#TY"
-    title="TY = &quot;types&quot;"><wbr />TY<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#IN"
-    title="IN = &quot;init&quot;"><wbr />IN<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -898,13 +877,14 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#interpretType%2Cstring%2Cstring"
     title="interpretType(inputType: string; outputType: string): TypeInterpreter"><wbr />interpret<wbr />Type<span class="attachedType">TypeInterpreter</span></a></li>
-  <li><a class="reference" href="#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D"
+  <li><a class="reference" href="#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D"
     title="initTConfig(cmt: string = DEFAULT_COMMENT;
             ct: Table[string, TypeInterpreter] = initTable();
             cti: Table[string, TypeInterpreter] = initTable();
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
-            sep: char = DEFAULT_SEPARATOR; level: int = 0; pfmt: string = &quot;&quot;;
+            sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
+            pi: bool = false; pfmt: string = &quot;&quot;;
             temp: Table[string, string] = initTable();
             ty: Table[string, string] = initTable();
             ti: Table[string, string] = initTable()): TConfig"><wbr />init<wbr />TConfig<span class="attachedType">TConfig</span></a></li>
@@ -934,9 +914,9 @@ function main() {
 
 Supported import path types.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L26"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L12"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L26" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L12" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="TypeInterpreter"></a>
@@ -950,9 +930,23 @@ class="link-seesrc" target="_blank">Source</a>
 
 Post processed custom types
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L41"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L27"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L27" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="Indentation"></a>
+<dt><pre><a href="tconfig.html#Indentation"><span class="Identifier">Indentation</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Identifier">spacing</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
+  <span class="Identifier">preIndent</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
+</pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L35"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="TConfig"></a>
@@ -964,6 +958,7 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">filetype</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">implementFormat</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">importPath</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">ImportPath</span>
+  <span class="Identifier">indentation</span><span class="Operator">*</span><span class="Other">:</span> <a href="tconfig.html#Indentation"><span class="Identifier">Indentation</span></a>
   <span class="Identifier">parseFormat</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">templates</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span>
   <span class="Identifier">types</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span>
@@ -973,9 +968,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Object of template config.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L49"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L40"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1005,149 +1000,6 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L9" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="FN"></a>
-<dt><pre><a href="tconfig.html#FN"><span class="Identifier">FN</span></a> <span class="Other">=</span> <span class="StringLit">&quot;filename&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L11"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L11" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="FT"></a>
-<dt><pre><a href="tconfig.html#FT"><span class="Identifier">FT</span></a> <span class="Other">=</span> <span class="StringLit">&quot;filetype&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L12"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L12" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="I_FMT"></a>
-<dt><pre><a href="tconfig.html#I_FMT"><span class="Identifier">I_FMT</span></a> <span class="Other">=</span> <span class="StringLit">&quot;implementFormat&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L13"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L13" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="IP_FMT"></a>
-<dt><pre><a href="tconfig.html#IP_FMT"><span class="Identifier">IP_FMT</span></a> <span class="Other">=</span> <span class="StringLit">&quot;importPath&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L14"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L14" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="FMT"></a>
-<dt><pre><a href="tconfig.html#FMT"><span class="Identifier">FMT</span></a> <span class="Other">=</span> <span class="StringLit">&quot;format&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L15"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L15" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="P_TY"></a>
-<dt><pre><a href="tconfig.html#P_TY"><span class="Identifier">P_TY</span></a> <span class="Other">=</span> <span class="StringLit">&quot;pathType&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L16"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L16" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="SEP"></a>
-<dt><pre><a href="tconfig.html#SEP"><span class="Identifier">SEP</span></a> <span class="Other">=</span> <span class="StringLit">&quot;separator&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L17"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L17" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="PFX"></a>
-<dt><pre><a href="tconfig.html#PFX"><span class="Identifier">PFX</span></a> <span class="Other">=</span> <span class="StringLit">&quot;prefix&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L18"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L18" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="LEVEL"></a>
-<dt><pre><a href="tconfig.html#LEVEL"><span class="Identifier">LEVEL</span></a> <span class="Other">=</span> <span class="StringLit">&quot;level&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L19"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="P_FMT"></a>
-<dt><pre><a href="tconfig.html#P_FMT"><span class="Identifier">P_FMT</span></a> <span class="Other">=</span> <span class="StringLit">&quot;parseFormat&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L20"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L20" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="TEMP"></a>
-<dt><pre><a href="tconfig.html#TEMP"><span class="Identifier">TEMP</span></a> <span class="Other">=</span> <span class="StringLit">&quot;templates&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L21"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L21" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="TY"></a>
-<dt><pre><a href="tconfig.html#TY"><span class="Identifier">TY</span></a> <span class="Other">=</span> <span class="StringLit">&quot;types&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L22"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="IN"></a>
-<dt><pre><a href="tconfig.html#IN"><span class="Identifier">IN</span></a> <span class="Other">=</span> <span class="StringLit">&quot;init&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L23"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 
 </dl></div>
 <div class="section" id="12">
@@ -1160,28 +1012,29 @@ class="link-seesrc" target="_blank">Source</a>
 
 Interpret custom types.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L75"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L67"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="initTConfig,string,Table[string,TypeInterpreter],Table[string,TypeInterpreter],Case,string,string,string,ImportPathType,string,char,int,string,Table[string,string],Table[string,string],Table[string,string]"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D"><span class="Identifier">initTConfig</span></a><span class="Other">(</span><span class="Identifier">cmt</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_COMMENT</span><span class="Other">;</span>
+<a id="initTConfig,string,Table[string,TypeInterpreter],Table[string,TypeInterpreter],Case,string,string,string,ImportPathType,string,char,int,string,bool,string,Table[string,string],Table[string,string],Table[string,string]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D"><span class="Identifier">initTConfig</span></a><span class="Other">(</span><span class="Identifier">cmt</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_COMMENT</span><span class="Other">;</span>
                 <span class="Identifier">ct</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="tconfig.html#TypeInterpreter"><span class="Identifier">TypeInterpreter</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">initTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
                 <span class="Identifier">cti</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="tconfig.html#TypeInterpreter"><span class="Identifier">TypeInterpreter</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">initTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
                 <span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Case</span> <span class="Other">=</span> <span class="Identifier">Case</span><span class="Other">.</span><span class="Identifier">Default</span><span class="Other">;</span> <span class="Identifier">ft</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">ifmt</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
                 <span class="Identifier">ipfmt</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">ipt</span><span class="Other">:</span> <a href="tconfig.html#ImportPathType"><span class="Identifier">ImportPathType</span></a> <span class="Other">=</span> <a href="tconfig.html#ImportPathType"><span class="Identifier">ImportPathType</span></a><span class="Other">.</span><span class="Identifier">Never</span><span class="Other">;</span>
                 <span class="Identifier">pfx</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">sep</span><span class="Other">:</span> <span class="Identifier">char</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_SEPARATOR</span><span class="Other">;</span> <span class="Identifier">level</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
-                <span class="Identifier">pfmt</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">temp</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">initTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
+                <span class="Identifier">isp</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">pi</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">pfmt</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+                <span class="Identifier">temp</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">initTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
                 <span class="Identifier">ty</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">initTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
                 <span class="Identifier">ti</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">initTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="tconfig.html#TConfig"><span class="Identifier">TConfig</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Create an initialized template config.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L129"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/tconfig.nim#L121"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tconfig.nim#L121" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1194,7 +1047,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-12-30 06:52:22 UTC</small>
+        <small>Made with Nim. Generated: 2020-01-06 05:05:13 UTC</small>
       </div>
     </div>
   </div>

@@ -9,12 +9,12 @@ import examples.output.py.emotion
 
 # Work to be done at home
 class Homework():
-    id: int = 0
-    name: str = ""
-    due_date: DateTime = date.today()
-    given_date: DateTime = date.today()
-    feeling: list = []
+  id: int = 0
+  name: str = ""
+  due_date: DateTime = date.today()
+  given_date: DateTime = date.today()
+  feeling: list = []
 
-    def __init__(self, data):
-        self = json.loads(data)
-    
+  def __init__(self, data):
+    self = json.loads(data)
+  

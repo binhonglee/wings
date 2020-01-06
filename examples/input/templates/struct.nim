@@ -6,10 +6,10 @@ import json
 
 // #BEGIN_VAR
 type
-    {#NAME}* = ref object{#IMPLEMENT}
-        ## {#COMMENT}
-        // #VAR {#VARNAME_CAMEL}*: {#TYPE}
+  {#NAME}* = ref object{#IMPLEMENT}
+    ## {#COMMENT}
+    // #VAR {#VARNAME_CAMEL}*: {#TYPE}
 // #END_VAR
 // #BEGIN_FUNCTIONS
-    // #FUNCTIONS {#FUNCTIONS}
+  // #FUNCTIONS {#FUNCTIONS}
 // #END_FUNCTIONS

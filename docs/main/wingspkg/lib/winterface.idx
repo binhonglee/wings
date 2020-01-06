@@ -7,4 +7,4 @@ IWings	wingspkg/lib/winterface.html#IWings	winterface: IWings
 WEnum	wingspkg/lib/winterface.html#WEnum	winterface: WEnum	
 WStruct	wingspkg/lib/winterface.html#WStruct	winterface: WStruct	
 initImportedWingsType	wingspkg/lib/winterface.html#initImportedWingsType,string,string	winterface: initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;): ImportedWingsType	
-parseFile	wingspkg/lib/winterface.html#parseFile,File,string,bool	winterface: parseFile(file: File; filename: string; skipImport: bool): Table[string, IWings]	
+parseFile	wingspkg/lib/winterface.html#parseFile,string,bool	winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]	

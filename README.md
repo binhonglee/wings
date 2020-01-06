@@ -1,5 +1,7 @@
 # wings
 
+A customizable cross language struct and enum file generator.
+
 [![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=master)](https://travis-ci.org/binhonglee/wings)
 [![codecov](https://codecov.io/gh/binhonglee/wings/branch/master/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
 [![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
@@ -21,17 +23,6 @@
 - [Python](https://www.python.org/) (WIP)
 - [TypeScript](https://www.typescriptlang.org)
     - [Utility package](https://github.com/binhonglee/wings-ts-util)
-
-## Supported types
-
-| wings               | Go                | Kotlin                  | Nim                   | Python | TypeScript          |
-| :------------------ | :---------------- | :---------------------- | :-------------------- | :----- | :------------------ |
-| `int`               | `int`             | `Int`                   | `int`                 | `int`  | `number`            |
-| `str`               | `string`          | `String`                | `string`              | `str`  | `string`            |
-| `bool`              | `bool`            | `Boolean`               | `bool`                | `bool` | `boolean`           |
-| `date`              | `time.Time`       | `Date`                  | -                     | `date` | `Date`              |
-| `[]type`            | `[]type`          | `ArrayList<type>`       | `seq[type]`           | `list` | `[]`                |
-| `Map<type1, type2>` | `map[type1]type2` | `HashMap<type1, type2>` | `Table[type1, type2]` | `dict` | `Map<type1, type2>` |
 
 ## Documentations
 

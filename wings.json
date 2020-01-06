@@ -1,20 +1,23 @@
 {
-    "acronyms": ["id"],
-    "header": [
-        "This is a generated file",
-        "",
-        "If you would like to make any changes, please edit the source file instead.",
-        "run `plz genFile -- \"{SOURCE_FILE}\" -c:wings.json` upon completion."
-    ],
-    "logging": 6,
-    "outputRootDirs": ["", "wings"],
-    "prefixes": {
-        "go": "github.com/binhonglee/wings"
-    },
-    "skipImport": false,
-    "tabbing": 4,
-    "langConfigs": [
-        "examples/input/templates/go.json",
-        "examples/input/templates/ts.json"
-    ]
+  "acronyms": ["id"],
+  "header": [
+    "This is a generated file",
+    "",
+    "If you would like to make any changes, please edit the source file instead.",
+    "run `plz genFile -- \"{SOURCE_FILE}\" -c:wings.json` upon completion."
+  ],
+  "logging": 6,
+  "outputRootDirs": ["", "wings"],
+  "prefixes": {
+    "go": "github.com/binhonglee/wings"
+  },
+  "skipImport": false,
+  "tabbing": 4,
+  "langConfigs": [
+    "examples/input/templates/go.json",
+    "examples/input/templates/kt.json",
+    "examples/input/templates/nim.json",
+    "examples/input/templates/py.json",
+    "examples/input/templates/ts.json"
+  ]
 }

@@ -860,8 +860,8 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#initImportedWingsType%2Cstring%2Cstring"
     title="initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;): ImportedWingsType"><wbr />init<wbr />Imported<wbr />Wings<wbr />Type<span class="attachedType">ImportedWingsType</span></a></li>
-  <li><a class="reference" href="#parseFile%2CFile%2Cstring%2Cbool"
-    title="parseFile(file: File; filename: string; skipImport: bool): Table[string, IWings]"><wbr />parse<wbr />File<span class="attachedType">IWings</span></a></li>
+  <li><a class="reference" href="#parseFile%2Cstring%2Cbool"
+    title="parseFile(filename: string; skipImport: bool): Table[string, IWings]"><wbr />parse<wbr />File<span class="attachedType">IWings</span></a></li>
 
   </ul>
 </li>
@@ -968,17 +968,17 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="parseFile,File,string,bool"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#parseFile%2CFile%2Cstring%2Cbool"><span class="Identifier">parseFile</span></a><span class="Other">(</span><span class="Identifier">file</span><span class="Other">:</span> <span class="Identifier">File</span><span class="Other">;</span> <span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">skipImport</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="winterface.html#IWings"><span class="Identifier">IWings</span></a><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+<a id="parseFile,string,bool"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#parseFile%2Cstring%2Cbool"><span class="Identifier">parseFile</span></a><span class="Other">(</span><span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">skipImport</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="winterface.html#IWings"><span class="Identifier">IWings</span></a><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Parse the given file (and its dependencies) into a table of filename to <tt class="docutils literal"><span class="pre">IWings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L247"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L243"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L247" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -991,7 +991,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-12-30 06:52:22 UTC</small>
+        <small>Made with Nim. Generated: 2020-01-06 05:05:13 UTC</small>
       </div>
     </div>
   </div>

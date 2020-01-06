@@ -1,4 +1,4 @@
-from strlib import Case
+from stones/cases import Case
 import tables
 import ../lib/tconfig
 
@@ -49,34 +49,34 @@ const (
 """
 
 const TYPES: Table[string, string] = {
-    "int": "int",
-    "flt": "float",
-    "dbl": "double",
-    "str": "string",
-    "bool": "boolean",
-    "date": "time.Time",
-    "!imported": "PATH0.{#TYPE_PASCAL}",
-    "!unimported": "{#TYPE_PASCAL}",
+  "int": "int",
+  "flt": "float",
+  "dbl": "double",
+  "str": "string",
+  "bool": "boolean",
+  "date": "time.Time",
+  "!imported": "PATH0.{#TYPE_PASCAL}",
+  "!unimported": "{#TYPE_PASCAL}",
 }.toTable()
 
 const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-    "[]": interpretType("[]{TYPE}", "[]{TYPE1}"),
-    "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "map[{TYPE1}]{TYPE2}"),
+  "[]": interpretType("[]{TYPE}", "[]{TYPE1}"),
+  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "map[{TYPE1}]{TYPE2}"),
 }.toTable()
 
 let GO_CONFIG*: TConfig = initTConfig(
-    cmt = COMMENT,
-    ct = CUSTOM_TYPES,
-    c = FILENAME,
-    ft = FILETYPE,
-    ipfmt = IMPORT_PATH_FORMAT,
-    ipt = IMPORT_PATH_TYPE,
-    pfx = IMPORT_PATH_PREFIX,
-    sep = IMPORT_PATH_SEPARATOR,
-    level = IMPORT_PATH_LEVEL,
-    temp = {
-        "struct": TEMPLATE_STRUCT,
-        "enum": TEMPLATE_ENUM,
-    }.toTable(),
-    ty = TYPES,
+  cmt = COMMENT,
+  ct = CUSTOM_TYPES,
+  c = FILENAME,
+  ft = FILETYPE,
+  ipfmt = IMPORT_PATH_FORMAT,
+  ipt = IMPORT_PATH_TYPE,
+  pfx = IMPORT_PATH_PREFIX,
+  sep = IMPORT_PATH_SEPARATOR,
+  level = IMPORT_PATH_LEVEL,
+  temp = {
+    "struct": TEMPLATE_STRUCT,
+    "enum": TEMPLATE_ENUM,
+  }.toTable(),
+  ty = TYPES,
 )

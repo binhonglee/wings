@@ -5,16 +5,16 @@
 # Source: examples/input/emotion.wings
 
 type
-    Emotion* = enum
-        Accomplished
-        Angry
-        Annoyed
-        Appalled
-        Excited
-        Exhausted
-        FeelsGood
-        Frustrated
-        Happy
-        Meh
-        Sad
-        Satisfied
+  Emotion* = enum
+    Accomplished
+    Angry
+    Annoyed
+    Appalled
+    Excited
+    Exhausted
+    FeelsGood
+    Frustrated
+    Happy
+    Meh
+    Sad
+    Satisfied

@@ -7,16 +7,16 @@ package {#1}
 // {#COMMENT}
 class {#NAME} {#IMPLEMENT}{
 // #BEGIN_VAR
-    // #VAR var {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT}
+  // #VAR var {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT}
 // #END_VAR
 
 // #BEGIN_JSON
-    fun toJsonKey(key: string): string {
-        when (key) {
-            // #JSON "{#VARNAME_CAMEL}" -> return "{#VARNAME_JSON}"
-            else -> return key
-        }
+  fun toJsonKey(key: string): string {
+    when (key) {
+      // #JSON "{#VARNAME_CAMEL}" -> return "{#VARNAME_JSON}"
+      else -> return key
     }
+  }
 // #END_JSON
 // #BEGIN_FUNCTIONS
 // #FUNCTIONS {#FUNCTIONS}

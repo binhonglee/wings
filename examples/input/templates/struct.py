@@ -7,11 +7,11 @@ import json
 // #BEGIN_VAR
 # {#COMMENT}
 class {#NAME}({#IMPLEMENT}):
-    // #VAR {#VARNAME_SNAKE}: {#TYPE} = {#TYPE_INIT}
+  // #VAR {#VARNAME_SNAKE}: {#TYPE} = {#TYPE_INIT}
 // #END_VAR
 
-    def __init__(self, data):
-        self = json.loads(data)
+  def __init__(self, data):
+    self = json.loads(data)
 // #BEGIN_FUNCTIONS
-    // #FUNCTIONS {#FUNCTIONS}
+  // #FUNCTIONS {#FUNCTIONS}
 // #END_FUNCTIONS

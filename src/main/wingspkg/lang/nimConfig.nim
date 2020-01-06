@@ -1,4 +1,4 @@
-from strlib import Case
+from stones/cases import Case
 import tables
 import ../lib/tconfig
 
@@ -20,12 +20,12 @@ import json
 
 // #BEGIN_VAR
 type
-    {#NAME}* = ref object{#IMPLEMENT}
-        ## {#COMMENT}
-        // #VAR {#VARNAME_CAMEL}*: {#TYPE}
+  {#NAME}* = ref object{#IMPLEMENT}
+    ## {#COMMENT}
+    // #VAR {#VARNAME_CAMEL}*: {#TYPE}
 // #END_VAR
 // #BEGIN_FUNCTIONS
-    // #FUNCTIONS {#FUNCTIONS}
+  // #FUNCTIONS {#FUNCTIONS}
 // #END_FUNCTIONS
 
 """
@@ -33,42 +33,42 @@ type
 const TEMPLATE_ENUM: string = """
 // #BEGIN_VAR
 type
-    {#NAME}* = enum
-        // #VAR {#VARNAME_PASCAL}
+  {#NAME}* = enum
+    // #VAR {#VARNAME_PASCAL}
 // #END_VAR
 
 """
 
 const TYPES: Table[string, string] = {
-    "int": "int",
-    "flt": "float",
-    "dbl": "float",
-    "str": "string",
-    "bool": "bool",
-    "date": "DateTime",
-    "!imported": "{#TYPE_PASCAL}",
-    "!unimported": "{#TYPE_PASCAL}"
+  "int": "int",
+  "flt": "float",
+  "dbl": "float",
+  "str": "string",
+  "bool": "bool",
+  "date": "DateTime",
+  "!imported": "{#TYPE_PASCAL}",
+  "!unimported": "{#TYPE_PASCAL}"
 }.toTable()
 
 const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-    "[]": interpretType("[]{TYPE}", "seq[{TYPE1}]"),
-    "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]"),
+  "[]": interpretType("[]{TYPE}", "seq[{TYPE1}]"),
+  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]"),
 }.toTable()
 
 let NIM_CONFIG*: TConfig = initTConfig(
-    cmt = COMMENT,
-    ct = CUSTOM_TYPES,
-    c = FILENAME,
-    ft = FILETYPE,
-    ifmt = IMPLEMENT_FORMAT,
-    ipfmt = IMPORT_PATH_FORMAT,
-    ipt = IMPORT_PATH_TYPE,
-    pfx = IMPORT_PATH_PREFIX,
-    sep = IMPORT_PATH_SEPARATOR,
-    level = IMPORT_PATH_LEVEL,
-    temp = {
-        "struct": TEMPLATE_STRUCT,
-        "enum": TEMPLATE_ENUM,
-    }.toTable(),
-    ty = TYPES,
+  cmt = COMMENT,
+  ct = CUSTOM_TYPES,
+  c = FILENAME,
+  ft = FILETYPE,
+  ifmt = IMPLEMENT_FORMAT,
+  ipfmt = IMPORT_PATH_FORMAT,
+  ipt = IMPORT_PATH_TYPE,
+  pfx = IMPORT_PATH_PREFIX,
+  sep = IMPORT_PATH_SEPARATOR,
+  level = IMPORT_PATH_LEVEL,
+  temp = {
+    "struct": TEMPLATE_STRUCT,
+    "enum": TEMPLATE_ENUM,
+  }.toTable(),
+  ty = TYPES,
 )

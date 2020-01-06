@@ -1,6 +1,6 @@
 subinclude('//build_defs/nim')
 
 nimscript(
-    name = "docs",
-    main = "docs.nims",
+  name = "docs",
+  main = "docs.nims",
 )

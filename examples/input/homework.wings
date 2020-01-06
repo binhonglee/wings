@@ -12,16 +12,16 @@ ts-implement IWingsStruct
 # Work to be done at home
 
 struct Homework {
-    id          int
-    name        str
-    due_date    date
-    given_date  date
-    feeling     []Emotion
+  id          int
+  name        str
+  due_date    date
+  given_date  date
+  feeling     []Emotion
 }
 
 go-func(
-    // Test - This comment should be included.
-    func Test() int {
-        return 0
-    }
+  // Test - This comment should be included.
+  func Test() int {
+    return 0
+  }
 )

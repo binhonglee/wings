@@ -844,23 +844,11 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="WingsType.enumw" href="wingspkg/lib/winterface.html#enumw">WingsType.enumw</a></li>
           </ul></dd>
-<dt><a name="FMT" href="#FMT"><span>FMT:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: FMT" href="wingspkg/lib/tconfig.html#FMT">tconfig: FMT</a></li>
-          </ul></dd>
-<dt><a name="FN" href="#FN"><span>FN:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: FN" href="wingspkg/lib/tconfig.html#FN">tconfig: FN</a></li>
-          </ul></dd>
 <dt><a name="fromFiles" href="#fromFiles"><span>fromFiles:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="core: fromFiles(filenames: seq[string]; config: Config): Table[string,
     Table[string, string]]" href="wingspkg/core.html#fromFiles%2Cseq%5BT%5D%5Bstring%5D%2CConfig">core: fromFiles(filenames: seq[string]; config: Config): Table[string,
     Table[string, string]]</a></li>
-          </ul></dd>
-<dt><a name="FT" href="#FT"><span>FT:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: FT" href="wingspkg/lib/tconfig.html#FT">tconfig: FT</a></li>
           </ul></dd>
 <dt><a name="genFile" href="#genFile"><span>genFile:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -873,10 +861,6 @@ function main() {
 <dt><a name="GO_CONFIG" href="#GO_CONFIG"><span>GO_CONFIG:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="goConfig: GO_CONFIG" href="wingspkg/lang/goConfig.html#GO_CONFIG">goConfig: GO_CONFIG</a></li>
-          </ul></dd>
-<dt><a name="I_FMT" href="#I_FMT"><span>I_FMT:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: I_FMT" href="wingspkg/lib/tconfig.html#I_FMT">tconfig: I_FMT</a></li>
           </ul></dd>
 <dt><a name="ImportedWingsType" href="#ImportedWingsType"><span>ImportedWingsType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -892,9 +876,9 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="tconfig: ImportPathType" href="wingspkg/lib/tconfig.html#ImportPathType">tconfig: ImportPathType</a></li>
           </ul></dd>
-<dt><a name="IN" href="#IN"><span>IN:</span></a></dt><dd><ul class="simple">
+<dt><a name="Indentation" href="#Indentation"><span>Indentation:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="tconfig: IN" href="wingspkg/lib/tconfig.html#IN">tconfig: IN</a></li>
+          data-doc-search-tag="tconfig: Indentation" href="wingspkg/lib/tconfig.html#Indentation">tconfig: Indentation</a></li>
           </ul></dd>
 <dt><a name="initConfig" href="#initConfig"><span>initConfig:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -917,15 +901,17 @@ function main() {
             cti: Table[string, TypeInterpreter] = initTable();
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
-            sep: char = DEFAULT_SEPARATOR; level: int = 0; pfmt: string = &quot;&quot;;
+            sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
+            pi: bool = false; pfmt: string = &quot;&quot;;
             temp: Table[string, string] = initTable();
             ty: Table[string, string] = initTable();
-            ti: Table[string, string] = initTable()): TConfig" href="wingspkg/lib/tconfig.html#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D">tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
+            ti: Table[string, string] = initTable()): TConfig" href="wingspkg/lib/tconfig.html#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D">tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
             ct: Table[string, TypeInterpreter] = initTable();
             cti: Table[string, TypeInterpreter] = initTable();
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
-            sep: char = DEFAULT_SEPARATOR; level: int = 0; pfmt: string = &quot;&quot;;
+            sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
+            pi: bool = false; pfmt: string = &quot;&quot;;
             temp: Table[string, string] = initTable();
             ty: Table[string, string] = initTable();
             ti: Table[string, string] = initTable()): TConfig</a></li>
@@ -934,10 +920,6 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="tconfig: interpretType(inputType: string; outputType: string): TypeInterpreter" href="wingspkg/lib/tconfig.html#interpretType%2Cstring%2Cstring">tconfig: interpretType(inputType: string; outputType: string): TypeInterpreter</a></li>
           </ul></dd>
-<dt><a name="IP_FMT" href="#IP_FMT"><span>IP_FMT:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: IP_FMT" href="wingspkg/lib/tconfig.html#IP_FMT">tconfig: IP_FMT</a></li>
-          </ul></dd>
 <dt><a name="IWings" href="#IWings"><span>IWings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="winterface: IWings" href="wingspkg/lib/winterface.html#IWings">winterface: IWings</a></li>
@@ -945,10 +927,6 @@ function main() {
 <dt><a name="KT_CONFIG" href="#KT_CONFIG"><span>KT_CONFIG:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="ktConfig: KT_CONFIG" href="wingspkg/lang/ktConfig.html#KT_CONFIG">ktConfig: KT_CONFIG</a></li>
-          </ul></dd>
-<dt><a name="LEVEL" href="#LEVEL"><span>LEVEL:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: LEVEL" href="wingspkg/lib/tconfig.html#LEVEL">tconfig: LEVEL</a></li>
           </ul></dd>
 <dt><a name="Never" href="#Never"><span>Never:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -970,19 +948,7 @@ function main() {
           </ul></dd>
 <dt><a name="parseFile" href="#parseFile"><span>parseFile:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="winterface: parseFile(file: File; filename: string; skipImport: bool): Table[string, IWings]" href="wingspkg/lib/winterface.html#parseFile%2CFile%2Cstring%2Cbool">winterface: parseFile(file: File; filename: string; skipImport: bool): Table[string, IWings]</a></li>
-          </ul></dd>
-<dt><a name="P_FMT" href="#P_FMT"><span>P_FMT:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: P_FMT" href="wingspkg/lib/tconfig.html#P_FMT">tconfig: P_FMT</a></li>
-          </ul></dd>
-<dt><a name="PFX" href="#PFX"><span>PFX:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: PFX" href="wingspkg/lib/tconfig.html#PFX">tconfig: PFX</a></li>
-          </ul></dd>
-<dt><a name="P_TY" href="#P_TY"><span>P_TY:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: P_TY" href="wingspkg/lib/tconfig.html#P_TY">tconfig: P_TY</a></li>
+          data-doc-search-tag="winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]" href="wingspkg/lib/winterface.html#parseFile%2Cstring%2Cbool">winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]</a></li>
           </ul></dd>
 <dt><a name="PY_CONFIG" href="#PY_CONFIG"><span>PY_CONFIG:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -992,10 +958,6 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="ImportPathType.Relative" href="wingspkg/lib/tconfig.html#Relative">ImportPathType.Relative</a></li>
           </ul></dd>
-<dt><a name="SEP" href="#SEP"><span>SEP:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: SEP" href="wingspkg/lib/tconfig.html#SEP">tconfig: SEP</a></li>
-          </ul></dd>
 <dt><a name="structw" href="#structw"><span>structw:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="WingsType.structw" href="wingspkg/lib/winterface.html#structw">WingsType.structw</a></li>
@@ -1003,10 +965,6 @@ function main() {
 <dt><a name="TConfig" href="#TConfig"><span>TConfig:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="tconfig: TConfig" href="wingspkg/lib/tconfig.html#TConfig">tconfig: TConfig</a></li>
-          </ul></dd>
-<dt><a name="TEMP" href="#TEMP"><span>TEMP:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: TEMP" href="wingspkg/lib/tconfig.html#TEMP">tconfig: TEMP</a></li>
           </ul></dd>
 <dt><a name="Templatable" href="#Templatable"><span>Templatable:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1072,10 +1030,6 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="tsConfig: TS_CONFIG" href="wingspkg/lang/tsConfig.html#TS_CONFIG">tsConfig: TS_CONFIG</a></li>
           </ul></dd>
-<dt><a name="TY" href="#TY"><span>TY:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="tconfig: TY" href="wingspkg/lib/tconfig.html#TY">tconfig: TY</a></li>
-          </ul></dd>
 <dt><a name="TYPE_IMPORTED" href="#TYPE_IMPORTED"><span>TYPE_IMPORTED:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="tempconst: TYPE_IMPORTED" href="wingspkg/lib/tempconst.html#TYPE_IMPORTED">tempconst: TYPE_IMPORTED</a></li>
@@ -1121,7 +1075,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-12-30 06:52:24 UTC</small>
+        <small>Made with Nim. Generated: 2020-01-06 05:05:14 UTC</small>
       </div>
     </div>
   </div>

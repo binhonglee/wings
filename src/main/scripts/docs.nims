@@ -10,22 +10,22 @@ const master: string = "master"
 const devel: string = "devel"
 
 proc genRun(): void =
-    if lastPathPart(getCurrentDir()) != "wings":
-        echo "This script should be run on the top level folder instead."
-        echo "Exiting..."
-        return
+  if lastPathPart(getCurrentDir()) != "wings":
+    echo "This script should be run on the top level folder instead."
+    echo "Exiting..."
+    return
 
-    if dirExists(folder):
-        rmdir(folder)
+  if dirExists(folder):
+    rmdir(folder)
 
-    exec(
-        "nim doc --project --index:on -o:" & folder &
-        "/ --git.url:" & gitURL &
-        " --git.commit:" & master &
-        " --git.devel:" & devel & " " & main
-    )
+  exec(
+    "nim doc --project --index:on -o:" & folder &
+    "/ --git.url:" & gitURL &
+    " --git.commit:" & master &
+    " --git.devel:" & devel & " " & main
+  )
 
-    exec("nim buildIndex -o:" & folder & "/theindex.html " & folder)
-    mvFile(folder & "/theindex.html", folder & "/index.html")
+  exec("nim buildIndex -o:" & folder & "/theindex.html " & folder)
+  mvFile(folder & "/theindex.html", folder & "/index.html")
 
 genRun()

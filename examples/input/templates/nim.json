@@ -1,28 +1,32 @@
 {
-    "comment": "#",
-    "filename": "lower",
-    "filetype": "nim",
-    "implementFormat": " of {#IMPLEMENT} ",
-    "importPath": {
-        "format": "{#IMPORT}",
-        "pathType": "relative",
-        "prefix": "",
-        "level": 0
-    },
-    "templates": {
-        "struct": "examples/input/templates/struct.nim",
-        "enum": "examples/input/templates/enum.nim"
-    },
-    "types": {
-        "int": "int",
-        "flt": "float",
-        "dbl": "float",
-        "str": "string",
-        "bool": "bool",
-        "date": "DateTime",
-        "[]{TYPE}": "seq[{TYPE1}]",
-        "Map<{TYPE1}, {TYPE2}>": "Table[{TYPE1}, {TYPE2}]",
-        "!imported": "{#TYPE_PASCAL}",
-        "!unimported": "{#TYPE_PASCAL}"
-    }
+  "comment": "#",
+  "filename": "lower",
+  "filetype": "nim",
+  "implementFormat": " of {#IMPLEMENT} ",
+  "importPath": {
+    "format": "{#IMPORT}",
+    "pathType": "relative",
+    "prefix": "",
+    "level": 0
+  },
+  "indentation": {
+    "spacing": "  ",
+    "preIndent": false
+  },
+  "templates": {
+    "struct": "examples/input/templates/struct.nim",
+    "enum": "examples/input/templates/enum.nim"
+  },
+  "types": {
+    "int": "int",
+    "flt": "float",
+    "dbl": "float",
+    "str": "string",
+    "bool": "bool",
+    "date": "DateTime",
+    "[]{TYPE}": "seq[{TYPE1}]",
+    "Map<{TYPE1},{TYPE2}>": "Table[{TYPE1}, {TYPE2}]",
+    "!imported": "{#TYPE_PASCAL}",
+    "!unimported": "{#TYPE_PASCAL}"
+  }
 }

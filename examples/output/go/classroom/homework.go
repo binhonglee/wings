@@ -19,10 +19,10 @@ type Homework struct {
 	Feeling      []person.Emotion    `json:"feeling"`
 }
 
-    // Test - This comment should be included.
-    func Test() int {
-        return 0
-    }
+// Test - This comment should be included.
+func Test() int {
+	return 0
+}
 
 // Homeworks - An array of Homework
 type Homeworks []Homework

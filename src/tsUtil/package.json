@@ -1,55 +1,55 @@
 {
-    "name": "wings-ts-util",
-    "version": "0.0.6",
-    "description": "Utility class for Wings (a codegen module).",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "build": "npm run clean && tsc -p ./tsconfig.json",
-        "test": "mocha",
-        "cover": "nyc mocha",
-        "clean": "rm -rf dist",
-        "prepublishOnly": "npm run build"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/binhonglee/wings.git",
-        "directory": "src/tsUtil"
-    },
-    "author": "BinHong Lee",
-    "license": "MIT",
-    "devDependencies": {
-        "@types/assert": "1.4.3",
-        "@types/mocha": "5.2.7",
-        "mocha": "6.2.2",
-        "nyc": "14.1.1",
-        "ts-node": "8.5.3",
-        "typescript": "3.7.2"
-    },
-    "nyc": {
-        "instrument": true,
-        "sourceMaps": false,
-        "all": true,
-        "check-coverage": false,
-        "per-file": true,
-        "clean": true,
-        "temp-dir": "./.nyc_output",
-        "include": [
-            "**/*.ts"
-        ],
-        "exclude": [
-            "**/*.{spec,test}.{js,ts}",
-            "*.js"
-        ],
-        "reporter": [
-            "lcov",
-            "cobertura",
-            "text",
-            "text-summary"
-        ],
-        "report-dir": "../../report",
-        "extension": [
-            ".ts"
-        ]
-    }
+  "name": "wings-ts-util",
+  "version": "0.0.6",
+  "description": "Utility class for Wings (a codegen module).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc -p ./tsconfig.json",
+    "test": "mocha",
+    "cover": "nyc mocha",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binhonglee/wings.git",
+    "directory": "src/tsUtil"
+  },
+  "author": "BinHong Lee",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/assert": "1.4.3",
+    "@types/mocha": "5.2.7",
+    "mocha": "6.2.2",
+    "nyc": "14.1.1",
+    "ts-node": "8.5.3",
+    "typescript": "3.7.2"
+  },
+  "nyc": {
+    "instrument": true,
+    "sourceMaps": false,
+    "all": true,
+    "check-coverage": false,
+    "per-file": true,
+    "clean": true,
+    "temp-dir": "./.nyc_output",
+    "include": [
+      "**/*.ts"
+    ],
+    "exclude": [
+      "**/*.{spec,test}.{js,ts}",
+      "*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "cobertura",
+      "text",
+      "text-summary"
+    ],
+    "report-dir": "../../report",
+    "extension": [
+      ".ts"
+    ]
+  }
 }

@@ -10,16 +10,16 @@ import examples.output.py.emotion
 
 # Any person who is studying in a class
 class Student(People):
-    id: int = -1
-    name: str = ""
-    cur_class: str = ""
-    feeling: Emotion = Emotion.Meh
-    is_active: bool = true
-    year: DateTime = date.today()
-    graduation: DateTime = date.today()
-    homeworks: list = []
-    something: dict = {}
+  id: int = -1
+  name: str = ""
+  cur_class: str = ""
+  feeling: Emotion = Emotion.Meh
+  is_active: bool = true
+  year: DateTime = date.today()
+  graduation: DateTime = date.today()
+  homeworks: list = []
+  something: dict = {}
 
-    def __init__(self, data):
-        self = json.loads(data)
-    
+  def __init__(self, data):
+    self = json.loads(data)
+  

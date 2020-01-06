@@ -1,6 +1,6 @@
 enum {#NAME_PASCAL} {
 // #BEGIN_VAR
-    // #VAR {#VARNAME_PASCAL},
+  // #VAR {#VARNAME_PASCAL},
 // #END_VAR
 }
 

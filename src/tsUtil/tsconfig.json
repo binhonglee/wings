@@ -1,12 +1,12 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "commonjs",
-        "outDir": "./dist",
-        "moduleResolution": "node",
-        "declaration": true
-    },
-    "include": [
-        "index.ts"
-    ]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "declaration": true
+  },
+  "include": [
+    "index.ts"
+  ]
 }

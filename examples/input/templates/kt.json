@@ -1,34 +1,38 @@
 {
-    "comment": "//",
-    "filename": "pascal",
-    "filetype": "kt",
-    "implementFormat": ": {#IMPLEMENT} ",
-    "importPath": {
-        "pathType": "never"
-    },
-    "templates": {
-        "struct": "examples/input/templates/struct.kt",
-        "enum": "examples/input/templates/enum.kt"
-    },
-    "types": {
-        "int": "Int",
-        "flt": "Float",
-        "dbl": "Double",
-        "str": "String",
-        "bool": "Boolean",
-        "date": "Date",
-        "[]{TYPE}": "ArrayList<{TYPE1}>",
-        "Map<{TYPE1},{TYPE2}>": "HashMap<{TYPE1}, {TYPE2}>",
-        "!imported": "{#TYPE_PASCAL}",
-        "!unimported": "{#TYPE_PASCAL}"
-    },
-    "init": {
-        "int": "0",
-        "flt": "0",
-        "dbl": "0",
-        "str": "\"\"",
-        "bool": "false",
-        "!imported": " {#TYPE_PASCAL}()",
-        "!unimported": " {#TYPE_PASCAL}()"
-    }
+  "comment": "//",
+  "filename": "pascal",
+  "filetype": "kt",
+  "implementFormat": ": {#IMPLEMENT} ",
+  "importPath": {
+    "pathType": "never"
+  },
+  "indentation": {
+    "spacing": "  ",
+    "preIndent": true
+  },
+  "templates": {
+    "struct": "examples/input/templates/struct.kt",
+    "enum": "examples/input/templates/enum.kt"
+  },
+  "types": {
+    "int": "Int",
+    "flt": "Float",
+    "dbl": "Double",
+    "str": "String",
+    "bool": "Boolean",
+    "date": "Date",
+    "[]{TYPE}": "ArrayList<{TYPE1}>",
+    "Map<{TYPE1},{TYPE2}>": "HashMap<{TYPE1}, {TYPE2}>",
+    "!imported": "{#TYPE_PASCAL}",
+    "!unimported": "{#TYPE_PASCAL}"
+  },
+  "init": {
+    "int": "0",
+    "flt": "0",
+    "dbl": "0",
+    "str": "\"\"",
+    "bool": "false",
+    "!imported": " {#TYPE_PASCAL}()",
+    "!unimported": " {#TYPE_PASCAL}()"
+  }
 }

@@ -1,28 +1,32 @@
 {
-    "comment": "//",
-    "filename": "lower",
-    "filetype": "go",
-    "importPath": {
-        "format": "{#1}:{#IMPORT}",
-        "pathType": "absolute",
-        "prefix": "",
-        "level": 1
-    },
-    "importedFormat": "{#1}.{#TYPE_PASCAL}",
-    "templates": {
-        "struct": "examples/input/templates/struct.go",
-        "enum": "examples/input/templates/enum.go"
-    },
-    "types": {
-        "int": "int",
-        "flt": "float",
-        "dbl": "double",
-        "str": "string",
-        "bool": "boolean",
-        "date": "time.Time",
-        "[]{TYPE}": "[]{TYPE1}",
-        "Map<{TYPE1},{TYPE2}>": "map[{TYPE1}]{TYPE2}",
-        "!imported": "{#1}.{#TYPE_PASCAL}",
-        "!unimported": "{#TYPE_PASCAL}"
-    }
+  "comment": "//",
+  "filename": "lower",
+  "filetype": "go",
+  "importPath": {
+    "format": "{#1}:{#IMPORT}",
+    "pathType": "absolute",
+    "prefix": "",
+    "level": 1
+  },
+  "importedFormat": "{#1}.{#TYPE_PASCAL}",
+  "indentation": {
+    "spacing": "\t",
+    "preIndent": false
+  },
+  "templates": {
+    "struct": "examples/input/templates/struct.go",
+    "enum": "examples/input/templates/enum.go"
+  },
+  "types": {
+    "int": "int",
+    "flt": "float",
+    "dbl": "double",
+    "str": "string",
+    "bool": "boolean",
+    "date": "time.Time",
+    "[]{TYPE}": "[]{TYPE1}",
+    "Map<{TYPE1},{TYPE2}>": "map[{TYPE1}]{TYPE2}",
+    "!imported": "{#1}.{#TYPE_PASCAL}",
+    "!unimported": "{#TYPE_PASCAL}"
+  }
 }

@@ -5,17 +5,24 @@ os:
 language: c
 node_js: stable
 
+cache:
+  directories:
+    - "$HOME/.nimble/bin"
+    - "$HOME/.choosenim"
+
 install:
+  - export CHOOSENIM_NO_ANALYTICS=1
+  - export PATH=$HOME/.nimble/bin:$PATH
   - cd src/tsUtil
   - npm install
   - cd ../../
   - |
+    if ! type -P choosenim &> /dev/null; then
+      export CHOOSENIM_CHOOSE_VERSION=$BRANCH
       curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
       sh init.sh -y
-
-before_script:
-  - export CHOOSENIM_NO_ANALYTICS=1
-  - export PATH=$HOME/.nimble/bin:$PATH
+    fi
+  - nimble -y build
 
 script:
   - ./scripts/test.sh
