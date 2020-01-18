@@ -11,6 +11,9 @@
   "prefixes": {
     "go": "github.com/binhonglee/wings"
   },
+  "langFilter": [
+    "go", "kt", "nim", "py", "ts"
+  ],
   "skipImport": false,
   "tabbing": 4,
   "langConfigs": [

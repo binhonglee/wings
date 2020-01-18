@@ -16,7 +16,6 @@ run `wings "{SOURCE_FILE}"` upon completion.
 
 const DEFAULT_OUTPUT_ROOT_DIRS: HashSet[string] = initHashSet[string]()
 const DEFAULT_SKIP_IMPORT: bool = false
-const DEFAULT_TABBING: int = 4
 let CALLER_DIR*: string = getCurrentDir() ## Directory from which `wings` is ran from.
 
 type
@@ -26,14 +25,12 @@ type
     langConfigs*: Table[string, TConfig]
     outputRootDirs*: HashSet[string]
     skipImport*: bool
-    tabbing*: int
 
 proc initConfig*(
   header: string = DEFAULT_HEADER,
   langConfigs: Table[string, TConfig] = DEFAULT_CONFIGS,
   outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS,
   skipImport: bool = DEFAULT_SKIP_IMPORT,
-  tabbing: int = DEFAULT_TABBING,
 ): Config =
   ## Create a config to be used.
   result = Config()
@@ -41,7 +38,6 @@ proc initConfig*(
   result.langConfigs = langConfigs
   result.outputRootDirs = outputRootDirs
   result.skipImport = skipImport
-  result.tabbing = tabbing
 
 proc verifyRootDir(outputRootDir: string): string =
   result = getCurrentDir()
@@ -104,12 +100,6 @@ proc parse*(filename: string): Config =
   else:
     LOG(INFO, "'skipImport' is not set. Using default " & $DEFAULT_SKIP_IMPORT & ".")
 
-  if jsonConfig.hasKey("tabbing"):
-    result.tabbing = jsonConfig["tabbing"].getInt(DEFAULT_TABBING)
-    LOG(INFO, "Set 'tabbing' to " & $result.tabbing & ".")
-  else:
-    LOG(INFO, "'tabbing' is not set. Using default " & $DEFAULT_TABBING & ".")
-
   if jsonConfig.hasKey("langConfigs"):
     let langConfigs: seq[JsonNode] = jsonConfig["langConfigs"].getElems()
     for configNode in langConfigs:
@@ -118,6 +108,17 @@ proc parse*(filename: string): Config =
         result.langConfigs[config.filetype] = config
       else:
         result.langConfigs.add(config.filetype, config)
+
+  if jsonConfig.hasKey("langFilter"):
+    let langFilter: seq[JsonNode] = jsonConfig["langFilter"].getElems()
+    var filters: HashSet[string] = initHashSet[string]()
+    for lang in langFilter:
+      filters.incl(lang.getStr(""))
+
+    if langFilter.len() > 0:
+      for lang in result.langConfigs.keys:
+        if not filters.contains(lang):
+          result.langConfigs.del(lang)
 
   if jsonConfig.hasKey("prefixes"):
     let prefixFields: OrderedTable[string, JsonNode] = jsonConfig["prefixes"].getFields()
