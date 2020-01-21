@@ -810,6 +810,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="ImportPathType.Absolute" href="wingspkg/lib/tconfig.html#Absolute">ImportPathType.Absolute</a></li>
           </ul></dd>
+<dt><a name="addImport" href="#addImport"><span>addImport:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="winterface: addImport(iwings: var IWings; newImport: string; importLang: string): void" href="wingspkg/lib/winterface.html#addImport%2CIWings%2Cstring%2Cstring">winterface: addImport(iwings: var IWings; newImport: string; importLang: string): void</a></li>
+          </ul></dd>
 <dt><a name="CALLER_DIR" href="#CALLER_DIR"><span>CALLER_DIR:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="config: CALLER_DIR" href="wingspkg/util/config.html#CALLER_DIR">config: CALLER_DIR</a></li>
@@ -817,6 +821,10 @@ function main() {
 <dt><a name="Config" href="#Config"><span>Config:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="config: Config" href="wingspkg/util/config.html#Config">config: Config</a></li>
+          </ul></dd>
+<dt><a name="CustomTypeInterpreter" href="#CustomTypeInterpreter"><span>CustomTypeInterpreter:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tconfig: CustomTypeInterpreter" href="wingspkg/lib/tconfig.html#CustomTypeInterpreter">tconfig: CustomTypeInterpreter</a></li>
           </ul></dd>
 <dt><a name="default" href="#default"><span>default:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -885,10 +893,10 @@ function main() {
           data-doc-search-tag="config: initConfig(header: string = DEFAULT_HEADER;
            langConfigs: Table[string, TConfig] = DEFAULT_CONFIGS;
            outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS;
-           skipImport: bool = DEFAULT_SKIP_IMPORT; tabbing: int = DEFAULT_TABBING): Config" href="wingspkg/util/config.html#initConfig%2Cstring%2CTable%5Bstring%2CTConfig%5D%2CHashSet%5Bstring%5D%2Cbool%2Cint">config: initConfig(header: string = DEFAULT_HEADER;
+           skipImport: bool = DEFAULT_SKIP_IMPORT): Config" href="wingspkg/util/config.html#initConfig%2Cstring%2CTable%5Bstring%2CTConfig%5D%2CHashSet%5Bstring%5D%2Cbool">config: initConfig(header: string = DEFAULT_HEADER;
            langConfigs: Table[string, TConfig] = DEFAULT_CONFIGS;
            outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS;
-           skipImport: bool = DEFAULT_SKIP_IMPORT; tabbing: int = DEFAULT_TABBING): Config</a></li>
+           skipImport: bool = DEFAULT_SKIP_IMPORT): Config</a></li>
           </ul></dd>
 <dt><a name="initImportedWingsType" href="#initImportedWingsType"><span>initImportedWingsType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -897,28 +905,30 @@ function main() {
 <dt><a name="initTConfig" href="#initTConfig"><span>initTConfig:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
-            ct: Table[string, TypeInterpreter] = initTable();
-            cti: Table[string, TypeInterpreter] = initTable();
+            ct: Table[string, CustomTypeInterpreter] = initTable();
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
             sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
             pi: bool = false; pfmt: string = &quot;&quot;;
             temp: Table[string, string] = initTable();
-            ty: Table[string, string] = initTable();
-            ti: Table[string, string] = initTable()): TConfig" href="wingspkg/lib/tconfig.html#initTConfig%2Cstring%2CTable%5Bstring%2CTypeInterpreter%5D%2CTable%5Bstring%2CTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2Cstring%5D">tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
-            ct: Table[string, TypeInterpreter] = initTable();
-            cti: Table[string, TypeInterpreter] = initTable();
+            ty: Table[string, TypeInterpreter] = initTable()): TConfig" href="wingspkg/lib/tconfig.html#initTConfig%2Cstring%2CTable%5Bstring%2CCustomTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2CTypeInterpreter%5D">tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
+            ct: Table[string, CustomTypeInterpreter] = initTable();
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
             sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
             pi: bool = false; pfmt: string = &quot;&quot;;
             temp: Table[string, string] = initTable();
-            ty: Table[string, string] = initTable();
-            ti: Table[string, string] = initTable()): TConfig</a></li>
+            ty: Table[string, TypeInterpreter] = initTable()): TConfig</a></li>
+          </ul></dd>
+<dt><a name="initTypeInterpreter" href="#initTypeInterpreter"><span>initTypeInterpreter:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tconfig: initTypeInterpreter(wingsType: string = &quot;&quot;; targetType: string = &quot;&quot;;
+                    requiredImport: string = &quot;&quot;; targetInit: string = &quot;&quot;): TypeInterpreter" href="wingspkg/lib/tconfig.html#initTypeInterpreter%2Cstring%2Cstring%2Cstring%2Cstring">tconfig: initTypeInterpreter(wingsType: string = &quot;&quot;; targetType: string = &quot;&quot;;
+                    requiredImport: string = &quot;&quot;; targetInit: string = &quot;&quot;): TypeInterpreter</a></li>
           </ul></dd>
 <dt><a name="interpretType" href="#interpretType"><span>interpretType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="tconfig: interpretType(inputType: string; outputType: string): TypeInterpreter" href="wingspkg/lib/tconfig.html#interpretType%2Cstring%2Cstring">tconfig: interpretType(inputType: string; outputType: string): TypeInterpreter</a></li>
+          data-doc-search-tag="tconfig: interpretType(typeInterpreter: TypeInterpreter): CustomTypeInterpreter" href="wingspkg/lib/tconfig.html#interpretType%2CTypeInterpreter">tconfig: interpretType(typeInterpreter: TypeInterpreter): CustomTypeInterpreter</a></li>
           </ul></dd>
 <dt><a name="IWings" href="#IWings"><span>IWings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1056,7 +1066,7 @@ function main() {
           </ul></dd>
 <dt><a name="wingsToTemplatable" href="#wingsToTemplatable"><span>wingsToTemplatable:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="templatable: wingsToTemplatable(winterface: IWings; tconfig: TConfig): Templatable" href="wingspkg/lib/templatable.html#wingsToTemplatable%2CIWings%2CTConfig">templatable: wingsToTemplatable(winterface: IWings; tconfig: TConfig): Templatable</a></li>
+          data-doc-search-tag="templatable: wingsToTemplatable(winterface: var IWings; tconfig: TConfig): Templatable" href="wingspkg/lib/templatable.html#wingsToTemplatable%2CIWings%2CTConfig">templatable: wingsToTemplatable(winterface: var IWings; tconfig: TConfig): Templatable</a></li>
           </ul></dd>
 <dt><a name="WingsType" href="#WingsType"><span>WingsType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1075,7 +1085,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2020-01-06 05:05:14 UTC</small>
+        <small>Made with Nim. Generated: 2020-02-06 08:56:58 UTC</small>
       </div>
     </div>
   </div>

@@ -15,6 +15,9 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Syntax: syntax.md
+  - Config: config.md
+  - Template: template.md
   - Main: main/index.html
   - Utility classes:
     - TypeScript:
