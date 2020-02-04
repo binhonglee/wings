@@ -6,6 +6,7 @@
 
 import json
 import ./homework
+import tables
 import ./emotion
 
 type

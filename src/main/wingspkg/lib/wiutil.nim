@@ -1,16 +1,10 @@
 from stones/cases import Case, allCases
-from stones/strlib import replace, seqCharToString
+from stones/strlib import replace
 from strutils import join, split
 import stones/log
-import sets
 import tables
 import ./winterface, ./tconfig, ./tempconst, ./templating, ./templatable
 import ../util/filename, ../util/header, ../util/config
-
-proc addImport(iwings: var IWings, newImport: string, importLang: string): void =
-  if not iwings.imports.hasKey(importLang):
-    iwings.imports.add(importLang, initHashSet[string]())
-  iwings.imports[importLang].incl(newImport)
 
 proc fulfillDependency(
   iwings: var IWings,
@@ -54,16 +48,12 @@ proc fulfillDependency(
       for k, v in allCases(name, Snake).pairs:
         replaceMap.add(wrap(TK_TYPE, $k), v)
 
-      var s: string = ""
-      if langConfig[importType].typeInits.hasKey(TYPE_IMPORTED):
-        s = langConfig[importType].typeInits[TYPE_IMPORTED].replace(replaceMap)
-      let iptwt: ImportedWingsType = initImportedWingsType(
-        langConfig[importType].types[TYPE_IMPORTED].replace(replaceMap), s,
-      )
-
       iwings.typesImported[importType].add(
         name,
-        iptwt
+        initImportedWingsType(
+          langConfig[importType].types[TYPE_IMPORTED].targetType.replace(replaceMap),
+          langConfig[importType].types[TYPE_IMPORTED].targetInit.replace(replaceMap),
+        ),
       )
       iwings.addImport(ipString, importType)
 

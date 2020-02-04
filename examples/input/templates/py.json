@@ -18,28 +18,48 @@
     "struct": "examples/input/templates/struct.py",
     "enum": "examples/input/templates/enum.py"
   },
-  "types": {
-    "int": "int",
-    "flt": "float",
-    "dbl": "double",
-    "str": "str",
-    "bool": "bool",
-    "date": "DateTime",
-    "[]{TYPE}": "list",
-    "Map<{TYPE1},{TYPE2}>": "dict",
-    "!imported": "{#TYPE_PASCAL}",
-    "!unimported": "{#TYPE_PASCAL}"
-  },
-  "init": {
-    "int": "0",
-    "flt": "0",
-    "dbl": "0",
-    "str": "\"\"",
-    "bool": "false",
-    "date": "date.today()",
-    "[]{TYPE}": "[]",
-    "Map<{TYPE1},{TYPE2}>": "{}",
-    "!imported": "new {#TYPE_PASCAL}()",
-    "!unimported": "new {#TYPE_PASCAL}()"
-  }
+  "types": [
+    {
+      "wingsType": "int",
+      "targetType": "int",
+      "targetInit": "0"
+    }, {
+      "wingsType": "flt",
+      "targetType": "float",
+      "targetInit": "0"
+    }, {
+      "wingsType": "dbl",
+      "targetType": "double",
+      "targetInit": "0"
+    }, {
+      "wingsType": "str",
+      "targetType": "str",
+      "targetInit": "\"\""
+    }, {
+      "wingsType": "bool",
+      "targetType": "bool",
+      "targetInit": "False"
+    }, {
+      "wingsType": "date",
+      "targetType": "datetime",
+      "requiredImport": "datetime:datetime",
+      "targetInit": "datetime.now()"
+    }, {
+      "wingsType": "[]{TYPE}",
+      "targetType": "list",
+      "targetInit": "[]"
+    }, {
+      "wingsType": "Map<{TYPE1},{TYPE2}>",
+      "targetType": "dict",
+      "targetInit": "{}"
+    }, {
+      "wingsType": "!imported",
+      "targetType": "{#TYPE_PASCAL}",
+      "targetInit": "new {#TYPE_PASCAL}()"
+    }, {
+      "wingsType": "!unimported",
+      "targetType": "{#TYPE_PASCAL}",
+      "targetInit": "new {#TYPE_PASCAL}()"
+    }
+  ]
 }

@@ -10,7 +10,7 @@ const CMT = "comment"
 const FN = "filename"
 const FT = "filetype"
 const I_FMT = "implementFormat"
-const IP = "importPath"
+const I_P = "importPath"
 const FMT = "format"
 const P_TY = "pathType"
 const SEP = "separator"
@@ -18,11 +18,14 @@ const PFX = "prefix"
 const LEVEL = "level"
 const IND = "indentation"
 const SP = "spacing"
-const PI = "preIndent"
+const P_I = "preIndent"
 const P_FMT = "parseFormat"
 const TEMP = "templates"
 const TY = "types"
-const IN = "init"
+const W_T = "wingsType"
+const T_T = "targetType"
+const R_I = "requiredImport"
+const T_I = "targetInit"
 
 proc getCase(
   input: string,
@@ -97,13 +100,13 @@ proc parse*(filename: string): TConfig =
   else:
     result.implementFormat = wrap(TK_IMPLEMENT)
 
-  if jsonConfig.hasKey(IP):
-    let importPath: OrderedTable[string, JsonNode] = jsonConfig[IP].getFields()
+  if jsonConfig.hasKey(I_P):
+    let importPath: OrderedTable[string, JsonNode] = jsonConfig[I_P].getFields()
 
     if importPath.hasKey(FMT):
       result.importPath.format = importPath[FMT].getStr("")
 
-    let importPathTypeErrMsg: string = IP & ":" & P_TY & errorMsg
+    let importPathTypeErrMsg: string = I_P & ":" & P_TY & errorMsg
     if importPath.hasKey(P_TY):
       result.importPath.pathType = getImportPathType(
         importPath[P_TY].getStr(""),
@@ -123,27 +126,27 @@ proc parse*(filename: string): TConfig =
       try:
         result.importPath.prefix = importPath[PFX].getStr("")
       except:
-        LOG(DEBUG, "Setting prefix to empty.")
+        LOG(DEBUG, "Setting " & PFX & " to empty.")
         result.importPath.prefix = ""
 
       try:
         let pathLevel: int = importPath[LEVEL].getInt(-1)
         if pathLevel < 0:
-          LOG(FATAL, IP & ":" & LEVEL & errorMsg)
+          LOG(FATAL, I_P & ":" & LEVEL & errorMsg)
         else:
           result.importPath.level = pathLevel
       except:
-        LOG(FATAL, IP & ":" & LEVEL & errorMsg)
+        LOG(FATAL, I_P & ":" & LEVEL & errorMsg)
   else:
-    LOG(FATAL, IP & errorMsg)
+    LOG(FATAL, I_P & errorMsg)
 
   if jsonConfig.hasKey(IND):
     let ind: OrderedTable[string, JsonNode] = jsonConfig[IND].getFields()
 
     if ind.hasKey(SP):
       result.indentation.spacing = ind[SP].getStr("")
-    if ind.hasKey(PI):
-      result.indentation.preIndent = ind[PI].getBool(false)
+    if ind.hasKey(P_I):
+      result.indentation.preIndent = ind[P_I].getBool(false)
 
   if jsonConfig.hasKey(P_FMT):
     result.parseFormat = jsonConfig[P_FMT].getStr("")
@@ -162,34 +165,47 @@ proc parse*(filename: string): TConfig =
     LOG(FATAL, TEMP & errorMsg)
 
   if jsonConfig.hasKey(TY):
-    let types: OrderedTable[string, JsonNode] = jsonConfig[TY].getFields()
+    let types: seq[JsonNode] = jsonConfig[TY].getElems()
+    if types.len < 1:
+      LOG(FATAL, TY & errorMsg)
 
-    for key in types.keys:
-      let givenType: string = types[key].getStr("")
-      if givenType != "":
-        if key.contains(TYPE_PREFIX):
-          let temp: TypeInterpreter = interpretType(key, givenType)
-          result.customTypes.add(temp.prefix, temp)
-        else:
-          result.types.add(key, givenType)
+    for t in types:
+      var wingsType: string
+      var targetType: string
+      var requiredImport: string
+      var targetInit: string
+
+      if t.hasKey(W_T):
+        wingsType = t[W_T].getStr("")
       else:
-        LOG(ERROR, "Failed to read counterpart type for '" & key & "'. Skipping...")
+        wingsType = ""
+
+      if t.hasKey(T_T):
+        targetType = t[T_T].getStr("")
+      else:
+        targetType = ""
+
+      if t.hasKey(R_I):
+        requiredImport = t[R_I].getStr("")
+      else:
+        requiredImport = ""
+
+      if t.hasKey(T_I):
+        targetInit = t[T_I].getStr("")
+      else:
+        targetInit = ""
+
+      if wingsType.len() < 1 or targetType.len() < 1:
+        LOG(FATAL,  W_T & " or " & T_T & errorMsg)
+
+      let typeInterpreter: TypeInterpreter = initTypeInterpreter(
+        wingsType, targetType, requiredImport, targetInit,
+      )
+
+      if wingsType.contains(TYPE_PREFIX):
+        let temp: CustomTypeInterpreter = interpretType(typeInterpreter)
+        result.customTypes.add(temp.prefix, temp)
+      else:
+        result.types.add(typeInterpreter.wingsType, typeInterpreter)
   else:
     LOG(FATAL, TY & errorMsg)
-
-
-  if jsonConfig.hasKey(IN):
-    let init: OrderedTable[string, JsonNode] = jsonConfig[IN].getFields()
-
-    for key in init.keys:
-      let givenInit: string = init[key].getStr("")
-      if givenInit != "":
-        if key.contains(TYPE_PREFIX):
-          let temp: TypeInterpreter = interpretType(key, givenInit)
-          result.customTypeInits.add(temp.prefix, temp)
-        else:
-          result.typeInits.add(key, givenInit)
-      else:
-        LOG(ERROR, "Failed to read counterpart type for '" & key & "'. Skipping...")
-  else:
-    LOG(DEBUG, IN & errorMsg)

@@ -8,6 +8,7 @@ package classroom
 
 import (
 	person "github.com/binhonglee/wings/examples/output/go/person"
+	"time"
 )
 
 // Homework - Work to be done at home

@@ -8,6 +8,7 @@ package classroom
 
 import (
 	person "github.com/binhonglee/wings/examples/output/go/person"
+	"time"
 )
 
 // Student - Any person who is studying in a class
@@ -16,7 +17,7 @@ type Student struct {
 	Name          string               `json:"name"`
 	CurClass      string               `json:"cur_class"`
 	Feeling       person.Emotion       `json:"feeling"`
-	IsActive      boolean              `json:"is_active"`
+	IsActive      bool                 `json:"is_active"`
 	Year          time.Time            `json:"year"`
 	Graduation    time.Time            `json:"graduation"`
 	Homeworks     []Homework           `json:"homeworks"`

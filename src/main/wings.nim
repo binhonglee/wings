@@ -11,6 +11,7 @@ import wingspkg/core
 import wingspkg/util/config
 
 const CONFIG_PREFIX: string = "-c:"
+const HELP_OPTION: string = "-h"
 var USER_CONFIG: Config = initConfig()
 
 proc toFile(path: string, content: string): void =
@@ -29,20 +30,34 @@ proc toFile(path: string, content: string): void =
 proc init(count: int): void =
   let startTime = epochTime()
   if count < 1:
-    LOG(FATAL, "Please add struct or enum files to be generated.")
+    LOG(FATAL, "Please add wings files to be generated. Or use `-h` for help.")
     return
 
+  var configFile: string = ""
   var wingsFiles: seq[string] = newSeq[string](0)
   for i in countup(1, count, 1):
     let file = paramStr(i)
-    if file.startsWith(CONFIG_PREFIX):
-      USER_CONFIG = config.parse(
-        getResult[string](string(file), CONFIG_PREFIX, removePrefix)
-      )
+    if file.startsWith(HELP_OPTION):
+      echo ""
+      echo "-c:{CONFIG_FILE}.json\t - The config file should be a json file."
+      echo "-h\t\t\t - Show this menu."
+      echo ""
+      echo "Expects {FILENAME}.wings files to be generated from."
+      echo ""
+      return
+    elif file.startsWith(CONFIG_PREFIX):
+      if configFile.len() > 0:
+        LOG(FATAL, "Only one config file is allowed.")
+      configFile = string(file)
     elif not fileExists(file):
       LOG(ERROR, "Cannot find " & file & ". Skipping...")
     else:
       wingsFiles.add(file)
+
+  if configFile.len() > 0:
+    USER_CONFIG = config.parse(
+      getResult[string](configFile, CONFIG_PREFIX, removePrefix)
+    )
 
   var outputFiles = fromFiles(wingsFiles, USER_CONFIG)
   for files in outputFiles.keys:

@@ -18,9 +18,9 @@ type
     langBasedFields*: Table[string, seq[Table[string, string]]]
 
 proc parseType(
+  winterface: var IWings,
   s: string,
   langConfig: TConfig,
-  typesImported: Table[string, ImportedWingsType] = initTable[string, ImportedWingsType](),
 ): Table[string, string]
 
 proc processFunctions(s: string, ind: Indentation): string =
@@ -65,11 +65,12 @@ proc processFunctions(s: string, ind: Indentation): string =
     result = result.unindent(1, ind.spacing)
 
 proc processCustomType(
+  wi: var IWings,
   s: string,
-  ti: TypeInterpreter,
+  ti: CustomTypeInterpreter,
   tc: TConfig,
   kw: string,
-  timpt: Table[string, ImportedWingsType],
+  kw_init: string,
 ): Table[string, string] =
   result = initTable[string, string]()
   var str: string = s
@@ -87,11 +88,11 @@ proc processCustomType(
   for t in types:
     ts.add(
       TYPE_PREFIX & $i & TYPE_POSTFIX,
-      parseType(t, tc, timpt)[wrap(TK_TYPE)]
+      parseType(wi, t, tc)[wrap(TK_TYPE)]
     )
     inc(i)
 
-  str = ti.output.replace(ts)
+  str = ti.targetType.replace(ts)
   let t: Table[Case, string] = allCases(str, Snake)
   for key in t.keys:
     result.add(
@@ -99,14 +100,17 @@ proc processCustomType(
       t[key],
     )
   result.add(wrap(kw), str)
+  result.add(wrap(kw_init), ti.targetInit.replace(ts))
 
 proc parseType(
+  winterface: var IWings,
   s: string,
   langConfig: TConfig,
-  typesImported: Table[string, ImportedWingsType] = initTable[string, ImportedWingsType](),
 ): Table[string, string] =
   result = initTable[string, string]()
   var hit: bool = false
+  let typesImported: Table[string, ImportedWingsType] =
+    winterface.typesImported.getOrDefault(langConfig.filetype)
 
   if typesImported.hasKey(s):
     result.add(wrap(TK_TYPE), typesImported[s].name)
@@ -115,48 +119,34 @@ proc parseType(
   for key in langConfig.customTypes.keys:
     if key.len() > 0 and s.startsWith(key):
       let r: Table[string, string] = processCustomType(
+        winterface,
         s,
         langConfig.customTypes[key],
         langConfig,
         TK_TYPE,
-        typesImported,
+        TK_TYPE & TK_SEPARATOR & TK_INIT,
       )
       if not r.len() > 0:
         continue
 
       result.merge(r)
+      if langConfig.customTypes[key].requiredImport.len() > 0:
+        winterface.addImport(
+          langConfig.customTypes[key].requiredImport,
+          langConfig.filetype,
+        )
       hit = true
 
-  if hit:
-    for key in langConfig.customTypeInits.keys:
-      if key.len() > 0 and s.startsWith(key):
-        let r: Table[string, string] = processCustomType(
-          s,
-          langConfig.customTypeInits[key],
-          langConfig,
-          TK_TYPE & TK_SEPARATOR & TK_INIT,
-          typesImported,
-        )
-        if not r.len() > 0:
-          continue
-
-        result.merge(r)
-
-    if not result.hasKey(
-      wrap(TK_TYPE, TK_INIT)
-    ) and langConfig.typeInits.hasKey(TYPE_UNIMPORTED):
-      result.add(wrap(TK_TYPE, TK_INIT), langConfig.typeInits[TYPE_UNIMPORTED])
-
   if not hit and langConfig.types.hasKey(s):
-    result.add(
-      wrap(TK_TYPE),
-      langConfig.types[s]
-    )
-    if langConfig.typeInits.len() > 0 and langConfig.typeInits.hasKey(s):
-      result.add(
-        wrap(TK_TYPE, TK_INIT),
-        langConfig.typeInits[s]
+    result.add(wrap(TK_TYPE), langConfig.types[s].targetType)
+    if langConfig.types[s].requiredImport.len() > 0:
+      winterface.addImport(
+        langConfig.types[s].requiredImport,
+        langConfig.filetype,
       )
+
+    if langConfig.types[s].targetInit.len() > 0:
+      result.add(wrap(TK_TYPE, TK_INIT), langConfig.types[s].targetInit)
     else:
       let types: Table[Case, string] = allCases(s, Snake)
       var temp: Table[string, string] = initTable[string, string]()
@@ -166,10 +156,10 @@ proc parseType(
           types[key]
         )
 
-      if langConfig.typeInits.hasKey(TYPE_UNIMPORTED):
+      if langConfig.types.hasKey(TYPE_UNIMPORTED) and langConfig.types[TYPE_UNIMPORTED].targetInit.len() > 0:
         result.add(
           wrap(TK_TYPE, TK_INIT),
-          langConfig.typeInits[TYPE_UNIMPORTED].replace(temp),
+          langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp),
         )
   elif not hit:
     let types: Table[Case, string] = allCases(s, Snake)
@@ -181,14 +171,12 @@ proc parseType(
       )
     result.add(
       wrap(TK_TYPE),
-      langConfig.types[TYPE_UNIMPORTED].replace(temp),
+      langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp),
     )
-
-    if langConfig.typeInits.hasKey(TYPE_UNIMPORTED):
-      result.add(
-        wrap(TK_TYPE, TK_INIT),
-        langConfig.typeInits[TYPE_UNIMPORTED].replace(temp),
-      )
+    result.add(
+      wrap(TK_TYPE, TK_INIT),
+      langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp),
+    )
 
 proc initTemplatable(): Templatable =
   result = Templatable()
@@ -197,7 +185,7 @@ proc initTemplatable(): Templatable =
   result.langBasedMultireps = initTable[string, Table[string, HashSet[string]]]()
   result.fields = newSeq[Table[string, string]](0)
 
-proc wingsToTemplatable*(winterface: IWings, tconfig: TConfig): Templatable =
+proc wingsToTemplatable*(winterface: var IWings, tconfig: TConfig): Templatable =
   ## Convert IWings to TConfig.
   result = initTemplatable()
   if winterface.dependencies.len() > 0:
@@ -219,11 +207,6 @@ proc wingsToTemplatable*(winterface: IWings, tconfig: TConfig): Templatable =
   var names: Table[Case, string] = allCases(winterface.name, Snake)
   for key in names.keys:
     result.replacements.add(wrap(TK_NAME, $key), names[key])
-
-  if winterface.imports.hasKey(lang):
-    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), winterface.imports[lang])
-  else:
-    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), initHashSet[string]())
 
   var i: int = 1
   var words: seq[string] = tFilename(
@@ -271,7 +254,7 @@ proc wingsToTemplatable*(winterface: IWings, tconfig: TConfig): Templatable =
         variables.add(wrap(TK_VARNAME, $key), varnames[key])
 
       variables.merge(
-        parseType(fields[1], tConfig, winterface.typesImported.getOrDefault(lang))
+        parseType(winterface, fields[1], tconfig)
       )
       if fields.len() > 2:
         if variables.hasKey(wrap(TK_TYPE, TK_INIT)):
@@ -291,3 +274,8 @@ proc wingsToTemplatable*(winterface: IWings, tconfig: TConfig): Templatable =
       result.fields.add(variables)
   of WingsType.default:
     LOG(FATAL, "Invalid `WingsType`.")
+
+  if winterface.imports.hasKey(lang):
+    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), winterface.imports[lang])
+  else:
+    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), initHashSet[string]())

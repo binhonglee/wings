@@ -15,7 +15,7 @@ export default class Student implements People {
   public name: string = '';
   public curClass: string = '';
   public feeling: Emotion = Emotion.Meh;
-  public isActive: boolean = true;
+  public isActive: boolean = false;
   public year: Date = new Date();
   public graduation: Date = new Date();
   public homeworks: Homework[] = [];
@@ -27,7 +27,7 @@ export default class Student implements People {
       this.name = obj.name || ''
       this.curClass = obj.cur_class || ''
       this.feeling = obj.feeling || Emotion.Meh
-      this.isActive = obj.is_active || true
+      this.isActive = obj.is_active || false
       this.year = obj.year || new Date()
       this.graduation = obj.graduation || new Date()
       this.homeworks = obj.homeworks || []

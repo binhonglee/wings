@@ -17,26 +17,47 @@
     "struct": "examples/input/templates/struct.ts",
     "enum": "examples/input/templates/enum.ts"
   },
-  "types": {
-    "int": "number",
-    "flt": "number",
-    "dbl": "number",
-    "str": "string",
-    "bool": "boolean",
-    "date": "Date",
-    "[]{TYPE}": "{TYPE1}[]",
-    "Map<{TYPE1},{TYPE2}>": "Map<{TYPE1}, {TYPE2}>",
-    "!imported": "{#TYPE_PASCAL}",
-    "!unimported": "{#TYPE_PASCAL}"
-  },
-  "init": {
-    "int": "0",
-    "flt": "0",
-    "dbl": "0",
-    "str": "''",
-    "bool": "false",
-    "[]{TYPE}": "[]",
-    "!imported": "new {#TYPE_PASCAL}()",
-    "!unimported": "new {#TYPE_PASCAL}()"
-  }
+  "types": [
+    {
+      "wingsType": "int",
+      "targetType": "number",
+      "targetInit": "0"
+    }, {
+      "wingsType": "flt",
+      "targetType": "number",
+      "targetInit": "0"
+    }, {
+      "wingsType": "dbl",
+      "targetType": "number",
+      "targetInit": "0"
+    }, {
+      "wingsType": "str",
+      "targetType": "string",
+      "targetInit": "''"
+    }, {
+      "wingsType": "bool",
+      "targetType": "boolean",
+      "targetInit": "false"
+    }, {
+      "wingsType": "date",
+      "targetType": "Date",
+      "targetInit": "new Date()"
+    }, {
+      "wingsType": "[]{TYPE}",
+      "targetType": "{TYPE1}[]",
+      "targetInit": "[]"
+    }, {
+      "wingsType": "Map<{TYPE1},{TYPE2}>",
+      "targetType": "Map<{TYPE1}, {TYPE2}>",
+      "targetInit": "new Map<{TYPE1}, {TYPE2}>()"
+    }, {
+      "wingsType": "!imported",
+      "targetType": "{#TYPE_PASCAL}",
+      "targetInit": "new {#TYPE_PASCAL}()"
+    }, {
+      "wingsType": "!unimported",
+      "targetType": "{#TYPE_PASCAL}",
+      "targetInit": "new {#TYPE_PASCAL}()"
+    }
+  ]
 }

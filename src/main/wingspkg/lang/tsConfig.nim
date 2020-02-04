@@ -64,40 +64,29 @@ export default {#NAME_PASCAL};
 
 """
 
-const TYPES: Table[string, string] = {
-  "int": "number",
-  "flt": "number",
-  "dbl": "number",
-  "str": "string",
-  "bool": "boolean",
-  "date": "Date",
-  "!imported": "{#TYPE_PASCAL}",
-  "!unimported": "{#TYPE_PASCAL}"
+let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "number", "", "0"),
+  "flt": initTypeInterpreter("flt", "number", "", "0"),
+  "dbl": initTypeInterpreter("dbl", "number", "", "0"),
+  "str": initTypeInterpreter("str", "string", "", "''"),
+  "bool": initTypeInterpreter("bool", "boolean", "", "false"),
+  "date": initTypeInterpreter("date", "Date", "", "new Date()"),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()"),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()"),
 }.toTable()
 
-const TYPE_INITS: Table[string, string] = {
-  "int": "0",
-  "flt": "0",
-  "dbl": "0",
-  "str": "''",
-  "bool": "false",
-  "!imported": "new {#TYPE_PASCAL}()",
-  "!unimported": "new {#TYPE_PASCAL}()"
-}.toTable
-
-const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "{TYPE1}[]"),
-  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "Map<{TYPE1}, {TYPE2}>"),
-}.toTable()
-
-const CUSTOM_TYPE_INITS: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "[]"),
+let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
+  "[]": interpretType(
+    initTypeInterpreter("[]{TYPE}", "{TYPE1}[]", "", "[]")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Map<{TYPE1}, {TYPE2}>", "", "new Map<{TYPE1}, {TYPE2}>()")
+  ),
 }.toTable()
 
 let TS_CONFIG*: TConfig = initTConfig(
   cmt = COMMENT,
   ct = CUSTOM_TYPES,
-  cti = CUSTOM_TYPE_INITS,
   c = FILENAME,
   ft = FILETYPE,
   ifmt = IMPLEMENT_FORMAT,
@@ -112,5 +101,4 @@ let TS_CONFIG*: TConfig = initTConfig(
     "enum": TEMPLATE_ENUM,
   }.toTable(),
   ty = TYPES,
-  ti = TYPE_INITS,
 )

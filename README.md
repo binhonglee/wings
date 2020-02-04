@@ -5,7 +5,6 @@ A customizable cross language struct and enum file generator.
 [![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=master)](https://travis-ci.org/binhonglee/wings)
 [![codecov](https://codecov.io/gh/binhonglee/wings/branch/master/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
 [![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
-[![wakatime](https://wakatime.com/badge/github/binhonglee/wings.svg)](https://wakatime.com/badge/github/binhonglee/wings)
 
 ## Requirements
 

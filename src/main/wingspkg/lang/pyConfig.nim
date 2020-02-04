@@ -42,42 +42,29 @@ class {#NAME}(Enum):
 
 """
 
-const TYPES: Table[string, string] = {
-  "int": "int",
-  "flt": "float",
-  "dbl": "double",
-  "str": "str",
-  "bool": "bool",
-  "date": "DateTime",
-  "!imported": "{#TYPE_PASCAL}",
-  "!unimported": "{#TYPE_PASCAL}"
+let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "int", "", "0"),
+  "flt": initTypeInterpreter("flt", "float", "", "0"),
+  "dbl": initTypeInterpreter("dbl", "double", "", "0"),
+  "str": initTypeInterpreter("str", "str", "", "\"\""),
+  "bool": initTypeInterpreter("bool", "bool", "", "False"),
+  "date": initTypeInterpreter("date", "datetime", "datetime:datetime", "datetime.now()"),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()"),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()"),
 }.toTable()
 
-const TYPE_INITS: Table[string, string] = {
-  "int": "0",
-  "flt": "0",
-  "dbl": "0",
-  "str": "\"\"",
-  "bool": "false",
-  "date": "date.today()",
-  "!imported": "new {#TYPE_PASCAL}()",
-  "!unimported": "new {#TYPE_PASCAL}()"
-}.toTable
-
-const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "list"),
-  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "dict"),
-}.toTable()
-
-const CUSTOM_TYPE_INITS: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "[]"),
-  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "{}"),
+let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
+  "[]": interpretType(
+    initTypeInterpreter("[]{TYPE}", "list", "", "[]")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "dict", "", "{}")
+  ),
 }.toTable()
 
 let PY_CONFIG*: TConfig = initTConfig(
   cmt = COMMENT,
   ct = CUSTOM_TYPES,
-  cti = CUSTOM_TYPE_INITS,
   c = FILENAME,
   ft = FILETYPE,
   ifmt = IMPLEMENT_FORMAT,
@@ -91,5 +78,4 @@ let PY_CONFIG*: TConfig = initTConfig(
     "enum": TEMPLATE_ENUM,
   }.toTable(),
   ty = TYPES,
-  ti = TYPE_INITS,
 )

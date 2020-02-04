@@ -7,6 +7,7 @@
 import json
 import examples.output.py.homework
 import examples.output.py.emotion
+from datetime import datetime
 
 # Any person who is studying in a class
 class Student(People):
@@ -14,9 +15,9 @@ class Student(People):
   name: str = ""
   cur_class: str = ""
   feeling: Emotion = Emotion.Meh
-  is_active: bool = true
-  year: DateTime = date.today()
-  graduation: DateTime = date.today()
+  is_active: bool = False
+  year: datetime = datetime.now()
+  graduation: datetime = datetime.now()
   homeworks: list = []
   something: dict = {}
 

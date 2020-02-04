@@ -39,20 +39,24 @@ type
 
 """
 
-const TYPES: Table[string, string] = {
-  "int": "int",
-  "flt": "float",
-  "dbl": "float",
-  "str": "string",
-  "bool": "bool",
-  "date": "DateTime",
-  "!imported": "{#TYPE_PASCAL}",
-  "!unimported": "{#TYPE_PASCAL}"
+let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "int", "", ""),
+  "flt": initTypeInterpreter("flt", "float", "", ""),
+  "dbl": initTypeInterpreter("dbl", "float64", "", ""),
+  "str": initTypeInterpreter("str", "string", "", ""),
+  "bool": initTypeInterpreter("bool", "bool", "", ""),
+  "date": initTypeInterpreter("date", "DateTime", "", ""),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", ""),
 }.toTable()
 
-const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "seq[{TYPE1}]"),
-  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]"),
+let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
+  "[]": interpretType(
+    initTypeInterpreter("[]{TYPE}", "seq[{TYPE1}]", "", "")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]", "tables", "")
+  ),
 }.toTable()
 
 let NIM_CONFIG*: TConfig = initTConfig(

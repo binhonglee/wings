@@ -50,30 +50,34 @@ enum class {#NAME} {
 
 """
 
-const TYPES: Table[string, string] = {
-  "int": "Int",
-  "flt": "Float",
-  "dbl": "Double",
-  "str": "String",
-  "bool": "Boolean",
-  "date": "Date",
-  "!imported": "{#TYPE_PASCAL}",
-  "!unimported": "{#TYPE_PASCAL}"
+let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "Int", "", "0"),
+  "flt": initTypeInterpreter("flt", "Float", "", "0"),
+  "dbl": initTypeInterpreter("dbl", "Double", "", "0"),
+  "str": initTypeInterpreter("str", "String", "", "\"\""),
+  "bool": initTypeInterpreter("bool", "Boolean", "", "false"),
+  "date": initTypeInterpreter("date", "Date", "", "Date()"),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "{#TYPE_PASCAL}()"),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "{#TYPE_PASCAL}()"),
 }.toTable()
 
-const TYPE_INITS: Table[string, string] = {
-  "int": "0",
-  "flt": "0",
-  "dbl": "0",
-  "str": "\"\"",
-  "bool": "false",
-  "!imported": " {#TYPE_PASCAL}()",
-  "!unimported": " {#TYPE_PASCAL}()"
-}.toTable
-
-const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "ArrayList<{TYPE1}>"),
-  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "HashMap<{TYPE1}, {TYPE2}>"),
+let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
+  "[]": interpretType(
+    initTypeInterpreter(
+      "[]{TYPE}",
+      "ArrayList<{TYPE1}>",
+      "",
+      "arrayListOf<{TYPE1}>()"
+    )
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter(
+      "Map<{TYPE1},{TYPE2}>",
+      "HashMap<{TYPE1}, {TYPE2}>",
+      "",
+      "hashMapOf<{TYPE1}, {TYPE2}>()"
+    )
+  ),
 }.toTable()
 
 let KT_CONFIG*: TConfig = initTConfig(
@@ -92,5 +96,4 @@ let KT_CONFIG*: TConfig = initTConfig(
     "enum": TEMPLATE_ENUM,
   }.toTable(),
   ty = TYPES,
-  ti = TYPE_INITS,
 )

@@ -48,20 +48,24 @@ const (
 
 """
 
-const TYPES: Table[string, string] = {
-  "int": "int",
-  "flt": "float",
-  "dbl": "double",
-  "str": "string",
-  "bool": "boolean",
-  "date": "time.Time",
-  "!imported": "PATH0.{#TYPE_PASCAL}",
-  "!unimported": "{#TYPE_PASCAL}",
+let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "int", "", ""),
+  "flt": initTypeInterpreter("flt", "float", "", ""),
+  "dbl": initTypeInterpreter("dbl", "double", "", ""),
+  "str": initTypeInterpreter("str", "string", "", ""),
+  "bool": initTypeInterpreter("bool", "bool", "", ""),
+  "date": initTypeInterpreter("date", "time.Time", "time", ""),
+  "!imported": initTypeInterpreter("!imported", "PATH0.{#TYPE_PASCAL}", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", ""),
 }.toTable()
 
-const CUSTOM_TYPES: Table[string, TypeInterpreter] = {
-  "[]": interpretType("[]{TYPE}", "[]{TYPE1}"),
-  "Map<": interpretType("Map<{TYPE1},{TYPE2}>", "map[{TYPE1}]{TYPE2}"),
+let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
+  "[]": interpretType(
+    initTypeInterpreter("[]{TYPE}", "[]{TYPE1}", "", "")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "map[{TYPE1}]{TYPE2}", "", "")
+  ),
 }.toTable()
 
 let GO_CONFIG*: TConfig = initTConfig(

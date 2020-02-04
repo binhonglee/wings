@@ -17,16 +17,38 @@
     "struct": "examples/input/templates/struct.go",
     "enum": "examples/input/templates/enum.go"
   },
-  "types": {
-    "int": "int",
-    "flt": "float",
-    "dbl": "double",
-    "str": "string",
-    "bool": "boolean",
-    "date": "time.Time",
-    "[]{TYPE}": "[]{TYPE1}",
-    "Map<{TYPE1},{TYPE2}>": "map[{TYPE1}]{TYPE2}",
-    "!imported": "{#1}.{#TYPE_PASCAL}",
-    "!unimported": "{#TYPE_PASCAL}"
-  }
+  "types": [
+    {
+      "wingsType": "int",
+      "targetType": "int"
+    }, {
+      "wingsType": "flt",
+      "targetType": "float"
+    }, {
+      "wingsType": "dbl",
+      "targetType": "double"
+    }, {
+      "wingsType": "str",
+      "targetType": "string"
+    }, {
+      "wingsType": "bool",
+      "targetType": "bool"
+    }, {
+      "wingsType": "date",
+      "targetType": "time.Time",
+      "requiredImport": "time"
+    }, {
+      "wingsType": "[]{TYPE}",
+      "targetType": "[]{TYPE1}"
+    }, {
+      "wingsType": "Map<{TYPE1},{TYPE2}>",
+      "targetType": "map[{TYPE1}]{TYPE2}"
+    }, {
+      "wingsType": "!imported",
+      "targetType": "{#1}.{#TYPE_PASCAL}"
+    }, {
+      "wingsType": "!unimported",
+      "targetType": "{#TYPE_PASCAL}"
+    }
+  ]
 }

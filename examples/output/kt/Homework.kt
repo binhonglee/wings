@@ -10,9 +10,9 @@ package kt
 class Homework {
   var ID: Int = 0
   var name: String = ""
-  var dueDate: Date =  Date()
-  var givenDate: Date =  Date()
-  var feeling: ArrayList<Emotion> =  ArrayList<Emotion>()
+  var dueDate: Date = Date()
+  var givenDate: Date = Date()
+  var feeling: ArrayList<Emotion> = arrayListOf<Emotion>()
 
   fun toJsonKey(key: string): string {
     when (key) {

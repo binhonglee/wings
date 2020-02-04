@@ -6,13 +6,14 @@
 
 import json
 import examples.output.py.emotion
+from datetime import datetime
 
 # Work to be done at home
 class Homework():
   id: int = 0
   name: str = ""
-  due_date: DateTime = date.today()
-  given_date: DateTime = date.today()
+  due_date: datetime = datetime.now()
+  given_date: datetime = datetime.now()
   feeling: list = []
 
   def __init__(self, data):

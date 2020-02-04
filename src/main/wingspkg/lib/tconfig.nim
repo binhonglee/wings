@@ -24,12 +24,19 @@ type
     level*: int
 
 type
-  TypeInterpreter* = object
-    ## Post processed custom types
+  TypeInterpreter* = ref object of RootObj
+    ## Output type object from given input type.
+    wingsType*: string
+    targetType*: string
+    requiredImport*: string
+    targetInit*: string
+
+type
+  CustomTypeInterpreter* = ref object of TypeInterpreter
+    ## Post processed custom types.
     prefix*: string
     separators*: string
     postfix*: string
-    output*: string
 
 type
   Indentation* = object
@@ -40,8 +47,7 @@ type
   TConfig* = object
     ## Object of template config.
     comment*: string
-    customTypes*: Table[string, TypeInterpreter]
-    customTypeInits*: Table[string, TypeInterpreter]
+    customTypes*: Table[string, CustomTypeInterpreter]
     filename*: Case
     filetype*: string
     implementFormat*: string
@@ -49,35 +55,49 @@ type
     indentation*: Indentation
     parseFormat*: string
     templates*: Table[string, string]
-    types*: Table[string, string]
-    typeInits*: Table[string, string]
+    types*: Table[string, TypeInterpreter]
 
-proc initTypeInterpreter(
+proc initTypeInterpreter*(
+  wingsType: string = "",
+  targetType: string = "",
+  requiredImport: string = "",
+  targetInit: string = "",
+): TypeInterpreter =
+  result = TypeInterpreter()
+  result.wingsType = wingsType
+  result.targetType = targetType
+  result.requiredImport = requiredImport
+  result.targetInit = targetInit
+
+proc initCustomTypeInterpreter(
+  typeInterpreter: TypeInterpreter = initTypeInterpreter(),
   prefix: string = "",
   separators: string = "",
   postfix: string = "",
-  output: string = "",
-): TypeInterpreter =
-  result = TypeInterpreter()
+): CustomTypeInterpreter =
+  result = CustomTypeInterpreter()
+  result.wingsType =  typeInterpreter.wingsType
+  result.targetType = typeInterpreter.targetType
+  result.requiredImport = typeInterpreter.requiredImport
+  result.targetInit = typeInterpreter.targetInit
   result.prefix = prefix
   result.separators = separators
   result.postfix = postfix
-  result.output = output
 
-proc interpretType*(inputType: string, outputType: string): TypeInterpreter =
+proc interpretType*(typeInterpreter: TypeInterpreter): CustomTypeInterpreter =
   ## Interpret custom types.
-  if not inputType.contains(TYPE_PREFIX):
+  if not typeInterpreter.wingsType.contains(TYPE_PREFIX):
     LOG(
       ERROR,
       "Types without '" &
       TYPE_PREFIX &
       "' should never be passed into interpretType()"
     )
-  result = initTypeInterpreter()
+  result = initCustomTypeInterpreter(typeInterpreter)
 
-  let splittedInput: seq[string] = inputType.split(TYPE_PREFIX)
+  let splittedInput: seq[string] = typeInterpreter.wingsType.split(TYPE_PREFIX)
   if splittedInput.len() == 1:
-    if not inputType.startsWith(TYPE_POSTFIX):
+    if not typeInterpreter.wingsType.startsWith(TYPE_POSTFIX):
       LOG(ERROR, "Types with only 1 external type should use {TYPE} instead of {TYPE#}")
 
     result.postfix = getResult[string](splittedInput[0], TYPE_POSTFIX, removePrefix)
@@ -116,12 +136,10 @@ proc interpretType*(inputType: string, outputType: string): TypeInterpreter =
       $count & TYPE_POSTFIX,
       removePrefix
     )
-  result.output = outputType
 
 proc initTConfig*(
   cmt: string = DEFAULT_COMMENT,
-  ct: Table[string, TypeInterpreter] = initTable[string, TypeInterpreter](),
-  cti: Table[string, TypeInterpreter] = initTable[string, TypeInterpreter](),
+  ct: Table[string, CustomTypeInterpreter] = initTable[string, CustomTypeInterpreter](),
   c: Case = Case.Default,
   ft: string = "",
   ifmt: string = "",
@@ -134,14 +152,12 @@ proc initTConfig*(
   pi: bool = false,
   pfmt: string = "",
   temp: Table[string, string] = initTable[string, string](),
-  ty: Table[string, string] = initTable[string, string](),
-  ti: Table[string, string] = initTable[string, string](),
+  ty: Table[string, TypeInterpreter] = initTable[string, TypeInterpreter](),
 ): TConfig =
   ## Create an initialized template config.
   result = TConfig()
   result.comment = cmt
   result.customTypes = ct
-  result.customTypeInits = cti
   result.filename = c
   result.filetype = ft
   result.implementFormat = ifmt
@@ -157,4 +173,3 @@ proc initTConfig*(
   result.parseFormat = pfmt
   result.templates = temp
   result.types = ty
-  result.typeInits = ti

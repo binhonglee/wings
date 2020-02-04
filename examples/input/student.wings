@@ -18,7 +18,7 @@ struct Student {
   name        str
   cur_class   str
   feeling     Emotion   Emotion.Meh
-  is_active   bool      true
+  is_active   bool
   year        date
   graduation  date
   homeworks   []Homework

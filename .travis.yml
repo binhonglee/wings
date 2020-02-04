@@ -4,6 +4,7 @@ os:
 
 language: c
 node_js: stable
+python: "3.8"
 
 cache:
   directories:
@@ -30,4 +31,6 @@ script:
   - npm run cover
 
 after_success:
+  - pip install -r requirements.txt
+  - mkdocs build
   - bash <(curl -s https://codecov.io/bash)

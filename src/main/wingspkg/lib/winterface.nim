@@ -261,3 +261,9 @@ proc parseFile*(
         LOG(FATAL, "Failed to parse '" & imports & "' imported in " & filename & ".")
   else:
     LOG(FATAL, "Failed to parse '" & filename & "'.")
+
+proc addImport*(iwings: var IWings, newImport: string, importLang: string): void =
+  ## Add new file / library to be imported by the IWings.
+  if not iwings.imports.hasKey(importLang):
+    iwings.imports.add(importLang, initHashSet[string]())
+  iwings.imports[importLang].incl(newImport)
