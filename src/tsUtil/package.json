@@ -23,7 +23,7 @@
     "@types/mocha": "7.0.1",
     "mocha": "6.2.2",
     "nyc": "15.0.0",
-    "ts-node": "8.5.3",
+    "ts-node": "8.6.2",
     "typescript": "3.7.5"
   },
   "nyc": {
