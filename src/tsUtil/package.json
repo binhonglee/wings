@@ -19,7 +19,7 @@
   "author": "BinHong Lee",
   "license": "MIT",
   "devDependencies": {
-    "@types/assert": "1.4.3",
+    "@types/assert": "1.4.6",
     "@types/mocha": "7.0.1",
     "mocha": "6.2.2",
     "nyc": "15.0.0",
