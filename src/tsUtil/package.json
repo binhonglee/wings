@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/assert": "1.4.6",
     "@types/mocha": "7.0.1",
-    "mocha": "7.0.1",
+    "mocha": "7.1.0",
     "nyc": "15.0.0",
     "ts-node": "8.6.2",
     "typescript": "3.8.3"
