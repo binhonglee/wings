@@ -73,11 +73,11 @@
       }]
     },
     "wings-types": {
-      "begin": "^(struct|enum)",
+      "begin": "^(interface|struct|enum)",
       "end": "}",
       "name": "storage.modifier",
       "patterns": [{
-        "begin": " [A-Z]+[a-z]* ",
+        "begin": " [A-Z]+[a-zA-Z]* ",
         "end": "(?=})",
         "name": "entity.name.class",
         "patterns": [{
@@ -90,25 +90,25 @@
             "name": "invalid",
             "patterns": [{
               "name": "entity.name.tag",
-              "match": "( |\t)+([\\[\\]])*(int|str|bool|date)( |\t|\n)"
+              "match": "( |\t)*([\\[\\]])*(int|str|bool|date)( |\t|\n)"
             }, {
               "name": "support.class",
-              "match": "( |\t)+([\\[\\]])*([A-Z]+[a-zA-Z0-9]+)( |\t|\n)"
+              "match": "( |\t)*([\\[\\]])*([A-Z]+[a-zA-Z0-9]+)( |\t|\n)"
             }, {
               "name": "support.class",
-              "match": "( |\t)+(Map<([a-zA-Z<>,]+),([a-zA-Z<>,]+)>)( |\t|\n)"
+              "match": "( |\t)*(Map<([a-zA-Z<>,]+),([a-zA-Z<>,]+)>)( |\t|\n)"
             }, {
               "name": "constant.numeric",
-              "match": "( |\t)+([\\-][0-9]+)(\n)"
+              "match": "( |\t)*([\\-][0-9]+)(\n)"
             }, {
               "name": "constant.language",
-              "match": "( |\t)+(true|false|null)(\n)"
+              "match": "( |\t)*(true|false|null)(\n)"
             }, {
               "name": "support.constant",
-              "match": "( |\t)+(([a-zA-Z0-9]|[_]|[.])+)(\n)"
+              "match": "( |\t)*(([a-zA-Z0-9]|[_]|[.])+)(\n)"
             }, {
               "name": "variable.other",
-              "match": "( |\t)+([a-zA-Z0-9]|[_])+( |\t)"
+              "match": "( |\t)*([a-zA-Z0-9]|[_])+( |\t)"
             }, {
               "name": "string.quoted.double",
               "begin": "\"",
