@@ -2,41 +2,29 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Wings",
   "scopeName": "source.wings",
-  "patterns": [
-    {
-      "include": "#keywords"
-    },
-    {
-      "include": "#filepath"
-    },
-    {
-      "include": "#code-comment"
-    },
-    {
-      "include": "#wings-comment"
-    },
-    {
-      "include": "#wings-types"
-    },
-    {
-      "include": "#go-func"
-    },
-    {
-      "include": "#js-func"
-    },
-    {
-      "include": "#kt-func"
-    },
-    {
-      "include": "#nim-func"
-    },
-    {
-      "include": "#py-func"
-    },
-    {
-      "include": "#ts-func"
-    }
-  ],
+  "patterns": [{
+    "include": "#keywords"
+  }, {
+    "include": "#filepath"
+  }, {
+    "include": "#code-comment"
+  }, {
+    "include": "#wings-comment"
+  }, {
+    "include": "#wings-types"
+  }, {
+    "include": "#go-func"
+  }, {
+    "include": "#js-func"
+  }, {
+    "include": "#kt-func"
+  }, {
+    "include": "#nim-func"
+  }, {
+    "include": "#py-func"
+  }, {
+    "include": "#ts-func"
+  }],
   "repository": {
     "keywords": {
       "begin": "^( |\t)*([a-z]+-(import|implement))\\b",
@@ -151,12 +139,10 @@
                 }
               },
               "name": "constant.character",
-              "patterns": [
-                {
-                  "match": "\\\\.",
-                  "name": "constant.character.escape.java"
-                }
-              ]
+              "patterns": [{
+                "match": "\\\\.",
+                "name": "constant.character.escape.java"
+              }]
             }, {
               "name": "entity.name.tag",
               "match": "( |\t)*([\\[\\]])*(int|flt|dbl|str|char|bool|date)( |\t|\n)"
@@ -203,11 +189,9 @@
         "begin": "\\(",
         "end": "(?=^\\)\n)",
         "name": "source.js",
-        "patterns": [
-          {
-            "include": "source.js"
-          }
-        ]
+        "patterns": [{
+          "include": "source.js"
+        }]
       }]
     },
     "kt-func": {
@@ -218,11 +202,9 @@
         "begin": "\\(",
         "end": "(?=^\\)\n)",
         "name": "source.kotlin",
-        "patterns": [
-          {
-            "include": "source.kotlin"
-          }
-        ]
+        "patterns": [{
+          "include": "source.kotlin"
+        }]
       }]
     },
     "nim-func": {
@@ -233,11 +215,9 @@
         "begin": "\\(",
         "end": "(?=^\\)\n)",
         "name": "source.nim",
-        "patterns": [
-          {
-            "include": "source.nim"
-          }
-        ]
+        "patterns": [{
+          "include": "source.nim"
+        }]
       }]
     },
     "py-func": {
@@ -248,11 +228,9 @@
         "begin": "\\(",
         "end": "(?=^\\)\n)",
         "name": "source.python",
-        "patterns": [
-          {
-            "include": "source.python"
-          }
-        ]
+        "patterns": [{
+          "include": "source.python"
+        }]
       }]
     },
     "ts-func": {
@@ -263,11 +241,9 @@
         "begin": "\\(",
         "end": "(?=^\\)\n)",
         "name": "source.ts",
-        "patterns": [
-          {
-            "include": "source.ts"
-          }
-        ]
+        "patterns": [{
+          "include": "source.ts"
+        }]
       }]
     }
   }

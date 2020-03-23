@@ -1,31 +1,31 @@
 {
-    "name": "vscode-wings",
-    "displayName": "Wings",
-    "description": "Syntax higlighting for wings",
-    "version": "0.0.1",
-    "publisher": "binhonglee",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/binhonglee/wings.git",
-        "directory": "src/vscode-wings"
-    },
-    "engines": {
-        "vscode": "^1.43.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "contributes": {
-        "languages": [{
-            "id": "wings",
-            "aliases": ["Wings", "wings"],
-            "extensions": [".wings"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "wings",
-            "scopeName": "source.wings",
-            "path": "./syntaxes/wings.tmLanguage.json"
-        }]
-    }
+  "name": "vscode-wings",
+  "displayName": "Wings",
+  "description": "Syntax higlighting for wings",
+  "version": "0.0.1",
+  "publisher": "binhonglee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binhonglee/wings.git",
+    "directory": "src/vscode-wings"
+  },
+  "engines": {
+    "vscode": "^1.43.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "wings",
+      "aliases": ["Wings", "wings"],
+      "extensions": [".wings"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "wings",
+      "scopeName": "source.wings",
+      "path": "./syntaxes/wings.tmLanguage.json"
+    }]
+  }
 }
