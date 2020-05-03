@@ -47,21 +47,29 @@ export class WingsStructUtil {
         if (val instanceof Date) {
           return this.wrap(val.toISOString());
         } else if (val instanceof Array) {
-          if (val.length === 0) {
-            return 'null';
-          } else {
-            let toReturn = '[';
-            for (const item of val) {
-              toReturn += this.stringify(item) + ',';
-            }
-            toReturn = toReturn.slice(0, -1);
-            toReturn += ']';
-            return toReturn;
+          let toReturn = '[';
+          for (const item of val) {
+            toReturn += this.stringify(item) + ',';
           }
+          if (val.length > 0) {
+            toReturn = toReturn.slice(0, -1);
+          }
+          toReturn += ']';
+          return toReturn;
         } else if (this.isIWingsStruct(val)) {
           return this.stringify(val);
-        } else {
-          throw new TypeError();
+        } else if (val instanceof Map) {
+          let toReturn = '{';
+          Object.keys(val).forEach(key => {
+            toReturn += this.stringify(key) + ':' + this.stringify(val[key]) + ',';
+          });
+          if (val.size > 0) {
+            toReturn = toReturn.slice(0, -1);
+          }
+          toReturn += '}';
+          return toReturn;
+      } else {
+          throw new TypeError("Currently unsupported type by wings.");
         }
       }
     }

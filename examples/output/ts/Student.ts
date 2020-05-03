@@ -4,12 +4,11 @@
 // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
 // Source: examples/input/student.wings
 
-import People from './People';
 import Homework from './Homework';
 import Emotion from './person/Emotion';
 
 // Any person who is studying in a class
-export default class Student implements People {
+export default class Student {
   [key: string]: any;
   public ID: number = -1;
   public name: string = '';

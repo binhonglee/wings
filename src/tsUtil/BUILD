@@ -54,7 +54,11 @@ genrule(
 
 gentest(
   name = "mocha",
-  srcs = [".mocharc.json"],
+  srcs = [
+    ".mocharc.json",
+    "scripts/testPrep.ts",
+    "test/index.test.ts",
+  ],
   cmd = " && ".join([
     "cd $PKG_DIR/",
     "npm run cover",
@@ -62,8 +66,8 @@ gentest(
   test_cmd = "echo \"Do nothing~\"",
   no_test_output = True,
   deps = [
+    "//examples:genFiles",
     ":tsUtil",
-    "//src/tsUtil/test:test_files",
   ],
   output_is_complete = False,
   needs_transitive_deps = True,

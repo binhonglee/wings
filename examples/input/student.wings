@@ -4,12 +4,11 @@ nim-filepath examples/output/nim
 py-filepath examples/output/py
 ts-filepath examples/output/ts
 
-ts-import People:./People
+py-import examples.output.py.people
 import examples/input/emotion.wings
 import examples/input/homework.wings
 
 py-implement People
-ts-implement People
 
 # Any person who is studying in a class
 

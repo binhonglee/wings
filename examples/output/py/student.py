@@ -6,6 +6,7 @@
 
 import json
 import examples.output.py.homework
+import examples.output.py.people
 import examples.output.py.emotion
 from datetime import datetime
 

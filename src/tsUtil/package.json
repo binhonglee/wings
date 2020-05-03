@@ -5,10 +5,12 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "pretest": "tsc scripts/testPrep.ts --outDir ./ && node ./testPrep.js && rm ./testPrep.js",
+    "posttest": "tsc scripts/testCleanup.ts --outDir ./ && node ./testCleanup.js && rm ./testCleanup.js",
     "build": "npm run clean && tsc -p ./tsconfig.json",
-    "test": "mocha",
-    "cover": "nyc mocha",
-    "clean": "rm -rf dist",
+    "test": "npm run pretest && mocha && npm run posttest",
+    "cover": "npm run pretest && nyc mocha && npm run posttest",
+    "clean": "rm -rf dist .nyc_output",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@types/assert": "1.4.6",
     "@types/mocha": "7.0.2",
+    "@types/node": "^13.13.4",
     "mocha": "7.1.1",
     "nyc": "15.0.0",
     "ts-node": "8.7.0",
@@ -38,6 +41,7 @@
       "**/*.ts"
     ],
     "exclude": [
+      "**/scripts/*.ts",
       "**/*.{spec,test}.{js,ts}",
       "*.js"
     ],
