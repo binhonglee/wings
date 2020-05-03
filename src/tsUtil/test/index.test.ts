@@ -1,16 +1,26 @@
-import { equal } from "assert";
-import { WingsStructUtil } from "../index";
-import Student from "./Student";
-import Homework from "./Homework";
-import Emotion from "./person/Emotion";
+import { equal } from 'assert';
+import { WingsStructUtil } from '../index';
+import Student from './Student';
+import Homework from './Homework';
+import Emotion from './person/Emotion';
 
-describe("isIWingsStruct", () => {
-  it("Student should pass isIWingsStruct", () => {
+describe('isIWingsStruct', () => {
+  it('Student should pass isIWingsStruct', () => {
     equal(WingsStructUtil.isIWingsStruct(new Student()), true);
-  })
-  it("Homework should pass isIWingsStruct", () => {
+  });
+  it('Homework should pass isIWingsStruct', () => {
     equal(WingsStructUtil.isIWingsStruct(new Homework()), true);
-  })
+  });
+
+  class NonWingsClass {}
+
+  it('NonWingsClass should fail isWingsStruct', () => {
+    equal(WingsStructUtil.isIWingsStruct(new NonWingsClass()), false);
+  });
+
+  it('Passing non object into isIWingsStruct', () => {
+    equal(WingsStructUtil.isIWingsStruct(''), false);
+  });
 });
 
 describe('stringify Student', () => {
@@ -21,6 +31,10 @@ describe('stringify Student', () => {
     is_active: true,
     feeling: Emotion.Meh,
     year: new Date(),
+    something: {
+      'a': 'b',
+      'b': 'c',
+    }
   });
   const reversedObj = new Student(
     JSON.parse(
@@ -62,12 +76,7 @@ describe('stringify Homework', () => {
 
 function test(original?: any, reversed?: any) {
   if (original instanceof Date) {
-    // TODO: Temporary workaround as Date objects are not initialized properly (need custom initialization support)
-    if (typeof reversed === 'string') {
-      equal(original.toISOString(), reversed)
-    } else {
-      equal(reversed.toISOString(), original.toISOString());
-    }
+    equal(original.toISOString(), reversed.toISOString());
   } else if (original instanceof Array) {
     equal(reversed instanceof Array, true);
     equal(original.filter(
@@ -77,8 +86,7 @@ function test(original?: any, reversed?: any) {
     );
   } else if (original instanceof Map) {
     equal(
-      // TODO: Strict Map creation instead of accepting Object
-      reversed instanceof Map || reversed instanceof Object,
+      reversed instanceof Map,
       true
     );
     equal(

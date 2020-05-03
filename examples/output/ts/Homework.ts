@@ -18,11 +18,11 @@ export default class Homework implements IWingsStruct {
 
   public constructor(obj?: any) {
     if (obj) {
-      this.ID = obj.id || 0
-      this.name = obj.name || ''
-      this.dueDate = obj.due_date || new Date()
-      this.givenDate = obj.given_date || new Date()
-      this.feeling = obj.feeling || []
+      this.ID = obj.id !== undefined && obj.id !== null ? obj.id : 0;
+      this.name = obj.name !== undefined && obj.name !== null ? obj.name : '';
+      this.dueDate = obj.due_date !== undefined && obj.due_date !== null ? new Date(obj.due_date) : new Date();
+      this.givenDate = obj.given_date !== undefined && obj.given_date !== null ? new Date(obj.given_date) : new Date();
+      this.feeling = obj.feeling !== undefined && obj.feeling !== null ? obj.feeling : [];
     }
   }
 

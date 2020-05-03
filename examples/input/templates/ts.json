@@ -41,7 +41,8 @@
     }, {
       "wingsType": "date",
       "targetType": "Date",
-      "targetInit": "new Date()"
+      "targetInit": "new Date()",
+      "targetParse": "new Date({P_FMT})"
     }, {
       "wingsType": "[]{TYPE}",
       "targetType": "{TYPE1}[]",
@@ -49,15 +50,19 @@
     }, {
       "wingsType": "Map<{TYPE1},{TYPE2}>",
       "targetType": "Map<{TYPE1}, {TYPE2}>",
-      "targetInit": "new Map<{TYPE1}, {TYPE2}>()"
+      "targetInit": "new Map<{TYPE1}, {TYPE2}>()",
+      "targetParse": "parseMap<{TYPE2}>({P_FMT})",
+      "requiredImport": "{ parseMap }:wings-ts-util"
     }, {
       "wingsType": "!imported",
       "targetType": "{#TYPE_PASCAL}",
-      "targetInit": "new {#TYPE_PASCAL}()"
+      "targetInit": "new {#TYPE_PASCAL}()",
+      "targetParse": "new {#TYPE_PASCAL}({P_FMT})"
     }, {
       "wingsType": "!unimported",
       "targetType": "{#TYPE_PASCAL}",
-      "targetInit": "new {#TYPE_PASCAL}()"
+      "targetInit": "new {#TYPE_PASCAL}()",
+      "targetParse": "new {#TYPE_PASCAL}({P_FMT})"
     }
   ]
 }

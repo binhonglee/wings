@@ -69,8 +69,6 @@ proc processCustomType(
   s: string,
   ti: CustomTypeInterpreter,
   tc: TConfig,
-  kw: string,
-  kw_init: string,
 ): Table[string, string] =
   result = initTable[string, string]()
   var str: string = s
@@ -96,11 +94,12 @@ proc processCustomType(
   let t: Table[Case, string] = allCases(str, Snake)
   for key in t.keys:
     result.add(
-      wrap(kw, $key),
+      wrap(TK_TYPE, $key),
       t[key],
     )
-  result.add(wrap(kw), str)
-  result.add(wrap(kw_init), ti.targetInit.replace(ts))
+  result.add(wrap(TK_TYPE), str)
+  result.add(wrap(TK_TYPE, TK_INIT), ti.targetInit.replace(ts))
+  result.add(wrap(TK_TYPE, TK_PARSE), ti.targetParse.replace(ts))
 
 proc parseType(
   winterface: var IWings,
@@ -108,6 +107,14 @@ proc parseType(
   langConfig: TConfig,
 ): Table[string, string] =
   result = initTable[string, string]()
+  let types: Table[Case, string] = allCases(s, Snake)
+  var temp: Table[string, string] = initTable[string, string]()
+  for key in types.keys:
+    temp.add(
+      wrap(TK_TYPE, $key),
+      types[key]
+    )
+
   var hit: bool = false
   let typesImported: Table[string, ImportedWingsType] =
     winterface.typesImported.getOrDefault(langConfig.filetype)
@@ -115,6 +122,10 @@ proc parseType(
   if typesImported.hasKey(s):
     result.add(wrap(TK_TYPE), typesImported[s].name)
     result.add(wrap(TK_TYPE, TK_INIT), typesImported[s].init)
+    if typesImported[s].wingsType == WingsType.structw:
+      result.add(wrap(TK_TYPE, TK_PARSE), langConfig.types[TYPE_IMPORTED].targetParse.replace(temp))
+    elif typesImported[s].wingsType == WingsType.enumw:
+      result.add(wrap(TK_TYPE, TK_PARSE), langConfig.parseFormat)
 
   for key in langConfig.customTypes.keys:
     if key.len() > 0 and s.startsWith(key):
@@ -123,8 +134,6 @@ proc parseType(
         s,
         langConfig.customTypes[key],
         langConfig,
-        TK_TYPE,
-        TK_TYPE & TK_SEPARATOR & TK_INIT,
       )
       if not r.len() > 0:
         continue
@@ -147,28 +156,18 @@ proc parseType(
 
     if langConfig.types[s].targetInit.len() > 0:
       result.add(wrap(TK_TYPE, TK_INIT), langConfig.types[s].targetInit)
+      result.add(wrap(TK_TYPE, TK_PARSE), langConfig.types[s].targetParse)
     else:
-      let types: Table[Case, string] = allCases(s, Snake)
-      var temp: Table[string, string] = initTable[string, string]()
-      for key in types.keys:
-        temp.add(
-          wrap(TK_TYPE, $key),
-          types[key]
-        )
-
       if langConfig.types.hasKey(TYPE_UNIMPORTED) and langConfig.types[TYPE_UNIMPORTED].targetInit.len() > 0:
         result.add(
           wrap(TK_TYPE, TK_INIT),
           langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp),
         )
+        result.add(
+          wrap(TK_TYPE, TK_PARSE),
+          langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
+        )
   elif not hit:
-    let types: Table[Case, string] = allCases(s, Snake)
-    var temp: Table[string, string] = initTable[string, string]()
-    for key in types.keys:
-      temp.add(
-        wrap(TK_TYPE, $key),
-        types[key],
-      )
     result.add(
       wrap(TK_TYPE),
       langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp),
@@ -176,6 +175,10 @@ proc parseType(
     result.add(
       wrap(TK_TYPE, TK_INIT),
       langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp),
+    )
+    result.add(
+      wrap(TK_TYPE, TK_PARSE),
+      langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
     )
 
 proc initTemplatable(): Templatable =

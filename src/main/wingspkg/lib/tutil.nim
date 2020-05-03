@@ -1,6 +1,6 @@
 from os import fileExists, lastPathPart, parentDir
 from stones/cases import Case
-from strutils import contains, endsWith, removePrefix, split, startsWith
+from strutils import contains, endsWith, removePrefix, replace, split, startsWith
 import json
 import stones/log
 import tables
@@ -26,6 +26,9 @@ const W_T = "wingsType"
 const T_T = "targetType"
 const R_I = "requiredImport"
 const T_I = "targetInit"
+const T_P = "targetParse"
+
+const parseFMT = "{P_FMT}"
 
 proc getCase(
   input: string,
@@ -174,6 +177,7 @@ proc parse*(filename: string): TConfig =
       var targetType: string
       var requiredImport: string
       var targetInit: string
+      var targetParse: string
 
       if t.hasKey(W_T):
         wingsType = t[W_T].getStr("")
@@ -195,11 +199,17 @@ proc parse*(filename: string): TConfig =
       else:
         targetInit = ""
 
+      if t.hasKey(T_P):
+        targetParse = t[T_P].getStr("")
+        targetParse = targetParse.replace(parseFMT, result.parseFormat)
+      else:
+        targetParse = result.parseFormat
+
       if wingsType.len() < 1 or targetType.len() < 1:
         LOG(FATAL,  W_T & " or " & T_T & errorMsg)
 
       let typeInterpreter: TypeInterpreter = initTypeInterpreter(
-        wingsType, targetType, requiredImport, targetInit,
+        wingsType, targetType, requiredImport, targetInit, targetParse,
       )
 
       if wingsType.contains(TYPE_PREFIX):

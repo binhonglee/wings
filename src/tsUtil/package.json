@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "pretest": "tsc scripts/testPrep.ts --outDir ./ && node ./testPrep.js && rm ./testPrep.js",
-    "posttest": "tsc scripts/testCleanup.ts --outDir ./ && node ./testCleanup.js && rm ./testCleanup.js",
+    "pretest": "tsc scripts/testPrep.ts --outDir ./ && node ./testPrep.js && rm ./*.js",
+    "posttest": "tsc scripts/testCleanup.ts --outDir ./ && node ./testCleanup.js && rm ./*.js",
     "build": "npm run clean && tsc -p ./tsconfig.json",
     "test": "npm run pretest && mocha && npm run posttest",
     "cover": "npm run pretest && nyc mocha && npm run posttest",

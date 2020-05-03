@@ -1,4 +1,4 @@
-import { accessSync, constants, mkdirSync, readFileSync, rmdirSync, unlinkSync, writeFileSync } from 'fs';
+import { accessSync, constants, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
 import { folders, files } from './const';
 
 folders.forEach(folder => {
@@ -16,7 +16,7 @@ Object.keys(files).forEach(file => {
     accessSync(files[file], constants.R_OK && constants.W_OK);
     unlinkSync(files[file]);
   } catch (err) {
-    console.log("File (" + file + ") does not exist or unaccessible. Not deleting it.");
+    console.log("File (" + files[file] + ") does not exist or unaccessible. Not deleting it.");
   }
   writeFileSync(files[file], output, 'utf8');
 });

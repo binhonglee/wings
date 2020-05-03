@@ -12,7 +12,7 @@ export default class {#NAME_PASCAL} {#IMPLEMENT}{
 // #BEGIN_CONSTRUCTOR
   public constructor(obj?: any) {
     if (obj) {
-      // #CONSTRUCTOR this.{#VARNAME_CAMEL} = obj.{#VARNAME_JSON} || {#TYPE_INIT}
+      // #CONSTRUCTOR this.{#VARNAME_CAMEL} = obj.{#VARNAME_JSON} !== undefined && obj.{#VARNAME_JSON} !== null ? {#TYPE_PARSE} : {#TYPE_INIT};
     }
   }
 // #END_CONSTRUCTOR

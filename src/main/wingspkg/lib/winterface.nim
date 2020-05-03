@@ -30,6 +30,7 @@ type
   ImportedWingsType* = ref object
     name*: string
     init*: string
+    wingsType*: WingsType
 
 type
   IWings* = ref object of RootObj
@@ -56,10 +57,15 @@ type
     fields*: seq[string]
     functions*: Table[string, string]
 
-proc initImportedWingsType*(name: string = "", init: string = ""): ImportedWingsType =
+proc initImportedWingsType*(
+  name: string = "",
+  init: string = "",
+  wingsType: WingsType = WingsType.default
+): ImportedWingsType =
   result = ImportedWingsType()
   result.name = name
   result.init = init
+  result.wingsType = wingsType
 
 proc initIWings(): IWings =
   ## Returns an empty initialized `IWings`.

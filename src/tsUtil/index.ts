@@ -4,27 +4,20 @@ export interface IWingsStruct {
 
 export class WingsStructUtil {
   public static isIWingsStruct(arg: any): arg is IWingsStruct {
-    try {
-      return (arg as IWingsStruct).toJsonKey !== undefined;
-    } catch (e) {
-      return false;
-    }
+    return (arg as IWingsStruct).toJsonKey !== undefined;
   }
 
   public static stringify(obj: any): string {
     let toReturn = '{';
-    for (const key in obj) {
-      if (typeof key === 'string') {
-        if (typeof obj[key] !== 'function') {
-          toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key]) + ',';
-        }
-      }
+
+    if (typeof obj === 'object') {
+      Object.keys(obj).forEach(key => {
+        toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key]) + ',';
+      });
+    } else {
+      return this.valString(obj);
     }
 
-    // This means that 'obj' is not iterable.
-    if (toReturn.length < 2) {
-      return obj;
-    }
     return toReturn.slice(0, -1) + '}';
   }
 
@@ -44,7 +37,9 @@ export class WingsStructUtil {
         return String(val);
       }
       default: {
-        if (val instanceof Date) {
+        if (this.isIWingsStruct(val)) {
+          return this.stringify(val);
+        } else if (val instanceof Date) {
           return this.wrap(val.toISOString());
         } else if (val instanceof Array) {
           let toReturn = '[';
@@ -56,12 +51,10 @@ export class WingsStructUtil {
           }
           toReturn += ']';
           return toReturn;
-        } else if (this.isIWingsStruct(val)) {
-          return this.stringify(val);
         } else if (val instanceof Map) {
           let toReturn = '{';
-          Object.keys(val).forEach(key => {
-            toReturn += this.stringify(key) + ':' + this.stringify(val[key]) + ',';
+          val.forEach((v, k) => {
+            toReturn += this.stringify(k) + ':' + this.stringify(v) + ',';
           });
           if (val.size > 0) {
             toReturn = toReturn.slice(0, -1);
@@ -69,9 +62,19 @@ export class WingsStructUtil {
           toReturn += '}';
           return toReturn;
       } else {
-          throw new TypeError("Currently unsupported type by wings.");
+          return String(val);
         }
       }
     }
   }
+}
+
+export function parseMap<V>(obj?: any): Map<string, V> {
+  let toReturn = new Map<string, V>();
+
+  Object.keys(obj).forEach(key => {
+    toReturn.set(key, obj[key]);
+  });
+
+  return toReturn;
 }

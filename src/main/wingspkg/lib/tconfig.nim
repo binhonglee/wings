@@ -30,6 +30,7 @@ type
     targetType*: string
     requiredImport*: string
     targetInit*: string
+    targetParse*: string
 
 type
   CustomTypeInterpreter* = ref object of TypeInterpreter
@@ -62,12 +63,14 @@ proc initTypeInterpreter*(
   targetType: string = "",
   requiredImport: string = "",
   targetInit: string = "",
+  targetParse: string = "",
 ): TypeInterpreter =
   result = TypeInterpreter()
   result.wingsType = wingsType
   result.targetType = targetType
   result.requiredImport = requiredImport
   result.targetInit = targetInit
+  result.targetParse = targetParse
 
 proc initCustomTypeInterpreter(
   typeInterpreter: TypeInterpreter = initTypeInterpreter(),
@@ -80,6 +83,7 @@ proc initCustomTypeInterpreter(
   result.targetType = typeInterpreter.targetType
   result.requiredImport = typeInterpreter.requiredImport
   result.targetInit = typeInterpreter.targetInit
+  result.targetParse = typeInterpreter.targetParse
   result.prefix = prefix
   result.separators = separators
   result.postfix = postfix

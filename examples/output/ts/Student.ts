@@ -4,11 +4,13 @@
 // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
 // Source: examples/input/student.wings
 
+import { parseMap } from 'wings-ts-util';
 import Homework from './Homework';
+import { IWingsStruct } from 'wings-ts-util';
 import Emotion from './person/Emotion';
 
 // Any person who is studying in a class
-export default class Student {
+export default class Student implements IWingsStruct {
   [key: string]: any;
   public ID: number = -1;
   public name: string = '';
@@ -22,15 +24,15 @@ export default class Student {
 
   public constructor(obj?: any) {
     if (obj) {
-      this.ID = obj.id || -1
-      this.name = obj.name || ''
-      this.curClass = obj.cur_class || ''
-      this.feeling = obj.feeling || Emotion.Meh
-      this.isActive = obj.is_active || false
-      this.year = obj.year || new Date()
-      this.graduation = obj.graduation || new Date()
-      this.homeworks = obj.homeworks || []
-      this.something = obj.something || new Map<string, string>()
+      this.ID = obj.id !== undefined && obj.id !== null ? obj.id : -1;
+      this.name = obj.name !== undefined && obj.name !== null ? obj.name : '';
+      this.curClass = obj.cur_class !== undefined && obj.cur_class !== null ? obj.cur_class : '';
+      this.feeling = obj.feeling !== undefined && obj.feeling !== null ? obj.feeling : Emotion.Meh;
+      this.isActive = obj.is_active !== undefined && obj.is_active !== null ? obj.is_active : false;
+      this.year = obj.year !== undefined && obj.year !== null ? new Date(obj.year) : new Date();
+      this.graduation = obj.graduation !== undefined && obj.graduation !== null ? new Date(obj.graduation) : new Date();
+      this.homeworks = obj.homeworks !== undefined && obj.homeworks !== null ? obj.homeworks : [];
+      this.something = obj.something !== undefined && obj.something !== null ? parseMap<string>(obj.something) : new Map<string, string>();
     }
   }
 

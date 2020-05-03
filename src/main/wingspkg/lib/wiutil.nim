@@ -12,6 +12,7 @@ proc fulfillDependency(
   imports: Table[string, string],
   langConfig: Table[string, TConfig],
   name: string,
+  wingsType: WingsType,
 ): bool =
   ## Fulfill the required dependency (after dependant file is generated).
   if not iwings.dependencies.contains(dependency):
@@ -53,6 +54,7 @@ proc fulfillDependency(
         initImportedWingsType(
           langConfig[importType].types[TYPE_IMPORTED].targetType.replace(replaceMap),
           langConfig[importType].types[TYPE_IMPORTED].targetInit.replace(replaceMap),
+          wingsType,
         ),
       )
       iwings.addImport(ipString, importType)
@@ -138,6 +140,7 @@ proc dependencyGraph*(
           importFilenames,
           config.langConfigs,
           wings.name,
+          wings.wingsType,
         )
         if not fulfillDep:
           LOG(

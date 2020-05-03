@@ -5,10 +5,12 @@ py-filepath examples/output/py
 ts-filepath examples/output/ts
 
 py-import examples.output.py.people
+ts-import { IWingsStruct }:wings-ts-util
 import examples/input/emotion.wings
 import examples/input/homework.wings
 
 py-implement People
+ts-implement IWingsStruct
 
 # Any person who is studying in a class
 
