@@ -1,7 +1,9 @@
 #!/bin/sh
 
 rm -rf examples/output
-nimble genFile examples/input/student.wings -c:wings.json
+rm src/main/wingspkg/lang/*Config.nim
+./pleasew run --show_all_output //src/main/staticlang:static
+./pleasew run --show_all_output //src/main:wings -- examples/input/student.wings -c:wings.json
 
 STATUS=$(git status --porcelain)
 if [ "$STATUS" != "" ]; then

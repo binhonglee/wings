@@ -1,7 +1,7 @@
 from times import epochTime
 from os
-import createDir, fileExists, joinPath, paramCount,
-  paramStr, parentDir, setCurrentDir
+import createDir, fileExists, paramCount, paramStr,
+  parentDir, setCurrentDir
 from strutils import endsWith, removePrefix, startsWith
 import stones/genlib
 import stones/log

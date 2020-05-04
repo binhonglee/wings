@@ -1,5 +1,5 @@
 from os import DirSep, unixToNativePath
-from strutils import capitalizeAscii, join, split
+from strutils import join, split
 from sequtils import foldr
 import stones/cases
 import ../lib/tconfig

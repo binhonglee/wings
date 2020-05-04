@@ -11,9 +11,9 @@ const DEFAULT_COMMENT*: string = "//"
 type
   ImportPathType* = enum
     ## Supported import path types.
-    Never = 0,
-    Absolute = 1,
-    Relative = 2,
+    Never = "Never",
+    Absolute = "Absolute",
+    Relative = "Relative",
 
 type
   ImportPath = object

@@ -11,5 +11,6 @@ filegroup(
   ],
   visibility =  [
     '//src/main:files',
+    '//src/main/staticlang:static',
   ]
 )

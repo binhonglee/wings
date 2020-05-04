@@ -13,7 +13,10 @@ nimble_install(
   name = "stones",
   pkg_name = "stones",
   revision = "#devel",
-  visibility = [':wings'],
+  visibility = [
+    ':wings',
+    '//src/main/staticlang:static',
+  ],
 )
 
 filegroup(

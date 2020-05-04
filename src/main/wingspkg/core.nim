@@ -1,5 +1,5 @@
 from strutils
-import capitalizeAscii, contains, endsWith, join, normalize,
+import contains, endsWith, join, normalize,
   parseEnum, removeSuffix, split, splitWhitespace
 import tables
 import stones/log
