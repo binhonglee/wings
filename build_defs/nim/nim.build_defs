@@ -16,7 +16,7 @@ def nim_binary(name:str, main:str, srcs:list=[], out:str=None, test_only:bool=Fa
     out = out or name
 
     cmd = ' && '.join([
-        "HOME=\"/home/$USER\"",
+        _home_path(),
         _nimble_path(),
         "$TOOL --verbosity:2 --NimblePath:$NIMBLE_PATH/pkgs -o:" + out + " c $PKG_DIR/" + main,
     ])
@@ -40,7 +40,7 @@ def nimble_install(name:str, pkg_name:str=None, revision:str=None, test_only:boo
     pkg = pkg_name + "@" + revision
 
     cmd = ' && '.join([
-        "HOME=\"/home/$USER\"",
+        _home_path(),
         _nimble_path(),
         "$TOOL --accept --verbose --nimbleDir:$NIMBLE_PATH install " + pkg,
         "ln -s $NIMBLE_PATH/pkgs/" + pkg_name + "* ./",
@@ -59,6 +59,10 @@ def nimble_install(name:str, pkg_name:str=None, revision:str=None, test_only:boo
 
 def _nimble_path():
     return "NIMBLE_PATH=$(pwd | awk -F'plz-out' '{print $1}')\"plz-out/.nimble\""
+
+def _home_path():
+    return "if [[ \"$OSTYPE\" == \"darwin\"* ]]; then HOME=\"/Users/$USER\"; elif [[ \"$OSTYPE\" == \"linux-gnu\"* ]]; then HOME=\"/home/$USER\"; fi",
+
 
 CONFIG.setdefault('NIM_TOOL', 'nim')
 CONFIG.setdefault('NIMBLE_TOOL', 'nimble')

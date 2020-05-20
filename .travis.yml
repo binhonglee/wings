@@ -6,10 +6,15 @@ language: c
 node_js: stable
 python: "3.8"
 
+env:
+  - BRANCH=1.0.6
+  - BRANCH=1.2.0
+
 cache:
   directories:
     - "$HOME/.nimble/bin"
     - "$HOME/.choosenim"
+    - "$HOME/.please"
 
 install:
   - export CHOOSENIM_NO_ANALYTICS=1
@@ -19,9 +24,15 @@ install:
   - cd ../../
   - |
     if ! type -P choosenim &> /dev/null; then
+      echo "Fresh install"
       export CHOOSENIM_CHOOSE_VERSION=$BRANCH
       curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
       sh init.sh -y
+    else
+      echo "Already installed"
+      rm -rf $HOME/.choosenim/current
+      choosenim update $BRANCH --latest
+      choosenim $BRANCH
     fi
   - nimble -y build
 

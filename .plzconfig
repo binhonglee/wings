@@ -4,6 +4,7 @@ version = 14.0.0
 [Build]
 PassEnv = PATH
 PassEnv = USER
+PassEnv = OSTYPE
 
 [Alias "genFile"]
 cmd = run //src/main:wings
