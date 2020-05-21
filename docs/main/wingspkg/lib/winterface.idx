@@ -6,6 +6,6 @@ ImportedWingsType	wingspkg/lib/winterface.html#ImportedWingsType	winterface: Imp
 IWings	wingspkg/lib/winterface.html#IWings	winterface: IWings	
 WEnum	wingspkg/lib/winterface.html#WEnum	winterface: WEnum	
 WStruct	wingspkg/lib/winterface.html#WStruct	winterface: WStruct	
-initImportedWingsType	wingspkg/lib/winterface.html#initImportedWingsType,string,string	winterface: initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;): ImportedWingsType	
+initImportedWingsType	wingspkg/lib/winterface.html#initImportedWingsType,string,string,WingsType	winterface: initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;;\n                      wingsType: WingsType = WingsType.default): ImportedWingsType	
 parseFile	wingspkg/lib/winterface.html#parseFile,string,bool	winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]	
 addImport	wingspkg/lib/winterface.html#addImport,IWings,string,string	winterface: addImport(iwings: var IWings; newImport: string; importLang: string): void	

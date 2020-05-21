@@ -16,7 +16,7 @@ proc genRun(): void =
     return
 
   if dirExists(folder):
-    rmdir(folder)
+    rmDir(folder)
 
   exec(
     "nim doc --project --index:on -o:" & folder &

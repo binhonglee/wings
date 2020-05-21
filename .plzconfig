@@ -8,3 +8,12 @@ PassEnv = OSTYPE
 
 [Alias "genFile"]
 cmd = run //src/main:wings
+
+[Alias "docs"]
+cmd = run //src/main/scripts:docs
+
+[Alias "release"]
+cmd = run //src/main/scripts:release
+
+[Alias "lang"]
+cmd = run //src/main/staticlang:static

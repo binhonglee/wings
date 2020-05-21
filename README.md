@@ -9,10 +9,12 @@ A customizable cross language struct and enum file generator.
 ## Requirements
 
 - [Nim](https://nim-lang.org/)
-    - [Nimble](https://github.com/nim-lang/nimble) - Bundled with Nim
-- [Please](https://please.build) (alternative to nimble)
+- [Please](https://please.build)
+
 
 \*_Note: Replace `plz` with `./pleasew` if you do not have please installed._
+
+\*_More note: There are also other packages needed for deployment due to cross compilation (like `gcc-multilib`, `gcc-arm-linux-gnueabihf`, `mingw-w64` etc...)._
 
 ## Supported languages
 

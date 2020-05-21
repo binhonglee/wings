@@ -9,6 +9,7 @@ TK_IMPORT	wingspkg/lib/tempconst.html#TK_IMPORT	tempconst: TK_IMPORT
 TK_INIT	wingspkg/lib/tempconst.html#TK_INIT	tempconst: TK_INIT	
 TK_JSON	wingspkg/lib/tempconst.html#TK_JSON	tempconst: TK_JSON	
 TK_NAME	wingspkg/lib/tempconst.html#TK_NAME	tempconst: TK_NAME	
+TK_PARSE	wingspkg/lib/tempconst.html#TK_PARSE	tempconst: TK_PARSE	
 TK_IPREFIX	wingspkg/lib/tempconst.html#TK_IPREFIX	tempconst: TK_IPREFIX	
 TK_SPACED	wingspkg/lib/tempconst.html#TK_SPACED	tempconst: TK_SPACED	
 TK_TYPE	wingspkg/lib/tempconst.html#TK_TYPE	tempconst: TK_TYPE	

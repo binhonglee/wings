@@ -832,7 +832,8 @@ function main() {
   <li><a class="reference" href="#ImportedWingsType"
     title="ImportedWingsType = ref object
   name*: string
-  init*: string"><wbr />Imported<wbr />Wings<wbr />Type<span class="attachedType"></span></a></li>
+  init*: string
+  wingsType*: WingsType"><wbr />Imported<wbr />Wings<wbr />Type<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#IWings"
     title="IWings = ref object of RootObj
   comment*: string
@@ -858,8 +859,9 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#initImportedWingsType%2Cstring%2Cstring"
-    title="initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;): ImportedWingsType"><wbr />init<wbr />Imported<wbr />Wings<wbr />Type<span class="attachedType">ImportedWingsType</span></a></li>
+      <li><a class="reference" href="#initImportedWingsType%2Cstring%2Cstring%2CWingsType"
+    title="initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;;
+                      wingsType: WingsType = WingsType.default): ImportedWingsType"><wbr />init<wbr />Imported<wbr />Wings<wbr />Type<span class="attachedType">ImportedWingsType</span></a></li>
   <li><a class="reference" href="#parseFile%2Cstring%2Cbool"
     title="parseFile(filename: string; skipImport: bool): Table[string, IWings]"><wbr />parse<wbr />File<span class="attachedType">IWings</span></a></li>
   <li><a class="reference" href="#addImport%2CIWings%2Cstring%2Cstring"
@@ -894,6 +896,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><a href="winterface.html#ImportedWingsType"><span class="Identifier">ImportedWingsType</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">name</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">init</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
+  <span class="Identifier">wingsType</span><span class="Operator">*</span><span class="Other">:</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a>
 </pre></dt>
 <dd>
 
@@ -921,9 +924,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 A wings object interface.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L35"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L36"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="WEnum"></a>
@@ -934,9 +937,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 A wings enum object.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L49"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L50"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L50" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="WStruct"></a>
@@ -948,9 +951,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 A wings struct object.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L54"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L55"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L55" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -958,16 +961,17 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="initImportedWingsType,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#initImportedWingsType%2Cstring%2Cstring"><span class="Identifier">initImportedWingsType</span></a><span class="Other">(</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">init</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="winterface.html#ImportedWingsType"><span class="Identifier">ImportedWingsType</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+<a id="initImportedWingsType,string,string,WingsType"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#initImportedWingsType%2Cstring%2Cstring%2CWingsType"><span class="Identifier">initImportedWingsType</span></a><span class="Other">(</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">init</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+                          <span class="Identifier">wingsType</span><span class="Other">:</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a> <span class="Other">=</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <a href="winterface.html#ImportedWingsType"><span class="Identifier">ImportedWingsType</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L59"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L60"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="parseFile,string,bool"></a>
@@ -978,9 +982,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Parse the given file (and its dependencies) into a table of filename to <tt class="docutils literal"><span class="pre">IWings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L244"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L250"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L244" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addImport,IWings,string,string"></a>
@@ -990,9 +994,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Add new file / library to be imported by the IWings.
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L265"
+href="https://github.com/binhonglee/wings/tree/master/src/main/wingspkg/lib/winterface.nim#L271"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L265" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/winterface.nim#L271" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1005,7 +1009,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2020-02-06 08:56:56 UTC</small>
+        <small>Made with Nim. Generated: 2020-05-21 06:39:31 UTC</small>
       </div>
     </div>
   </div>

@@ -16,6 +16,8 @@ A simple customizable cross language struct and enum file generator.
 
 or if you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can just do `nimble install wings`.
 
+[Here](https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings)'s a simple vscode plugin that provides syntax highlighting for wings.
+
 ## Struct
 
 Input file:
