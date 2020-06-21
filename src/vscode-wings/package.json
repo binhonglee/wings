@@ -2,7 +2,7 @@
   "name": "vscode-wings",
   "displayName": "Wings",
   "description": "Syntax higlighting for wings",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "publisher": "binhonglee",
   "repository": {
     "type": "git",
@@ -16,16 +16,25 @@
     "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "wings",
-      "aliases": ["Wings", "wings"],
-      "extensions": [".wings"],
-      "configuration": "./language-configuration.json"
-    }],
-    "grammars": [{
-      "language": "wings",
-      "scopeName": "source.wings",
-      "path": "./syntaxes/wings.tmLanguage.json"
-    }]
+    "languages": [
+      {
+        "id": "wings",
+        "aliases": [
+          "Wings",
+          "wings"
+        ],
+        "extensions": [
+          ".wings"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "wings",
+        "scopeName": "source.wings",
+        "path": "./syntaxes/wings.tmLanguage.json"
+      }
+    ]
   }
 }

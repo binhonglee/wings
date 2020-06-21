@@ -29,7 +29,7 @@ TypeScript
 
 ```ts
 import { WingsStructUtil } from wings-ts-util;
-import Person from 'path/to/tsfile';
+import Person from 'path/to/tsfile/Person';
 
 export class SomeClass {
   public static someFunction(someone: Person): string {
@@ -41,3 +41,16 @@ export class SomeClass {
   }
 }
 ```
+
+## Development
+
+- Install
+  - `npm i`
+- Build
+  - `npm build`
+- Clean
+  - `npm clean`
+- Testing
+  - `npm run cover`
+- Publish
+  - `npm publish`

@@ -169,78 +169,78 @@
       }]
     },
     "go-func": {
-      "begin": "go\\-func",
+      "begin": "^go\\-func\\(",
       "end": "^\\)\n",
       "name": "support.function",
       "patterns": [{
-        "begin": "\\(",
+        "begin": "\n",
         "end": "(?=^\\)\n)",
-        "contentName": "source.go",
+        "name": "variable.other.declaration",
         "patterns": [{
           "include": "source.go"
         }]
       }]
     },
     "js-func": {
-      "begin": "^js\\-func",
+      "begin": "^js\\-func\\(",
       "end": "^\\)\n",
       "name": "support.function",
       "patterns": [{
-        "begin": "\\(",
+        "begin": "\n",
         "end": "(?=^\\)\n)",
-        "name": "source.js",
+        "name": "variable.other.declaration",
         "patterns": [{
           "include": "source.js"
         }]
       }]
     },
     "kt-func": {
-      "begin": "^kt\\-func",
+      "begin": "^kt\\-func\\(",
       "end": "^\\)\n",
       "name": "support.function",
       "patterns": [{
-        "begin": "\\(",
+        "begin": "\n",
         "end": "(?=^\\)\n)",
-        "name": "source.kotlin",
+        "name": "variable.other.declaration",
         "patterns": [{
           "include": "source.kotlin"
         }]
       }]
     },
     "nim-func": {
-      "begin": "^nim\\-func",
+      "begin": "^nim\\-func\\(",
       "end": "^\\)\n",
       "name": "support.function",
       "patterns": [{
-        "begin": "\\(",
+        "begin": "\n",
         "end": "(?=^\\)\n)",
-        "name": "source.nim",
+        "name": "variable.other.declaration",
         "patterns": [{
           "include": "source.nim"
         }]
       }]
     },
     "py-func": {
-      "begin": "^py\\-func",
+      "begin": "^py\\-func\\(",
       "end": "^\\)\n",
       "name": "support.function",
       "patterns": [{
-        "begin": "\\(",
+        "begin": "\n",
         "end": "(?=^\\)\n)",
-        "name": "source.python",
+        "name": "variable.other.declaration",
         "patterns": [{
           "include": "source.python"
         }]
       }]
     },
     "ts-func": {
-      "begin": "^ts\\-func",
+      "begin": "^ts\\-func\\(",
       "end": "^\\)\n",
       "name": "support.function",
       "patterns": [{
-        "begin": "\\(",
+        "begin": "\n",
         "end": "(?=^\\)\n)",
-        "name": "source.ts",
+        "name": "variable.other.declaration",
         "patterns": [{
           "include": "source.ts"
         }]

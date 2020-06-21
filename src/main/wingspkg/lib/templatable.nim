@@ -1,5 +1,5 @@
-from strutils import indent, isSpaceAscii, removePrefix, removeSuffix,
-  replace, split, splitWhitespace, startsWith, unindent
+from strutils import indent, isNilOrWhitespace, isSpaceAscii, removePrefix,
+  removeSuffix, replace, split, splitLines, splitWhitespace, startsWith, unindent
 from stones/genlib import merge, getResult
 import stones/cases
 import stones/log
@@ -41,26 +41,24 @@ proc processFunctions(s: string, ind: Indentation): string =
   if ci == "" or cur.len() < ci.len():
     ci = cur
 
-  var i: int = 0
-  var prev: int = 0
-  var same: bool = false
-  result = ""
-  while i < s.len() - 1:
-    if s[i] == '\n' or same:
-      inc(i)
-      var j: int = 0
-      same = true
-      while ci.len() - j > 0 and s.len() > i + j and same:
-        if ci[j] == s[i + j]:
-          inc(j)
-        else:
-          same = false
-      if ci.len() - j == 0 and same:
-        result &= substr(s, prev, i - 1) & ind.spacing
-        prev = i + j
-        i = prev - 2
-    inc(i)
-  result &= substr(s, prev, i - 1)
+  var strings: seq[string] = splitLines(s)
+
+  for str in strings:
+    var mutableStr: string = str
+    if result.len() > 0:
+      result &= "\n"
+    if isNilOrWhitespace(str):
+      continue
+    var count: int = 0
+
+    while mutableStr.startsWith(ci):
+      mutableStr.removePrefix(ci)
+      inc(count)
+
+    for i in countup(1, count, 1):
+      result &= ind.spacing
+
+    result &= mutableStr
   if not ind.preIndent:
     result = result.unindent(1, ind.spacing)
 

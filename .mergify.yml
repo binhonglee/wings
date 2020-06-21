@@ -1,5 +1,5 @@
 pull_request_rules:
-  - name: Automatic merge on approval
+  - name: Dependabot updates
     conditions:
       - author=dependabot-preview[bot]
       - status-success=Travis CI - Pull Request
@@ -9,4 +9,15 @@ pull_request_rules:
       - status-success=codecov/project
     actions:
       merge:
-        method: merge
+        method: squash
+  - name: Approved PRs
+    conditions:
+      - approved-reviews-by=binhonglee
+      - status-success=Travis CI - Pull Request
+      - status-success=Travis CI - Branch
+      - status-success=security/snyk (binhonglee)
+      - status-success=codecov/patch
+      - status-success=codecov/project
+    actions:
+      merge:
+        method: squash

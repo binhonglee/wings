@@ -1,0 +1,27 @@
+go-filepath examples/output/go
+ts-filepath examples/output/ts
+
+ts-import { IWingsStruct }:wings-ts-util
+
+ts-implement IWingsStruct
+
+# One of many location for a Day (in a Trip).
+
+struct Place {
+    id          int
+    label       str
+    url         str
+    description str
+}
+
+go-func(
+    // GetID (istruct) - Returns the place ID.
+    func (place Place) GetID() int {
+        return place.ID
+    }
+
+    // SetID (istruct) - Sets the place ID.
+    func (place *Place) SetID(id int) {
+        place.ID = id
+    }
+)

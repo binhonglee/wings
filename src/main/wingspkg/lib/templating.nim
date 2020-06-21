@@ -113,9 +113,7 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
       while givenTemplate.readLine(line) and not line.contains(
         MK_PREFIX & keyword
       ) and not line.startsWith(MK_PREFIX & MK_END & keyword):
-        if prefix.len() > 0:
-          prefix &= "\n"
-        prefix &= line
+        prefix &= line & "\n"
         inc(lineNo)
       var templateText: string = ""
       if not line.startsWith(MK_PREFIX & MK_END & keyword):
@@ -154,12 +152,11 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
       else:
         output = multiRow(keyword, templatable.fields, templateText)
 
-      if postfix.len() > 0:
-        output = output & "\n" & postfix
-      if prefix.len() > 0:
-        output = prefix & "\n" & output
-
       if output.len() > 0:
+        if postfix.len() > 0:
+          output = output & "\n" & postfix
+        if prefix.len() > 0:
+          output = prefix & output
         result &= "\n" & output
     else:
       LOG(
