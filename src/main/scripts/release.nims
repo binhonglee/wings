@@ -13,7 +13,8 @@ const plz_run: string = "./pleasew run --show_all_output"
 const plz_build: string = "./pleasew build --show_all_output"
 const options: seq[string] =
   @[
-    "--os:linux --cpu:arm -t:-marm -l:-marm",
+    # This can be compiled separately and manually if you intend to get it.
+    # "--os:linux --cpu:arm -t:-marm -l:-marm",
     "--os:linux --cpu:i386 -t:-m32 -l:-m32",
     "--os:linux --cpu:amd64",
     "-d:mingw --cpu:i386 -t:-m32 -l:-m32",

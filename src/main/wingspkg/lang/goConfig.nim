@@ -16,6 +16,7 @@ const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '/'
 const IMPORT_PATH_LEVEL: int = 1
 const PARSE_FORMAT: string = ""
+const INDENTATION_SPACING: string = "	"
 
 const TEMPLATE_STRUCT: string = """
 package {#1}
@@ -87,6 +88,7 @@ let GO_CONFIG*: TConfig = initTConfig(
   pfx = IMPORT_PATH_PREFIX,
   sep = IMPORT_PATH_SEPARATOR,
   level = IMPORT_PATH_LEVEL,
+  isp = INDENTATION_SPACING,
   pfmt = PARSE_FORMAT,
   temp = {
     "struct": TEMPLATE_STRUCT,

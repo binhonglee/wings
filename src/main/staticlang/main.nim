@@ -42,6 +42,7 @@ proc genFile(inputFile: string): void =
   push(c.IMPORT_PATH_SEPARATOR_PRE, $config.importPath.separator, c.IMPORT_PATH_SEPARATOR_POST)
   push(c.IMPORT_PATH_LEVEL, $config.importPath.level)
   push(c.PARSE_FORMAT_PRE, config.parseFormat, c.PARSE_FORMAT_POST)
+  push(c.INDENTATION_SPACING_PRE, config.indentation.spacing, c.INDENTATION_SPACING_POST)
 
   push()
   push(c.TEMPLATE_STRUCT_PRE, config.templates.getOrDefault("struct"), c.TEMPLATE_ENUM_POST)

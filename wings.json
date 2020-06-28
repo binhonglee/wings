@@ -15,7 +15,6 @@
     "go", "kt", "nim", "py", "ts"
   ],
   "skipImport": false,
-  "tabbing": 4,
   "langConfigs": [
     "examples/input/templates/go.json",
     "examples/input/templates/kt.json",
