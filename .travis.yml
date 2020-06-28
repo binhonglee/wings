@@ -40,8 +40,25 @@ script:
   - ./scripts/test.sh
   - cd src/tsUtil
   - npm run cover
+  - cd ../../
 
 after_success:
-  - pip install -r requirements.txt
-  - mkdocs build
   - bash <(curl -s https://codecov.io/bash)
+
+before_deploy:
+  - pip3 install -r requirements.txt
+  - mkdocs build
+
+deploy:
+  edge: true
+  cleanup: false
+  strategy: git
+  provider: pages
+  local_dir: site
+  keep_history: true
+  token: $GITHUB_TOKEN
+  on:
+    branch: release
+    condition:
+      - "$(uname -s) = Darwin"
+      - "$BRANCH = 1.2.0"
