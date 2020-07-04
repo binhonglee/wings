@@ -1,4 +1,4 @@
-from strutils import indent, isNilOrWhitespace, isSpaceAscii, removePrefix,
+from strutils import indent, isEmptyOrWhitespace, isSpaceAscii, removePrefix,
   removeSuffix, replace, split, splitLines, splitWhitespace, startsWith, unindent
 from stones/genlib import merge, getResult
 import stones/cases
@@ -18,7 +18,7 @@ type
     langBasedFields*: Table[string, seq[Table[string, string]]]
 
 proc parseType(
-  winterface: var IWings,
+  iwings: var IWings,
   s: string,
   langConfig: TConfig,
 ): Table[string, string]
@@ -47,7 +47,7 @@ proc processFunctions(s: string, ind: Indentation): string =
     var mutableStr: string = str
     if result.len() > 0:
       result &= "\n"
-    if isNilOrWhitespace(str):
+    if isEmptyOrWhitespace(str):
       continue
     var count: int = 0
 
@@ -100,7 +100,7 @@ proc processCustomType(
   result.add(wrap(TK_TYPE, TK_PARSE), ti.targetParse.replace(ts))
 
 proc parseType(
-  winterface: var IWings,
+  iwings: var IWings,
   s: string,
   langConfig: TConfig,
 ): Table[string, string] =
@@ -115,7 +115,7 @@ proc parseType(
 
   var hit: bool = false
   let typesImported: Table[string, ImportedWingsType] =
-    winterface.typesImported.getOrDefault(langConfig.filetype)
+    iwings.typesImported.getOrDefault(langConfig.filetype)
 
   if typesImported.hasKey(s):
     result.add(wrap(TK_TYPE), typesImported[s].name)
@@ -128,7 +128,7 @@ proc parseType(
   for key in langConfig.customTypes.keys:
     if key.len() > 0 and s.startsWith(key):
       let r: Table[string, string] = processCustomType(
-        winterface,
+        iwings,
         s,
         langConfig.customTypes[key],
         langConfig,
@@ -138,7 +138,7 @@ proc parseType(
 
       result.merge(r)
       if langConfig.customTypes[key].requiredImport.len() > 0:
-        winterface.addImport(
+        iwings.addImport(
           langConfig.customTypes[key].requiredImport,
           langConfig.filetype,
         )
@@ -147,7 +147,7 @@ proc parseType(
   if not hit and langConfig.types.hasKey(s):
     result.add(wrap(TK_TYPE), langConfig.types[s].targetType)
     if langConfig.types[s].requiredImport.len() > 0:
-      winterface.addImport(
+      iwings.addImport(
         langConfig.types[s].requiredImport,
         langConfig.filetype,
       )
@@ -186,14 +186,39 @@ proc initTemplatable(): Templatable =
   result.langBasedMultireps = initTable[string, Table[string, HashSet[string]]]()
   result.fields = newSeq[Table[string, string]](0)
 
-proc wingsToTemplatable*(winterface: var IWings, tconfig: TConfig): Templatable =
+proc parseFields(iwings: var IWings, fs: seq[string], tconfig: TConfig): seq[Table[string, string]] =
+  result = newSeq[Table[string, string]]()
+  for row in fs:
+    var variables: Table[string, string] = initTable[string, string]()
+    let fields: seq[string] = row.splitWhitespace()
+    if fields.len() < 2:
+      LOG(ERROR, "Row '" & row & "' has less field than expected. Skipping...")
+
+    variables.add(wrap(TK_VARNAME), fields[0])
+    var varnames: Table[Case, string] = allCases(fields[0], Snake)
+    variables.add(wrap(TK_VARNAME, TK_JSON), varnames[Snake])
+
+    for key in varnames.keys:
+      variables.add(wrap(TK_VARNAME, $key), varnames[key])
+
+    variables.merge(
+      parseType(iwings, fields[1], tconfig)
+    )
+    if fields.len() > 2:
+      if variables.hasKey(wrap(TK_TYPE, TK_INIT)):
+        variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
+      else:
+        variables.add(wrap(TK_TYPE, TK_INIT), fields[2])
+    result.add(variables)
+
+proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
   ## Convert IWings to TConfig.
   result = initTemplatable()
-  if winterface.dependencies.len() > 0:
+  if iwings.dependencies.len() > 0:
     LOG(
       FATAL,
       "Dependencies is not yet fulfilled for '" &
-      winterface.name &
+      iwings.name &
       "' when calling `wingsToTemplatable()`."
     )
 
@@ -202,17 +227,17 @@ proc wingsToTemplatable*(winterface: var IWings, tconfig: TConfig): Templatable 
   result.langBasedReps.add(lang, initTable[string, string]())
   result.langBasedReps[lang].add(wrap(TK_FUNCTIONS), "")
   result.langBasedMultireps.add(lang, initTable[string, HashSet[string]]())
-  result.replacements.add(wrap(TK_COMMENT), winterface.comment)
-  result.replacements.add(wrap(TK_NAME), winterface.name)
+  result.replacements.add(wrap(TK_COMMENT), iwings.comment)
+  result.replacements.add(wrap(TK_NAME), iwings.name)
 
-  var names: Table[Case, string] = allCases(winterface.name, Snake)
+  var names: Table[Case, string] = allCases(iwings.name, Snake)
   for key in names.keys:
     result.replacements.add(wrap(TK_NAME, $key), names[key])
 
   var i: int = 1
   var words: seq[string] = tFilename(
-    winterface.filename,
-    winterface.filepath[lang],
+    iwings.filename,
+    iwings.filepath[lang],
   ).split('/')
 
   for w in words:
@@ -221,9 +246,13 @@ proc wingsToTemplatable*(winterface: var IWings, tconfig: TConfig): Templatable 
       result.langBasedReps[lang].add(wrap($(words.len() - i)), word)
     inc(i)
 
-  case winterface.wingsType
+  case iwings.wingsType
+  of WingsType.interfacew:
+    let winterface: WInterface = WInterface(iwings)
+    result.fields = parseFields(iwings, winterface.fields, tconfig)
+
   of WingsType.structw:
-    let wstruct: WStruct = WStruct(winterface)
+    let wstruct: WStruct = WStruct(iwings)
     var implement: string = ""
     if wstruct.implement.hasKey(tconfig.filetype):
       implement = replace(
@@ -241,30 +270,10 @@ proc wingsToTemplatable*(winterface: var IWings, tconfig: TConfig): Templatable 
     else:
       result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = ""
 
-    for row in wstruct.fields:
-      var variables: Table[string, string] = initTable[string, string]()
-      let fields: seq[string] = row.splitWhitespace()
-      if fields.len() < 2:
-        LOG(ERROR, "Row '" & row & "' has less field than expected. Skipping...")
+    result.fields = parseFields(iwings, wstruct.fields, tconfig)
 
-      variables.add(wrap(TK_VARNAME), fields[0])
-      var varnames: Table[Case, string] = allCases(fields[0], Snake)
-      variables.add(wrap(TK_VARNAME, TK_JSON), varnames[Snake])
-
-      for key in varnames.keys:
-        variables.add(wrap(TK_VARNAME, $key), varnames[key])
-
-      variables.merge(
-        parseType(winterface, fields[1], tconfig)
-      )
-      if fields.len() > 2:
-        if variables.hasKey(wrap(TK_TYPE, TK_INIT)):
-          variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
-        else:
-          variables.add(wrap(TK_TYPE, TK_INIT), fields[2])
-      result.fields.add(variables)
   of WingsType.enumw:
-    let wenum: WEnum = WEnum(winterface)
+    let wenum: WEnum = WEnum(iwings)
     for field in wenum.values:
       var variables: Table[string, string] = initTable[string, string]()
       variables.add(wrap(TK_VARNAME), field)
@@ -276,7 +285,7 @@ proc wingsToTemplatable*(winterface: var IWings, tconfig: TConfig): Templatable 
   of WingsType.default:
     LOG(FATAL, "Invalid `WingsType`.")
 
-  if winterface.imports.hasKey(lang):
-    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), winterface.imports[lang])
+  if iwings.imports.hasKey(lang):
+    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), iwings.imports[lang])
   else:
     result.langBasedMultireps[lang].add(wrap(TK_IMPORT), initHashSet[string]())

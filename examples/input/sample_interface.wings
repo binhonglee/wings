@@ -1,0 +1,30 @@
+go-filepath examples/output/go
+kt-filepath examples/output/kt
+nim-filepath examples/output/nim
+py-filepath examples/output/py
+ts-filepath examples/output/ts
+
+import examples/input/emotion.wings
+
+# Just some interface
+
+interface SampleInterface {
+  id          int       -1
+  name        str
+  cur_class   str
+  feeling     Emotion   Emotion.Meh
+  is_active   bool
+  year        date
+  graduation  date
+  something   Map<str,str>
+}
+
+wings-func(
+  public functionName (firstParam: str, secondParam: str) str
+)
+
+ts-func(
+  public addHomework(hw: Homework): void {
+    this.Homeworks.push(hw);
+  }
+)

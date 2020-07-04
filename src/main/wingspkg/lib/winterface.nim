@@ -1,8 +1,9 @@
 from strutils
-import endsWith, join, removePrefix, removeSuffix,
-  split, splitWhitespace, startsWith
+import endsWith, isEmptyOrWhitespace, join, parseEnum,
+  removePrefix, removeSuffix, split, splitWhitespace, startsWith, strip
 from os import fileExists
 import stones/log
+import stones/strlib, stones/genlib
 import sets
 import tables
 
@@ -12,6 +13,13 @@ type
     default = "unknownObj"
     structw = "struct"
     enumw = "enum"
+    interfacew = "interface"
+
+type
+  Visibility* = enum
+    public = "public"
+    protected = "protected"
+    private = "private"
 
 const COMMENT = "//"
 
@@ -25,12 +33,22 @@ const WINGS_OPEN = "{"
 const WINGS_CLOSE = "}"
 const WINGS_COMMENT = "#"
 const WINGS_IMPORT = "import"
+const WINGS_FUNC = "wings"
+const WINGS_FUNC_OPEN = '('
+const WINGS_FUNC_CLOSE = ')'
 
 type
   ImportedWingsType* = ref object
     name*: string
     init*: string
     wingsType*: WingsType
+
+type
+  AbstractFunction* = object
+    visibility*: Visibility
+    name*: string
+    arguments*: Table[string, string] # key: name, value: type
+    returnType*: string # wingsType to be parse
 
 type
   IWings* = ref object of RootObj
@@ -57,6 +75,12 @@ type
     fields*: seq[string]
     functions*: Table[string, string]
 
+type
+  WInterface* = ref object of IWings
+    fields*: seq[string]
+    functions*: Table[string, string]
+    abstractFunctions*: Table[string, AbstractFunction]
+
 proc initImportedWingsType*(
   name: string = "",
   init: string = "",
@@ -81,38 +105,71 @@ proc initIWings(): IWings =
   result.typesImported = initTable[string, Table[string, ImportedWingsType]]()
   result.wingsType = WingsType.default
 
-proc initWEnum(winterface: IWings = initIWings()): WEnum =
+proc initWEnum(iwings: IWings = initIWings()): WEnum =
   ## Returns an empty initialized `WEnum`.
   result = WEnum()
-  result.comment = winterface.comment
-  result.dependencies = winterface.dependencies
-  result.filename = winterface.filename
-  result.filepath = winterface.filepath
-  result.implement = winterface.implement
-  result.imported = winterface.imported
-  result.imports = winterface.imports
-  result.name = winterface.name
-  result.typesImported = winterface.typesImported
+  result.comment = iwings.comment
+  result.dependencies = iwings.dependencies
+  result.filename = iwings.filename
+  result.filepath = iwings.filepath
+  result.implement = iwings.implement
+  result.imported = iwings.imported
+  result.imports = iwings.imports
+  result.name = iwings.name
+  result.typesImported = iwings.typesImported
   result.values = newSeq[string](0)
   result.wingsType = WingsType.enumw
 
-proc initWStruct(winterface: IWings = initIWings()): WStruct =
+proc initWStruct(iwings: IWings = initIWings()): WStruct =
   ## Returns an empty initialized `WStruct`.
   result = WStruct()
-  result.comment = winterface.comment
-  result.dependencies = winterface.dependencies
+  result.comment = iwings.comment
+  result.dependencies = iwings.dependencies
   result.fields = newSeq[string](0)
-  result.filename = winterface.filename
-  result.filepath = winterface.filepath
+  result.filename = iwings.filename
+  result.filepath = iwings.filepath
   result.functions = initTable[string, string]()
-  result.implement = winterface.implement
-  result.imported = winterface.imported
-  result.imports = winterface.imports
-  result.name = winterface.name
+  result.implement = iwings.implement
+  result.imported = iwings.imported
+  result.imports = iwings.imports
+  result.name = iwings.name
   result.wingsType = WingsType.structw
+
+proc initWInterface(iwings: IWings = initIWings()): WInterface =
+  ## Returns an empty initialized `WEnum`.
+  result = WInterface()
+  result.abstractFunctions = initTable[string, AbstractFunction]()
+  result.comment = iwings.comment
+  result.dependencies = iwings.dependencies
+  result.fields = newSeq[string](0)
+  result.filename = iwings.filename
+  result.filepath = iwings.filepath
+  result.functions = initTable[string, string]()
+  result.implement = iwings.implement
+  result.imported = iwings.imported
+  result.imports = iwings.imports
+  result.name = iwings.name
+  result.typesImported = iwings.typesImported
+  result.wingsType = WingsType.interfacew
+
+proc initAbstractFunction(
+  visibility: Visibility = Visibility.public,
+  name: string = "",
+  arguments: Table[string, string] = initTable[string, string](),
+  returnType: string = "",
+): AbstractFunction =
+  result = AbstractFunction()
+  result.visibility = visibility
+  result.name = name
+  result.arguments = arguments
+  result.returnType = returnType
 
 proc error(line: int, message: string): void =
   LOG(FATAL, "Line " & $line & ": " & message)
+
+proc parseWInteface(winterface: var WInterface, words: seq[string]): string =
+  if words[0] == WINGS_CLOSE:
+    result = ""
 
 proc parseWEnum(wenum: var WEnum, words: seq[string]): string =
   if words.len() > 1:
@@ -133,8 +190,93 @@ proc parseWStruct(wstruct: var WStruct, words: seq[string]): string =
     wstruct.fields.add(join(words, " "))
     result = $WingsType.default
 
+proc parseAbstractFunc(
+  winterface: var WInterface,
+  words: seq[string],
+  line: string,
+): string =
+  if words.len() > 0 and words[0] == TYPE_FUNCTION_CLOSE:
+    result = ""
+
+  var str: string = getResult(line, trim)
+
+  var i = 0
+  var space = false
+
+  while not space and i < str.len():
+    if isEmptyOrWhitespace($str[i]) or str[i] == WINGS_FUNC_OPEN:
+      space = true
+    else:
+      inc(i)
+  
+  var visibility: Visibility
+  var name: string
+
+  try:
+    visibility = parseEnum[Visibility](system.substr(str, 0, i))
+  except:
+    visibility = Visibility.public
+    name = system.substr(str, 0, i)
+
+  strlib.substr(str, i + 1, str.len() - 1)
+
+  if name.len() == 0:
+    i = 0
+    space = false
+
+    while not space and i < str.len():
+      if str[i] != WINGS_FUNC_OPEN:
+        inc(i)
+      else:
+        space = true
+
+    name = system.substr(str, 0, i - 1).strip()
+    strlib.substr(str, i + 1, str.len() - 1)
+
+  var strs = strlib.split(str, WINGS_FUNC_OPEN, WINGS_FUNC_CLOSE, " ")
+  if strs.len() < 2:
+    error(0, "Missing return type for the wings-func().")
+  elif strs.len() > 2:
+    error(0, "Unexpected characters at the end of the line for the wings-func().")
+
+  str = system.substr(strs[0], 1, strs[0].len() - 1)
+  let params = split(str, ",")
+
+  var paramTable = initTable[string, string]()
+  for param in params:
+    let ss = split(param, ":")
+    if ss.len() < 2:
+      error(0, "Missing type declaration in `" & param & "`.")
+    elif ss.len() > 2:
+      error(0, "Unexpected characters in `" & param & "`.")
+    
+    if paramTable.hasKey(ss[0]):
+      error(0, "Parameter name `" & ss[0] & "` already declared previously.")
+    
+    paramTable.add(ss[0], ss[1])
+
+  winterface.abstractFunctions.add(
+    name,
+    initAbstractFunction(visibility, name, paramTable, strs[1])
+  )
+  result = WINGS_FUNC
+
+# proc parseFunc(
+#   wstruct: var WStruct,
+#   words: seq[string],
+#   line: string,
+#   lang: string
+# ): string =
+#   if words.len() > 0 and words[0] == TYPE_FUNCTION_CLOSE:
+#     result = ""
+#   else:
+#     if not wstruct.functions.hasKey(lang):
+#       wstruct.functions.add(lang, "")
+#     wstruct.functions[lang] &= "\n" & line
+#     result = lang
+
 proc parseFunc(
-  wstruct: var WStruct,
+  functions: var Table[string, string],
   words: seq[string],
   line: string,
   lang: string
@@ -142,18 +284,18 @@ proc parseFunc(
   if words.len() > 0 and words[0] == TYPE_FUNCTION_CLOSE:
     result = ""
   else:
-    if not wstruct.functions.hasKey(lang):
-      wstruct.functions.add(lang, "")
-    wstruct.functions[lang] &= "\n" & line
+    if not functions.hasKey(lang):
+      functions.add(lang, "")
+    functions[lang] &= "\n" & line
     result = lang
 
 proc parseFileIWings(
-  winterface: var IWings,
+  iwings: var IWings,
   filename: string,
 ): bool =
   ## Parse the `IWings` from the given file.
   LOG(DEBUG, "Parsing " & filename & "...")
-  winterface.filename = filename
+  iwings.filename = filename
   var line: string = ""
   var lineNo: int = 1
   var inObj: string = ""
@@ -174,19 +316,27 @@ proc parseFileIWings(
       continue
 
     if inObj != "":
-      if winterface of WEnum:
-        inObj = parseWEnum(WEnum(winterface), words)
-      elif winterface of WStruct:
+      if iwings of WEnum:
+        inObj = parseWEnum(WEnum(iwings), words)
+      elif iwings of WStruct:
         if inObj == $WingsType.default:
-          inObj = parseWStruct(WStruct(winterface), words)
+          inObj = parseWStruct(WStruct(iwings), words)
         else:
-          inObj = parseFunc(WStruct(winterface), words, line, inObj)
+          inObj = parseFunc(WStruct(iwings).functions, words, line, inObj)
+      elif iwings of WInterface:
+        if inObj == $WingsType.default:
+          inObj = parseWInteface(WInterface(iwings), words)
+        elif inObj == WINGS_FUNC:
+          inObj = parseAbstractFunc(WInterface(iwings), words, line)
+        else:
+          inObj = parseFunc(WInterface(iwings).functions, words, line, inObj)
       else:
         error(
           lineNo,
-          "Unexpected code path! `winterface` should be either a `" &
-          $WingsType.structw & "` or a `" &
-          $WingsType.enumw & "`."
+          "Unexpected code path! `iwings` should be either `" &
+          $WingsType.structw & "`, `" &
+          $WingsType.enumw & "`, or `" &
+          $WingsType.interfacew & "`."
         )
       continue
 
@@ -194,21 +344,23 @@ proc parseFileIWings(
     of WINGS_COMMENT:
       words.delete(0)
       if words.len() > 0:
-        if winterface.comment.len() > 0:
-          winterface.comment &= "\n"
-        winterface.comment &= join(words, " ")
+        if iwings.comment.len() > 0:
+          iwings.comment &= "\n"
+        iwings.comment &= join(words, " ")
     of WINGS_IMPORT:
       if words.len() != 2:
         error(lineNo, "Invalid import file argument.")
       if not fileExists(words[1]):
         error(lineNo, "Could not find import file '" & words[1] & "'.")
-      winterface.dependencies.add(words[1])
+      iwings.dependencies.add(words[1])
     elif words.len > 2 and words[2] == WINGS_OPEN:
       case words[0]
       of $WingsType.structw:
-        winterface = initWStruct(winterface)
+        iwings = initWStruct(iwings)
       of $WingsType.enumw:
-        winterface = initWEnum(winterface)
+        iwings = initWEnum(iwings)
+      of $WingsType.interfacew:
+        iwings = initWInterface(iwings)
       else:
         error(
           lineNo,
@@ -216,7 +368,7 @@ proc parseFileIWings(
           "\", '" & $WingsType.structw &
           "' defined."
         )
-      winterface.name = words[1]
+      iwings.name = words[1]
       inObj = $WingsType.default
     else:
       let ss: seq[string] = words[0].split('-')
@@ -226,16 +378,16 @@ proc parseFileIWings(
 
       case ss[1]
       of TYPE_FILEPATH:
-        winterface.filepath.add(ss[0], words[0])
+        iwings.filepath.add(ss[0], words[0])
       of TYPE_IMPLEMENT:
-        winterface.implement.add(ss[0], words[0])
+        iwings.implement.add(ss[0], words[0])
       of TYPE_IMPORT:
-        if not winterface.imports.hasKey(ss[0]):
-          winterface.imports.add(ss[0], initHashSet[string]())
-        winterface.imports[ss[0]].incl(join(words, " "))
+        if not iwings.imports.hasKey(ss[0]):
+          iwings.imports.add(ss[0], initHashSet[string]())
+        iwings.imports[ss[0]].incl(join(words, " "))
       of TYPE_FUNCTION_OPEN:
-        if not (winterface of WStruct):
-          error(lineNo, "`{lang}Func()` should only be used when defining a `struct`.")
+        if not (iwings of WStruct or iwings of WInterface):
+          error(lineNo, "`{lang}Func()` should only be used when defining a `struct` or an `interface`.")
         inObj = ss[0]
       else:
         if words[1] == WINGS_OPEN:
@@ -253,16 +405,16 @@ proc parseFile*(
 ): Table[string, IWings] =
   ## Parse the given file (and its dependencies) into a table of filename to `IWings`.
   result = initTable[string, IWings]()
-  var winterface = initIWings()
+  var iwings = initIWings()
 
-  if winterface.parseFileIWings(filename):
-    result.add(filename, winterface)
-    let deps = winterface.dependencies
+  if iwings.parseFileIWings(filename):
+    result.add(filename, iwings)
+    let deps = iwings.dependencies
     for imports in deps:
-      winterface = initIWings()
-      winterface.imported = skipImport
-      if winterface.parseFileIWings(imports):
-        result.add(imports, winterface)
+      iwings = initIWings()
+      iwings.imported = skipImport
+      if iwings.parseFileIWings(imports):
+        result.add(imports, iwings)
       else:
         LOG(FATAL, "Failed to parse '" & imports & "' imported in " & filename & ".")
   else:
