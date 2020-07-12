@@ -1,3 +1,0 @@
-outputFilename	wingspkg/util/filename.html#outputFilename,string,string,TConfig	filename: outputFilename(filename: string; filepath: string; langConfig: TConfig): string	
-importFilename	wingspkg/util/filename.html#importFilename,string,string,string,string,TConfig	filename: importFilename(filename: string; filepath: string; callerFilename: string;\n               callerFilepath: string; langConfig: TConfig): string	
-tFilename	wingspkg/util/filename.html#tFilename,string,string	filename: tFilename(filename: string; filepath: string): string	

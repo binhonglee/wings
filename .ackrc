@@ -1,8 +1,10 @@
 --ignore-dir=coverage
 --ignore-dir=dist
+--ignore-dir=docs/main
 --ignore-dir=node_modules
 --ignore-dir=plz-out
---ignore-dir=docs/main
+--ignore-dir=site
 --ignore-dir=.vscode
 --ignore-file=is:pleasew
+--ignore-file=is:package-lock.json
 -i

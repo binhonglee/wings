@@ -9,6 +9,7 @@ python: "3.8"
 env:
   - BRANCH=1.0.6
   - BRANCH=1.2.0
+  - BRANCH=stable
 
 cache:
   directories:
@@ -46,6 +47,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 before_deploy:
+  - ./pleasew --show_all_output docs
   - pip3 install -r requirements.txt
   - mkdocs build
 

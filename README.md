@@ -10,12 +10,13 @@ A customizable cross language struct and enum file generator.
 
 - [Nim](https://nim-lang.org/)
 - [Please](https://please.build)
+- [MkDocs](https://www.mkdocs.org/) (Documentation)
 
 \*_Note: There are also other packages needed for deployment due to cross compilation (like `gcc-multilib`, `gcc-arm-linux-gnueabihf`, `mingw-w64` etc...)._
 
 ## Development Tools (scripts)
 
-- Generate documentations (based on updated code)
+- Run mkdocs development server for realtime feedback on changes made `docs` folder _(requires `mkdocs`)_
   - `plz docs`
 - Build release binaries for distribution
   - `plz release`

@@ -1,1 +1,0 @@
-genHeader	wingspkg/util/header.html#genHeader,string,string,string	header: genHeader(prefix: string; source: string; text: string): string	

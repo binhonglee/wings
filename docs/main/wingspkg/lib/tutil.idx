@@ -1,1 +1,0 @@
-parse	wingspkg/lib/tutil.html#parse,string	tutil: parse(filename: string): TConfig	

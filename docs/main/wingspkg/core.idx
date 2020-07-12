@@ -1,1 +1,0 @@
-fromFiles	wingspkg/core.html#fromFiles,seq[T][string],Config	core: fromFiles(filenames: seq[string]; config: Config): Table[string,\n    Table[string, string]]	

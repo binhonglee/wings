@@ -10,7 +10,10 @@ PassEnv = OSTYPE
 cmd = run //src/main:wings
 
 [Alias "docs"]
-cmd = run //src/main/scripts:docs
+cmd = run //src/main/scripts:docs -- serve
+
+[Alias "genDocs"]
+cmd = run //src/main/scripts:docs -- build
 
 [Alias "release"]
 cmd = run //src/main/scripts:release
