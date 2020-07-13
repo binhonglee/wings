@@ -47,9 +47,8 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 before_deploy:
-  - ./pleasew --show_all_output docs
   - pip3 install -r requirements.txt
-  - mkdocs build
+  - ./pleasew --show_all_output genDocs
 
 deploy:
   edge: true
@@ -60,7 +59,7 @@ deploy:
   keep_history: true
   token: $GITHUB_TOKEN
   on:
-    branch: release
+    branch: devel
     condition:
       - "$(uname -s) = Darwin"
-      - "$BRANCH = 1.2.0"
+      - "$BRANCH = stable"

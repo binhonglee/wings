@@ -18,6 +18,7 @@ nav:
   - Syntax: syntax.md
   - Config: config.md
   - Template: template.md
+  - Design: design.md
   - Main: main/index.html
   - Utility classes:
     - TypeScript:

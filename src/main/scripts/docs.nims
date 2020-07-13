@@ -9,6 +9,7 @@ const main: string = "src/main/wings.nim"
 const devel: string = "devel"
 const build: string = "build"
 const serve: string = "serve"
+const docLicense: string = "docs/license.md"
 
 proc run(cmd: string): void =
   if dirExists(folder):
@@ -23,6 +24,9 @@ proc run(cmd: string): void =
 
   exec("nim buildIndex -o:" & folder & "/theindex.html " & folder)
   mvFile(folder & "/theindex.html", folder & "/index.html")
+  rmFile(docLicense)
+  cpFile("LICENSE", docLicense)
+
   try:
     exec("mkdocs -v " & cmd)
   except:

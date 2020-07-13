@@ -5,4 +5,5 @@ release/
 report/
 init.sh
 wings
-docs/main
+docs/main/
+docs/license.md
