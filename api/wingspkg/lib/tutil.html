@@ -17,8 +17,8 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>wings</title>
-<link rel="stylesheet" type="text/css" href="nimdoc.out.css">
+<title>wingspkg/lib/tutil</title>
+<link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
 
@@ -71,7 +71,7 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">wings</h1>
+    <h1 class="title">wingspkg/lib/tutil</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -103,6 +103,14 @@ function main() {
     
   </ul>
 </li>
+<li>
+  <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#parse%2Cstring"
+    title="parse(filename: string): TConfig"><wbr />parse<span class="attachedType"></span></a></li>
+
+  </ul>
+</li>
 
 </ul>
 
@@ -114,7 +122,26 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="wingspkg/core.html">wingspkg/core</a>, <a class="reference external" href="wingspkg/util/config.html">wingspkg/util/config</a>
+<a class="reference external" href="tconfig.html">tconfig</a>, <a class="reference external" href="tempconst.html">tempconst</a>
+</dl></div>
+<div class="section" id="12">
+<h1><a class="toc-backref" href="#12">Procs</a></h1>
+<dl class="item">
+<a id="parse,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#parse%2Cstring"><span class="Identifier">parse</span></a><span class="Other">(</span><span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="tconfig.html#TConfig"><span class="Identifier">TConfig</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span>
+    <span class="Identifier">Defect</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">JsonParsingError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span>
+    <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadDirEffect</span><span class="Other">,</span>
+    <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Parse template config file into <tt class="docutils literal"><span class="pre">TConfig</span></tt>.
+&nbsp;&nbsp;<a
+href="https://github.com/binhonglee/wings/tree/devel/src/main/wingspkg/lib/tutil.nim#L71"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lib/tutil.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
 </dl></div>
 
   </div>
@@ -124,7 +151,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-17 17:15:42 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-19 11:20:47 UTC</small>
       </div>
     </div>
   </div>

@@ -318,27 +318,15 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="main/" title="Main" class="md-nav__link">
-      Main
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       Utility classes
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         Utility classes
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -351,13 +339,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
     
-    <label class="md-nav__link" for="nav-7-1">
+    <label class="md-nav__link" for="nav-6-1">
       TypeScript
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-1">
+      <label class="md-nav__title" for="nav-6-1">
         TypeScript
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -460,9 +448,10 @@
 <p class="admonition-title">Nim <code>date</code></p>
 <p>It is currently unsupported since I haven't figure out how to parse ISOString time properly from <code>string</code> in Nim.</p>
 </div>
+<p>Click <a href="./api">here</a> for code documentation instead.</p>
 <p><strong>Usage</strong></p>
 <ul>
-<li>Download the appropriate binary <a href="https://github.com/binhonglee/wings/releases/tag/v0.0.3-alpha">here</a>.</li>
+<li>Download the appropriate binary <a href="https://github.com/binhonglee/wings/releases/tag/v0.0.4-alpha">here</a>.</li>
 <li>Add binary to an included path and rename it to <code>wings</code>.</li>
 <li>Run <code>wings -c:{config_file} {filepath}</code> to generate the files.</li>
 </ul>
@@ -470,40 +459,44 @@
 <p><a href="https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings">Here</a>'s a simple vscode plugin that provides syntax highlighting for wings.</p>
 <h2 id="struct">Struct</h2>
 <p>Input file:</p>
-<div class="codehilite"><pre><span></span>go-filepath examples/go/classroom
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts
+<div style="display: flex; flex-wrap: wrap; border: .05rem solid rgba(0,0,0,.07); border-radius: .2em;">
+<label style="font-weight: bold; padding: .6rem; font-size: .65rem;">student.wings</label>
+<pre style="width: 100%; margin: 0px; padding: .6rem 0">
+  <span style="color: #3b78e7">go-filepath</span> <span style="color: #0d904f">examples/go/classroom</span>
+  <span style="color: #3b78e7">kt-filepath</span> <span style="color: #0d904f">examples/kt</span>
+  <span style="color: #3b78e7">nim-filepath</span> <span style="color: #0d904f">examples/nim</span>
+  <span style="color: #3b78e7">py-filepath</span> <span style="color: #0d904f">examples/py</span>
+  <span style="color: #3b78e7">ts-filepath</span> <span style="color: #0d904f">examples/ts</span>
 
-py-import examples.output.py.people
-ts-import { IWingsStruct }:wings-ts-util
-import examples/input/emotion.wings
-import examples/input/homework.wings
+  <span style="color: #3b78e7">py-import</span> <span style="color: #ec407a">examples.output.py.people</span>
+  <span style="color: #3b78e7">ts-import</span> <span style="color: #ec407a">{ IWingsStruct }</span><span style="color: #3b78e7">:</span><span style="color: #3e61a2">wings-ts-util</span>
+  <span style="color: #3b78e7">import</span> <span style="color: #0d904f">examples/input/emotion.wings</span>
+  <span style="color: #3b78e7">import</span> <span style="color: #0d904f">examples/input/homework.wings</span>
 
-py-implement People
-ts-implement IWingsStruct
+  <span style="color: #3b78e7">py-implement</span> <span style="color: #ec407a">People</span>
+  <span style="color: #3b78e7">ts-implement</span> <span style="color: #ec407a">IWingsStruct</span>
 
-# Any person who is studying in a class
+  <span style="color: #999"># Any person who is studying in a class</span>
 
-struct Student {
-  id          int       -1
-  name        str
-  cur_class   str
-  feeling     Emotion   Emotion.Meh
-  is_active   bool
-  year        date
-  graduation  date
-  homeworks   []Homework
-  something   Map&lt;str,str&gt;
-}
+  <span style="color: #3b78e7">struct</span> <span style="color: #ec407a">Student</span> <span style="color: #3b78e7">{</span>
+    <span style="color: #ec407a">id</span>          <span style="color: #3e61a2">int</span>       <span style="color: #e74c3c">-1</span>
+    <span style="color: #ec407a">name</span>        <span style="color: #3e61a2">str</span>
+    <span style="color: #ec407a">cur_class</span>   <span style="color: #3e61a2">str</span>
+    <span style="color: #ec407a">feeling</span>     <span style="color: #ec407a">Emotion</span>   Emotion.Meh
+    <span style="color: #ec407a">is_active</span>   <span style="color: #3e61a2">bool</span>
+    <span style="color: #ec407a">year</span>        <span style="color: #3e61a2">date</span>
+    <span style="color: #ec407a">graduation</span>  <span style="color: #3e61a2">date</span>
+    <span style="color: #ec407a">homeworks</span>   <span style="color: #ec407a">[]Homework</span>
+    <span style="color: #ec407a">something</span>   <span style="color: #ec407a">Map<</span><span style="color: #3e61a2">str</span><span style="color: #ec407a">,</span><span style="color: #3e61a2">str</span><span style="color: #ec407a">></span>
+  <span style="color: #3b78e7">}</span>
 
-ts-func(
-  public addHomework(hw: Homework): void {
-    this.Homeworks.push(hw);
-  }
-)
-</pre></div>
+  <span style="color: #c2185b">ts-func(</span>
+    <span style="color: #3e61a2">public</span> <span style="color: #ec407a">addHomework</span><span style="color: #37474f">(</span><span style="color: #ec407a">hw</span><span style="color: #37474f">:</span> <span style="color: #3e61a2">Homework</span><span style="color: #37474f">):</span> <span style="color: #3b78e7">void</span> <span style="color: #37474f">{</span>
+      <span style="color: #3b78e7">this</span><span style="color: #3b78e7">.</span><span style="color: #ec407a">Homeworks</span><span style="color: #3b78e7">.</span><span style="color: #ec407a">push</span><span style="color: #37474f">(</span><span style="color: #ec407a">hw</span><span style="color: #37474f">)</span><span style="color: #3b78e7">;</span>
+    <span style="color: #37474f">}</span>
+  <span style="color: #c2185b">)</span>
+</pre>
+</div>
 
 <p>Output files:</p>
 <div class="superfences-tabs">
@@ -716,31 +709,36 @@ ts-func(
 <p><em>*Note: There is no gurranttee that "initialize as" field goes through a proper conversion or localization based on the targetted output languages so ideally you want to make sure it works with all versions of output that will be using it.</em></p>
 <h2 id="enum">Enum</h2>
 <p>Input file:</p>
-<div class="codehilite"><pre><span></span>go-filepath examples/go
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts/person
+<div style="display: flex; flex-wrap: wrap; border: .05rem solid rgba(0,0,0,.07); border-radius: .2em;">
+<label style="font-weight: bold; padding: .6rem; font-size: .65rem;">emotion.wings</label>
+<pre style="width: 100%; margin: 0px; padding: .6rem 0">
+  <span style="color: #3b78e7">go-filepath</span> <span style="color: #0d904f">examples/go</span>
+  <span style="color: #3b78e7">kt-filepath</span> <span style="color: #0d904f">examples/kt</span>
+  <span style="color: #3b78e7">nim-filepath</span> <span style="color: #0d904f">examples/nim</span>
+  <span style="color: #3b78e7">py-filepath</span> <span style="color: #0d904f">examples/py</span>
+  <span style="color: #3b78e7">ts-filepath</span> <span style="color: #0d904f">examples/ts/person</span>
 
-//Ignored comment
-// Another ignored comment
+  <span style="color: #999">//Ignored comment</span>
+  <span style="color: #999">// Another ignored comment</span>
 
-enum Emotion {
-  Accomplished
-  Angry
-  Annoyed
-  Appalled
-  Excited
-  Exhausted
-  FeelsGood
-  Frustrated
-  Happy
-  Meh
-  Sad
-  Satisfied
-}
-</pre></div>
+  <span style="color: #3b78e7">enum</span> <span style="color: #ec407a">Emotion</span> <span style="color: #3b78e7">{</span>
+    <span style="color: #ec407a">Accomplished</span>
+    <span style="color: #ec407a">Angry</span>
+    <span style="color: #ec407a">Annoyed</span>
+    <span style="color: #ec407a">Appalled</span>
+    <span style="color: #ec407a">Excited</span>
+    <span style="color: #ec407a">Exhausted</span>
+    <span style="color: #ec407a">FeelsGood</span>
+    <span style="color: #ec407a">Frustrated</span>
+    <span style="color: #ec407a">Happy</span>
+    <span style="color: #ec407a">Meh</span>
+    <span style="color: #ec407a">Sad</span>
+    <span style="color: #ec407a">Satisfied</span>
+  <span style="color: #3b78e7">}</span>
+</pre>
+</div>
 
+<p>Output files:</p>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
 <label for="__tab_2_0">examples/go/emotion.go</label>

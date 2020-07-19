@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>wingspkg/lang/ktConfig</title>
+<title>wingspkg/lang/defaults</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
 <script type="text/javascript" src="dochack.js"></script>
@@ -71,7 +71,7 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">wingspkg/lang/ktConfig</h1>
+    <h1 class="title">wingspkg/lang/defaults</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -106,12 +106,10 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#9" id="59">Lets</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#KT_CONFIG"
-    title="KT_CONFIG: TConfig = initTConfig(COMMENT, CUSTOM_TYPES, FILENAME, FILETYPE,
-                              IMPLEMENT_FORMAT, IMPORT_PATH_FORMAT,
-                              IMPORT_PATH_TYPE, IMPORT_PATH_PREFIX, &apos;/&apos;, 0,
-                              INDENTATION_SPACING, false, PARSE_FORMAT, toTable(
-    [(&quot;struct&quot;, TEMPLATE_STRUCT), (&quot;enum&quot;, TEMPLATE_ENUM)]), TYPES)"><wbr />KT_<wbr />CONFIG<span class="attachedType"></span></a></li>
+      <li><a class="reference" href="#DEFAULT_CONFIGS"
+    title="DEFAULT_CONFIGS: Table[string, TConfig] = toTable([(GO_CONFIG.filetype, GO_CONFIG),
+    (KT_CONFIG.filetype, KT_CONFIG), (NIM_CONFIG.filetype, NIM_CONFIG),
+    (PY_CONFIG.filetype, PY_CONFIG), (TS_CONFIG.filetype, TS_CONFIG)])"><wbr />DEFAULT_<wbr />CONFIGS<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -126,24 +124,22 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="../lib/tconfig.html">../lib/tconfig</a>
+<a class="reference external" href="goConfig.html">goConfig</a>, <a class="reference external" href="ktConfig.html">ktConfig</a>, <a class="reference external" href="nimConfig.html">nimConfig</a>, <a class="reference external" href="pyConfig.html">pyConfig</a>, <a class="reference external" href="tsConfig.html">tsConfig</a>, <a class="reference external" href="../lib/tconfig.html">../lib/tconfig</a>
 </dl></div>
 <div class="section" id="9">
 <h1><a class="toc-backref" href="#9">Lets</a></h1>
 <dl class="item">
-<a id="KT_CONFIG"></a>
-<dt><pre><a href="ktConfig.html#KT_CONFIG"><span class="Identifier">KT_CONFIG</span></a><span class="Other">:</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a> <span class="Other">=</span> <span class="Identifier">initTConfig</span><span class="Other">(</span><span class="Identifier">COMMENT</span><span class="Other">,</span> <span class="Identifier">CUSTOM_TYPES</span><span class="Other">,</span> <span class="Identifier">FILENAME</span><span class="Other">,</span> <span class="Identifier">FILETYPE</span><span class="Other">,</span>
-                              <span class="Identifier">IMPLEMENT_FORMAT</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_FORMAT</span><span class="Other">,</span>
-                              <span class="Identifier">IMPORT_PATH_TYPE</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_PREFIX</span><span class="Other">,</span> <span class="CharLit">'/'</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">,</span>
-                              <span class="Identifier">INDENTATION_SPACING</span><span class="Other">,</span> <span class="Identifier">false</span><span class="Other">,</span> <span class="Identifier">PARSE_FORMAT</span><span class="Other">,</span> <span class="Identifier">toTable</span><span class="Other">(</span>
-    <span class="Other">[</span><span class="Other">(</span><span class="StringLit">&quot;struct&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_STRUCT</span><span class="Other">)</span><span class="Other">,</span> <span class="Other">(</span><span class="StringLit">&quot;enum&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_ENUM</span><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">TYPES</span><span class="Other">)</span></pre></dt>
+<a id="DEFAULT_CONFIGS"></a>
+<dt><pre><a href="defaults.html#DEFAULT_CONFIGS"><span class="Identifier">DEFAULT_CONFIGS</span></a><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">toTable</span><span class="Other">(</span><span class="Other">[</span><span class="Other">(</span><a href="goConfig.html#GO_CONFIG"><span class="Identifier">GO_CONFIG</span></a><span class="Other">.</span><span class="Identifier">filetype</span><span class="Other">,</span> <a href="goConfig.html#GO_CONFIG"><span class="Identifier">GO_CONFIG</span></a><span class="Other">)</span><span class="Other">,</span>
+    <span class="Other">(</span><a href="ktConfig.html#KT_CONFIG"><span class="Identifier">KT_CONFIG</span></a><span class="Other">.</span><span class="Identifier">filetype</span><span class="Other">,</span> <a href="ktConfig.html#KT_CONFIG"><span class="Identifier">KT_CONFIG</span></a><span class="Other">)</span><span class="Other">,</span> <span class="Other">(</span><a href="nimConfig.html#NIM_CONFIG"><span class="Identifier">NIM_CONFIG</span></a><span class="Other">.</span><span class="Identifier">filetype</span><span class="Other">,</span> <a href="nimConfig.html#NIM_CONFIG"><span class="Identifier">NIM_CONFIG</span></a><span class="Other">)</span><span class="Other">,</span>
+    <span class="Other">(</span><a href="pyConfig.html#PY_CONFIG"><span class="Identifier">PY_CONFIG</span></a><span class="Other">.</span><span class="Identifier">filetype</span><span class="Other">,</span> <a href="pyConfig.html#PY_CONFIG"><span class="Identifier">PY_CONFIG</span></a><span class="Other">)</span><span class="Other">,</span> <span class="Other">(</span><a href="tsConfig.html#TS_CONFIG"><span class="Identifier">TS_CONFIG</span></a><span class="Other">.</span><span class="Identifier">filetype</span><span class="Other">,</span> <a href="tsConfig.html#TS_CONFIG"><span class="Identifier">TS_CONFIG</span></a><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/devel/src/main/wingspkg/lang/ktConfig.nim#L80"
+href="https://github.com/binhonglee/wings/tree/devel/src/main/wingspkg/lang/defaults.nim#L5"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lang/ktConfig.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lang/defaults.nim#L5" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -156,7 +152,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-17 17:15:42 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-19 11:20:47 UTC</small>
       </div>
     </div>
   </div>
