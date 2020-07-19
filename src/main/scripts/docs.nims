@@ -4,7 +4,7 @@ from os import lastPathPart
 mode = ScriptMode.Verbose
 
 const gitURL: string = "https://github.com/binhonglee/wings"
-const folder: string = "docs/main"
+const folder: string = "docs/api"
 const main: string = "src/main/wings.nim"
 const devel: string = "devel"
 const build: string = "build"

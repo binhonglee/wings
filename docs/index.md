@@ -8,9 +8,11 @@ A simple customizable cross language struct and enum file generator.
 !!! warning "Nim `date`"
     It is currently unsupported since I haven't figure out how to parse ISOString time properly from `string` in Nim.
 
+Click [here](./api) for code documentation instead.
+
 **Usage**
 
-- Download the appropriate binary [here](https://github.com/binhonglee/wings/releases/tag/v0.0.3-alpha).
+- Download the appropriate binary [here](https://github.com/binhonglee/wings/releases/tag/v0.0.4-alpha).
 - Add binary to an included path and rename it to `wings`.
 - Run `wings -c:{config_file} {filepath}` to generate the files.
 
@@ -22,41 +24,44 @@ or if you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can
 
 Input file:
 
-```text
-go-filepath examples/go/classroom
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts
+<div style="display: flex; flex-wrap: wrap; border: .05rem solid rgba(0,0,0,.07); border-radius: .2em;">
+<label style="font-weight: bold; padding: .6rem; font-size: .65rem;">student.wings</label>
+<pre style="width: 100%; margin: 0px; padding: .6rem 0">
+  <span style="color: #3b78e7">go-filepath</span> <span style="color: #0d904f">examples/go/classroom</span>
+  <span style="color: #3b78e7">kt-filepath</span> <span style="color: #0d904f">examples/kt</span>
+  <span style="color: #3b78e7">nim-filepath</span> <span style="color: #0d904f">examples/nim</span>
+  <span style="color: #3b78e7">py-filepath</span> <span style="color: #0d904f">examples/py</span>
+  <span style="color: #3b78e7">ts-filepath</span> <span style="color: #0d904f">examples/ts</span>
 
-py-import examples.output.py.people
-ts-import { IWingsStruct }:wings-ts-util
-import examples/input/emotion.wings
-import examples/input/homework.wings
+  <span style="color: #3b78e7">py-import</span> <span style="color: #ec407a">examples.output.py.people</span>
+  <span style="color: #3b78e7">ts-import</span> <span style="color: #ec407a">{ IWingsStruct }</span><span style="color: #3b78e7">:</span><span style="color: #3e61a2">wings-ts-util</span>
+  <span style="color: #3b78e7">import</span> <span style="color: #0d904f">examples/input/emotion.wings</span>
+  <span style="color: #3b78e7">import</span> <span style="color: #0d904f">examples/input/homework.wings</span>
 
-py-implement People
-ts-implement IWingsStruct
+  <span style="color: #3b78e7">py-implement</span> <span style="color: #ec407a">People</span>
+  <span style="color: #3b78e7">ts-implement</span> <span style="color: #ec407a">IWingsStruct</span>
 
-# Any person who is studying in a class
+  <span style="color: #999"># Any person who is studying in a class</span>
 
-struct Student {
-  id          int       -1
-  name        str
-  cur_class   str
-  feeling     Emotion   Emotion.Meh
-  is_active   bool
-  year        date
-  graduation  date
-  homeworks   []Homework
-  something   Map<str,str>
-}
+  <span style="color: #3b78e7">struct</span> <span style="color: #ec407a">Student</span> <span style="color: #3b78e7">{</span>
+    <span style="color: #ec407a">id</span>          <span style="color: #3e61a2">int</span>       <span style="color: #e74c3c">-1</span>
+    <span style="color: #ec407a">name</span>        <span style="color: #3e61a2">str</span>
+    <span style="color: #ec407a">cur_class</span>   <span style="color: #3e61a2">str</span>
+    <span style="color: #ec407a">feeling</span>     <span style="color: #ec407a">Emotion</span>   Emotion.Meh
+    <span style="color: #ec407a">is_active</span>   <span style="color: #3e61a2">bool</span>
+    <span style="color: #ec407a">year</span>        <span style="color: #3e61a2">date</span>
+    <span style="color: #ec407a">graduation</span>  <span style="color: #3e61a2">date</span>
+    <span style="color: #ec407a">homeworks</span>   <span style="color: #ec407a">[]Homework</span>
+    <span style="color: #ec407a">something</span>   <span style="color: #ec407a">Map<</span><span style="color: #3e61a2">str</span><span style="color: #ec407a">,</span><span style="color: #3e61a2">str</span><span style="color: #ec407a">></span>
+  <span style="color: #3b78e7">}</span>
 
-ts-func(
-  public addHomework(hw: Homework): void {
-    this.Homeworks.push(hw);
-  }
-)
-```
+  <span style="color: #c2185b">ts-func(</span>
+    <span style="color: #3e61a2">public</span> <span style="color: #ec407a">addHomework</span><span style="color: #37474f">(</span><span style="color: #ec407a">hw</span><span style="color: #37474f">:</span> <span style="color: #3e61a2">Homework</span><span style="color: #37474f">):</span> <span style="color: #3b78e7">void</span> <span style="color: #37474f">{</span>
+      <span style="color: #3b78e7">this</span><span style="color: #3b78e7">.</span><span style="color: #ec407a">Homeworks</span><span style="color: #3b78e7">.</span><span style="color: #ec407a">push</span><span style="color: #37474f">(</span><span style="color: #ec407a">hw</span><span style="color: #37474f">)</span><span style="color: #3b78e7">;</span>
+    <span style="color: #37474f">}</span>
+  <span style="color: #c2185b">)</span>
+</pre>
+</div>
 
 Output files:
 
@@ -272,31 +277,36 @@ _*Note: There is no gurranttee that "initialize as" field goes through a proper 
 
 Input file:
 
-```text
-go-filepath examples/go
-kt-filepath examples/kt
-nim-filepath examples/nim
-py-filepath examples/py
-ts-filepath examples/ts/person
+<div style="display: flex; flex-wrap: wrap; border: .05rem solid rgba(0,0,0,.07); border-radius: .2em;">
+<label style="font-weight: bold; padding: .6rem; font-size: .65rem;">emotion.wings</label>
+<pre style="width: 100%; margin: 0px; padding: .6rem 0">
+  <span style="color: #3b78e7">go-filepath</span> <span style="color: #0d904f">examples/go</span>
+  <span style="color: #3b78e7">kt-filepath</span> <span style="color: #0d904f">examples/kt</span>
+  <span style="color: #3b78e7">nim-filepath</span> <span style="color: #0d904f">examples/nim</span>
+  <span style="color: #3b78e7">py-filepath</span> <span style="color: #0d904f">examples/py</span>
+  <span style="color: #3b78e7">ts-filepath</span> <span style="color: #0d904f">examples/ts/person</span>
 
-//Ignored comment
-// Another ignored comment
+  <span style="color: #999">//Ignored comment</span>
+  <span style="color: #999">// Another ignored comment</span>
 
-enum Emotion {
-  Accomplished
-  Angry
-  Annoyed
-  Appalled
-  Excited
-  Exhausted
-  FeelsGood
-  Frustrated
-  Happy
-  Meh
-  Sad
-  Satisfied
-}
-```
+  <span style="color: #3b78e7">enum</span> <span style="color: #ec407a">Emotion</span> <span style="color: #3b78e7">{</span>
+    <span style="color: #ec407a">Accomplished</span>
+    <span style="color: #ec407a">Angry</span>
+    <span style="color: #ec407a">Annoyed</span>
+    <span style="color: #ec407a">Appalled</span>
+    <span style="color: #ec407a">Excited</span>
+    <span style="color: #ec407a">Exhausted</span>
+    <span style="color: #ec407a">FeelsGood</span>
+    <span style="color: #ec407a">Frustrated</span>
+    <span style="color: #ec407a">Happy</span>
+    <span style="color: #ec407a">Meh</span>
+    <span style="color: #ec407a">Sad</span>
+    <span style="color: #ec407a">Satisfied</span>
+  <span style="color: #3b78e7">}</span>
+</pre>
+</div>
+
+Output files:
 
 ```go tab="examples/go/emotion.go"
 // This is a generated file

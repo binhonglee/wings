@@ -2,8 +2,8 @@
 
 A customizable cross language struct and enum file generator.
 
-[![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=master)](https://travis-ci.org/binhonglee/wings)
-[![codecov](https://codecov.io/gh/binhonglee/wings/branch/master/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
+[![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=devel)](https://travis-ci.org/binhonglee/wings)
+[![codecov](https://codecov.io/gh/binhonglee/wings/branch/devel/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
 [![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
 
 ## Requirements
@@ -43,4 +43,4 @@ For some more comprehensive set up / testing procedure, [`.travis.yml`](https://
 ## Further Documentations
 
 - [Usage explanation and examples](https://wings.sh).
-- [API docs](https://wings.sh/main).
+- [Code documentation](https://wings.sh/api).

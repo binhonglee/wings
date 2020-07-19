@@ -19,7 +19,6 @@ nav:
   - Config: config.md
   - Template: template.md
   - Design: design.md
-  - Main: main/index.html
   - Utility classes:
     - TypeScript:
       - index.ts: tsUtil/index.md

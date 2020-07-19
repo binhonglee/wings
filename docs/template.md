@@ -1,6 +1,6 @@
 # Template
 
-This is for more advanced used where you want your own way of formatting for output file or if you use wings for languages that is not currently supported. Check out the [examples/input/template](https://github.com/binhonglee/wings/tree/master/examples/input/templates) folder for an example of how it works for currently supported languages.
+This is for more advanced used where you want your own way of formatting for output file or if you use wings for languages that is not currently supported. Check out the [examples/input/template](https://github.com/binhonglee/wings/tree/devel/examples/input/templates) folder for an example of how it works for currently supported languages.
 
 _\* indicates required field. Non-required fields will have its default value specified below._
 
