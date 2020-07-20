@@ -1,10 +1,12 @@
 # Config
 
-These are the fields of the config file (`-c:<FILENAME>`). Currently its only supported in `json` format.
+These are the fields of the config file (`-c:<FILENAME>`). Currently its only supported in `json` format. Checkout the file in the repository ([here](https://github.com/binhonglee/wings/blob/devel/wings.json)) for reference.
 
 ## acronyms: `[]str`
 
 You can specify specific cases where a word in a parameter name should be full caps instead of just camelCase or PascalCase. For eg, `ID` instead of `id` or `Id`.
+
+See [here](https://binhonglee.github.io/stones/stones/cases.html#setAcronyms%2CHashSet%5Bstring%5D) for more information about how its used.
 
 ## header: `[]str`
 

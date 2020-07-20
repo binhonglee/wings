@@ -4,22 +4,36 @@ site_author: BinHong Lee
 
 theme:
   name: 'material'
-  font: false
+  font:
+    text: PT Sans
+    code: Victor Mono
+  palette:
+    scheme: slate
+    primary: teal
+  icon:
+    repo: fontawesome/brands/github
 
+repo_name: wings
 repo_url: https://github.com/binhonglee/wings
 
 markdown_extensions:
   - admonition
   - codehilite
+  - pymdownx.tabbed
   - pymdownx.superfences
+
+extra_css: [custom.css]
 
 nav:
   - Home: index.md
+  - Design: design.md
   - Syntax: syntax.md
   - Config: config.md
   - Template: template.md
-  - Design: design.md
   - Utility classes:
     - TypeScript:
       - index.ts: tsUtil/index.md
   - License: license.md
+
+plugins:
+  - search
