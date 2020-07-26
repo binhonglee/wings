@@ -2,19 +2,13 @@
 
 A simple customizable cross language struct and enum file generator.
 
-!!! info
-    Unsupported types are initialized as custom struct / classes unless specified otherwise.
-
-!!! warning "Nim `date`"
-    It is currently unsupported since I haven't figure out how to parse ISOString time properly from `string` in Nim.
-
-Click [here](./api) for code documentation instead.
+Click [here](./api) for code documentation index instead.
 
 **Usage**
 
 - Download the appropriate binary [here](https://github.com/binhonglee/wings/releases).
 - Add binary to an included path and rename it to `wings`.
-- Run `wings -c:{config_file} {filepath}` to generate the files.
+- Run `wings {filepath}` to generate the files. (eg. `wings /path/to/student.wings`)
 
 or if you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can just do `nimble install wings`.
 
