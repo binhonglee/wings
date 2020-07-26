@@ -2,12 +2,12 @@
   "name": "vscode-wings",
   "displayName": "Wings",
   "description": "Syntax higlighting for wings",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "publisher": "binhonglee",
   "repository": {
     "type": "git",
     "url": "https://github.com/binhonglee/wings.git",
-    "directory": "src/vscode-wings"
+    "directory": "src/vscode"
   },
   "engines": {
     "vscode": "^1.43.0"
