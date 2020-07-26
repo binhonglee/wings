@@ -440,20 +440,12 @@
                 
                 <h1 id="wings">wings</h1>
 <p>A simple customizable cross language struct and enum file generator.</p>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Unsupported types are initialized as custom struct / classes unless specified otherwise.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Nim <code>date</code></p>
-<p>It is currently unsupported since I haven't figure out how to parse ISOString time properly from <code>string</code> in Nim.</p>
-</div>
-<p>Click <a href="./api">here</a> for code documentation instead.</p>
+<p>Click <a href="./api">here</a> for code documentation index instead.</p>
 <p><strong>Usage</strong></p>
 <ul>
 <li>Download the appropriate binary <a href="https://github.com/binhonglee/wings/releases">here</a>.</li>
 <li>Add binary to an included path and rename it to <code>wings</code>.</li>
-<li>Run <code>wings -c:{config_file} {filepath}</code> to generate the files.</li>
+<li>Run <code>wings {filepath}</code> to generate the files. (eg. <code>wings /path/to/student.wings</code>)</li>
 </ul>
 <p>or if you have <a href="https://github.com/nim-lang/nimble"><code>nimble</code></a> installed, you can just do <code>nimble install wings</code>.</p>
 <p><a href="https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings">Here</a>'s a simple vscode plugin that provides syntax highlighting for wings.</p>
