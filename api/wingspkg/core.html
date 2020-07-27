@@ -131,10 +131,10 @@ function main() {
 <a id="fromFiles,seq[string],Config"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#fromFiles%2Cseq%5Bstring%5D%2CConfig"><span class="Identifier">fromFiles</span></a><span class="Other">(</span><span class="Identifier">filenames</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">config</span><span class="Other">:</span> <a href="util/config.html#Config"><span class="Identifier">Config</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span>
     <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span>
-                                   <span class="Identifier">UnsupportedCharacterError</span><span class="Other">,</span> <span class="Identifier">Defect</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span>
-                                   <span class="Identifier">ConflictingValueError</span><span class="Other">,</span> <span class="Identifier">DuplicateKeyError</span><span class="Other">,</span>
-                                   <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">,</span>
-    <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                                   <span class="Identifier">InvalidIndexError</span><span class="Other">,</span> <span class="Identifier">UnsupportedCharacterError</span><span class="Other">,</span>
+                                   <span class="Identifier">Defect</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">ConflictingValueError</span><span class="Other">,</span>
+                                   <span class="Identifier">DuplicateKeyError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span>
+    <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Entry point to the file. It gets all the files to read and returns a table of output to be written.
@@ -154,7 +154,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-26 02:18:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-27 07:23:30 UTC</small>
       </div>
     </div>
   </div>

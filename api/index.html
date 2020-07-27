@@ -77,6 +77,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="ImportPathType.Absolute" href="wingspkg/lib/tconfig.html#Absolute">ImportPathType.Absolute</a></li>
           </ul></dd>
+<dt><a name="AbstractFunction" href="#AbstractFunction"><span>AbstractFunction:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="winterface: AbstractFunction" href="wingspkg/lib/winterface.html#AbstractFunction">winterface: AbstractFunction</a></li>
+          </ul></dd>
 <dt><a name="addImport" href="#addImport"><span>addImport:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="winterface: addImport(iwings: var IWings; newImport: string; importLang: string): void" href="wingspkg/lib/winterface.html#addImport%2CIWings%2Cstring%2Cstring">winterface: addImport(iwings: var IWings; newImport: string; importLang: string): void</a></li>
@@ -171,6 +175,12 @@ function main() {
                       wingsType: WingsType = WingsType.default): ImportedWingsType" href="wingspkg/lib/winterface.html#initImportedWingsType%2Cstring%2Cstring%2CWingsType">winterface: initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;;
                       wingsType: WingsType = WingsType.default): ImportedWingsType</a></li>
           </ul></dd>
+<dt><a name="initInterfaceConfig" href="#initInterfaceConfig"><span>initInterfaceConfig:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tconfig: initInterfaceConfig(interfaceSupported: bool = false; paramFormat: string = &quot;&quot;;
+                    paramJoiner: string = &quot;&quot;): InterfaceConfig" href="wingspkg/lib/tconfig.html#initInterfaceConfig%2Cbool%2Cstring%2Cstring">tconfig: initInterfaceConfig(interfaceSupported: bool = false; paramFormat: string = &quot;&quot;;
+                    paramJoiner: string = &quot;&quot;): InterfaceConfig</a></li>
+          </ul></dd>
 <dt><a name="initTConfig" href="#initTConfig"><span>initTConfig:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
@@ -178,15 +188,15 @@ function main() {
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
             sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
-            pi: bool = false; pfmt: string = &quot;&quot;;
-            temp: Table[string, string] = initTable();
-            ty: Table[string, TypeInterpreter] = initTable()): TConfig" href="wingspkg/lib/tconfig.html#initTConfig%2Cstring%2CTable%5Bstring%2CCustomTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2CTypeInterpreter%5D">tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
+            pi: bool = false; isup: bool = false; prmFmt: string = &quot;&quot;; prmJnr: string = &quot;&quot;;
+            pfmt: string = &quot;&quot;; temp: Table[string, string] = initTable();
+            ty: Table[string, TypeInterpreter] = initTable()): TConfig" href="wingspkg/lib/tconfig.html#initTConfig%2Cstring%2CTable%5Bstring%2CCustomTypeInterpreter%5D%2CCase%2Cstring%2Cstring%2Cstring%2CImportPathType%2Cstring%2Cchar%2Cint%2Cstring%2Cbool%2Cbool%2Cstring%2Cstring%2Cstring%2CTable%5Bstring%2Cstring%5D%2CTable%5Bstring%2CTypeInterpreter%5D">tconfig: initTConfig(cmt: string = DEFAULT_COMMENT;
             ct: Table[string, CustomTypeInterpreter] = initTable();
             c: Case = Case.Default; ft: string = &quot;&quot;; ifmt: string = &quot;&quot;; ipfmt: string = &quot;&quot;;
             ipt: ImportPathType = ImportPathType.Never; pfx: string = &quot;&quot;;
             sep: char = DEFAULT_SEPARATOR; level: int = 0; isp: string = &quot;&quot;;
-            pi: bool = false; pfmt: string = &quot;&quot;;
-            temp: Table[string, string] = initTable();
+            pi: bool = false; isup: bool = false; prmFmt: string = &quot;&quot;; prmJnr: string = &quot;&quot;;
+            pfmt: string = &quot;&quot;; temp: Table[string, string] = initTable();
             ty: Table[string, TypeInterpreter] = initTable()): TConfig</a></li>
           </ul></dd>
 <dt><a name="initTypeInterpreter" href="#initTypeInterpreter"><span>initTypeInterpreter:</span></a></dt><dd><ul class="simple">
@@ -196,6 +206,14 @@ function main() {
                     targetParse: string = &quot;&quot;): TypeInterpreter" href="wingspkg/lib/tconfig.html#initTypeInterpreter%2Cstring%2Cstring%2Cstring%2Cstring%2Cstring">tconfig: initTypeInterpreter(wingsType: string = &quot;&quot;; targetType: string = &quot;&quot;;
                     requiredImport: string = &quot;&quot;; targetInit: string = &quot;&quot;;
                     targetParse: string = &quot;&quot;): TypeInterpreter</a></li>
+          </ul></dd>
+<dt><a name="InterfaceConfig" href="#InterfaceConfig"><span>InterfaceConfig:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tconfig: InterfaceConfig" href="wingspkg/lib/tconfig.html#InterfaceConfig">tconfig: InterfaceConfig</a></li>
+          </ul></dd>
+<dt><a name="interfacew" href="#interfacew"><span>interfacew:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="WingsType.interfacew" href="wingspkg/lib/winterface.html#interfacew">WingsType.interfacew</a></li>
           </ul></dd>
 <dt><a name="interpretType" href="#interpretType"><span>interpretType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -231,6 +249,18 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]" href="wingspkg/lib/winterface.html#parseFile%2Cstring%2Cbool">winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]</a></li>
           </ul></dd>
+<dt><a name="private" href="#private"><span>private:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="Visibility.private" href="wingspkg/lib/winterface.html#private">Visibility.private</a></li>
+          </ul></dd>
+<dt><a name="protected" href="#protected"><span>protected:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="Visibility.protected" href="wingspkg/lib/winterface.html#protected">Visibility.protected</a></li>
+          </ul></dd>
+<dt><a name="public" href="#public"><span>public:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="Visibility.public" href="wingspkg/lib/winterface.html#public">Visibility.public</a></li>
+          </ul></dd>
 <dt><a name="PY_CONFIG" href="#PY_CONFIG"><span>PY_CONFIG:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="pyConfig: PY_CONFIG" href="wingspkg/lang/pyConfig.html#PY_CONFIG">pyConfig: PY_CONFIG</a></li>
@@ -263,6 +293,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="tempconst: TK_FILENAME" href="wingspkg/lib/tempconst.html#TK_FILENAME">tempconst: TK_FILENAME</a></li>
           </ul></dd>
+<dt><a name="TK_FUNCNAME" href="#TK_FUNCNAME"><span>TK_FUNCNAME:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tempconst: TK_FUNCNAME" href="wingspkg/lib/tempconst.html#TK_FUNCNAME">tempconst: TK_FUNCNAME</a></li>
+          </ul></dd>
 <dt><a name="TK_FUNCTIONS" href="#TK_FUNCTIONS"><span>TK_FUNCTIONS:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="tempconst: TK_FUNCTIONS" href="wingspkg/lib/tempconst.html#TK_FUNCTIONS">tempconst: TK_FUNCTIONS</a></li>
@@ -290,6 +324,14 @@ function main() {
 <dt><a name="TK_NAME" href="#TK_NAME"><span>TK_NAME:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="tempconst: TK_NAME" href="wingspkg/lib/tempconst.html#TK_NAME">tempconst: TK_NAME</a></li>
+          </ul></dd>
+<dt><a name="TK_PARAM" href="#TK_PARAM"><span>TK_PARAM:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tempconst: TK_PARAM" href="wingspkg/lib/tempconst.html#TK_PARAM">tempconst: TK_PARAM</a></li>
+          </ul></dd>
+<dt><a name="TK_PARAMS" href="#TK_PARAMS"><span>TK_PARAMS:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="tempconst: TK_PARAMS" href="wingspkg/lib/tempconst.html#TK_PARAMS">tempconst: TK_PARAMS</a></li>
           </ul></dd>
 <dt><a name="TK_PARSE" href="#TK_PARSE"><span>TK_PARSE:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -335,17 +377,25 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="tempconst: TYPE_UNIMPORTED" href="wingspkg/lib/tempconst.html#TYPE_UNIMPORTED">tempconst: TYPE_UNIMPORTED</a></li>
           </ul></dd>
+<dt><a name="Visibility" href="#Visibility"><span>Visibility:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="winterface: Visibility" href="wingspkg/lib/winterface.html#Visibility">winterface: Visibility</a></li>
+          </ul></dd>
 <dt><a name="WEnum" href="#WEnum"><span>WEnum:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="winterface: WEnum" href="wingspkg/lib/winterface.html#WEnum">winterface: WEnum</a></li>
           </ul></dd>
 <dt><a name="wingsToTemplatable" href="#wingsToTemplatable"><span>wingsToTemplatable:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="templatable: wingsToTemplatable(winterface: var IWings; tconfig: TConfig): Templatable" href="wingspkg/lib/templatable.html#wingsToTemplatable%2CIWings%2CTConfig">templatable: wingsToTemplatable(winterface: var IWings; tconfig: TConfig): Templatable</a></li>
+          data-doc-search-tag="templatable: wingsToTemplatable(iwings: var IWings; tconfig: TConfig): Templatable" href="wingspkg/lib/templatable.html#wingsToTemplatable%2CIWings%2CTConfig">templatable: wingsToTemplatable(iwings: var IWings; tconfig: TConfig): Templatable</a></li>
           </ul></dd>
 <dt><a name="WingsType" href="#WingsType"><span>WingsType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="winterface: WingsType" href="wingspkg/lib/winterface.html#WingsType">winterface: WingsType</a></li>
+          </ul></dd>
+<dt><a name="WInterface" href="#WInterface"><span>WInterface:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="winterface: WInterface" href="wingspkg/lib/winterface.html#WInterface">winterface: WInterface</a></li>
           </ul></dd>
 <dt><a name="wrap" href="#wrap"><span>wrap:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -360,7 +410,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-26 02:18:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-27 07:23:30 UTC</small>
       </div>
     </div>
   </div>

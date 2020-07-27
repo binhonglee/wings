@@ -110,8 +110,11 @@ function main() {
     title="NIM_CONFIG: TConfig = initTConfig(COMMENT, CUSTOM_TYPES, FILENAME, FILETYPE,
                                IMPLEMENT_FORMAT, IMPORT_PATH_FORMAT,
                                IMPORT_PATH_TYPE, IMPORT_PATH_PREFIX, &apos;/&apos;, 0,
-                               INDENTATION_SPACING, false, PARSE_FORMAT, toTable(
-    [(&quot;struct&quot;, TEMPLATE_STRUCT), (&quot;enum&quot;, TEMPLATE_ENUM)]), TYPES)"><wbr />NIM_<wbr />CONFIG<span class="attachedType"></span></a></li>
+                               INDENTATION_SPACING, PRE_INDENT,
+                               INTERFACE_SUPPORTED, PARAM_FORMAT, PARAM_JOINER,
+                               PARSE_FORMAT, toTable([
+    (&quot;struct&quot;, TEMPLATE_STRUCT), (&quot;enum&quot;, TEMPLATE_ENUM),
+    (&quot;interface&quot;, TEMPLATE_INTERFACE)]), TYPES)"><wbr />NIM_<wbr />CONFIG<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -135,15 +138,18 @@ function main() {
 <dt><pre><a href="nimConfig.html#NIM_CONFIG"><span class="Identifier">NIM_CONFIG</span></a><span class="Other">:</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a> <span class="Other">=</span> <span class="Identifier">initTConfig</span><span class="Other">(</span><span class="Identifier">COMMENT</span><span class="Other">,</span> <span class="Identifier">CUSTOM_TYPES</span><span class="Other">,</span> <span class="Identifier">FILENAME</span><span class="Other">,</span> <span class="Identifier">FILETYPE</span><span class="Other">,</span>
                                <span class="Identifier">IMPLEMENT_FORMAT</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_FORMAT</span><span class="Other">,</span>
                                <span class="Identifier">IMPORT_PATH_TYPE</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_PREFIX</span><span class="Other">,</span> <span class="CharLit">'/'</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">,</span>
-                               <span class="Identifier">INDENTATION_SPACING</span><span class="Other">,</span> <span class="Identifier">false</span><span class="Other">,</span> <span class="Identifier">PARSE_FORMAT</span><span class="Other">,</span> <span class="Identifier">toTable</span><span class="Other">(</span>
-    <span class="Other">[</span><span class="Other">(</span><span class="StringLit">&quot;struct&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_STRUCT</span><span class="Other">)</span><span class="Other">,</span> <span class="Other">(</span><span class="StringLit">&quot;enum&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_ENUM</span><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">TYPES</span><span class="Other">)</span></pre></dt>
+                               <span class="Identifier">INDENTATION_SPACING</span><span class="Other">,</span> <span class="Identifier">PRE_INDENT</span><span class="Other">,</span>
+                               <span class="Identifier">INTERFACE_SUPPORTED</span><span class="Other">,</span> <span class="Identifier">PARAM_FORMAT</span><span class="Other">,</span> <span class="Identifier">PARAM_JOINER</span><span class="Other">,</span>
+                               <span class="Identifier">PARSE_FORMAT</span><span class="Other">,</span> <span class="Identifier">toTable</span><span class="Other">(</span><span class="Other">[</span>
+    <span class="Other">(</span><span class="StringLit">&quot;struct&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_STRUCT</span><span class="Other">)</span><span class="Other">,</span> <span class="Other">(</span><span class="StringLit">&quot;enum&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_ENUM</span><span class="Other">)</span><span class="Other">,</span>
+    <span class="Other">(</span><span class="StringLit">&quot;interface&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_INTERFACE</span><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">TYPES</span><span class="Other">)</span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/binhonglee/wings/tree/devel/src/main/wingspkg/lang/nimConfig.nim#L69"
+href="https://github.com/binhonglee/wings/tree/devel/src/main/wingspkg/lang/nimConfig.nim#L77"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lang/nimConfig.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/binhonglee/wings/edit/devel/src/main/wingspkg/lang/nimConfig.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -156,7 +162,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-26 02:18:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-27 07:23:30 UTC</small>
       </div>
     </div>
   </div>

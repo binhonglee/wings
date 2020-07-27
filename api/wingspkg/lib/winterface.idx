@@ -1,11 +1,18 @@
 default	wingspkg/lib/winterface.html#default	WingsType.default	
 structw	wingspkg/lib/winterface.html#structw	WingsType.structw	
 enumw	wingspkg/lib/winterface.html#enumw	WingsType.enumw	
+interfacew	wingspkg/lib/winterface.html#interfacew	WingsType.interfacew	
 WingsType	wingspkg/lib/winterface.html#WingsType	winterface: WingsType	
+public	wingspkg/lib/winterface.html#public	Visibility.public	
+protected	wingspkg/lib/winterface.html#protected	Visibility.protected	
+private	wingspkg/lib/winterface.html#private	Visibility.private	
+Visibility	wingspkg/lib/winterface.html#Visibility	winterface: Visibility	
 ImportedWingsType	wingspkg/lib/winterface.html#ImportedWingsType	winterface: ImportedWingsType	
+AbstractFunction	wingspkg/lib/winterface.html#AbstractFunction	winterface: AbstractFunction	
 IWings	wingspkg/lib/winterface.html#IWings	winterface: IWings	
 WEnum	wingspkg/lib/winterface.html#WEnum	winterface: WEnum	
 WStruct	wingspkg/lib/winterface.html#WStruct	winterface: WStruct	
+WInterface	wingspkg/lib/winterface.html#WInterface	winterface: WInterface	
 initImportedWingsType	wingspkg/lib/winterface.html#initImportedWingsType,string,string,WingsType	winterface: initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;;\n                      wingsType: WingsType = WingsType.default): ImportedWingsType	
 parseFile	wingspkg/lib/winterface.html#parseFile,string,bool	winterface: parseFile(filename: string; skipImport: bool): Table[string, IWings]	
 addImport	wingspkg/lib/winterface.html#addImport,IWings,string,string	winterface: addImport(iwings: var IWings; newImport: string; importLang: string): void	

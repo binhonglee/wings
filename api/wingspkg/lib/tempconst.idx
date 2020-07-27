@@ -14,6 +14,9 @@ TK_IPREFIX	wingspkg/lib/tempconst.html#TK_IPREFIX	tempconst: TK_IPREFIX
 TK_SPACED	wingspkg/lib/tempconst.html#TK_SPACED	tempconst: TK_SPACED	
 TK_TYPE	wingspkg/lib/tempconst.html#TK_TYPE	tempconst: TK_TYPE	
 TK_VARNAME	wingspkg/lib/tempconst.html#TK_VARNAME	tempconst: TK_VARNAME	
+TK_FUNCNAME	wingspkg/lib/tempconst.html#TK_FUNCNAME	tempconst: TK_FUNCNAME	
+TK_PARAM	wingspkg/lib/tempconst.html#TK_PARAM	tempconst: TK_PARAM	
+TK_PARAMS	wingspkg/lib/tempconst.html#TK_PARAMS	tempconst: TK_PARAMS	
 TYPE_IMPORTED	wingspkg/lib/tempconst.html#TYPE_IMPORTED	tempconst: TYPE_IMPORTED	
 TYPE_UNIMPORTED	wingspkg/lib/tempconst.html#TYPE_UNIMPORTED	tempconst: TYPE_UNIMPORTED	
 wrap	wingspkg/lib/tempconst.html#wrap,string,varargs[string]	tempconst: wrap(s: string; ss: varargs[string]): string	
