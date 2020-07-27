@@ -11,4 +11,3 @@ nim_binary(
     '//src/main:stones',
   ],
 )
-

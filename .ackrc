@@ -1,6 +1,6 @@
 --ignore-dir=coverage
 --ignore-dir=dist
---ignore-dir=docs/main
+--ignore-dir=docs/api
 --ignore-dir=node_modules
 --ignore-dir=plz-out
 --ignore-dir=site

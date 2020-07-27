@@ -45,6 +45,12 @@ type
     preIndent*: bool
 
 type
+  InterfaceConfig* = object
+    interfaceSupported*: bool
+    paramFormat*: string
+    paramJoiner*: string
+
+type
   TConfig* = object
     ## Object of template config.
     comment*: string
@@ -54,6 +60,7 @@ type
     implementFormat*: string
     importPath*: ImportPath
     indentation*: Indentation
+    interfaceConfig*: InterfaceConfig
     parseFormat*: string
     templates*: Table[string, string]
     types*: Table[string, TypeInterpreter]
@@ -141,6 +148,16 @@ proc interpretType*(typeInterpreter: TypeInterpreter): CustomTypeInterpreter =
       removePrefix
     )
 
+proc initInterfaceConfig*(
+  interfaceSupported: bool = false,
+  paramFormat: string = "",
+  paramJoiner: string = "",
+): InterfaceConfig =
+  result = InterfaceConfig()
+  result.interfaceSupported = interfaceSupported
+  result.paramFormat = paramFormat
+  result.paramJoiner = paramJoiner
+
 proc initTConfig*(
   cmt: string = DEFAULT_COMMENT,
   ct: Table[string, CustomTypeInterpreter] = initTable[string, CustomTypeInterpreter](),
@@ -154,6 +171,9 @@ proc initTConfig*(
   level: int = 0,
   isp: string = "",
   pi: bool = false,
+  isup: bool = false,
+  prmFmt: string = "",
+  prmJnr: string = "",
   pfmt: string = "",
   temp: Table[string, string] = initTable[string, string](),
   ty: Table[string, TypeInterpreter] = initTable[string, TypeInterpreter](),
@@ -174,6 +194,10 @@ proc initTConfig*(
   result.indentation = Indentation()
   result.indentation.spacing = isp
   result.indentation.preIndent = pi
+  result.interfaceConfig = InterfaceConfig()
+  result.interfaceConfig.interfaceSupported = isup
+  result.interfaceConfig.paramFormat = prmFmt
+  result.interfaceConfig.paramJoiner = prmJnr
   result.parseFormat = pfmt
   result.templates = temp
   result.types = ty

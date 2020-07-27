@@ -1,6 +1,6 @@
 from strutils import indent, isEmptyOrWhitespace, isSpaceAscii, removePrefix,
   removeSuffix, replace, split, splitLines, splitWhitespace, startsWith, unindent
-from stones/genlib import merge, getResult
+import stones/genlib
 import stones/cases
 import stones/log
 import stones/strlib
@@ -211,6 +211,38 @@ proc parseFields(iwings: var IWings, fs: seq[string], tconfig: TConfig): seq[Tab
         variables.add(wrap(TK_TYPE, TK_INIT), fields[2])
     result.add(variables)
 
+proc parseAbstractFunc(
+  iwings: var IWings,
+  abstractFuncs: Table[string, AbstractFunction],
+  tconfig: TConfig,
+): seq[Table[string, string]] =
+  result = newSeq[Table[string, string]]()
+  for key in abstractFuncs.keys:
+    let abstractFunc: AbstractFunction = abstractFuncs[key]
+    var function: Table[string, string] = initTable[string, string]()
+    function.add(wrap(TK_FUNCNAME), abstractFunc.name)
+    var funcName: Table[Case, string] = allCases(abstractFunc.name, Snake)
+    for key in funcName.keys:
+      function.add(wrap(TK_FUNCNAME, $key), funcName[key])
+
+    var params: string = ""
+    for (argName, argType) in abstractFunc.arguments.pairs:
+      if params.len() > 0:
+        params &= tconfig.interfaceConfig.paramJoiner
+      params &= replace(
+        tconfig.interfaceConfig.paramFormat, {
+          wrap(TK_PARAM, TK_NAME): argName,
+          wrap(TK_PARAM, TK_TYPE): parseType(iwings, argType, tconfig)[wrap(TK_TYPE)],
+        }.toTable()
+      )
+    function.add(wrap(TK_PARAMS), params)
+
+    function.merge(
+      parseType(iwings, abstractFunc.returnType, tconfig)
+    )
+
+    result.add(function)
+
 proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
   ## Convert IWings to TConfig.
   result = initTemplatable()
@@ -249,7 +281,29 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
   case iwings.wingsType
   of WingsType.interfacew:
     let winterface: WInterface = WInterface(iwings)
-    result.fields = parseFields(iwings, winterface.fields, tconfig)
+    if winterface.implement.hasKey(tconfig.filetype):
+      result.langBasedReps[tconfig.filetype].add(
+        wrap(TK_IMPLEMENT),
+        replace(
+          tconfig.implementFormat,
+          wrap(TK_IMPLEMENT),
+          winterface.implement[tconfig.filetype]
+        )
+      )
+    else:
+      result.langBasedReps[tconfig.filetype].add(
+        wrap(TK_IMPLEMENT),
+        ""
+      )
+    result.fields = parseAbstractFunc(iwings, winterface.abstractFunctions, tconfig)
+
+    if winterface.functions.hasKey(lang):
+      result.langBasedReps[lang][wrap(TK_FUNCTIONS)] =
+        processFunctions(
+          winterface.functions[lang], tconfig.indentation
+        )
+    else:
+      result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = ""
 
   of WingsType.structw:
     let wstruct: WStruct = WStruct(iwings)

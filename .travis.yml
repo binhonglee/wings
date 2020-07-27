@@ -7,7 +7,6 @@ node_js: stable
 python: "3.8"
 
 env:
-  - BRANCH=1.0.6
   - BRANCH=1.2.0
   - BRANCH=stable
 

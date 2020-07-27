@@ -1,0 +1,16 @@
+package {#1}
+// #BEGIN_IMPORT
+
+// #IMPORT1 import {#IMPORT_1}
+// #END_IMPORT
+
+// {#COMMENT}
+interface {#NAME} {#IMPLEMENT}{
+// #BEGIN_FUNC
+  // #FUNC fun {#FUNCNAME_CAMEL}({#PARAMS}): {#TYPE}
+// #END_FUNC
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS
+}

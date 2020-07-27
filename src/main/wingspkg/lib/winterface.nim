@@ -47,8 +47,10 @@ type
   AbstractFunction* = object
     visibility*: Visibility
     name*: string
-    arguments*: Table[string, string] # key: name, value: type
-    returnType*: string # wingsType to be parse
+    arguments*: Table[string, string]
+      ## key: name, value: type
+    returnType*: string
+      ## wingsType to be parse
 
 type
   IWings* = ref object of RootObj
@@ -167,9 +169,17 @@ proc initAbstractFunction(
 proc error(line: int, message: string): void =
   LOG(FATAL, "Line " & $line & ": " & message)
 
-proc parseWInteface(winterface: var WInterface, words: seq[string]): string =
+proc parseFields(fields: var seq[string], words: seq[string]): string =
   if words[0] == WINGS_CLOSE:
     result = ""
+  elif words.len() < 2 or words.len() > 3:
+    LOG(FATAL, "Unexpected input: " & join(words, " "))
+  else:
+    fields.add(join(words, " "))
+    result = $WingsType.default
+
+proc parseWInteface(winterface: var WInterface, words: seq[string]): string =
+  result = parseFields(winterface.fields, words)
 
 proc parseWEnum(wenum: var WEnum, words: seq[string]): string =
   if words.len() > 1:
@@ -182,13 +192,7 @@ proc parseWEnum(wenum: var WEnum, words: seq[string]): string =
     result = $WingsType.default
 
 proc parseWStruct(wstruct: var WStruct, words: seq[string]): string =
-  if words[0] == WINGS_CLOSE:
-    result = ""
-  elif words.len() < 2 or words.len() > 3:
-    LOG(FATAL, "Unexpected input: " & join(words, " "))
-  else:
-    wstruct.fields.add(join(words, " "))
-    result = $WingsType.default
+  result = parseFields(wstruct.fields, words)
 
 proc parseAbstractFunc(
   winterface: var WInterface,
@@ -196,10 +200,9 @@ proc parseAbstractFunc(
   line: string,
 ): string =
   if words.len() > 0 and words[0] == TYPE_FUNCTION_CLOSE:
-    result = ""
+    return ""
 
   var str: string = getResult(line, trim)
-
   var i = 0
   var space = false
 
@@ -208,7 +211,8 @@ proc parseAbstractFunc(
       space = true
     else:
       inc(i)
-  
+  dec(i)
+
   var visibility: Visibility
   var name: string
 
@@ -231,7 +235,7 @@ proc parseAbstractFunc(
         space = true
 
     name = system.substr(str, 0, i - 1).strip()
-    strlib.substr(str, i + 1, str.len() - 1)
+    strlib.substr(str, i, str.len() - 1)
 
   var strs = strlib.split(str, WINGS_FUNC_OPEN, WINGS_FUNC_CLOSE, " ")
   if strs.len() < 2:
@@ -239,41 +243,30 @@ proc parseAbstractFunc(
   elif strs.len() > 2:
     error(0, "Unexpected characters at the end of the line for the wings-func().")
 
-  str = system.substr(strs[0], 1, strs[0].len() - 1)
-  let params = split(str, ",")
-
+  str = system.substr(strs[0], 1, strs[0].len() - 2)
   var paramTable = initTable[string, string]()
-  for param in params:
-    let ss = split(param, ":")
-    if ss.len() < 2:
-      error(0, "Missing type declaration in `" & param & "`.")
-    elif ss.len() > 2:
-      error(0, "Unexpected characters in `" & param & "`.")
-    
-    if paramTable.hasKey(ss[0]):
-      error(0, "Parameter name `" & ss[0] & "` already declared previously.")
-    
-    paramTable.add(ss[0], ss[1])
+
+  if str.len() > 0:
+    let params = split(str, ",")
+
+    for param in params:
+      let ss = split(param, ":")
+      if ss.len() < 2:
+        echo ss
+        error(0, "Missing type declaration in `" & param & "`.")
+      elif ss.len() > 2:
+        error(0, "Unexpected characters in `" & param & "`.")
+      
+      if paramTable.hasKey(ss[0]):
+        error(0, "Parameter name `" & ss[0] & "` already declared previously.")
+      
+      paramTable.add(strip(ss[0]), strip(ss[1]))
 
   winterface.abstractFunctions.add(
     name,
     initAbstractFunction(visibility, name, paramTable, strs[1])
   )
   result = WINGS_FUNC
-
-# proc parseFunc(
-#   wstruct: var WStruct,
-#   words: seq[string],
-#   line: string,
-#   lang: string
-# ): string =
-#   if words.len() > 0 and words[0] == TYPE_FUNCTION_CLOSE:
-#     result = ""
-#   else:
-#     if not wstruct.functions.hasKey(lang):
-#       wstruct.functions.add(lang, "")
-#     wstruct.functions[lang] &= "\n" & line
-#     result = lang
 
 proc parseFunc(
   functions: var Table[string, string],

@@ -32,8 +32,17 @@ const IMPORT_PATH_SEPARATOR_POST*: string = "'"
 
 const IMPORT_PATH_LEVEL*: string = "const IMPORT_PATH_LEVEL: int = "
 
+const PRE_INDENT*: string = "const PRE_INDENT: bool = "
+
 const INDENTATION_SPACING_PRE*: string = "const INDENTATION_SPACING: string = \""
 const INDENTATION_SPACING_POST*: string = "\""
+
+const INTERFACE_SUPPORTED*: string = "const INTERFACE_SUPPORTED: bool = "
+const PARAM_FORMAT_PRE*: string = "const PARAM_FORMAT: string = \""
+const PARAM_FORMAT_POST*: string = "\""
+
+const PARAM_JOINER_PRE*: string = "const PARAM_JOINER: string = \""
+const PARAM_JOINER_POST*: string = "\""
 
 const PARSE_FORMAT_PRE*: string = "const PARSE_FORMAT: string = \""
 const PARSE_FORMAT_POST*: string = "\""
@@ -42,6 +51,8 @@ const TEMPLATE_STRUCT_PRE*: string = "const TEMPLATE_STRUCT: string = \"\"\"\n"
 const TEMPLATE_STRUCT_POST*: string = "\n\"\"\""
 const TEMPLATE_ENUM_PRE*: string = "const TEMPLATE_ENUM: string = \"\"\"\n"
 const TEMPLATE_ENUM_POST*: string = "\n\"\"\""
+const TEMPLATE_INTERFACE_PRE*: string = "const TEMPLATE_INTERFACE: string = \"\"\"\n"
+const TEMPLATE_INTERFACE_POST*: string = "\n\"\"\""
 
 const TYPES_PRE*: string = "let TYPES: Table[string, TypeInterpreter] = {"
 const TYPES_POST*: string = "}.toTable()"
@@ -61,10 +72,15 @@ const CONFIG_POST*: string = """_CONFIG*: TConfig = initTConfig(
   sep = IMPORT_PATH_SEPARATOR,
   level = IMPORT_PATH_LEVEL,
   isp = INDENTATION_SPACING,
+  pi = PRE_INDENT,
+  isup = INTERFACE_SUPPORTED,
+  prmFmt = PARAM_FORMAT,
+  prmJnr = PARAM_JOINER,
   pfmt = PARSE_FORMAT,
   temp = {
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
+    "interface": TEMPLATE_INTERFACE,
   }.toTable(),
   ty = TYPES,
 )"""

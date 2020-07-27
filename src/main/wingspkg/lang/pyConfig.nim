@@ -16,6 +16,10 @@ const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '.'
 const IMPORT_PATH_LEVEL: int = 0
 const PARSE_FORMAT: string = ""
+const INTERFACE_SUPPORTED: bool = false
+const PARAM_FORMAT: string = ""
+const PARAM_JOINER: string = ""
+const PRE_INDENT: bool = true
 const INDENTATION_SPACING: string = "  "
 
 const TEMPLATE_STRUCT: string = """
@@ -46,6 +50,10 @@ from enum import Enum, auto
 class {#NAME}(Enum):
   // #VAR {#VARNAME_PASCAL} = auto()
 // #END_VAR
+
+"""
+
+const TEMPLATE_INTERFACE: string = """
 
 """
 
@@ -81,10 +89,15 @@ let PY_CONFIG*: TConfig = initTConfig(
   sep = IMPORT_PATH_SEPARATOR,
   level = IMPORT_PATH_LEVEL,
   isp = INDENTATION_SPACING,
+  pi = PRE_INDENT,
+  isup = INTERFACE_SUPPORTED,
+  prmFmt = PARAM_FORMAT,
+  prmJnr = PARAM_JOINER,
   pfmt = PARSE_FORMAT,
   temp = {
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
+    "interface": TEMPLATE_INTERFACE,
   }.toTable(),
   ty = TYPES,
 )

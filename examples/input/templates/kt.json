@@ -12,13 +12,23 @@
   },
   "templates": {
     "struct": "examples/input/templates/struct.kt",
-    "enum": "examples/input/templates/enum.kt"
+    "enum": "examples/input/templates/enum.kt",
+    "interface": "examples/input/templates/interface.kt"
+  },
+  "interfaceConfig": {
+    "interfaceSupported": true,
+    "paramFormat": "{#PARAM_NAME}: {#PARAM_TYPE}",
+    "paramJoiner": ", "
   },
   "types": [
     {
       "wingsType": "int",
       "targetType": "Int",
       "targetInit": "0"
+    }, {
+      "wingsType": "void",
+      "targetType": "Unit",
+      "targetInit": ""
     }, {
       "wingsType": "flt",
       "targetType": "Float",

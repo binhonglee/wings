@@ -1,0 +1,19 @@
+package {#1}
+// #BEGIN_IMPORT
+
+import (
+	// #IMPORT2 {#IMPORT_1} "{#IMPORT_2}"
+	// #IMPORT1 "{#IMPORT_1}"
+)
+// #END_IMPORT
+
+// {#NAME_PASCAL} - {#COMMENT}
+type {#NAME_PASCAL} interface {
+// #BEGIN_FUNC
+	// #FUNC {#FUNCNAME_PASCAL}({#PARAMS}) {#TYPE}
+// #END_FUNC
+}
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS

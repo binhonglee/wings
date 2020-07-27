@@ -16,6 +16,10 @@ const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '/'
 const IMPORT_PATH_LEVEL: int = 0
 const PARSE_FORMAT: string = ""
+const INTERFACE_SUPPORTED: bool = true
+const PARAM_FORMAT: string = "{#PARAM_NAME}: {#PARAM_TYPE}"
+const PARAM_JOINER: string = ", "
+const PRE_INDENT: bool = true
 const INDENTATION_SPACING: string = "  "
 
 const TEMPLATE_STRUCT: string = """
@@ -57,8 +61,29 @@ enum class {#NAME} {
 
 """
 
+const TEMPLATE_INTERFACE: string = """
+package {#1}
+// #BEGIN_IMPORT
+
+// #IMPORT1 import {#IMPORT_1}
+// #END_IMPORT
+
+// {#COMMENT}
+interface {#NAME} {#IMPLEMENT}{
+// #BEGIN_FUNC
+  // #FUNC fun {#FUNCNAME_CAMEL}({#PARAMS}): {#TYPE}
+// #END_FUNC
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS
+}
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "Double", "", "0", ""),
+  "void": initTypeInterpreter("void", "Unit", "", "", ""),
   "bool": initTypeInterpreter("bool", "Boolean", "", "false", ""),
   "flt": initTypeInterpreter("flt", "Float", "", "0", ""),
   "date": initTypeInterpreter("date", "Date", "", "Date()", ""),
@@ -89,10 +114,15 @@ let KT_CONFIG*: TConfig = initTConfig(
   sep = IMPORT_PATH_SEPARATOR,
   level = IMPORT_PATH_LEVEL,
   isp = INDENTATION_SPACING,
+  pi = PRE_INDENT,
+  isup = INTERFACE_SUPPORTED,
+  prmFmt = PARAM_FORMAT,
+  prmJnr = PARAM_JOINER,
   pfmt = PARSE_FORMAT,
   temp = {
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
+    "interface": TEMPLATE_INTERFACE,
   }.toTable(),
   ty = TYPES,
 )

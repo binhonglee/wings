@@ -15,10 +15,19 @@
   "parseFormat": "obj.{#VARNAME_JSON}",
   "templates": {
     "struct": "examples/input/templates/struct.ts",
-    "enum": "examples/input/templates/enum.ts"
+    "enum": "examples/input/templates/enum.ts",
+    "interface": "examples/input/templates/interface.ts"
+  },
+  "interfaceConfig": {
+    "interfaceSupported": true,
+    "paramFormat": "{#PARAM_NAME}: {#PARAM_TYPE}",
+    "paramJoiner": ", "
   },
   "types": [
     {
+      "wingsType": "void",
+      "targetType": "void"
+    }, {
       "wingsType": "int",
       "targetType": "number",
       "targetInit": "0"

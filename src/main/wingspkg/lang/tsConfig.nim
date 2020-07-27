@@ -16,6 +16,10 @@ const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '/'
 const IMPORT_PATH_LEVEL: int = 0
 const PARSE_FORMAT: string = "obj.{#VARNAME_JSON}"
+const INTERFACE_SUPPORTED: bool = true
+const PARAM_FORMAT: string = "{#PARAM_NAME}: {#PARAM_TYPE}"
+const PARAM_JOINER: string = ", "
+const PRE_INDENT: bool = true
 const INDENTATION_SPACING: string = "  "
 
 const TEMPLATE_STRUCT: string = """
@@ -69,8 +73,27 @@ export default {#NAME_PASCAL};
 
 """
 
+const TEMPLATE_INTERFACE: string = """
+// #BEGIN_IMPORT
+// #IMPORT2 import {#IMPORT_1} from '{#IMPORT_2}';
+// #END_IMPORT
+
+// {#COMMENT}
+export default interface {#NAME_PASCAL} {#IMPLEMENT}{
+// #BEGIN_FUNC
+  // #FUNC {#FUNCNAME_CAMEL}({#PARAMS}): {#TYPE};
+// #END_FUNC
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS
+}
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "number", "", "0", "obj.{#VARNAME_JSON}"),
+  "void": initTypeInterpreter("void", "void", "", "", "obj.{#VARNAME_JSON}"),
   "bool": initTypeInterpreter("bool", "boolean", "", "false", "obj.{#VARNAME_JSON}"),
   "flt": initTypeInterpreter("flt", "number", "", "0", "obj.{#VARNAME_JSON}"),
   "date": initTypeInterpreter("date", "Date", "", "new Date()", "new Date(obj.{#VARNAME_JSON})"),
@@ -101,10 +124,15 @@ let TS_CONFIG*: TConfig = initTConfig(
   sep = IMPORT_PATH_SEPARATOR,
   level = IMPORT_PATH_LEVEL,
   isp = INDENTATION_SPACING,
+  pi = PRE_INDENT,
+  isup = INTERFACE_SUPPORTED,
+  prmFmt = PARAM_FORMAT,
+  prmJnr = PARAM_JOINER,
   pfmt = PARSE_FORMAT,
   temp = {
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
+    "interface": TEMPLATE_INTERFACE,
   }.toTable(),
   ty = TYPES,
 )

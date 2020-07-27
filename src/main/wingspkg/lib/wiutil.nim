@@ -123,7 +123,7 @@ proc dependencyGraph*(
         var obj = filenameToObj[dependant]
         var importFilenames: Table[string, string] = initTable[string, string]()
         for lang in config.langConfigs.keys:
-          if wings.filepath.hasKey(lang):
+          if wings.filepath.hasKey(lang) and obj.filepath.hasKey(lang):
             let ip: string = importFilename(
               wings.filename,
               wings.filepath[lang],

@@ -21,6 +21,10 @@ const SP = "spacing"
 const P_I = "preIndent"
 const P_FMT = "parseFormat"
 const TEMP = "templates"
+const I_C = "interfaceConfig"
+const I_S = "interfaceSupported"
+const PRM_FMT = "paramFormat"
+const PRM_JNR = "paramJoiner"
 const TY = "types"
 const W_T = "wingsType"
 const T_T = "targetType"
@@ -167,6 +171,17 @@ proc parse*(filename: string): TConfig =
   else:
     LOG(FATAL, TEMP & errorMsg)
 
+  if jsonConfig.hasKey(I_C):
+    let interfaceConfig: OrderedTable[string, JsonNode] = jsonConfig[I_C].getFields()
+    if interfaceConfig.hasKey(I_S):
+      result.interfaceConfig.interfaceSupported = interfaceConfig[I_S].getBool()
+    
+    if result.interfaceConfig.interfaceSupported:
+      if not interfaceConfig.hasKey(PRM_FMT) or not interfaceConfig.hasKey(PRM_JNR):
+        LOG(FATAL, "'" & PRM_FMT & "' or '" & PRM_JNR & "' must be defined when '" & I_S & "' is set to true.")
+      result.interfaceConfig.paramFormat = interfaceConfig[PRM_FMT].getStr()
+      result.interfaceConfig.paramJoiner = interfaceConfig[PRM_JNR].getStr()
+
   if jsonConfig.hasKey(TY):
     let types: seq[JsonNode] = jsonConfig[TY].getElems()
     if types.len < 1:
@@ -182,12 +197,12 @@ proc parse*(filename: string): TConfig =
       if t.hasKey(W_T):
         wingsType = t[W_T].getStr("")
       else:
-        wingsType = ""
+        LOG(FATAL,  W_T & errorMsg)
 
       if t.hasKey(T_T):
         targetType = t[T_T].getStr("")
       else:
-        targetType = ""
+        LOG(FATAL,  T_T & errorMsg)
 
       if t.hasKey(R_I):
         requiredImport = t[R_I].getStr("")
@@ -204,9 +219,6 @@ proc parse*(filename: string): TConfig =
         targetParse = targetParse.replace(parseFMT, result.parseFormat)
       else:
         targetParse = result.parseFormat
-
-      if wingsType.len() < 1 or targetType.len() < 1:
-        LOG(FATAL,  W_T & " or " & T_T & errorMsg)
 
       let typeInterpreter: TypeInterpreter = initTypeInterpreter(
         wingsType, targetType, requiredImport, targetInit, targetParse,

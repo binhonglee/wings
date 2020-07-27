@@ -14,10 +14,19 @@
   },
   "templates": {
     "struct": "examples/input/templates/struct.go",
-    "enum": "examples/input/templates/enum.go"
+    "enum": "examples/input/templates/enum.go",
+    "interface": "examples/input/templates/interface.go"
+  },
+  "interfaceConfig": {
+    "interfaceSupported": true,
+    "paramFormat": "{#PARAM_NAME} {#PARAM_TYPE}",
+    "paramJoiner": ", "
   },
   "types": [
     {
+      "wingsType": "void",
+      "targetType": ""
+    }, {
       "wingsType": "int",
       "targetType": "int"
     }, {

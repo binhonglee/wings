@@ -25,7 +25,7 @@ If you would like to make any changes, please edit the source file instead.
 run `wings "{SOURCE_FILE}"` upon completion.
 """
 
-const DEFAULT_OUTPUT_ROOT_DIRS: HashSet[string] = initHashSet[string]()
+const DEFAULT_OUTPUT_ROOT_DIRS: HashSet[string] = toHashSet([""])
 const DEFAULT_SKIP_IMPORT: bool = false
 
 let CALLER_DIR*: string = getCurrentDir() ## Directory from which `wings` is ran from.

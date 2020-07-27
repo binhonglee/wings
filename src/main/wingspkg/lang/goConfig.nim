@@ -16,6 +16,10 @@ const IMPORT_PATH_PREFIX: string = ""
 const IMPORT_PATH_SEPARATOR: char = '/'
 const IMPORT_PATH_LEVEL: int = 1
 const PARSE_FORMAT: string = ""
+const INTERFACE_SUPPORTED: bool = true
+const PARAM_FORMAT: string = "{#PARAM_NAME} {#PARAM_TYPE}"
+const PARAM_JOINER: string = ", "
+const PRE_INDENT: bool = false
 const INDENTATION_SPACING: string = "	"
 
 const TEMPLATE_STRUCT: string = """
@@ -57,8 +61,32 @@ const (
 
 """
 
+const TEMPLATE_INTERFACE: string = """
+package {#1}
+// #BEGIN_IMPORT
+
+import (
+	// #IMPORT2 {#IMPORT_1} "{#IMPORT_2}"
+	// #IMPORT1 "{#IMPORT_1}"
+)
+// #END_IMPORT
+
+// {#NAME_PASCAL} - {#COMMENT}
+type {#NAME_PASCAL} interface {
+// #BEGIN_FUNC
+	// #FUNC {#FUNCNAME_PASCAL}({#PARAMS}) {#TYPE}
+// #END_FUNC
+}
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "double", "", "", ""),
+  "void": initTypeInterpreter("void", "", "", "", ""),
   "bool": initTypeInterpreter("bool", "bool", "", "", ""),
   "flt": initTypeInterpreter("flt", "float", "", "", ""),
   "date": initTypeInterpreter("date", "time.Time", "time", "", ""),
@@ -89,10 +117,15 @@ let GO_CONFIG*: TConfig = initTConfig(
   sep = IMPORT_PATH_SEPARATOR,
   level = IMPORT_PATH_LEVEL,
   isp = INDENTATION_SPACING,
+  pi = PRE_INDENT,
+  isup = INTERFACE_SUPPORTED,
+  prmFmt = PARAM_FORMAT,
+  prmJnr = PARAM_JOINER,
   pfmt = PARSE_FORMAT,
   temp = {
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
+    "interface": TEMPLATE_INTERFACE,
   }.toTable(),
   ty = TYPES,
 )

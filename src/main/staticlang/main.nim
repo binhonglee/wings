@@ -1,7 +1,7 @@
 from os import createDir, getCurrentDir, joinPath, lastPathPart, paramCount,
   paramStr, parentDir, walkFiles
 from strutils import indent, removeSuffix, replace
-from tables import getOrDefault, pairs
+from tables import getOrDefault, hasKey, pairs
 import stones/cases
 import stones/log
 import ../wingspkg/lib/tconfig, ../wingspkg/lib/tutil
@@ -42,13 +42,22 @@ proc genFile(inputFile: string): void =
   push(c.IMPORT_PATH_SEPARATOR_PRE, $config.importPath.separator, c.IMPORT_PATH_SEPARATOR_POST)
   push(c.IMPORT_PATH_LEVEL, $config.importPath.level)
   push(c.PARSE_FORMAT_PRE, config.parseFormat, c.PARSE_FORMAT_POST)
+
+  push(c.INTERFACE_SUPPORTED, $config.interfaceConfig.interfaceSupported)
+  push(c.PARAM_FORMAT_PRE, config.interfaceConfig.paramFormat, c.PARAM_FORMAT_POST)
+  push(c.PARAM_JOINER_PRE, config.interfaceConfig.paramJoiner, c.PARAM_JOINER_POST)
+
+  push(c.PRE_INDENT, $config.indentation.preIndent)
   push(c.INDENTATION_SPACING_PRE, config.indentation.spacing, c.INDENTATION_SPACING_POST)
 
   push()
-  push(c.TEMPLATE_STRUCT_PRE, config.templates.getOrDefault("struct"), c.TEMPLATE_ENUM_POST)
+  push(c.TEMPLATE_STRUCT_PRE, config.templates.getOrDefault("struct"), c.TEMPLATE_STRUCT_POST)
 
   push()
   push(c.TEMPLATE_ENUM_PRE, config.templates.getOrDefault("enum"), c.TEMPLATE_ENUM_POST)
+
+  push()
+  push(c.TEMPLATE_INTERFACE_PRE, config.templates.getOrDefault("interface"), c.TEMPLATE_INTERFACE_POST)
 
   push()
   push(c.TYPES_PRE)

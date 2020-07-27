@@ -435,3 +435,86 @@ Output files:
 
     export default Emotion;
     ```
+
+## Interface (WIP)
+
+Input file:
+
+<div class="input_div">
+<label class="input_label">sample_interface.wings</label>
+<pre class="highlight" id="codeblock">
+  <span class="kn">go-filepath</span> <span class="s">examples/go</span>
+  <span class="kn">kt-filepath</span> <span class="s">examples/kt</span>
+  <span class="kn">ts-filepath</span> <span class="s">examples/ts</span>
+
+  <span class="kn">import</span> <span class="s">examples/input/emotion.wings</span>
+
+  <span class="c1"># Just some interface</span>
+
+  <span class="kn">interface</span> <span class="nx">Student</span> <span class="kn">{</span>
+  <span class="kn">}</span>
+
+  wings-func(
+    public functionOne (firstParam: str, secondParam: str) void
+    public functionTwo () str
+  )
+
+</pre>
+</div>
+
+Output files:
+
+=== "examples/go/sampleinterface.go"
+    ```go
+    // This is a generated file
+    //
+    // If you would like to make any changes, please edit the source file instead.
+    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+    // Source: examples/input/sample_interface.wings
+
+    package go
+
+    import (
+      person "github.com/binhonglee/wings/examples/output/go/person"
+    )
+
+    // SampleInterface - Just some interface
+    type SampleInterface interface {
+      FunctionTwo() string
+      FunctionOne(firstParam string, secondParam string) 
+    }
+    ```
+
+=== "examples/kt/SampleInterface.kt"
+    ```kotlin
+    // This is a generated file
+    //
+    // If you would like to make any changes, please edit the source file instead.
+    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+    // Source: examples/input/sample_interface.wings
+
+    package kt
+
+    // Just some interface
+    interface SampleInterface {
+      fun functionTwo(): String
+      fun functionOne(firstParam: String, secondParam: String): Unit
+    }
+    ```
+
+=== "examples/ts/SampleInterface.ts"
+    ```ts
+    // This is a generated file
+    //
+    // If you would like to make any changes, please edit the source file instead.
+    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
+    // Source: examples/input/sample_interface.wings
+
+    import Emotion from './person/Emotion';
+
+    // Just some interface
+    export default interface SampleInterface {
+      functionTwo(): string;
+      functionOne(firstParam: string, secondParam: string): void;
+    }
+    ```
