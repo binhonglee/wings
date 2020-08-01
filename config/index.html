@@ -528,7 +528,7 @@
 <p>You can specify specific cases where a word in a parameter name should be full caps instead of just camelCase or PascalCase. For eg, <code>ID</code> instead of <code>id</code> or <code>Id</code>.</p>
 <p>See <a href="https://binhonglee.github.io/stones/stones/cases.html#setAcronyms%2CHashSet%5Bstring%5D">here</a> for more information about how its used.</p>
 <h2 id="header-str">header: <code>[]str</code></h2>
-<p>This is the header comment to be added to the generated files. The array of strings will be joined with a <code>\n</code> character so you can have multiline comment by having each line of comment as a separate string in this array.</p>
+<p>This is the header comment to be added to the generated files. The array of strings will be joined with a <code>\n</code> character so you can have multiline comment by having each line of comment as a separate string in this array. If you have <code>{#SOURCE_FILE}</code> included in there, it will be replaced with the path to the source wings file where this is generated from.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nt">&quot;header&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&quot;Line 1&quot;</span><span class="p">,</span>
