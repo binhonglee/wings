@@ -10,7 +10,7 @@ See [here](https://binhonglee.github.io/stones/stones/cases.html#setAcronyms%2CH
 
 ## header: `[]str`
 
-This is the header comment to be added to the generated files. The array of strings will be joined with a `\n` character so you can have multiline comment by having each line of comment as a separate string in this array.
+This is the header comment to be added to the generated files. The array of strings will be joined with a `\n` character so you can have multiline comment by having each line of comment as a separate string in this array. If you have `{#SOURCE_FILE}` included in there, it will be replaced with the path to the source wings file where this is generated from.
 
 ```json
 {

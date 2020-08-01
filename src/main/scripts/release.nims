@@ -11,6 +11,7 @@ const main: string = "src/main/wings.nim"
 const nimble: string = "plz-out/.nimble/pkgs"
 const plz_run: string = "./pleasew run --show_all_output"
 const plz_build: string = "./pleasew build --show_all_output"
+const release: string = "-d:release"
 
 const arm: string = "--cpu:arm -t:-marm -l:-marm"
 const bit_32: string = "--cpu:i386 -t:-m32 -l:-m32"
@@ -65,7 +66,7 @@ proc genRun(): void =
 
   for i in options:
     exec(
-      "nim " & i & " --verbosity:2 --NimblePath:" & nimble & " -o:" &
+      "nim " & i & " " & release & " --verbosity:2 --NimblePath:" & nimble & " -o:" &
       folder & "/wings_" & getFilename(i) & " c " & main
     )
 

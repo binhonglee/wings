@@ -1,8 +1,11 @@
-from strutils import indent, split
+from strutils import indent, split, replace
 
 proc genHeader*(prefix: string, source: string, text: string): string =
   ## Returns a string of a header (indented by given `prefix`).
-  result &= text & "\nSource: " & source
+  result &= replace(text, "{#SOURCE_FILE}", source)
+
+  if result.len() < 1:
+    return ""
 
   let lines: seq[string] = result.split("\n")
   result = ""
