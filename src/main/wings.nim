@@ -2,6 +2,7 @@ from times import epochTime
 from os
 import createDir, fileExists, paramCount, paramStr,
   parentDir, setCurrentDir
+from osproc import execCmdEx
 from strutils import endsWith, removePrefix, startsWith
 import stones/genlib
 import stones/log
@@ -12,6 +13,7 @@ import wingspkg/util/config
 
 const CONFIG_PREFIX: string = "-c:"
 const HELP_OPTION: string = "-h"
+const VERSION: string = "-v"
 var USER_CONFIG: Config = initConfig()
 
 proc toFile(path: string, content: string): void =
@@ -27,6 +29,14 @@ proc toFile(path: string, content: string): void =
   except:
     LOG(ERROR, "Failed to generate " & path)
 
+proc getVersion(): string =
+  let (version, _) = execCmdEx("git describe --tags")
+  let (hash, _) = execCmdEx("git rev-parse HEAD")
+  result = "wings " & version &
+    "\nCompiled at (UTC) " & CompileDate & " " & CompileTime &
+    "\nCommit hash: " & hash &
+    "\nhttps://wings.sh\n"
+
 proc init(count: int): void =
   let startTime = epochTime()
   if count < 1:
@@ -38,12 +48,16 @@ proc init(count: int): void =
   for i in countup(1, count, 1):
     let file = paramStr(i)
     if file.startsWith(HELP_OPTION):
-      echo ""
-      echo "-c:{CONFIG_FILE}.json\t - The config file should be a json file."
-      echo "-h\t\t\t - Show this menu."
+      echo getVersion()
+      echo "\t-c:{CONFIG_FILE}.json\t - The config file should be a json file."
+      echo "\t-v\t\t\t - Display version information"
+      echo "\t-h\t\t\t - Show this menu."
       echo ""
       echo "Expects {FILENAME}.wings files to be generated from."
       echo ""
+      return
+    elif file.startsWith(VERSION):
+      echo getVersion()
       return
     elif file.startsWith(CONFIG_PREFIX):
       if configFile.len() > 0:
