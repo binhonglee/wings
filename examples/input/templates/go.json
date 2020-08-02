@@ -13,9 +13,9 @@
     "preIndent": false
   },
   "templates": {
-    "struct": "examples/input/templates/struct.go",
-    "enum": "examples/input/templates/enum.go",
-    "interface": "examples/input/templates/interface.go"
+    "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.go",
+    "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.go",
+    "interface": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/interface.go"
   },
   "interfaceConfig": {
     "interfaceSupported": true,

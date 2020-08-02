@@ -1,8 +1,10 @@
-from os import fileExists, getCurrentDir, lastPathPart, parentDir
-from strutils import join
+from os import fileExists, getCurrentDir, lastPathPart, parentDir, removeFile
+from strutils import join, startsWith
 from stones/cases import setAcronyms
+import httpClient
 import json
 import sets
+import std/sha1
 import tables
 import stones/log
 import ../lang/defaults, ../lib/tconfig, ../lib/tutil
@@ -15,7 +17,10 @@ const LANG_FILTER: string = "langFilter"
 const LOGGING: string = "logging"
 const OUTPUT_ROOT_DIRS: string = "outputRootDirs"
 const PREFIXES: string = "prefixes"
+const REMOTE_CONFIGS: string = "remoteLangConfigs"
 const SKIP_IMPORT: string = "skipImport"
+const URL: string = "url"
+const HASH: string = "hash"
 
 # Defaults
 const DEFAULT_HEADER: string = """
@@ -112,6 +117,42 @@ proc parse*(filename: string): Config =
     LOG(INFO, "Set '" & SKIP_IMPORT & "' to " & $result.skipImport & ".")
   else:
     LOG(INFO, "'" & SKIP_IMPORT & "' is not set. Using default " & $DEFAULT_SKIP_IMPORT & ".")
+
+  if jsonConfig.hasKey(REMOTE_CONFIGS):
+    let remoteConfigs: seq[JsonNode] = jsonConfig[REMOTE_CONFIGS].getElems()
+    for configNode in remoteConfigs:
+      if not configNode.hasKey(URL):
+        LOG(ERROR, "'url' is missing in a remote config. Skipping...")
+      let configURL: string = configNode[URL].getStr("")
+      if not configURL.startsWith("https://"):
+        LOG(ERROR, configURL & "is not a remote URL. Skipping...")
+        continue
+      let client = newHttpClient()
+      let toParse = "tempconfigfile"
+      downloadFile(client, configURL, toParse)
+
+      if configNode.hasKey(HASH):
+        LOG(DEBUG, "Verifying hash matches...")
+        let hash = configNode[HASH].getStr("")
+        try:
+          if secureHashFile(toParse) == parseSecureHash(hash):
+            LOG(DEBUG, "File hash matches.")
+          else:
+            LOG(ERROR, "Hash for " & configURL & " is not matched. Skipping...")
+            continue
+        except:
+          LOG(ERROR, "Unable to parse " & hash & " properly. Skipping...")
+          continue
+      else:
+        LOG(DEBUG, "Remote file hash is not defined. Skip hash check.")
+
+      let config: TConfig = tutil.parse(toParse, configURL)
+      removeFile(toParse)
+
+      if result.langConfigs.hasKey(config.filetype):
+        result.langConfigs[config.filetype] = config
+      else:
+        result.langConfigs.add(config.filetype, config)
 
   if jsonConfig.hasKey(LANG_CONFIGS):
     let langConfigs: seq[JsonNode] = jsonConfig[LANG_CONFIGS].getElems()

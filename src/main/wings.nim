@@ -2,7 +2,6 @@ from times import epochTime
 from os
 import createDir, fileExists, paramCount, paramStr,
   parentDir, setCurrentDir
-from osproc import execCmdEx
 from strutils import endsWith, removePrefix, startsWith
 import stones/genlib
 import stones/log
@@ -10,6 +9,7 @@ import sets
 import tables
 import wingspkg/core
 import wingspkg/util/config
+import "./const" as c
 
 const CONFIG_PREFIX: string = "-c:"
 const HELP_OPTION: string = "-h"
@@ -30,11 +30,9 @@ proc toFile(path: string, content: string): void =
     LOG(ERROR, "Failed to generate " & path)
 
 proc getVersion(): string =
-  let (version, _) = execCmdEx("git describe --tags")
-  let (hash, _) = execCmdEx("git rev-parse HEAD")
-  result = "wings " & version &
+  result = "wings " & c.VERSION & "\n" &
     "\nCompiled at (UTC) " & CompileDate & " " & CompileTime &
-    "\nCommit hash: " & hash &
+    "\nCommit hash: " & c.HASH & "\n" &
     "\nhttps://wings.sh\n"
 
 proc init(count: int): void =

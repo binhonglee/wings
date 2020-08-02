@@ -14,8 +14,8 @@
     "preIndent": false
   },
   "templates": {
-    "struct": "examples/input/templates/struct.nim",
-    "enum": "examples/input/templates/enum.nim"
+    "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.nim",
+    "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.nim"
   },
   "types": [
     {

@@ -11,9 +11,9 @@
     "preIndent": true
   },
   "templates": {
-    "struct": "examples/input/templates/struct.kt",
-    "enum": "examples/input/templates/enum.kt",
-    "interface": "examples/input/templates/interface.kt"
+    "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.kt",
+    "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.kt",
+    "interface": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/interface.kt"
   },
   "interfaceConfig": {
     "interfaceSupported": true,

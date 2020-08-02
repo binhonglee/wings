@@ -9,9 +9,10 @@ type
 const folder: string = "release"
 const main: string = "src/main/wings.nim"
 const nimble: string = "plz-out/.nimble/pkgs"
-const plz_run: string = "./pleasew run --show_all_output"
-const plz_build: string = "./pleasew build --show_all_output"
+const plz_args: string = " --nocolour --nocache --plain_output --verbosity=error"
+const plz_run: string = "./pleasew run"
 const release: string = "-d:release"
+const ssl: string = "-d:ssl"
 
 const arm: string = "--cpu:arm -t:-marm -l:-marm"
 const bit_32: string = "--cpu:i386 -t:-m32 -l:-m32"
@@ -23,12 +24,12 @@ const macosx: string = "--os:macosx -d:emscripten"
 
 const options: seq[string] =
   @[
-    # This can be compiled separately and manually if you intend to get it.
-    # linux & " " & arm,
+    linux & " " & arm,
     linux & " " & bit_32,
     linux & " " & bit_64,
     windows & " " & bit_32,
     windows & " " & bit_64,
+    macosx & " " & bit_32,
     macosx & " " & bit_64,
   ]
 
@@ -44,6 +45,8 @@ proc getFilename(option: string): string =
     return "32bit_windows"
   of windows & " " & bit_64:
     return "64bit_windows"
+  of macosx & " " & bit_32:
+    return "32bit_macosx"
   of macosx & " " & bit_64:
     return "64bit_macosx"
   else:
@@ -54,6 +57,11 @@ proc getFilename(option: string): string =
       "defined in `getFilename()`."
     )
 
+proc build(version: string): void =
+  exec(
+    "nim " & version & " " & ssl & " " & release & " --verbosity:0 --NimblePath:" & nimble & " -o:" &
+    folder & "/wings_" & getFilename(version) & " c " & main
+  )
 
 proc genRun(): void =
   if lastPathPart(getCurrentDir()) != "wings":
@@ -61,13 +69,43 @@ proc genRun(): void =
     echo "Exiting..."
     return
 
-  exec(plz_run & " //src/main/staticlang:static")
-  exec(plz_build & " //src/main:wings")
+  exec(plz_run & plz_args & " //src/main/staticlang:static")
 
-  for i in options:
-    exec(
-      "nim " & i & " " & release & " --verbosity:2 --NimblePath:" & nimble & " -o:" &
-      folder & "/wings_" & getFilename(i) & " c " & main
-    )
+  if paramCount() > 1 and paramStr(2) == "--all":
+    var status: string = ""
+    for i in options:
+      try:
+        build(i)
+        status &= "\n  \u001b[32m[SUCCESS] " & getFilename(i) & "\u001b[0m"
+      except:
+        status &= "\n  \u001b[31m[FAILED] " & getFilename(i) & "\u001b[0m"
+    echo "Build status:" & status
+    return
+  elif defined(linux) and defined(arm):
+    build(options[0])
+    echo "Running build for ARM Linux"
+  elif defined(linux) and defined(i386):
+    build(options[1])
+    echo "Running build for 32 bits Linux"
+  elif defined(linux) and defined(amd64):
+    build(options[2])
+    echo "Running build for 64 bits Linux"
+  elif defined(windows) and defined(i386):
+    build(options[3])
+    echo "Running build for 32 bits Windows"
+  elif defined(windows) and defined(amd64):
+    build(options[4])
+    echo "Running build for 64 bits Windows"
+  elif defined(macosx) and defined(i386):
+    build(options[5])
+    echo "Running build for 64 bits MacOS"
+  elif defined(macosx) and defined(amd64):
+    build(options[6])
+    echo "Running build for 64 bits MacOS"
+  else:
+    echo "Unsupported OS version"
+    return
+
+  echo "Build successful. Exiting..."
 
 genRun()

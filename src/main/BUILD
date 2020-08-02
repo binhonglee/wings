@@ -3,6 +3,7 @@ subinclude('//build_defs/nim')
 nim_binary(
   name = 'wings',
   main = 'wings.nim',
+  opts = ['-d:ssl'],
   deps = [
     ':files',
     ':stones',
@@ -21,16 +22,16 @@ nimble_install(
 
 filegroup(
   name = 'files',
-  srcs = [],
+  srcs = ['//src/main/scripts:preCompile'],
   visibility = [
     ':wings',
-    ':wings_doc',
   ],
   deps = [
     '//src/main/wingspkg',
     '//src/main/wingspkg/lang',
     '//src/main/wingspkg/lib',
     '//src/main/wingspkg/util',
+    '//src/main/scripts:preCompile',
   ],
   exported_deps = [
     '//src/main/wingspkg',

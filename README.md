@@ -5,6 +5,7 @@ A customizable cross language struct and enum file generator.
 [![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=devel)](https://travis-ci.org/binhonglee/wings)
 [![codecov](https://codecov.io/gh/binhonglee/wings/branch/devel/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
 [![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
+[![Gitter](https://img.shields.io/gitter/room/binhonglee/wings.svg)](https://gitter.im/wings-sh/community)
 
 ## Requirements
 
@@ -12,14 +13,14 @@ A customizable cross language struct and enum file generator.
 - [Please](https://please.build)
 - [MkDocs](https://www.mkdocs.org/) (Documentation)
 
-\*_Note: There are also other packages needed for deployment due to cross compilation (like `gcc-multilib`, `gcc-arm-linux-gnueabihf`, `mingw-w64` etc...)._
+\*_Note: There are also other packages needed for deployment due to cross compilation (like `gcc-multilib`, `gcc-arm-linux-gnueabihf`, `mingw-w64`, `libevent-dev` etc...)._
 
 ## Development Tools (scripts)
 
 - Run mkdocs development server for realtime feedback on changes made `docs` folder _(requires `mkdocs`)_
   - `plz docs`
 - Build release binaries for distribution
-  - `plz release`
+  - `plz release` (This will only build the version compatible to your environment by default. You can do `plz release -- --all` to try cross-compiling for other environments.)
 - Generate / Update the `lang` folder [(`src/main/wingspkg/lang`)](https://github.com/binhonglee/wings/tree/devel/src/main/wingspkg/lang) based on the files in the [`examples/input/templates`](https://github.com/binhonglee/wings/tree/devel/examples/input/templates) folder
   - `plz lang`
 - Run tests

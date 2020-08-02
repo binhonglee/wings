@@ -1,8 +1,10 @@
-from os import fileExists, lastPathPart, parentDir
+from os import fileExists, lastPathPart, parentDir, removeFile
 from stones/cases import Case
 from strutils import contains, endsWith, removePrefix, replace, split, startsWith
+import httpClient
 import json
 import stones/log
+import stones/genlib
 import tables
 import ./tconfig, ./tempconst
 
@@ -72,9 +74,9 @@ proc getImportPathType(
   else:
     LOG(logLevel, errorMsg)
 
-proc parse*(filename: string): TConfig =
+proc parse*(filename: string, altName: string = ""): TConfig =
   ## Parse template config file into `TConfig`.
-  LOG(DEBUG, "Parsing file: '" & filename & "'.")
+  LOG(DEBUG, "Parsing file: '" & (altName.len() == 0 ? filename | altname) & "'.")
   result = initTConfig()
   if not fileExists(filename):
     LOG(FATAL, "Template config file not found: " & filename)
@@ -161,13 +163,23 @@ proc parse*(filename: string): TConfig =
   if jsonConfig.haskey(TEMP):
     let templates: OrderedTable[string, JsonNode] = jsonConfig[TEMP].getFields()
     for key in templates.keys:
-      let file: string = templates[key].getStr("")
+      var file: string = templates[key].getStr("")
+      var remote: bool = false
+
+      if file.startsWith("https://"):
+        remote = true
+        var client = newHttpClient()
+        downloadFile(client, file, "temptemplatefile")
+        file = "temptemplatefile"
 
       if not fileExists(file):
         LOG(FATAL, "'" & file & "' referenced in '" & filename & "' does not exists.")
 
       if file != "":
         result.templates.add(key, readFile(file))
+
+      if remote:
+        removeFile(file)
   else:
     LOG(FATAL, TEMP & errorMsg)
 

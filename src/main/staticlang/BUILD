@@ -6,6 +6,7 @@ nim_binary(
   srcs = [
     'const.nim',
   ],
+  opts = ['-d:ssl'],
   deps = [
     '//src/main/wingspkg/lib',
     '//src/main:stones',

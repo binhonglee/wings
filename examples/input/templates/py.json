@@ -15,8 +15,8 @@
     "preIndent": true
   },
   "templates": {
-    "struct": "examples/input/templates/struct.py",
-    "enum": "examples/input/templates/enum.py"
+    "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.py",
+    "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.py"
   },
   "types": [
     {

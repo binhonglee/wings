@@ -12,13 +12,44 @@ def nimscript(name:str, main:str, deps:list=None, visibility:list=None):
     visibility = visibility,
   )
 
-def nim_binary(name:str, main:str, srcs:list=[], out:str=None, test_only:bool=False, visibility:list=None, deps:list=[]):
-  out = out or name
+def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, post_script:str="echo ", visibility:list=None):
+  src = "./$PKG_DIR/" + main
+  temp = "temp_script_" + main
 
   cmd = ' && '.join([
     _home_path(),
     _nimble_path(),
-    "$TOOL --verbosity:2 --NimblePath:$NIMBLE_PATH/pkgs -o:" + out + " c $PKG_DIR/" + main,
+    "cp ./$PKG_DIR/" + main + " " + temp,
+    "chmod +x " + temp,
+    "./" + temp,
+    post_script,
+    "mv " + temp + " " + _top_level_dir(),
+    _go_to_top_level(),
+    "./" + temp,
+    "rm " + temp,
+  ])
+
+  return build_rule(
+    name = name,
+    srcs = [main],
+    outs = outs,
+    tools = [CONFIG.NIM_TOOL],
+    cmd = cmd,
+    deps = deps,
+    requires = [CONFIG.NIM_TOOL],
+    binary = False,
+    visibility = visibility,
+  )
+
+def nim_binary(name:str, main:str, srcs:list=[], out:str=None, opts:list=[], test_only:bool=False, visibility:list=None, deps:list=[]):
+  out = out or name
+
+  compile_options = ' '.join(opts)
+
+  cmd = ' && '.join([
+    _home_path(),
+    _nimble_path(),
+    "$TOOL --verbosity:2 --NimblePath:$NIMBLE_PATH/pkgs -o:" + out + " " + compile_options + " c $PKG_DIR/" + main,
   ])
 
   return build_rule(
@@ -63,6 +94,11 @@ def _nimble_path():
 def _home_path():
   return "if [[ \"$OSTYPE\" == \"darwin\"* ]]; then HOME=\"/Users/$USER\"; elif [[ \"$OSTYPE\" == \"linux-gnu\"* ]]; then HOME=\"/home/$USER\"; fi",
 
+def _go_to_top_level():
+  return "cd " + _top_level_dir() + " || exit 1"
+
+def _top_level_dir():
+  return "$(pwd | awk -F'plz-out' '{print $1}')"
 
 CONFIG.setdefault('NIM_TOOL', 'nim')
 CONFIG.setdefault('NIMBLE_TOOL', 'nimble')
