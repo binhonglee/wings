@@ -240,13 +240,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#interface-wip" class="md-nav__link">
-    Interface (WIP)
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -307,18 +300,30 @@
       
 
 
+  <li class="md-nav__item">
+    <a href="experimental/" title="Experimental" class="md-nav__link">
+      Experimental
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-7">
       Utility classes
       <span class="md-nav__icon md-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
       </span>
     </label>
     <nav class="md-nav" aria-label="Utility classes" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
         </span>
@@ -334,16 +339,16 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
     
-    <label class="md-nav__link" for="nav-6-1">
+    <label class="md-nav__link" for="nav-7-1">
       TypeScript
       <span class="md-nav__icon md-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
       </span>
     </label>
     <nav class="md-nav" aria-label="TypeScript" data-md-level="2">
-      <label class="md-nav__title" for="nav-6-1">
+      <label class="md-nav__title" for="nav-7-1">
         <span class="md-nav__icon md-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
         </span>
@@ -421,13 +426,6 @@
         <li class="md-nav__item">
   <a href="#enum" class="md-nav__link">
     Enum
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interface-wip" class="md-nav__link">
-    Interface (WIP)
   </a>
   
 </li>
@@ -879,87 +877,7 @@
 
 </div>
 </div>
-<h2 id="interface-wip">Interface (WIP)</h2>
-<p>Input file:</p>
-<div class="input_div">
-<label class="input_label">sample_interface.wings</label>
-<pre class="highlight" id="codeblock">
-  <span class="kn">go-filepath</span> <span class="s">examples/go</span>
-  <span class="kn">kt-filepath</span> <span class="s">examples/kt</span>
-  <span class="kn">ts-filepath</span> <span class="s">examples/ts</span>
-
-  <span class="kn">import</span> <span class="s">examples/input/emotion.wings</span>
-
-  <span class="c1"># Just some interface</span>
-
-  <span class="kn">interface</span> <span class="nx">Student</span> <span class="kn">{</span>
-  <span class="kn">}</span>
-
-  wings-func(
-    public functionOne (firstParam: str, secondParam: str) void
-    public functionTwo () str
-  )
-
-</pre>
-</div>
-
-<p>Output files:</p>
-<div class="tabbed-set" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">examples/go/sampleinterface.go</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="kn">package</span> <span class="k">go</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-  <span class="nx">person</span> <span class="s">&quot;github.com/binhonglee/wings/examples/output/go/person&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// SampleInterface - Just some interface</span>
-<span class="kd">type</span> <span class="nx">SampleInterface</span> <span class="kd">interface</span> <span class="p">{</span>
-  <span class="nx">FunctionTwo</span><span class="p">()</span> <span class="kt">string</span>
-  <span class="nx">FunctionOne</span><span class="p">(</span><span class="nx">firstParam</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">secondParam</span> <span class="kt">string</span><span class="p">)</span> 
-<span class="p">}</span>
-</code></pre></div>
-
-</div>
-<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">examples/kt/SampleInterface.kt</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="k">package</span> <span class="nn">kt</span>
-
-<span class="c1">// Just some interface</span>
-<span class="k">interface</span> <span class="nc">SampleInterface</span> <span class="p">{</span>
-  <span class="k">fun</span> <span class="nf">functionTwo</span><span class="p">():</span> <span class="n">String</span>
-  <span class="k">fun</span> <span class="nf">functionOne</span><span class="p">(</span><span class="n">firstParam</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">secondParam</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Unit</span>
-<span class="p">}</span>
-</code></pre></div>
-
-</div>
-<input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">examples/ts/SampleInterface.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="kr">import</span> <span class="nx">Emotion</span> <span class="nx">from</span> <span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span>
-
-<span class="c1">// Just some interface</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="kr">interface</span> <span class="nx">SampleInterface</span> <span class="p">{</span>
-  <span class="nx">functionTwo</span><span class="p">()</span><span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
-  <span class="nx">functionOne</span><span class="p">(</span><span class="nx">firstParam</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">secondParam</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-
-</div>
-</div>
+<p>If you are interested in testing out an experimental feature, we also have some basic support for abstract functions on interface documented <a href="./experimental/#interface">here</a>.</p>
                 
               
               
