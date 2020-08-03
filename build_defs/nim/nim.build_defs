@@ -12,8 +12,7 @@ def nimscript(name:str, main:str, deps:list=None, visibility:list=None):
     visibility = visibility,
   )
 
-def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, post_script:str="echo ", visibility:list=None):
-  src = "./$PKG_DIR/" + main
+def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, visibility:list=None):
   temp = "temp_script_" + main
 
   cmd = ' && '.join([
@@ -21,10 +20,6 @@ def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, post_script
     _nimble_path(),
     "cp ./$PKG_DIR/" + main + " " + temp,
     "chmod +x " + temp,
-    "./" + temp,
-    post_script,
-    "mv " + temp + " " + _top_level_dir(),
-    _go_to_top_level(),
     "./" + temp,
     "rm " + temp,
   ])
@@ -38,6 +33,52 @@ def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, post_script
     deps = deps,
     requires = [CONFIG.NIM_TOOL],
     binary = False,
+    visibility = visibility,
+  )
+
+def nim_doc(
+  name:str, main:str, srcs:list=[], out:str="nimDocs", opts:list=[],
+  index:bool=False, index_out:str="theindex.html", url:str=None,
+  commit:str=None, devel:str=None, visibility:list=None, deps:list=[]
+):
+  compile_options = ' '.join(opts)
+
+  if index:
+    index_option = "--index:on"
+  else:
+    index_option = "--index:off"
+    index_out = ""
+
+  if url is not None:
+    url = " --git.url:" + url
+  if commit is not None:
+    commit = " --git.commit:" + commit
+  if devel is not None:
+    devel = " --git.devel:" + devel
+
+  cmd = ' && '.join([
+    _home_path(),
+    _nimble_path(),
+    "$TOOL --verbosity:2 --NimblePath:$NIMBLE_PATH/pkgs doc --project " + index_option + " -o:" + out + url + commit + devel + " $PKG_DIR/" + main,
+    "mkdir " + _top_level_dir() + out + " || echo 'Folder already exists.'",
+    "cp -R " + out + "* " + _top_level_dir() + out,
+  ])
+
+  if index:
+    cmd += ' && '.join([
+      "",
+      "$TOOL --verbosity:2 --NimblePath:$NIMBLE_PATH/pkgs buildIndex -o:" + index_out + " " + out,
+      "cp -R " + index_out + " " + _top_level_dir() + out,
+    ])
+
+  return build_rule(
+    name = name,
+    srcs = srcs + [main],
+    outs = [out],
+    tools = [CONFIG.NIM_TOOL],
+    cmd = cmd,
+    deps = deps,
+    requires = [CONFIG.NIM_TOOL],
     visibility = visibility,
   )
 

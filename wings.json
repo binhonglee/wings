@@ -24,18 +24,18 @@
   ],
   "remoteLangConfigs": [{
     "url": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/go.json",
-    "hash": "50AEC40A6CE8A457BFFB2ED61EC5BE213D3CB91E"
+    "hash": "F6F38AE46ACB6A79EB333D360EF3705CBF76CDC1"
   }, {
     "url": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/kt.json",
-    "hash": "70A37A5A4E99FB1FFC27D2CD4460EE54A4015CAD"
+    "hash": "7885BBF682B5A931468A0A6BA51B47EA9CB31C79"
   }, {
     "url": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/nim.json",
-    "hash": "0234B661447A062298143685D40F11C1BB832AB0"
+    "hash": "BF55F9715D5997EE718DF811AB5F7194A76DF404"
   }, {
     "url": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/py.json",
-    "hash": "DAE77FD76A4E3D69BEAD926D65139EAA04E555DF"
+    "hash": "CC07CDD6622A39E0E09A13E6107FC3BBBC8A428B"
   }, {
     "url": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/ts.json",
-    "hash": "C1B0A8CC75C5BB606EB55BD2E3A6F64E9E780343"
+    "hash": "9E59AB2883F3C1DE2E6338622E067588420A069C"
   }]
 }

@@ -88,8 +88,6 @@ General fallback option for the more specific `targetParse` below if that's not 
 
 ## templates*: `obj`
 
-(WIP: Support downloading remote files.)
-
 ### struct*: `str`
 
 Filepath to the struct template file.

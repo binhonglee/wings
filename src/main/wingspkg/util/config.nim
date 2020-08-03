@@ -139,9 +139,11 @@ proc parse*(filename: string): Config =
             LOG(DEBUG, "File hash matches.")
           else:
             LOG(ERROR, "Hash for " & configURL & " is not matched. Skipping...")
+            removeFile(toParse)
             continue
         except:
           LOG(ERROR, "Unable to parse " & hash & " properly. Skipping...")
+          removeFile(toParse)
           continue
       else:
         LOG(DEBUG, "Remote file hash is not defined. Skip hash check.")

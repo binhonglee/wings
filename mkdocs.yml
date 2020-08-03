@@ -30,6 +30,7 @@ nav:
   - Syntax: syntax.md
   - Config: config.md
   - Template: template.md
+  - Experimental: experimental.md
   - Utility classes:
     - TypeScript:
       - index.ts: tsUtil/index.md

@@ -10,12 +10,31 @@ nim_binary(
   ],
 )
 
+nim_doc(
+  name = 'wings_api_doc',
+  main = 'wings.nim',
+  out = 'docs/api/',
+  index = True,
+  index_out = "docs/api/index.html",
+  url = 'https://wings.sh',
+  commit = 'devel',
+  devel = 'devel',
+  deps = [
+    ':files',
+    ':stones',
+  ],
+  visibility = [
+    '//src/main/scripts:docs',
+  ]
+)
+
 nimble_install(
   name = "stones",
   pkg_name = "stones",
   revision = "#devel",
   visibility = [
     ':wings',
+    ':wings_api_doc',
     '//src/main/staticlang:static',
   ],
 )
@@ -25,6 +44,7 @@ filegroup(
   srcs = ['//src/main/scripts:preCompile'],
   visibility = [
     ':wings',
+    ':wings_api_doc',
   ],
   deps = [
     '//src/main/wingspkg',

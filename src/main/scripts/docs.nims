@@ -3,27 +3,11 @@ from os import lastPathPart
 
 mode = ScriptMode.Verbose
 
-const gitURL: string = "https://github.com/binhonglee/wings"
-const folder: string = "docs/api"
-const main: string = "src/main/wings.nim"
-const devel: string = "devel"
 const build: string = "build"
 const serve: string = "serve"
 const docLicense: string = "docs/license.md"
 
 proc run(cmd: string): void =
-  if dirExists(folder):
-    rmDir(folder)
-
-  exec(
-    "nim doc --project --index:on -o:" & folder &
-    "/ --git.url:" & gitURL &
-    " --git.commit:" & devel &
-    " --git.devel:" & devel & " " & main
-  )
-
-  exec("nim buildIndex -o:" & folder & "/theindex.html " & folder)
-  mvFile(folder & "/theindex.html", folder & "/index.html")
   rmFile(docLicense)
   cpFile("LICENSE", docLicense)
 

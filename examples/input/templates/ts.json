@@ -14,9 +14,9 @@
   },
   "parseFormat": "obj.{#VARNAME_JSON}",
   "templates": {
-    "struct": "examples/input/templates/struct.ts",
-    "enum": "examples/input/templates/enum.ts",
-    "interface": "examples/input/templates/interface.ts"
+    "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.ts",
+    "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.ts",
+    "interface": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/interface.ts"
   },
   "interfaceConfig": {
     "interfaceSupported": true,

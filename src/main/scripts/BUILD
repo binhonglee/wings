@@ -3,6 +3,7 @@ subinclude('//build_defs/nim')
 nimscript(
   name = 'docs',
   main = 'docs.nims',
+  deps = ['//src/main:wings_api_doc'],
 )
 
 nimscript(
@@ -14,6 +15,5 @@ nim_run_script(
   name = 'preCompile',
   main = 'preCompile.nims',
   outs = ['const.nim'],
-  post_script = 'mv src/main/const.nim ./',
   visibility = ['//src/main:files'],
 )

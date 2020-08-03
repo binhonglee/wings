@@ -2,7 +2,7 @@
 
 mode = ScriptMode.Verbose
 
-const outputFile: string = "src/main/const.nim"
+const outputFile: string = "const.nim"
 const header: string = """
 # DO NOT MODIFY
 #

@@ -43,7 +43,6 @@ install:
       choosenim $BRANCH
     fi
   - ./pleasew --show_all_output build
-  - nimble -y build
   - pip3 install -r requirements.txt
   - ./pleasew --show_all_output genDocs
 

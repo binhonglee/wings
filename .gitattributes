@@ -1,2 +1,19 @@
-examples/*  linguist-generated=true
-pleasew     linguist-generated=true
+BUILD           text eol=lf linguist-language=Starlark
+*.build_defs    text eol=lf linguist-language=Starlark
+*.nim           text eol=lf linguist-language=Nim
+*.sh            text eol=lf linguist-language=Shell
+*.ts            text eol=lf linguist-language=TypeScript
+*.wings         text eol=lf linguist-language=Wings
+
+.plzconfig      text eol=lf linguist-detectable=false
+package.json    text eol=lf linguist-detectable=false
+tsconfig.json   text eol=lf linguist-detectable=false
+
+examples/input/templates/*  text eol=lf linguist-detectable=false
+
+examples/output/*   linguist-generated=true linguist-vendored=true -diff
+pleasew             linguist-generated=true linguist-vendored=true -diff
+package-lock.json   linguist-generated=true linguist-vendored=true -diff
+
+*.md    text eol=lf linguist-documentation=true
+LICENSE text eol=lf linguist-documentation=true

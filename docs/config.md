@@ -55,3 +55,6 @@ This is mainly created for `go` since the import path isn't just relative from t
 ## skipImport: `bool`
 
 When `skipimport` is set to `true`, wings will skip parsing and generating imported wings file(s) and only generate from the wings file given.
+
+
+_Note: If you'd like to use a remote template file instead of writing your own, check out the remote template feature in the [experimental page](../experimental/#remote-template)._
