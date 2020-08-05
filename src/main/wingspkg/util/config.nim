@@ -171,10 +171,14 @@ proc parse*(filename: string): Config =
     for lang in langFilter:
       filters.incl(lang.getStr(""))
 
+    var reverseList: HashSet[string] = initHashSet[string]()
     if langFilter.len() > 0:
       for lang in result.langConfigs.keys:
         if not filters.contains(lang):
-          result.langConfigs.del(lang)
+          reverseList.incl(lang)
+
+    for lang in reverseList:
+      result.langConfigs.del(lang)
 
   if jsonConfig.hasKey(PREFIXES):
     let prefixFields: OrderedTable[string, JsonNode] = jsonConfig[PREFIXES].getFields()
