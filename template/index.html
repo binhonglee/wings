@@ -773,25 +773,21 @@
 <h2 id="implementformat-str">implementFormat: <code>str</code></h2>
 <div class="highlight"><pre><span></span><code>default: &quot;{#IMPLEMENT}&quot;
 </code></pre></div>
-
 <p>The string in which is used in the specific language to declare that the current class extends or implements an existing different class.</p>
 <h2 id="importpath-obj">importPath*: <code>obj</code></h2>
 <h3 id="format-str">format: <code>str</code></h3>
 <div class="highlight"><pre><span></span><code>default: &quot;{#IMPORT}&quot;
 </code></pre></div>
-
 <p>The format in which import path are written in.</p>
 <h3 id="separator-str">separator: <code>str</code></h3>
 <div class="highlight"><pre><span></span><code>default: &#39;/&#39;
 </code></pre></div>
-
 <p>The way files / folders are joined. Some programming languages uses '.' in import path instead of '/'.</p>
 <h3 id="pathtype-never-absolute-relative">pathType*: <code>"never" || "absolute" || "relative"</code></h3>
 <p>This is to define how the import path should be written for the imported files.</p>
 <h3 id="prefix-str">prefix: <code>str</code></h3>
 <div class="highlight"><pre><span></span><code>default: &quot;&quot;
 </code></pre></div>
-
 <p>Prefix for import path. Will be overwritten by the <code>prefix</code> value in the project config if already defined there.</p>
 <h3 id="level-int">level*: <code>int</code></h3>
 <p>The level of folder the import should run and stop at. <code>0</code> is the lowest possible number which refers to the file itself, <code>1</code> refers to the folder the file is in and so on.</p>
@@ -800,17 +796,14 @@
 <h3 id="spacing-str">spacing: <code>str</code></h3>
 <div class="highlight"><pre><span></span><code>default: &quot;&quot;
 </code></pre></div>
-
 <p>Define the "tab" width. This <strong>WOULD NOT</strong> replace the existing tabbing in your template files but rather is used to properly indent functions declared in the wings file.</p>
 <h3 id="preindent-bool">preIndent: <code>bool</code></h3>
 <div class="highlight"><pre><span></span><code>default: false
 </code></pre></div>
-
 <p>This is to define if the imported functions should be indented in the output file.</p>
 <h2 id="parseformat-str">parseFormat: <code>str</code></h2>
 <div class="highlight"><pre><span></span><code>default: &quot;&quot;
 </code></pre></div>
-
 <p>General fallback option for the more specific <code>targetParse</code> below if that's not defined.</p>
 <h2 id="templates-obj">templates*: <code>obj</code></h2>
 <h3 id="struct-str">struct*: <code>str</code></h3>
@@ -825,12 +818,10 @@
 <h3 id="targetinit-str">targetInit: <code>str</code></h3>
 <div class="highlight"><pre><span></span><code>default: &quot;&quot;
 </code></pre></div>
-
 <p>Initialization for target output type.</p>
 <h3 id="requiredimport-str">requiredImport: <code>str</code></h3>
 <div class="highlight"><pre><span></span><code>default: &quot;&quot;
 </code></pre></div>
-
 <p>Specific import that is needed to be added when this type is in use.</p>
                 
               
