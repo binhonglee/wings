@@ -20,7 +20,7 @@
 <title>wingspkg/util/filename</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -106,13 +100,22 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">tFilename
+      <li><a class="reference" href="#tFilename%2Cstring%2Cstring"
+    title="tFilename(filename: string; filepath: string): string">tFilename,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">outputFilename
       <li><a class="reference" href="#outputFilename%2Cstring%2Cstring%2CTConfig"
-    title="outputFilename(filename: string; filepath: string; langConfig: TConfig): string"><wbr />output<wbr />Filename<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#importFilename%2Cstring%2Cstring%2Cstring%2Cstring%2CTConfig"
+    title="outputFilename(filename: string; filepath: string; langConfig: TConfig): string">outputFilename,string,string,TConfig<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">importFilename
+      <li><a class="reference" href="#importFilename%2Cstring%2Cstring%2Cstring%2Cstring%2CTConfig"
     title="importFilename(filename: string; filepath: string; callerFilename: string;
-               callerFilepath: string; langConfig: TConfig): string"><wbr />import<wbr />Filename<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#tFilename%2Cstring%2Cstring"
-    title="tFilename(filename: string; filepath: string): string"><wbr />t<wbr />Filename<span class="attachedType"></span></a></li>
+               callerFilepath: string; langConfig: TConfig): string">importFilename,string,string,string,string,TConfig<span class="attachedType"></span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -146,7 +149,7 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 <a id="importFilename,string,string,string,string,TConfig"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#importFilename%2Cstring%2Cstring%2Cstring%2Cstring%2CTConfig"><span class="Identifier">importFilename</span></a><span class="Other">(</span><span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">filepath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">callerFilename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-                   <span class="Identifier">callerFilepath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">langConfig</span><span class="Other">:</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+                    <span class="Identifier">callerFilepath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">langConfig</span><span class="Other">:</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">UnsupportedCharacterError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -179,7 +182,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-09 13:18:32 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-11-25 23:57:12 UTC</small>
       </div>
     </div>
   </div>

@@ -1,1 +1,1 @@
-dependencyGraph	wingspkg/lib/wiutil.html#dependencyGraph,Table[string,IWings],Config	wiutil: dependencyGraph(allWings: var Table[string, IWings]; config: Config): Table[string,\n    Table[string, string]]	
+dependencyGraph	wingspkg/lib/wiutil.html#dependencyGraph,Table[string,IWings],Config	wiutil: dependencyGraph(allWings: var Table[string, IWings]; config: Config): Table[\n    string, Table[string, string]]	

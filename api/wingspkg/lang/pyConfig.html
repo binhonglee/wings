@@ -20,7 +20,7 @@
 <title>wingspkg/lang/pyConfig</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -108,11 +102,11 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#PY_CONFIG"
     title="PY_CONFIG: TConfig = initTConfig(COMMENT, CUSTOM_TYPES, FILENAME, FILETYPE,
-                              IMPLEMENT_FORMAT, IMPORT_PATH_FORMAT,
-                              IMPORT_PATH_TYPE, IMPORT_PATH_PREFIX, &apos;.&apos;, 0,
-                              INDENTATION_SPACING, PRE_INDENT,
-                              INTERFACE_SUPPORTED, PARAM_FORMAT, PARAM_JOINER,
-                              PARSE_FORMAT, toTable([
+                                 IMPLEMENT_FORMAT, IMPORT_PATH_FORMAT,
+                                 IMPORT_PATH_TYPE, IMPORT_PATH_PREFIX, &apos;.&apos;, 0,
+                                 INDENTATION_SPACING, PRE_INDENT,
+                                 INTERFACE_SUPPORTED, PARAM_FORMAT,
+                                 PARAM_JOINER, PARSE_FORMAT, toTable([
     (&quot;struct&quot;, TEMPLATE_STRUCT), (&quot;enum&quot;, TEMPLATE_ENUM),
     (&quot;interface&quot;, TEMPLATE_INTERFACE)]), TYPES)"><wbr />PY_<wbr />CONFIG<span class="attachedType"></span></a></li>
 
@@ -136,11 +130,11 @@ function main() {
 <dl class="item">
 <a id="PY_CONFIG"></a>
 <dt><pre><a href="pyConfig.html#PY_CONFIG"><span class="Identifier">PY_CONFIG</span></a><span class="Other">:</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a> <span class="Other">=</span> <span class="Identifier">initTConfig</span><span class="Other">(</span><span class="Identifier">COMMENT</span><span class="Other">,</span> <span class="Identifier">CUSTOM_TYPES</span><span class="Other">,</span> <span class="Identifier">FILENAME</span><span class="Other">,</span> <span class="Identifier">FILETYPE</span><span class="Other">,</span>
-                              <span class="Identifier">IMPLEMENT_FORMAT</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_FORMAT</span><span class="Other">,</span>
-                              <span class="Identifier">IMPORT_PATH_TYPE</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_PREFIX</span><span class="Other">,</span> <span class="CharLit">'.'</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">,</span>
-                              <span class="Identifier">INDENTATION_SPACING</span><span class="Other">,</span> <span class="Identifier">PRE_INDENT</span><span class="Other">,</span>
-                              <span class="Identifier">INTERFACE_SUPPORTED</span><span class="Other">,</span> <span class="Identifier">PARAM_FORMAT</span><span class="Other">,</span> <span class="Identifier">PARAM_JOINER</span><span class="Other">,</span>
-                              <span class="Identifier">PARSE_FORMAT</span><span class="Other">,</span> <span class="Identifier">toTable</span><span class="Other">(</span><span class="Other">[</span>
+                                 <span class="Identifier">IMPLEMENT_FORMAT</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_FORMAT</span><span class="Other">,</span>
+                                 <span class="Identifier">IMPORT_PATH_TYPE</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_PREFIX</span><span class="Other">,</span> <span class="CharLit">'.'</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">,</span>
+                                 <span class="Identifier">INDENTATION_SPACING</span><span class="Other">,</span> <span class="Identifier">PRE_INDENT</span><span class="Other">,</span>
+                                 <span class="Identifier">INTERFACE_SUPPORTED</span><span class="Other">,</span> <span class="Identifier">PARAM_FORMAT</span><span class="Other">,</span>
+                                 <span class="Identifier">PARAM_JOINER</span><span class="Other">,</span> <span class="Identifier">PARSE_FORMAT</span><span class="Other">,</span> <span class="Identifier">toTable</span><span class="Other">(</span><span class="Other">[</span>
     <span class="Other">(</span><span class="StringLit">&quot;struct&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_STRUCT</span><span class="Other">)</span><span class="Other">,</span> <span class="Other">(</span><span class="StringLit">&quot;enum&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_ENUM</span><span class="Other">)</span><span class="Other">,</span>
     <span class="Other">(</span><span class="StringLit">&quot;interface&quot;</span><span class="Other">,</span> <span class="Identifier">TEMPLATE_INTERFACE</span><span class="Other">)</span><span class="Other">]</span><span class="Other">)</span><span class="Other">,</span> <span class="Identifier">TYPES</span><span class="Other">)</span></pre></dt>
 <dd>
@@ -162,7 +156,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-09 13:18:35 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-11-25 23:57:16 UTC</small>
       </div>
     </div>
   </div>

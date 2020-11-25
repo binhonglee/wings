@@ -20,7 +20,7 @@
 <title>wingspkg/core</title>
 <link rel="stylesheet" type="text/css" href="../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -106,9 +100,12 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">fromFiles
       <li><a class="reference" href="#fromFiles%2Cseq%5Bstring%5D%2CConfig"
     title="fromFiles(filenames: seq[string]; config: Config): Table[string,
-    Table[string, string]]"><wbr />from<wbr />Files<span class="attachedType"></span></a></li>
+    Table[string, string]]">fromFiles,seq[string],Config<span class="attachedType"></span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -130,11 +127,12 @@ function main() {
 <dl class="item">
 <a id="fromFiles,seq[string],Config"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#fromFiles%2Cseq%5Bstring%5D%2CConfig"><span class="Identifier">fromFiles</span></a><span class="Other">(</span><span class="Identifier">filenames</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">config</span><span class="Other">:</span> <a href="util/config.html#Config"><span class="Identifier">Config</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span>
-    <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span>
-                                   <span class="Identifier">InvalidIndexError</span><span class="Other">,</span> <span class="Identifier">UnsupportedCharacterError</span><span class="Other">,</span>
-                                   <span class="Identifier">Defect</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">ConflictingValueError</span><span class="Other">,</span>
-                                   <span class="Identifier">DuplicateKeyError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span>
-    <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span>
+                                      <span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">InvalidIndexError</span><span class="Other">,</span>
+                                      <span class="Identifier">UnsupportedCharacterError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span>
+                                      <span class="Identifier">ConflictingValueError</span><span class="Other">,</span> <span class="Identifier">DuplicateKeyError</span><span class="Other">,</span>
+                                      <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span>
+    <span class="Identifier">ReadDirEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Entry point to the file. It gets all the files to read and returns a table of output to be written.
@@ -154,7 +152,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-09 13:18:36 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-11-25 23:57:17 UTC</small>
       </div>
     </div>
   </div>

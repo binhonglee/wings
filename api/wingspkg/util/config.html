@@ -20,7 +20,7 @@
 <title>wingspkg/util/config</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -126,13 +120,19 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">initConfig
       <li><a class="reference" href="#initConfig%2Cstring%2CTable%5Bstring%2CTConfig%5D%2CHashSet%5Bstring%5D%2Cbool"
     title="initConfig(header: string = DEFAULT_HEADER;
            langConfigs: Table[string, TConfig] = DEFAULT_CONFIGS;
            outputRootDirs: HashSet[string] = DEFAULT_OUTPUT_ROOT_DIRS;
-           skipImport: bool = DEFAULT_SKIP_IMPORT): Config"><wbr />init<wbr />Config<span class="attachedType">Config</span></a></li>
-  <li><a class="reference" href="#parse%2Cstring"
-    title="parse(filename: string): Config"><wbr />parse<span class="attachedType">Config</span></a></li>
+           skipImport: bool = DEFAULT_SKIP_IMPORT): Config">initConfig,string,Table[string,TConfig],HashSet[string],bool<span class="attachedType">Config</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">parse
+      <li><a class="reference" href="#parse%2Cstring"
+    title="parse(filename: string): Config">parse,string<span class="attachedType">Config</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -191,9 +191,10 @@ class="link-seesrc" target="_blank">Source</a>
 <dl class="item">
 <a id="initConfig,string,Table[string,TConfig],HashSet[string],bool"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#initConfig%2Cstring%2CTable%5Bstring%2CTConfig%5D%2CHashSet%5Bstring%5D%2Cbool"><span class="Identifier">initConfig</span></a><span class="Other">(</span><span class="Identifier">header</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_HEADER</span><span class="Other">;</span>
-               <span class="Identifier">langConfigs</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_CONFIGS</span><span class="Other">;</span>
-               <span class="Identifier">outputRootDirs</span><span class="Other">:</span> <span class="Identifier">HashSet</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_OUTPUT_ROOT_DIRS</span><span class="Other">;</span>
-               <span class="Identifier">skipImport</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_SKIP_IMPORT</span><span class="Other">)</span><span class="Other">:</span> <a href="config.html#Config"><span class="Identifier">Config</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                <span class="Identifier">langConfigs</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_CONFIGS</span><span class="Other">;</span>
+                <span class="Identifier">outputRootDirs</span><span class="Other">:</span> <span class="Identifier">HashSet</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_OUTPUT_ROOT_DIRS</span><span class="Other">;</span>
+                <span class="Identifier">skipImport</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_SKIP_IMPORT</span><span class="Other">)</span><span class="Other">:</span> <a href="config.html#Config"><span class="Identifier">Config</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Create a config to be used.
@@ -204,11 +205,11 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="parse,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#parse%2Cstring"><span class="Identifier">parse</span></a><span class="Other">(</span><span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="config.html#Config"><span class="Identifier">Config</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span>
-    <span class="Identifier">Defect</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">JsonParsingError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">HttpRequestError</span><span class="Other">,</span>
-    <span class="Identifier">SslError</span><span class="Other">,</span> <span class="Identifier">TimeoutError</span><span class="Other">,</span> <span class="Identifier">ProtocolError</span><span class="Other">,</span> <span class="Identifier">OverflowError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span>
-    <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadDirEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span>
-                   <span class="Identifier">WriteDirEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#parse%2Cstring"><span class="Identifier">parse</span></a><span class="Other">(</span><span class="Identifier">filename</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="config.html#Config"><span class="Identifier">Config</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">GenericError</span><span class="Other">,</span>
+    <span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">JsonParsingError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">HttpRequestError</span><span class="Other">,</span>
+    <span class="Identifier">LibraryError</span><span class="Other">,</span> <span class="Identifier">SslError</span><span class="Other">,</span> <span class="Identifier">TimeoutError</span><span class="Other">,</span> <span class="Identifier">ProtocolError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span>
+    <span class="Identifier">GenericError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadDirEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span>
+                                   <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">WriteDirEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Parse the given config file in the path.
@@ -228,7 +229,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-09 13:18:36 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-11-25 23:57:17 UTC</small>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@
 <title>wingspkg/lib/winterface</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -102,7 +96,8 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#WingsType"
     title="WingsType = enum
-  default = &quot;unknownObj&quot;, structw = &quot;struct&quot;, enumw = &quot;enum&quot;, interfacew = &quot;interface&quot;"><wbr />Wings<wbr />Type<span class="attachedType"></span></a></li>
+  default = &quot;unknownObj&quot;, structw = &quot;struct&quot;, enumw = &quot;enum&quot;,
+  interfacew = &quot;interface&quot;"><wbr />Wings<wbr />Type<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#Visibility"
     title="Visibility = enum
   public = &quot;public&quot;, protected = &quot;protected&quot;, private = &quot;private&quot;"><wbr />Visibility<span class="attachedType"></span></a></li>
@@ -116,7 +111,7 @@ function main() {
   visibility*: Visibility
   name*: string
   arguments*: Table[string, string] ## key: name, value: type
-  returnType*: string          ## wingsType to be parse"><wbr />Abstract<wbr />Function<span class="attachedType"></span></a></li>
+  returnType*: string        ## wingsType to be parse"><wbr />Abstract<wbr />Function<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#IWings"
     title="IWings = ref object of RootObj
   comment*: string
@@ -147,13 +142,22 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">parseFile
+      <li><a class="reference" href="#parseFile%2Cstring%2Cbool"
+    title="parseFile(filename: string; skipImport: bool): Table[string, IWings]">parseFile,string,bool<span class="attachedType">IWings</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">initImportedWingsType
       <li><a class="reference" href="#initImportedWingsType%2Cstring%2Cstring%2CWingsType"
     title="initImportedWingsType(name: string = &quot;&quot;; init: string = &quot;&quot;;
-                      wingsType: WingsType = WingsType.default): ImportedWingsType"><wbr />init<wbr />Imported<wbr />Wings<wbr />Type<span class="attachedType">ImportedWingsType</span></a></li>
-  <li><a class="reference" href="#parseFile%2Cstring%2Cbool"
-    title="parseFile(filename: string; skipImport: bool): Table[string, IWings]"><wbr />parse<wbr />File<span class="attachedType">IWings</span></a></li>
-  <li><a class="reference" href="#addImport%2CIWings%2Cstring%2Cstring"
-    title="addImport(iwings: var IWings; newImport: string; importLang: string): void"><wbr />add<wbr />Import<span class="attachedType">IWings</span></a></li>
+                      wingsType: WingsType = WingsType.default): ImportedWingsType">initImportedWingsType,string,string,WingsType<span class="attachedType">ImportedWingsType</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">addImport
+      <li><a class="reference" href="#addImport%2CIWings%2Cstring%2Cstring"
+    title="addImport(iwings: var IWings; newImport: string; importLang: string): void">addImport,IWings,string,string<span class="attachedType">IWings</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -170,7 +174,8 @@ function main() {
 <dl class="item">
 <a id="WingsType"></a>
 <dt><pre><a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
-  <span class="Identifier">default</span> <span class="Other">=</span> <span class="StringLit">&quot;unknownObj&quot;</span><span class="Other">,</span> <span class="Identifier">structw</span> <span class="Other">=</span> <span class="StringLit">&quot;struct&quot;</span><span class="Other">,</span> <span class="Identifier">enumw</span> <span class="Other">=</span> <span class="StringLit">&quot;enum&quot;</span><span class="Other">,</span> <span class="Identifier">interfacew</span> <span class="Other">=</span> <span class="StringLit">&quot;interface&quot;</span></pre></dt>
+  <span class="Identifier">default</span> <span class="Other">=</span> <span class="StringLit">&quot;unknownObj&quot;</span><span class="Other">,</span> <span class="Identifier">structw</span> <span class="Other">=</span> <span class="StringLit">&quot;struct&quot;</span><span class="Other">,</span> <span class="Identifier">enumw</span> <span class="Other">=</span> <span class="StringLit">&quot;enum&quot;</span><span class="Other">,</span>
+  <span class="Identifier">interfacew</span> <span class="Other">=</span> <span class="StringLit">&quot;interface&quot;</span></pre></dt>
 <dd>
 
 Supported wings types
@@ -212,7 +217,7 @@ class="link-seesrc" target="_blank">Source</a>
   <span class="Identifier">visibility</span><span class="Operator">*</span><span class="Other">:</span> <a href="winterface.html#Visibility"><span class="Identifier">Visibility</span></a>
   <span class="Identifier">name</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">arguments</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">]</span> <span class="Comment">## key: name, value: type</span>
-  <span class="Identifier">returnType</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>          <span class="Comment">## wingsType to be parse</span>
+  <span class="Identifier">returnType</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>        <span class="Comment">## wingsType to be parse</span>
   </pre></dt>
 <dd>
 
@@ -294,7 +299,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dl class="item">
 <a id="initImportedWingsType,string,string,WingsType"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#initImportedWingsType%2Cstring%2Cstring%2CWingsType"><span class="Identifier">initImportedWingsType</span></a><span class="Other">(</span><span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">init</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
-                          <span class="Identifier">wingsType</span><span class="Other">:</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a> <span class="Other">=</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <a href="winterface.html#ImportedWingsType"><span class="Identifier">ImportedWingsType</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+                           <span class="Identifier">wingsType</span><span class="Other">:</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a> <span class="Other">=</span> <a href="winterface.html#WingsType"><span class="Identifier">WingsType</span></a><span class="Other">.</span><span class="Identifier">default</span><span class="Other">)</span><span class="Other">:</span> <a href="winterface.html#ImportedWingsType"><span class="Identifier">ImportedWingsType</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -340,7 +345,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-09 13:18:31 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-11-25 23:57:11 UTC</small>
       </div>
     </div>
   </div>
