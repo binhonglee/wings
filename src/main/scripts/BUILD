@@ -15,5 +15,6 @@ nim_run_script(
   name = 'preCompile',
   main = 'preCompile.nims',
   outs = ['const.nim'],
+  out_path = 'src/main',
   visibility = ['//src/main:files'],
 )

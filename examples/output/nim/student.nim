@@ -4,8 +4,8 @@
 # run `plz genFile -- examples/input/student.wings -c:wings.json` upon completion.
 
 import json
-import ./homework
 import tables
+import ./homework
 import ./emotion
 
 type

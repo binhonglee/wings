@@ -12,7 +12,10 @@ def nimscript(name:str, main:str, deps:list=None, visibility:list=None):
     visibility = visibility,
   )
 
-def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, visibility:list=None):
+def nim_run_script(
+  name:str, main:str, outs:list=[], out_path:str=None,
+  deps:list=None, visibility:list=None
+):
   temp = "temp_script_" + main
 
   cmd = ' && '.join([
@@ -23,6 +26,13 @@ def nim_run_script(name:str, main:str, outs:list=[], deps:list=None, visibility:
     "./" + temp,
     "rm " + temp,
   ])
+
+  if out_path is not None:
+    for i in outs:
+      cmd = ' && '.join([
+        cmd,
+        "cp " + i + " " + _top_level_dir() + out_path,
+      ])
 
   return build_rule(
     name = name,

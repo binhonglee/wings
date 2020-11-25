@@ -7,7 +7,7 @@ node_js: stable
 python: "3.7.1"
 
 env:
-  - BRANCH=1.2.0
+  - BRANCH=1.4.0
   - BRANCH=stable
 
 cache:

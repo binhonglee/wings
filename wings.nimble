@@ -9,7 +9,10 @@ bin          = @["wings"]
 srcDir       = "src/main"
 installExt   = @["nim"]
 
-requires "nim >= 1.0.0"
+# While it should still work for any nim version over 1.0.0, its only actively
+# tested against 1.4.0 due to some changes in 1.4.0 causing some inconsistency
+# in the generated code (breaking CI).
+requires "nim >= 1.4.0"
 requires "stones#devel"
 
 task genFile, "Generate file(s)":

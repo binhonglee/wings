@@ -14,6 +14,7 @@ examples/input/templates/*  text eol=lf linguist-detectable=false
 examples/output/*   linguist-generated=true linguist-vendored=true -diff
 pleasew             linguist-generated=true linguist-vendored=true -diff
 package-lock.json   linguist-generated=true linguist-vendored=true -diff
+src/main/const.nim  linguist-generated=true linguist-vendored=true -diff
 
 *.md    text eol=lf linguist-documentation=true
 LICENSE text eol=lf linguist-documentation=true

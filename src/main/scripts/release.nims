@@ -19,7 +19,7 @@ const bit_32: string = "--cpu:i386 -t:-m32 -l:-m32"
 const bit_64: string = "--cpu:amd64 -t:-m64 -l:-m64"
 
 const windows: string = "-d:mingw"
-const linux: string = "--os:linux -d:emscripten"
+const linux: string = "--os:linux"
 const macosx: string = "--os:macosx -d:emscripten"
 
 const options: seq[string] =

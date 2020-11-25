@@ -5,7 +5,7 @@ rm src/main/wingspkg/lang/*Config.nim
 ./pleasew run --show_all_output //src/main/staticlang:static
 ./pleasew run --show_all_output //src/main:wings -- examples/input/student.wings examples/input/place.wings examples/input/sample_interface.wings -c:wings.json
 
-STATUS=$(git status --porcelain)
+STATUS=$(git status examples/output/ src/main/wingspkg/lang --porcelain)
 if [ "$STATUS" != "" ]; then
     echo "$STATUS"
     echo

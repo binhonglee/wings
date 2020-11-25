@@ -4,7 +4,7 @@ mode = ScriptMode.Verbose
 
 const outputFile: string = "const.nim"
 const header: string = """
-# DO NOT MODIFY
+# DO NOT MANUALLY EDIT THIS FILE
 #
 # This file is generated from `src/main/scripts/preCompile.nims`.
 # If you would like to make any changes, please make your edits there instead.

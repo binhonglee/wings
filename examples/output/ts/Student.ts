@@ -5,8 +5,8 @@
 
 import { parseMap } from 'wings-ts-util';
 import Homework from './Homework';
-import { IWingsStruct } from 'wings-ts-util';
 import Emotion from './person/Emotion';
+import { IWingsStruct } from 'wings-ts-util';
 
 // Any person who is studying in a class
 export default class Student implements IWingsStruct {

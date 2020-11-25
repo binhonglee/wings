@@ -3,8 +3,8 @@
 // If you would like to make any changes, please edit the source file instead.
 // run `plz genFile -- examples/input/homework.wings -c:wings.json` upon completion.
 
-import { IWingsStruct } from 'wings-ts-util';
 import Emotion from './person/Emotion';
+import { IWingsStruct } from 'wings-ts-util';
 
 // Work to be done at home
 export default class Homework implements IWingsStruct {

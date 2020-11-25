@@ -7,6 +7,5 @@ init.sh
 wings
 docs/api/
 docs/license.md
-src/main/const.nim
 tempconfigfile
 temptemplatefile
