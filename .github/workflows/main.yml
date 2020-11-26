@@ -1,0 +1,118 @@
+name: CI
+on: [push]
+env:
+  CHOOSENIM_NO_ANALYTICS: 1
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        nim-version: [1.4.0, stable]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Cache choosenim
+      id: cache-choosenim
+      uses: actions/cache@v1
+      with:
+        path: ~/.choosenim
+        key: ${{ runner.os }}-choosenim
+    - name: Cache please
+      id: cache-please
+      uses: actions/cache@v1
+      with:
+        path: ~/.please
+        key: ${{ runner.os }}-please
+    - name: Cache nimble
+      id: cache-nimble
+      uses: actions/cache@v1
+      with:
+        path: ~/.nimble
+        key: ${{ runner.os }}-nimble
+    - name: Install choosenim / Nim
+      if: steps.cache-choosenim.outputs.cache-hit != 'true' || steps.cache-nimble.outputs.cache-hit != 'true'
+      run: |
+        curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
+        sh init.sh -y
+    - name: Set nimble path
+      run: echo "$HOME/.nimble/bin" >> $GITHUB_PATH
+    - name: Update choosenim and select version
+      run: |
+        choosenim update self
+        choosenim ${{ matrix.nim-version }}
+    - name: Build project
+      run: ./pleasew --show_all_output build
+    - name: Run package test
+      run: ./scripts/test.sh
+  tsutil:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/tsUtil
+    steps:
+    - uses: actions/checkout@v1
+    - name: Cache node_modules
+      id: cache-node-modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-npm
+    - name: Install
+      run: npm install
+    - name: Test / Cover
+      run: npm run cover
+    - name: Upload nyc coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: tsUtil-coverage
+        path: |
+          report
+          src/tsUtil/.nyc_output
+  python:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install python
+      run: |
+        sudo apt-get -y install python3-pip python-dev python3-setuptools
+        python3 -V
+        pip3 -V
+    - name: Install pip requirements
+      run: pip3 install -r requirements.txt
+  coverage:
+    needs: [core, tsutil]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Download nyc coverage report
+      uses: actions/download-artifact@v2
+      with:
+        name: tsUtil-coverage
+    - name: Send to codecov
+      run: bash <(curl -s https://codecov.io/bash)
+  documentation:
+    needs: [core, python]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Cache choosenim
+      id: cache-choosenim
+      uses: actions/cache@v1
+      with:
+        path: ~/.choosenim
+        key: ${{ runner.os }}-choosenim
+    - name: Cache please
+      id: cache-please
+      uses: actions/cache@v1
+      with:
+        path: ~/.please
+        key: ${{ runner.os }}-please
+    - name: Cache nimble
+      id: cache-nimble
+      uses: actions/cache@v1
+      with:
+        path: ~/.nimble
+        key: ${{ runner.os }}-nimble
+    - name: Set nimble path
+      run: echo "$HOME/.nimble/bin" >> $GITHUB_PATH
+    - name: Generate documentations
+      run: ./pleasew --show_all_output genDocs  

@@ -2,8 +2,12 @@ pull_request_rules:
   - name: Dependabot updates
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
-      - status-success=Travis CI - Pull Request
-      - status-success=Travis CI - Branch
+      - status-success=core (1.4.0) 
+      - status-success=core (stable) 
+      - status-success=tsutil
+      - status-success=python
+      - status-success=coverage
+      - status-success=documentation
       - status-success=security/snyk (binhonglee)
       - status-success=codecov/patch
       - status-success=codecov/project
@@ -13,11 +17,13 @@ pull_request_rules:
   - name: Approved PRs
     conditions:
       - approved-reviews-by=binhonglee
-      - status-success=Travis CI - Pull Request
-      - status-success=Travis CI - Branch
+      - status-success=core (1.4.0) 
+      - status-success=core (stable) 
+      - status-success=tsutil
+      - status-success=python
+      - status-success=coverage
+      - status-success=documentation
       - status-success=security/snyk (binhonglee)
-      - status-success=codecov/patch
-      - status-success=codecov/project
     actions:
       merge:
         method: squash
