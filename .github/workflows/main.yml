@@ -67,17 +67,6 @@ jobs:
         path: |
           report
           src/tsUtil/.nyc_output
-  python:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Install python
-      run: |
-        sudo apt-get -y install python3-pip python-dev python3-setuptools
-        python3 -V
-        pip3 -V
-    - name: Install pip requirements
-      run: pip3 install -r requirements.txt
   coverage:
     needs: [core, tsutil]
     runs-on: ubuntu-latest
@@ -90,10 +79,10 @@ jobs:
     - name: Send to codecov
       run: bash <(curl -s https://codecov.io/bash)
   documentation:
-    needs: [core, python]
+    needs: core
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Cache choosenim
       id: cache-choosenim
       uses: actions/cache@v1
@@ -114,5 +103,19 @@ jobs:
         key: ${{ runner.os }}-nimble
     - name: Set nimble path
       run: echo "$HOME/.nimble/bin" >> $GITHUB_PATH
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
     - name: Generate documentations
-      run: ./pleasew --show_all_output genDocs  
+      run: ./pleasew --show_all_output genDocs
+    - name: Deploy
+      if: github.ref == 'refs/heads/devel'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
