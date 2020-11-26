@@ -2,26 +2,34 @@ pull_request_rules:
   - name: Dependabot updates
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
-      - status-success=core (1.4.0) 
-      - status-success=core (stable) 
-      - status-success=tsutil
-      - status-success=coverage
-      - status-success=documentation
-      - status-success=security/snyk (binhonglee)
-      - status-success=codecov/patch
-      - status-success=codecov/project
+      - "status-success=core (1.4.0)" 
+      - "status-success=core (stable)" 
+      - "status-success=tsutil"
+      - "status-success=coverage"
+      - "status-success=documentation"
+      - "status-success=ci/circleci: codecov"
+      - "status-success=ci/circleci: core-v1.4.0"
+      - "status-success=ci/circleci: core-vstable"
+      - "status-success=ci/circleci: tsutil"
+      - "status-success=security/snyk (binhonglee)"
+      - "status-success=codecov/patch"
+      - "status-success=codecov/project"
     actions:
       merge:
         method: squash
   - name: Approved PRs
     conditions:
-      - approved-reviews-by=binhonglee
-      - status-success=core (1.4.0) 
-      - status-success=core (stable) 
-      - status-success=tsutil
-      - status-success=coverage
-      - status-success=documentation
-      - status-success=security/snyk (binhonglee)
+      - "approved-reviews-by=binhonglee"
+      - "status-success=core (1.4.0)" 
+      - "status-success=core (stable)" 
+      - "status-success=tsutil"
+      - "status-success=coverage"
+      - "status-success=documentation"
+      - "status-success=ci/circleci: codecov"
+      - "status-success=ci/circleci: core-v1.4.0"
+      - "status-success=ci/circleci: core-vstable"
+      - "status-success=ci/circleci: tsutil"
+      - "status-success=security/snyk (binhonglee)"
     actions:
       merge:
         method: squash

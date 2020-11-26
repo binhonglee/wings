@@ -1,0 +1,120 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1.0
+
+executors:
+  linux:
+    machine:
+      image: ubuntu-2004:202010-01
+
+jobs:
+  build_core:
+    parameters:
+      os:
+        type: executor
+      version:
+        type: string
+    executor: << parameters.os >>
+    environment:
+      CHOOSENIM_NO_ANALYTICS: 1
+    working_directory: ~/wings
+    steps:
+      - checkout
+      - restore_cache:
+          key: nim-<< parameters.version >>
+      - restore_cache:
+          key: please-{{ checksum ".pleasew" }}
+      - run:
+          name: Add nimble to path
+          command: echo 'export PATH=~/.nimble/bin:$PATH' >> $BASH_ENV
+      - run:
+          name: Install dependencies
+          command: |
+            if ! type -P choosenim &> /dev/null; then
+              echo "Fresh install"
+              export CHOOSENIM_CHOOSE_VERSION=<< parameters.version >>
+              curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
+              sh init.sh -y
+            else
+              echo "Already installed"
+              rm -rf $HOME/.choosenim/current
+              choosenim update self
+              choosenim << parameters.version >>
+            fi
+      - run:
+          name: Build files
+          command: ./pleasew --show_all_output build
+      - run:
+          name: Run core test
+          command: ./scripts/test.sh
+      - save_cache:
+          key: nim-<< parameters.version >>
+          paths:
+            - .nimble
+      - save_cache:
+          key: please-{{ checksum ".pleasew" }}
+          paths:
+            - .please
+  build_tsutil:
+    parameters:
+      os:
+        type: executor
+    executor: node/default
+    working_directory: ~/wings/src/tsUtil
+    steps:
+      - checkout:
+          path: ~/wings
+      - restore_cache:
+          key: node_modules-{{ checksum "package-lock.json" }}
+      - node/install-packages:
+          cache-path: ~/wings/src/tsUtil/node_modules
+          override-ci-command: npm install
+      - run:
+          name: Test / Cover
+          command: npm run cover
+      - save_cache:
+          key: node_modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - save_cache:
+          key: nyc_report-{{ checksum "." }}
+          paths:
+            - ../../report
+            - .nyc_output
+  send_codecov:
+    parameters:
+      os:
+        type: executor
+    executor: << parameters.os >>
+    working_directory: ~/wings
+    steps:
+      - checkout
+      - restore_cache:
+          key: nyc_report-{{ checksum "." }}
+      - run:
+          name: Send to codecov
+          command: bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  workflow:
+    jobs:
+      - build_core:
+          name: core-v<< matrix.version >>
+          matrix:
+            parameters:
+              os: [linux]
+              version: ["1.4.0", "stable"]
+      - build_tsutil:
+          name: tsutil
+          matrix:
+            parameters:
+              os: [linux]
+      - send_codecov:
+          name: codecov
+          requires:
+            - build_core
+            - build_tsutil
+          matrix:
+            parameters:
+              os: [linux]
