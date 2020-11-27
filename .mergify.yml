@@ -2,8 +2,8 @@ pull_request_rules:
   - name: Dependabot updates
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
-      - "status-success=core (1.4.0)" 
-      - "status-success=core (stable)" 
+      - "status-success=core (1.4.0)"
+      - "status-success=core (stable)"
       - "status-success=tsutil"
       - "status-success=coverage"
       - "status-success=documentation"
@@ -20,8 +20,8 @@ pull_request_rules:
   - name: Approved PRs
     conditions:
       - "approved-reviews-by=binhonglee"
-      - "status-success=core (1.4.0)" 
-      - "status-success=core (stable)" 
+      - "status-success=core (1.4.0)"
+      - "status-success=core (stable)"
       - "status-success=tsutil"
       - "status-success=coverage"
       - "status-success=documentation"

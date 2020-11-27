@@ -2,10 +2,18 @@
 
 A customizable cross language struct and enum file generator.
 
-[![Build Status](https://travis-ci.org/binhonglee/wings.svg?branch=devel)](https://travis-ci.org/binhonglee/wings)
+[![GitHub Action Status](https://github.com/binhonglee/wings/workflows/CI/badge.svg)](https://github.com/binhonglee/wings/actions?query=workflow%3ACI+branch%3Adevel)
+[![CircleCI](https://circleci.com/gh/binhonglee/wings/tree/devel.svg?style=shield)](https://app.circleci.com/pipelines/github/binhonglee/wings?branch=devel)
 [![codecov](https://codecov.io/gh/binhonglee/wings/branch/devel/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
 [![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
+[![mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/binhonglee/wings)](https://github.com/binhonglee/wings/blob/devel/.mergify.yml)
+
 [![Gitter](https://img.shields.io/gitter/room/binhonglee/wings.svg)](https://gitter.im/wings-sh/community)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fwings.sh)](https://wings.sh)
+
+![GitHub all releases](https://img.shields.io/github/downloads/binhonglee/wings/total?label=GitHub%20release%20downloads)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/binhonglee.vscode-wings?label=vscode-downloads)
+![npm](https://img.shields.io/npm/dt/wings-ts-util?label=npm%20downloads)
 
 ## Requirements
 
