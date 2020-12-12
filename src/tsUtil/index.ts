@@ -78,3 +78,34 @@ export function parseMap<V>(obj?: any): Map<string, V> {
 
   return toReturn;
 }
+
+function parseWingsArray<T>(
+  TConstruct: new (_: any) => T, obj?: any[]
+): T[] {
+  let toReturn = [];
+  for (const item of obj) {
+    toReturn.push(new TConstruct(item));
+  }
+  return toReturn;
+}
+
+function parseRegularArray<T>(obj?: any[]): T[] {
+  let toReturn = [];
+  for (const item of obj) {
+    toReturn.push(item);
+  }
+  return toReturn;
+}
+
+export function parseArray<T>(
+  TConstruct: any, obj?: any[],
+): T[] {
+  if (
+    TConstruct &&
+    {}.toString.call(TConstruct) === '[object Function]'
+  ) {
+    return parseWingsArray<T>(TConstruct, obj)
+  } else {
+    return parseRegularArray(obj);
+  }
+}

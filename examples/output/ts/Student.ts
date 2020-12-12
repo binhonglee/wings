@@ -5,6 +5,7 @@
 
 import { parseMap } from 'wings-ts-util';
 import Homework from './Homework';
+import { parseArray } from 'wings-ts-util';
 import Emotion from './person/Emotion';
 import { IWingsStruct } from 'wings-ts-util';
 
@@ -30,7 +31,7 @@ export default class Student implements IWingsStruct {
       this.isActive = obj.is_active !== undefined && obj.is_active !== null ? obj.is_active : false;
       this.year = obj.year !== undefined && obj.year !== null ? new Date(obj.year) : new Date();
       this.graduation = obj.graduation !== undefined && obj.graduation !== null ? new Date(obj.graduation) : new Date();
-      this.homeworks = obj.homeworks !== undefined && obj.homeworks !== null ? obj.homeworks : [];
+      this.homeworks = obj.homeworks !== undefined && obj.homeworks !== null ? parseArray<Homework>(Homework, obj.homeworks) : [];
       this.something = obj.something !== undefined && obj.something !== null ? parseMap<string>(obj.something) : new Map<string, string>();
     }
   }

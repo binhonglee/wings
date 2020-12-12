@@ -3,6 +3,7 @@
 // If you would like to make any changes, please edit the source file instead.
 // run `plz genFile -- examples/input/homework.wings -c:wings.json` upon completion.
 
+import { parseArray } from 'wings-ts-util';
 import Emotion from './person/Emotion';
 import { IWingsStruct } from 'wings-ts-util';
 
@@ -21,7 +22,7 @@ export default class Homework implements IWingsStruct {
       this.name = obj.name !== undefined && obj.name !== null ? obj.name : '';
       this.dueDate = obj.due_date !== undefined && obj.due_date !== null ? new Date(obj.due_date) : new Date();
       this.givenDate = obj.given_date !== undefined && obj.given_date !== null ? new Date(obj.given_date) : new Date();
-      this.feeling = obj.feeling !== undefined && obj.feeling !== null ? obj.feeling : [];
+      this.feeling = obj.feeling !== undefined && obj.feeling !== null ? parseArray<Emotion>(Emotion, obj.feeling) : [];
     }
   }
 

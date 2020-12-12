@@ -108,7 +108,7 @@ let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
     initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Map<{TYPE1}, {TYPE2}>", "{ parseMap }:wings-ts-util", "new Map<{TYPE1}, {TYPE2}>()", "parseMap<{TYPE2}>(obj.{#VARNAME_JSON})")
   ),
   "[]": interpretType(
-    initTypeInterpreter("[]{TYPE}", "{TYPE1}[]", "", "[]", "obj.{#VARNAME_JSON}")
+    initTypeInterpreter("[]{TYPE}", "{TYPE1}[]", "{ parseArray }:wings-ts-util", "[]", "parseArray<{TYPE1}>({TYPE1}, obj.{#VARNAME_JSON})")
   ),
 }.toTable()
 
