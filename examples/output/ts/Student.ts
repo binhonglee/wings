@@ -5,21 +5,23 @@
 
 import { parseMap } from 'wings-ts-util';
 import Homework from './Homework';
+import { parseArray } from 'wings-ts-util';
 import Emotion from './person/Emotion';
 import { IWingsStruct } from 'wings-ts-util';
 
 // Any person who is studying in a class
 export default class Student implements IWingsStruct {
   [key: string]: any;
-  public ID: number = -1;
-  public name: string = '';
-  public curClass: string = '';
+  public ID: Number = -1;
+  public name: String = '';
+  public curClass: String = '';
   public feeling: Emotion = Emotion.Meh;
-  public isActive: boolean = false;
+  public isActive: Boolean = false;
   public year: Date = new Date();
   public graduation: Date = new Date();
   public homeworks: Homework[] = [];
-  public something: Map<string, string> = new Map<string, string>();
+  public ids: Number[] = [];
+  public something: Map<String, String> = new Map<String, String>();
 
   public constructor(obj?: any) {
     if (obj) {
@@ -30,8 +32,9 @@ export default class Student implements IWingsStruct {
       this.isActive = obj.is_active !== undefined && obj.is_active !== null ? obj.is_active : false;
       this.year = obj.year !== undefined && obj.year !== null ? new Date(obj.year) : new Date();
       this.graduation = obj.graduation !== undefined && obj.graduation !== null ? new Date(obj.graduation) : new Date();
-      this.homeworks = obj.homeworks !== undefined && obj.homeworks !== null ? obj.homeworks : [];
-      this.something = obj.something !== undefined && obj.something !== null ? parseMap<string>(obj.something) : new Map<string, string>();
+      this.homeworks = obj.homeworks !== undefined && obj.homeworks !== null ? parseArray<Homework>(Homework, obj.homeworks) : [];
+      this.ids = obj.ids !== undefined && obj.ids !== null ? parseArray<Number>(Number, obj.ids) : [];
+      this.something = obj.something !== undefined && obj.something !== null ? parseMap<String>(obj.something) : new Map<String, String>();
     }
   }
 
@@ -60,6 +63,9 @@ export default class Student implements IWingsStruct {
       }
       case 'homeworks': {
         return 'homeworks';
+      }
+      case 'ids': {
+        return 'ids';
       }
       case 'something': {
         return 'something';

@@ -19,6 +19,7 @@ class Student(People):
   year: datetime = datetime.now()
   graduation: datetime = datetime.now()
   homeworks: list = []
+  ids: list = []
   something: dict = {}
 
   def __init__(self, data):

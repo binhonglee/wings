@@ -1,6 +1,6 @@
 # Package
 
-version      = "0.0.5"
+version      = "0.0.6"
 author       = "BinHong Lee"
 description  = "A simple cross language struct and enum file generator."
 license      = "MIT"

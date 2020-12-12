@@ -23,6 +23,7 @@ struct Student {
   year        date
   graduation  date
   homeworks   []Homework
+  ids         []int
   something   Map<str,str>
 }
 

@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export interface IWingsStruct {
   toJsonKey(key: string): string;
 }
@@ -9,8 +11,12 @@ export class WingsStructUtil {
 
   public static stringify(obj: any): string {
     let toReturn = '{';
-
-    if (typeof obj === 'object') {
+    
+    if (typeof obj === 'object' &&
+      !(obj instanceof Number) &&
+      !(obj instanceof String) &&
+      !(obj instanceof Boolean)
+    ) {
       Object.keys(obj).forEach(key => {
         toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key]) + ',';
       });
@@ -21,7 +27,7 @@ export class WingsStructUtil {
     return toReturn.slice(0, -1) + '}';
   }
 
-  private static wrap(toWrap: string) {
+  private static wrap(toWrap: string | String) {
     return '\"' + toWrap + '\"';
   }
 
@@ -61,7 +67,9 @@ export class WingsStructUtil {
           }
           toReturn += '}';
           return toReturn;
-      } else {
+        } else if (val instanceof String) {
+          return this.wrap(val);
+        } else {
           return String(val);
         }
       }
@@ -77,4 +85,35 @@ export function parseMap<V>(obj?: any): Map<string, V> {
   });
 
   return toReturn;
+}
+
+function parseWingsArray<T>(
+  TConstruct: new (_: any) => T, obj?: any[]
+): T[] {
+  let toReturn = [];
+  for (const item of obj) {
+    toReturn.push(new TConstruct(item));
+  }
+  return toReturn;
+}
+
+function parseRegularArray<T>(obj?: any[]): T[] {
+  let toReturn = [];
+  for (const item of obj) {
+    toReturn.push(item);
+  }
+  return toReturn;
+}
+
+export function parseArray<T>(
+  TConstruct: any, obj?: any[],
+): T[] {
+  if (
+    TConstruct &&
+    {}.toString.call(TConstruct) === '[object Function]'
+  ) {
+    return parseWingsArray<T>(TConstruct, obj)
+  } else {
+    return parseRegularArray(obj);
+  }
 }

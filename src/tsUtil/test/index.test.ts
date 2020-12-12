@@ -31,6 +31,23 @@ describe('stringify Student', () => {
     is_active: true,
     feeling: Emotion.Meh,
     year: new Date(),
+    homeworks: [
+      new Homework({
+        id: 2353456,
+        name: 'Test Homework1 Name',
+        due_date: new Date(),
+        given_date: new Date(),
+        feeling: [Emotion.Accomplished, Emotion.Frustrated],
+      }),
+      new Homework({
+        id: 7856,
+        name: 'Test Homework2 Name',
+        due_date: new Date(),
+        given_date: new Date(),
+        feeling: [Emotion.Accomplished, Emotion.Frustrated],
+      }),
+    ],
+    ids: [1, 2, 3, 5],
     something: {
       'a': 'b',
       'b': 'c',
@@ -79,10 +96,9 @@ function test(original?: any, reversed?: any) {
     equal(original.toISOString(), reversed.toISOString());
   } else if (original instanceof Array) {
     equal(reversed instanceof Array, true);
-    equal(original.filter(
-      (item: any) =>
-      reversed.indexOf(item) < 0).length,
-      0,
+    equal(
+      original.length,
+      reversed.length,
     );
   } else if (original instanceof Map) {
     equal(

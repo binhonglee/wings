@@ -15,6 +15,7 @@ class Student {
   var year: Date = Date()
   var graduation: Date = Date()
   var homeworks: ArrayList<Homework> = arrayListOf<Homework>()
+  var ids: ArrayList<Int> = arrayListOf<Int>()
   var something: HashMap<String, String> = hashMapOf<String, String>()
 
   fun toJsonKey(key: string): string {
@@ -27,6 +28,7 @@ class Student {
       "year" -> return "year"
       "graduation" -> return "graduation"
       "homeworks" -> return "homeworks"
+      "ids" -> return "ids"
       "something" -> return "something"
       else -> return key
     }

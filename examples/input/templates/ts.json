@@ -29,23 +29,23 @@
       "targetType": "void"
     }, {
       "wingsType": "int",
-      "targetType": "number",
+      "targetType": "Number",
       "targetInit": "0"
     }, {
       "wingsType": "flt",
-      "targetType": "number",
+      "targetType": "Number",
       "targetInit": "0"
     }, {
       "wingsType": "dbl",
-      "targetType": "number",
+      "targetType": "Number",
       "targetInit": "0"
     }, {
       "wingsType": "str",
-      "targetType": "string",
+      "targetType": "String",
       "targetInit": "''"
     }, {
       "wingsType": "bool",
-      "targetType": "boolean",
+      "targetType": "Boolean",
       "targetInit": "false"
     }, {
       "wingsType": "date",
@@ -55,7 +55,9 @@
     }, {
       "wingsType": "[]{TYPE}",
       "targetType": "{TYPE1}[]",
-      "targetInit": "[]"
+      "targetInit": "[]",
+      "targetParse": "parseArray<{TYPE1}>({TYPE1}, {P_FMT})",
+      "requiredImport": "{ parseArray }:wings-ts-util"
     }, {
       "wingsType": "Map<{TYPE1},{TYPE2}>",
       "targetType": "Map<{TYPE1}, {TYPE2}>",

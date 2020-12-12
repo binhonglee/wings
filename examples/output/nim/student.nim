@@ -19,5 +19,6 @@ type
     year*: DateTime
     graduation*: DateTime
     homeworks*: seq[Homework]
+    ids*: seq[int]
     something*: Table[string, string]
   

@@ -7,6 +7,6 @@ import Emotion from './person/Emotion';
 
 // Just some interface
 export default interface SampleInterface {
-  functionTwo(): string;
-  functionOne(firstParam: string, secondParam: string): void;
+  functionTwo(): String;
+  functionOne(firstParam: String, secondParam: String): void;
 }

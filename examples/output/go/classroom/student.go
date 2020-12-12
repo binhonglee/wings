@@ -20,6 +20,7 @@ type Student struct {
 	Year          time.Time            `json:"year"`
 	Graduation    time.Time            `json:"graduation"`
 	Homeworks     []Homework           `json:"homeworks"`
+	Ids           []int                `json:"ids"`
 	Something     map[string]string    `json:"something"`
 }
 
