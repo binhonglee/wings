@@ -54,11 +54,11 @@ proc multiWords(keyword: string, inputs: HashSet[string], givenTemplate: string)
   for input in inputs:
     let temp: seq[string] = input.split(':')
     if not brokenDownInput.hasKey(temp.len()):
-      brokenDownInput.add(temp.len(), newSeq[Table[string, string]](0))
+      brokenDownInput[temp.len()] = newSeq[Table[string, string]](0)
     var words: Table[string, string] = initTable[string, string]()
     var i: int = 1
     for str in temp:
-      words.add(wrap(keyword, $i), str)
+      words[wrap(keyword, $i)] = str
       inc(i)
     brokenDownInput[temp.len()].add(words)
 

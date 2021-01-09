@@ -176,7 +176,7 @@ proc parse*(filename: string, altName: string = ""): TConfig =
         LOG(FATAL, "'" & file & "' referenced in '" & filename & "' does not exists.")
 
       if file != "":
-        result.templates.add(key, readFile(file))
+        result.templates[key] = readFile(file)
 
       if remote:
         removeFile(file)
@@ -238,8 +238,8 @@ proc parse*(filename: string, altName: string = ""): TConfig =
 
       if wingsType.contains(TYPE_PREFIX):
         let temp: CustomTypeInterpreter = interpretType(typeInterpreter)
-        result.customTypes.add(temp.prefix, temp)
+        result.customTypes[temp.prefix] = temp
       else:
-        result.types.add(typeInterpreter.wingsType, typeInterpreter)
+        result.types[typeInterpreter.wingsType] = typeInterpreter
   else:
     LOG(FATAL, TY & errorMsg)

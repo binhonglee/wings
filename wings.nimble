@@ -5,7 +5,7 @@ author       = "BinHong Lee"
 description  = "A simple cross language struct and enum file generator."
 license      = "MIT"
 skipDirs     = @["examples"]
-bin          = @["wings"]
+bin          = @["wings", "staticlang"]
 srcDir       = "src/main"
 installExt   = @["nim"]
 

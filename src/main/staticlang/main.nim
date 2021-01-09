@@ -98,14 +98,14 @@ proc genFile(inputFile: string): void =
   writeFile(outputFile, content)
   LOG(SUCCESS, "Generated " & outputFile & ".")
 
-proc init(): void =
+proc init*(inputPath: string, outputPath: string): void =
   setLevel(INFO)
   if lastPathPart(getCurrentDir()) != "wings":
     LOG(FATAL, "This should only be run from the top level directory `wings/`)")
 
-  createDir(OUTPUT_PATH_DIR)
-  for file in walkFiles(joinPath(INPUT_PATH_DIR, "*.json")):
+  createDir(outputPath)
+  for file in walkFiles(joinPath(inputPath, "*.json")):
     LOG(INFO, "Generating from " & file & ".")
     genFile(file)
 
-init()
+init(INPUT_PATH_DIR, OUTPUT_PATH_DIR)

@@ -154,7 +154,7 @@ proc parse*(filename: string): Config =
       if result.langConfigs.hasKey(config.filetype):
         result.langConfigs[config.filetype] = config
       else:
-        result.langConfigs.add(config.filetype, config)
+        result.langConfigs[config.filetype] = config
 
   if jsonConfig.hasKey(LANG_CONFIGS):
     let langConfigs: seq[JsonNode] = jsonConfig[LANG_CONFIGS].getElems()
@@ -163,7 +163,7 @@ proc parse*(filename: string): Config =
       if result.langConfigs.hasKey(config.filetype):
         result.langConfigs[config.filetype] = config
       else:
-        result.langConfigs.add(config.filetype, config)
+        result.langConfigs[config.filetype] = config
 
   if jsonConfig.hasKey(LANG_FILTER):
     let langFilter: seq[JsonNode] = jsonConfig[LANG_FILTER].getElems()

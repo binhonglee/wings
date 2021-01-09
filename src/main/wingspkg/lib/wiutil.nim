@@ -33,30 +33,27 @@ proc fulfillDependency(
         if word == "." or word == "..":
           s &= ":"
           word = ""
-        replaceMap.add(s, word)
+        replaceMap[s] = word
         inc(i)
       if langConfig[importType].importPath.format.len() > 0:
         words.setLen(words.len() - langConfig[importType].importPath.level)
-        replaceMap.add(
-          wrap(TK_IMPORT),
-          words.join($langConfig[importType].importPath.separator),
+        replaceMap[wrap(TK_IMPORT)] = words.join(
+          $langConfig[importType].importPath.separator
         )
         ipString = langConfig[importType].importPath.format.replace(replaceMap)
 
       if not iwings.typesImported.hasKey(importType):
-        iwings.typesImported.add(importType, initTable[string, ImportedWingsType]())
+        iwings.typesImported[importType] = initTable[string, ImportedWingsType]()
 
       for k, v in allCases(name, Snake).pairs:
-        replaceMap.add(wrap(TK_TYPE, $k), v)
+        replaceMap[wrap(TK_TYPE, $k)] = v
 
-      iwings.typesImported[importType].add(
-        name,
+      iwings.typesImported[importType][name] =
         initImportedWingsType(
           langConfig[importType].types[TYPE_IMPORTED].targetType.replace(replaceMap),
           langConfig[importType].types[TYPE_IMPORTED].targetInit.replace(replaceMap),
           wingsType,
-        ),
-      )
+        )
       iwings.addImport(ipString, importType)
 
     var location: int = iwings.dependencies.find(dependency)
@@ -97,12 +94,13 @@ proc dependencyGraph*(
       var files: Table[string, string] = initTable[string, string]()
       for lang in config.langConfigs.keys:
         if wings.filepath.hasKey(lang):
-          files.add(
+          files[
             outputFilename(
               wings.filename,
               wings.filepath[lang],
               config.langConfigs[lang],
-            ),
+            )
+          ] =
             genHeader(
               config.langConfigs[lang].comment,
               wings.filename,
@@ -115,8 +113,7 @@ proc dependencyGraph*(
               config.langConfigs[lang],
               wings.wingsType
             )
-          )
-      result.add(name, files)
+      result[name] = files
 
     if reverseDependencyTable.hasKey(name):
       for dependant in reverseDependencyTable[name]:
@@ -133,7 +130,7 @@ proc dependencyGraph*(
             )
 
             if ip.len() > 0:
-              importFilenames.add(lang,ip)
+              importFilenames[lang] = ip
 
         let fulfillDep: bool = obj.fulfillDependency(
           name,
@@ -161,4 +158,4 @@ proc dependencyGraph*(
     let next = dependencyGraph(allWings, config)
 
     for k in next.keys:
-      result.add(k, next[k])
+      result[k] = next[k]

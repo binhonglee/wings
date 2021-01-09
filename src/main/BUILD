@@ -46,13 +46,6 @@ filegroup(
     ':wings',
     ':wings_api_doc',
   ],
-  deps = [
-    '//src/main/wingspkg',
-    '//src/main/wingspkg/lang',
-    '//src/main/wingspkg/lib',
-    '//src/main/wingspkg/util',
-    '//src/main/scripts:preCompile',
-  ],
   exported_deps = [
     '//src/main/wingspkg',
     '//src/main/wingspkg/lang',

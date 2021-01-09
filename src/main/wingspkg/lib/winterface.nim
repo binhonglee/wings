@@ -260,11 +260,10 @@ proc parseAbstractFunc(
       if paramTable.hasKey(ss[0]):
         error(0, "Parameter name `" & ss[0] & "` already declared previously.")
       
-      paramTable.add(strip(ss[0]), strip(ss[1]))
+      paramTable[strip(ss[0])] = strip(ss[1])
 
-  winterface.abstractFunctions.add(
-    name,
-    initAbstractFunction(visibility, name, paramTable, strs[1])
+  winterface.abstractFunctions[name] = initAbstractFunction(
+    visibility, name, paramTable, strs[1]
   )
   result = WINGS_FUNC
 
@@ -278,7 +277,7 @@ proc parseFunc(
     result = ""
   else:
     if not functions.hasKey(lang):
-      functions.add(lang, "")
+      functions[lang] = ""
     functions[lang] &= "\n" & line
     result = lang
 
@@ -371,12 +370,12 @@ proc parseFileIWings(
 
       case ss[1]
       of TYPE_FILEPATH:
-        iwings.filepath.add(ss[0], words[0])
+        iwings.filepath[ss[0]] = words[0]
       of TYPE_IMPLEMENT:
-        iwings.implement.add(ss[0], words[0])
+        iwings.implement[ss[0]] = words[0]
       of TYPE_IMPORT:
         if not iwings.imports.hasKey(ss[0]):
-          iwings.imports.add(ss[0], initHashSet[string]())
+          iwings.imports[ss[0]] = initHashSet[string]()
         iwings.imports[ss[0]].incl(join(words, " "))
       of TYPE_FUNCTION_OPEN:
         if not (iwings of WStruct or iwings of WInterface):
@@ -401,13 +400,13 @@ proc parseFile*(
   var iwings = initIWings()
 
   if iwings.parseFileIWings(filename):
-    result.add(filename, iwings)
+    result[filename] = iwings
     let deps = iwings.dependencies
     for imports in deps:
       iwings = initIWings()
       iwings.imported = skipImport
       if iwings.parseFileIWings(imports):
-        result.add(imports, iwings)
+        result[imports] = iwings
       else:
         LOG(FATAL, "Failed to parse '" & imports & "' imported in " & filename & ".")
   else:
@@ -416,5 +415,5 @@ proc parseFile*(
 proc addImport*(iwings: var IWings, newImport: string, importLang: string): void =
   ## Add new file / library to be imported by the IWings.
   if not iwings.imports.hasKey(importLang):
-    iwings.imports.add(importLang, initHashSet[string]())
+    iwings.imports[importLang] = initHashSet[string]()
   iwings.imports[importLang].incl(newImport)

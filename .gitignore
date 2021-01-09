@@ -5,6 +5,7 @@ release/
 report/
 init.sh
 wings
+staticlang
 docs/api/
 docs/license.md
 tempconfigfile

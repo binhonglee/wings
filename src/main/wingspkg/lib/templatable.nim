@@ -82,22 +82,16 @@ proc processCustomType(
   var ts: Table[string, string] = initTable[string, string]()
   var i: int = 1
   for t in types:
-    ts.add(
-      TYPE_PREFIX & $i & TYPE_POSTFIX,
-      parseType(wi, t, tc)[wrap(TK_TYPE)]
-    )
+    ts[TYPE_PREFIX & $i & TYPE_POSTFIX] = parseType(wi, t, tc)[wrap(TK_TYPE)]
     inc(i)
 
   str = ti.targetType.replace(ts)
   let t: Table[Case, string] = allCases(str, Snake)
   for key in t.keys:
-    result.add(
-      wrap(TK_TYPE, $key),
-      t[key],
-    )
-  result.add(wrap(TK_TYPE), str)
-  result.add(wrap(TK_TYPE, TK_INIT), ti.targetInit.replace(ts))
-  result.add(wrap(TK_TYPE, TK_PARSE), ti.targetParse.replace(ts))
+    result[wrap(TK_TYPE, $key)] = t[key]
+  result[wrap(TK_TYPE)] = str
+  result[wrap(TK_TYPE, TK_INIT)] = ti.targetInit.replace(ts)
+  result[wrap(TK_TYPE, TK_PARSE)] = ti.targetParse.replace(ts)
 
 proc parseType(
   iwings: var IWings,
@@ -108,22 +102,19 @@ proc parseType(
   let types: Table[Case, string] = allCases(s, Snake)
   var temp: Table[string, string] = initTable[string, string]()
   for key in types.keys:
-    temp.add(
-      wrap(TK_TYPE, $key),
-      types[key]
-    )
+    temp[wrap(TK_TYPE, $key)] = types[key]
 
   var hit: bool = false
   let typesImported: Table[string, ImportedWingsType] =
     iwings.typesImported.getOrDefault(langConfig.filetype)
 
   if typesImported.hasKey(s):
-    result.add(wrap(TK_TYPE), typesImported[s].name)
-    result.add(wrap(TK_TYPE, TK_INIT), typesImported[s].init)
+    result[wrap(TK_TYPE)] = typesImported[s].name
+    result[wrap(TK_TYPE, TK_INIT)] = typesImported[s].init
     if typesImported[s].wingsType == WingsType.structw:
-      result.add(wrap(TK_TYPE, TK_PARSE), langConfig.types[TYPE_IMPORTED].targetParse.replace(temp))
+      result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_IMPORTED].targetParse.replace(temp)
     elif typesImported[s].wingsType == WingsType.enumw:
-      result.add(wrap(TK_TYPE, TK_PARSE), langConfig.parseFormat)
+      result[wrap(TK_TYPE, TK_PARSE)] = langConfig.parseFormat
 
   for key in langConfig.customTypes.keys:
     if key.len() > 0 and s.startsWith(key):
@@ -145,7 +136,7 @@ proc parseType(
       hit = true
 
   if not hit and langConfig.types.hasKey(s):
-    result.add(wrap(TK_TYPE), langConfig.types[s].targetType)
+    result[wrap(TK_TYPE)] = langConfig.types[s].targetType
     if langConfig.types[s].requiredImport.len() > 0:
       iwings.addImport(
         langConfig.types[s].requiredImport,
@@ -153,27 +144,18 @@ proc parseType(
       )
 
     if langConfig.types[s].targetInit.len() > 0:
-      result.add(wrap(TK_TYPE, TK_INIT), langConfig.types[s].targetInit)
-      result.add(wrap(TK_TYPE, TK_PARSE), langConfig.types[s].targetParse)
+      result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[s].targetInit
+      result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[s].targetParse
     else:
       if langConfig.types.hasKey(TYPE_UNIMPORTED) and langConfig.types[TYPE_UNIMPORTED].targetInit.len() > 0:
-        result.add(
-          wrap(TK_TYPE, TK_INIT),
-          langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp),
-        )
-        result.add(
-          wrap(TK_TYPE, TK_PARSE),
-          langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
-        )
+        result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
+        result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
   elif not hit:
     result.add(
       wrap(TK_TYPE),
       langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp),
     )
-    result.add(
-      wrap(TK_TYPE, TK_INIT),
-      langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp),
-    )
+    result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
     result.add(
       wrap(TK_TYPE, TK_PARSE),
       langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
@@ -194,12 +176,12 @@ proc parseFields(iwings: var IWings, fs: seq[string], tconfig: TConfig): seq[Tab
     if fields.len() < 2:
       LOG(ERROR, "Row '" & row & "' has less field than expected. Skipping...")
 
-    variables.add(wrap(TK_VARNAME), fields[0])
+    variables[wrap(TK_VARNAME)] = fields[0]
     var varnames: Table[Case, string] = allCases(fields[0], Snake)
-    variables.add(wrap(TK_VARNAME, TK_JSON), varnames[Snake])
+    variables[wrap(TK_VARNAME, TK_JSON)] = varnames[Snake]
 
     for key in varnames.keys:
-      variables.add(wrap(TK_VARNAME, $key), varnames[key])
+      variables[wrap(TK_VARNAME, $key)] = varnames[key]
 
     variables.merge(
       parseType(iwings, fields[1], tconfig)
@@ -208,7 +190,7 @@ proc parseFields(iwings: var IWings, fs: seq[string], tconfig: TConfig): seq[Tab
       if variables.hasKey(wrap(TK_TYPE, TK_INIT)):
         variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
       else:
-        variables.add(wrap(TK_TYPE, TK_INIT), fields[2])
+        variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
     result.add(variables)
 
 proc parseAbstractFunc(
@@ -220,10 +202,10 @@ proc parseAbstractFunc(
   for key in abstractFuncs.keys:
     let abstractFunc: AbstractFunction = abstractFuncs[key]
     var function: Table[string, string] = initTable[string, string]()
-    function.add(wrap(TK_FUNCNAME), abstractFunc.name)
+    function[wrap(TK_FUNCNAME)] = abstractFunc.name
     var funcName: Table[Case, string] = allCases(abstractFunc.name, Snake)
     for key in funcName.keys:
-      function.add(wrap(TK_FUNCNAME, $key), funcName[key])
+      function[wrap(TK_FUNCNAME, $key)] = funcName[key]
 
     var params: string = ""
     for (argName, argType) in abstractFunc.arguments.pairs:
@@ -235,7 +217,7 @@ proc parseAbstractFunc(
           wrap(TK_PARAM, TK_TYPE): parseType(iwings, argType, tconfig)[wrap(TK_TYPE)],
         }.toTable()
       )
-    function.add(wrap(TK_PARAMS), params)
+    function[wrap(TK_PARAMS)] = params
 
     function.merge(
       parseType(iwings, abstractFunc.returnType, tconfig)
@@ -256,15 +238,15 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
 
   let lang: string = tconfig.filetype
 
-  result.langBasedReps.add(lang, initTable[string, string]())
-  result.langBasedReps[lang].add(wrap(TK_FUNCTIONS), "")
-  result.langBasedMultireps.add(lang, initTable[string, HashSet[string]]())
-  result.replacements.add(wrap(TK_COMMENT), iwings.comment)
-  result.replacements.add(wrap(TK_NAME), iwings.name)
+  result.langBasedReps[lang] = initTable[string, string]()
+  result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = ""
+  result.langBasedMultireps[lang] = initTable[string, HashSet[string]]()
+  result.replacements[wrap(TK_COMMENT)] = iwings.comment
+  result.replacements[wrap(TK_NAME)] = iwings.name
 
   var names: Table[Case, string] = allCases(iwings.name, Snake)
   for key in names.keys:
-    result.replacements.add(wrap(TK_NAME, $key), names[key])
+    result.replacements[wrap(TK_NAME, $key)] = names[key]
 
   var i: int = 1
   var words: seq[string] = tFilename(
@@ -275,26 +257,21 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
   for w in words:
     var word: string = w
     if word != "." and word != "..":
-      result.langBasedReps[lang].add(wrap($(words.len() - i)), word)
+      result.langBasedReps[lang][wrap($(words.len() - i))] = word
     inc(i)
 
   case iwings.wingsType
   of WingsType.interfacew:
     let winterface: WInterface = WInterface(iwings)
     if winterface.implement.hasKey(tconfig.filetype):
-      result.langBasedReps[tconfig.filetype].add(
-        wrap(TK_IMPLEMENT),
+      result.langBasedReps[tconfig.filetype][wrap(TK_IMPLEMENT)] =
         replace(
           tconfig.implementFormat,
           wrap(TK_IMPLEMENT),
           winterface.implement[tconfig.filetype]
         )
-      )
     else:
-      result.langBasedReps[tconfig.filetype].add(
-        wrap(TK_IMPLEMENT),
-        ""
-      )
+      result.langBasedReps[tconfig.filetype][wrap(TK_IMPLEMENT)] = ""
     result.fields = parseAbstractFunc(iwings, winterface.abstractFunctions, tconfig)
 
     if winterface.functions.hasKey(lang):
@@ -315,7 +292,7 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
         wstruct.implement[tconfig.filetype]
       )
 
-    result.langBasedReps[tconfig.filetype].add(wrap(TK_IMPLEMENT), implement)
+    result.langBasedReps[tconfig.filetype][wrap(TK_IMPLEMENT)] = implement
 
     if wstruct.functions.hasKey(lang):
       result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = processFunctions(
@@ -330,16 +307,16 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
     let wenum: WEnum = WEnum(iwings)
     for field in wenum.values:
       var variables: Table[string, string] = initTable[string, string]()
-      variables.add(wrap(TK_VARNAME), field)
+      variables[wrap(TK_VARNAME)] = field
       var varnames: Table[Case, string] = allCases(field, Snake)
-      variables.add(wrap(TK_VARNAME, TK_JSON), varnames[Snake])
+      variables[wrap(TK_VARNAME, TK_JSON)] = varnames[Snake]
       for key in varnames.keys:
-        variables.add(wrap(TK_VARNAME, $key), varnames[key])
+        variables[wrap(TK_VARNAME, $key)] = varnames[key]
       result.fields.add(variables)
   of WingsType.default:
     LOG(FATAL, "Invalid `WingsType`.")
 
   if iwings.imports.hasKey(lang):
-    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), iwings.imports[lang])
+    result.langBasedMultireps[lang][wrap(TK_IMPORT)] = iwings.imports[lang]
   else:
-    result.langBasedMultireps[lang].add(wrap(TK_IMPORT), initHashSet[string]())
+    result.langBasedMultireps[lang][wrap(TK_IMPORT)] = initHashSet[string]()
