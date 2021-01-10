@@ -44,7 +44,7 @@ jobs:
             fi
       - run:
           name: Build files
-          command: ./pleasew --show_all_output build
+          command: ./pleasew --show_all_output build //src/main/...
       - run:
           name: Run core test
           command: ./scripts/test.sh

@@ -40,7 +40,7 @@ jobs:
         choosenim update self
         choosenim ${{ matrix.nim-version }}
     - name: Build project
-      run: ./pleasew --show_all_output build
+      run: ./pleasew --show_all_output build //src/main/...
     - name: Run package test
       run: ./scripts/test.sh
   tsutil:
@@ -82,7 +82,7 @@ jobs:
     needs: core
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: Cache choosenim
       id: cache-choosenim
       uses: actions/cache@v1
