@@ -644,27 +644,27 @@
 <span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
 <span class="c1">// Source: examples/input/student.wings</span>
 
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">parseMap</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">Homework</span> <span class="nx">from</span> <span class="s1">&#39;./Homework&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="p">{</span> <span class="nx">IWingsStruct</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">Emotion</span> <span class="nx">from</span> <span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">parseMap</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Homework</span> <span class="nx">from</span> <span class="s1">&#39;./Homework&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">IWingsStruct</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Emotion</span> <span class="nx">from</span> <span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span>
 
 <span class="c1">// Any person who is studying in a class</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">Student</span> <span class="kr">implements</span> <span class="nx">IWingsStruct</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Student</span> <span class="k">implements</span> <span class="nx">IWingsStruct</span> <span class="p">{</span>
   <span class="p">[</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">]</span><span class="o">:</span> <span class="nx">any</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="nx">ID</span>: <span class="kt">number</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="nx">name</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="nx">curClass</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="nx">feeling</span>: <span class="kt">Emotion</span> <span class="o">=</span> <span class="nx">Emotion</span><span class="p">.</span><span class="nx">Meh</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="nx">isActive</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-  <span class="kr">public</span> <span class="nx">year</span>: <span class="kt">Date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-  <span class="kr">public</span> <span class="nx">graduation</span>: <span class="kt">Date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-  <span class="kr">public</span> <span class="nx">homeworks</span>: <span class="kt">Homework</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
-  <span class="kr">public</span> <span class="nx">something</span>: <span class="kt">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">public</span> <span class="nx">ID</span>: <span class="kt">number</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">name</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">curClass</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">feeling</span>: <span class="kt">Emotion</span> <span class="o">=</span> <span class="nx">Emotion</span><span class="p">.</span><span class="nx">Meh</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">isActive</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">public</span> <span class="nx">year</span>: <span class="kt">Date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+  <span class="k">public</span> <span class="nx">graduation</span>: <span class="kt">Date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+  <span class="k">public</span> <span class="nx">homeworks</span>: <span class="kt">Homework</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">public</span> <span class="nx">something</span>: <span class="kt">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
 
-  <span class="kr">public</span> <span class="kr">constructor</span><span class="p">(</span><span class="nx">obj?</span>: <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="kr">constructor</span><span class="p">(</span><span class="nx">obj?</span>: <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">ID</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">?</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">ID</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">?</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">id</span> <span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">?</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">curClass</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">?</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">feeling</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">feeling</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">feeling</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">?</span> <span class="nx">obj.feeling</span> : <span class="kt">Emotion.Meh</span><span class="p">;</span>
@@ -676,7 +676,7 @@
     <span class="p">}</span>
   <span class="p">}</span>
 
-  <span class="kr">public</span> <span class="nx">toJsonKey</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="nx">toJsonKey</span><span class="p">(</span><span class="nx">key</span>: <span class="kt">string</span><span class="p">)</span><span class="o">:</span> <span class="kt">string</span> <span class="p">{</span>
     <span class="k">switch</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">case</span> <span class="s1">&#39;ID&#39;</span><span class="o">:</span> <span class="p">{</span>
         <span class="k">return</span> <span class="s1">&#39;id&#39;</span><span class="p">;</span>
@@ -711,7 +711,7 @@
     <span class="p">}</span>
   <span class="p">}</span>
 
-  <span class="kr">public</span> <span class="nx">addHomework</span><span class="p">(</span><span class="nx">hw</span>: <span class="kt">Homework</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="nx">addHomework</span><span class="p">(</span><span class="nx">hw</span>: <span class="kt">Homework</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">Homeworks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">hw</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -858,7 +858,7 @@
 <span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
 <span class="c1">// Source: examples/input/emotion.wings</span>
 
-<span class="kr">enum</span> <span class="nx">Emotion</span> <span class="p">{</span>
+<span class="kd">enum</span> <span class="nx">Emotion</span> <span class="p">{</span>
   <span class="nx">Accomplished</span><span class="p">,</span>
   <span class="nx">Angry</span><span class="p">,</span>
   <span class="nx">Annoyed</span><span class="p">,</span>
@@ -873,7 +873,7 @@
   <span class="nx">Satisfied</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">Emotion</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Emotion</span><span class="p">;</span>
 </code></pre></div>
 </div>
 </div>
