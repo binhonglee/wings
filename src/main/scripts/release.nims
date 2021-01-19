@@ -20,7 +20,7 @@ const bit_64: string = "--cpu:amd64 -t:-m64 -l:-m64"
 
 const windows: string = "-d:mingw"
 const linux: string = "--os:linux"
-const macosx: string = "--os:macosx -d:emscripten"
+const macosx: string = "--os:macosx"
 
 const options: seq[string] =
   @[
