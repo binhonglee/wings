@@ -568,29 +568,29 @@
 <span class="k">package</span> <span class="nn">kt</span>
 
 <span class="c1">// Any person who is studying in a class</span>
-<span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
-  <span class="k">var</span> <span class="py">ID</span><span class="p">:</span> <span class="n">Int</span> <span class="p">=</span> <span class="p">-</span><span class="m">1</span>
-  <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
-  <span class="k">var</span> <span class="py">curClass</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
-  <span class="k">var</span> <span class="py">feeling</span><span class="p">:</span> <span class="n">Emotion</span> <span class="p">=</span> <span class="n">Emotion</span><span class="p">.</span><span class="n">Meh</span>
-  <span class="k">var</span> <span class="py">isActive</span><span class="p">:</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">false</span>
-  <span class="k">var</span> <span class="py">year</span><span class="p">:</span> <span class="n">Date</span> <span class="p">=</span> <span class="n">Date</span><span class="p">()</span>
-  <span class="k">var</span> <span class="py">graduation</span><span class="p">:</span> <span class="n">Date</span> <span class="p">=</span> <span class="n">Date</span><span class="p">()</span>
-  <span class="k">var</span> <span class="py">homeworks</span><span class="p">:</span> <span class="n">ArrayList</span><span class="p">&lt;</span><span class="n">Homework</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">arrayListOf</span><span class="p">&lt;</span><span class="n">Homework</span><span class="p">&gt;()</span>
-  <span class="k">var</span> <span class="py">something</span><span class="p">:</span> <span class="n">HashMap</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">hashMapOf</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;()</span>
+<span class="kd">class</span> <span class="nc">Student</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nv">ID</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">-</span><span class="m">1</span>
+  <span class="kd">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+  <span class="kd">var</span> <span class="nv">curClass</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+  <span class="kd">var</span> <span class="nv">feeling</span><span class="p">:</span> <span class="n">Emotion</span> <span class="o">=</span> <span class="n">Emotion</span><span class="p">.</span><span class="na">Meh</span>
+  <span class="kd">var</span> <span class="nv">isActive</span><span class="p">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="kd">var</span> <span class="nv">year</span><span class="p">:</span> <span class="n">Date</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span>
+  <span class="kd">var</span> <span class="nv">graduation</span><span class="p">:</span> <span class="n">Date</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span>
+  <span class="kd">var</span> <span class="nv">homeworks</span><span class="p">:</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Homework</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">arrayListOf</span><span class="o">&lt;</span><span class="n">Homework</span><span class="o">&gt;</span><span class="p">()</span>
+  <span class="kd">var</span> <span class="nv">something</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">hashMapOf</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
 
-  <span class="k">fun</span> <span class="nf">toJsonKey</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">):</span> <span class="n">string</span> <span class="p">{</span>
+  <span class="kd">fun</span> <span class="nf">toJsonKey</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">):</span> <span class="n">string</span> <span class="p">{</span>
     <span class="k">when</span> <span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
-      <span class="s">&quot;ID&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;id&quot;</span>
-      <span class="s">&quot;name&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;name&quot;</span>
-      <span class="s">&quot;curClass&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;cur_class&quot;</span>
-      <span class="s">&quot;feeling&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;feeling&quot;</span>
-      <span class="s">&quot;isActive&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;is_active&quot;</span>
-      <span class="s">&quot;year&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;year&quot;</span>
-      <span class="s">&quot;graduation&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;graduation&quot;</span>
-      <span class="s">&quot;homeworks&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;homeworks&quot;</span>
-      <span class="s">&quot;something&quot;</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="s">&quot;something&quot;</span>
-      <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">return</span> <span class="n">key</span>
+      <span class="s">&quot;ID&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;id&quot;</span>
+      <span class="s">&quot;name&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;name&quot;</span>
+      <span class="s">&quot;curClass&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;cur_class&quot;</span>
+      <span class="s">&quot;feeling&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;feeling&quot;</span>
+      <span class="s">&quot;isActive&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;is_active&quot;</span>
+      <span class="s">&quot;year&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;year&quot;</span>
+      <span class="s">&quot;graduation&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;graduation&quot;</span>
+      <span class="s">&quot;homeworks&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;homeworks&quot;</span>
+      <span class="s">&quot;something&quot;</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="s">&quot;something&quot;</span>
+      <span class="k">else</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="n">key</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -802,7 +802,7 @@
 
 <span class="k">package</span> <span class="nn">kt</span>
 
-<span class="k">enum</span> <span class="k">class</span> <span class="nc">Emotion</span> <span class="p">{</span>
+<span class="kd">enum</span> <span class="kd">class</span> <span class="nc">Emotion</span> <span class="p">{</span>
   <span class="n">Accomplished</span>
   <span class="n">Angry</span>
   <span class="n">Annoyed</span>
