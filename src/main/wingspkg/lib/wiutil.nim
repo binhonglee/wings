@@ -74,7 +74,7 @@ proc dependencyGraph*(
   var index = 0;
   for wings in allWings.values:
     filenameToObj[wings.filename] = wings
-    if wings.dependencies.len() == 0:
+    if wings.dependencies.len() == 0 or (config.skipImport and wings.imported):
       noDeps.add(wings.filename)
 
     for dependency in wings.dependencies:
@@ -88,9 +88,9 @@ proc dependencyGraph*(
   while noDeps.len() > 0:
     var wings: IWings = filenameToObj[noDeps.pop()]
     var name: string = wings.filename
-    LOG(DEBUG, "Generating files from " & name & "...")
 
     if not (config.skipImport and wings.imported):
+      LOG(DEBUG, "Generating files from " & name & "...")
       var files: Table[string, string] = initTable[string, string]()
       for lang in config.langConfigs.keys:
         if wings.filepath.hasKey(lang):
