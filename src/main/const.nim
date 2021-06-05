@@ -3,5 +3,5 @@
 # This file is generated from `src/main/scripts/preCompile.nims`.
 # If you would like to make any changes, please make your edits there instead.
 
-const VERSION*: string = "v0.0.6-alpha"
-const HASH*: string = "0823283cb6a54e52397574ca948819a97d9ef2eb"
+const VERSION*: string = "v0.0.7-alpha"
+const HASH*: string = "c629037eca8852ebd8eaeafcd4cb107b87bc89af"
