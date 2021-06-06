@@ -238,6 +238,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-easiest" class="md-nav__link">
+    Script (easiest)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nimble-easy-ish" class="md-nav__link">
+    Nimble (easy-ish)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-release-manual" class="md-nav__link">
+    GitHub Release (manual)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-from-source-from-scratch" class="md-nav__link">
+    Compile from source (from scratch)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vscode-additional-plugin" class="md-nav__link">
+    VSCode (additional plugin)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#struct" class="md-nav__link">
     Struct
   </a>
@@ -444,6 +492,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-easiest" class="md-nav__link">
+    Script (easiest)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nimble-easy-ish" class="md-nav__link">
+    Nimble (easy-ish)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-release-manual" class="md-nav__link">
+    GitHub Release (manual)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-from-source-from-scratch" class="md-nav__link">
+    Compile from source (from scratch)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vscode-additional-plugin" class="md-nav__link">
+    VSCode (additional plugin)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#struct" class="md-nav__link">
     Struct
   </a>
@@ -477,14 +573,29 @@
                 <h1 id="wings">wings</h1>
 <p>A simple customizable cross language struct and enum file generator.</p>
 <p>Click <a href="./api">here</a> for code documentation index instead.</p>
-<p><strong>Usage</strong></p>
+<h2 id="installation">Installation</h2>
+<h3 id="script-easiest">Script (easiest)</h3>
+<p>Just run the following in your terminal.</p>
+<div class="highlight"><pre><span></span><code>curl -s https://wings.sh/install.sh <span class="p">|</span> sh
+</code></pre></div>
+<h3 id="nimble-easy-ish">Nimble (easy-ish)</h3>
+<p>If you have <a href="https://github.com/nim-lang/nimble"><code>nimble</code></a> installed, you can just do <code>nimble install wings</code>.</p>
+<h3 id="github-release-manual">GitHub Release (manual)</h3>
+<p>If you prefer to download them manually instead, you could do the following.</p>
 <ul>
 <li>Download the appropriate binary <a href="https://github.com/binhonglee/wings/releases">here</a>.</li>
 <li>Add binary to an included path and rename it to <code>wings</code>.</li>
 <li>Run <code>wings {filepath}</code> to generate the files. (eg. <code>wings /path/to/student.wings</code>)</li>
 </ul>
-<p>or if you have <a href="https://github.com/nim-lang/nimble"><code>nimble</code></a> installed, you can just do <code>nimble install wings</code>.</p>
-<p><a href="https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings">Here</a>'s a simple vscode plugin that provides syntax highlighting for wings.</p>
+<p><em>Note: While there are Windows binaries available for download from GitHub release page, they aren't thoroughly tested and some features (like self-updating) might not work as intended.</em></p>
+<h3 id="compile-from-source-from-scratch">Compile from source (from scratch)</h3>
+<p>If you'd like to compile it from source, you can clone the repo and compile it with the release script.</p>
+<div class="highlight"><pre><span></span><code>git clone git@github.com:binhonglee/wings.git
+cd wings/
+./pleasew release
+</code></pre></div>
+<h3 id="vscode-additional-plugin">VSCode (additional plugin)</h3>
+<p>If you are coding with VSCode, its recommended that you also install <a href="https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings">this plugin</a> to get proper syntax highlighting on your wings files.</p>
 <h2 id="struct">Struct</h2>
 <p>Input file:</p>
 <div class="input_div">
