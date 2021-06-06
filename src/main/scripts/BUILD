@@ -16,5 +16,12 @@ nim_run_script(
   main = 'preCompile.nims',
   outs = ['const.nim'],
   out_path = 'src/main',
+  deps = [':releaseConst'],
   visibility = ['//src/main:files'],
+)
+
+filegroup(
+  name = 'releaseConst',
+  srcs = ['releaseConst.nim'],
+  visibility = ['PUBLIC'],
 )

@@ -13,12 +13,10 @@ const header: string = """
 proc genRun(): void =
   let (status, _) = gorgeEx("git status --porcelain")
   var getHash: string = "git rev-parse HEAD"
-  var getVersion = "git describe --tags HEAD"
   if status == "":
     getHash &= "^"
-    getVersion &= "^"
   let (hash, _) = gorgeEx(getHash)
-  let (version, _) = gorgeEx(getVersion)
+  let version = "v0.0.7-alpha"
   writeFile(
     outputFile,
     header & "\n" &

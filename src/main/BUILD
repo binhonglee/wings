@@ -51,5 +51,6 @@ filegroup(
     '//src/main/wingspkg/lang',
     '//src/main/wingspkg/lib',
     '//src/main/wingspkg/util',
+    '//src/main/scripts:releaseConst',
   ],
 )

@@ -4,15 +4,43 @@ A simple customizable cross language struct and enum file generator.
 
 Click [here](./api) for code documentation index instead.
 
-**Usage**
+## Installation
+
+### Script (easiest)
+
+Just run the following in your terminal.
+
+```sh
+curl -s https://wings.sh/install.sh | sh
+```
+
+### Nimble (easy-ish)
+
+If you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can just do `nimble install wings`.
+
+### GitHub Release (manual)
+
+If you prefer to download them manually instead, you could do the following.
 
 - Download the appropriate binary [here](https://github.com/binhonglee/wings/releases).
 - Add binary to an included path and rename it to `wings`.
 - Run `wings {filepath}` to generate the files. (eg. `wings /path/to/student.wings`)
 
-or if you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can just do `nimble install wings`.
+*Note: While there are Windows binaries available for download from GitHub release page, they aren't thoroughly tested and some features (like self-updating) might not work as intended.*
 
-[Here](https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings)'s a simple vscode plugin that provides syntax highlighting for wings.
+### Compile from source (from scratch)
+
+If you'd like to compile it from source, you can clone the repo and compile it with the release script.
+
+```
+git clone git@github.com:binhonglee/wings.git
+cd wings/
+./pleasew release
+```
+
+### VSCode (additional plugin)
+
+If you are coding with VSCode, its recommended that you also install [this plugin](https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings) to get proper syntax highlighting on your wings files.
 
 ## Struct
 

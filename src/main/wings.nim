@@ -50,7 +50,8 @@ proc init(count: int): void =
     if file.startsWith(HELP_OPTION):
       echo getVersion()
       echo "\t-c:{CONFIG_FILE}.json\t - The config file should be a json file."
-      echo "\t-v\t\t\t - Display version information"
+      echo "\t-v\t\t\t - Display version information."
+      echo "\t-u\t\t\t - Upgrade to latest wings version."
       echo "\t-h\t\t\t - Show this menu."
       echo ""
       echo "Expects {FILENAME}.wings files to be generated from."
