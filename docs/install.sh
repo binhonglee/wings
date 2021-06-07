@@ -81,8 +81,8 @@ fi
 cat <<EOF >> "$HOME/$SHELL_FILE"
 
 # wings
-export PATH="$HOME/.wings":\$PATH
+export PATH="$WINGS_HOME$BIN:\$PATH"
 EOF
 
 echo "$GREEN""SUCCESS""$DEFAULT"": Download completed successfully. You might need to restart your shell or source ""$SHELL_FILE"" to use wings."
-export PATH="$HOME/.wings:\$PATH"
+export PATH="$WINGS_HOME$BIN:\$PATH"
