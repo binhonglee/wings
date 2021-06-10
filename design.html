@@ -13,19 +13,19 @@
         <meta name="author" content="BinHong Lee">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.6">
     
     
       
-        <title>Syntax - wings</title>
+        <title>Design - wings</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.875de78c.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.875de78c.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
         
           
           
@@ -44,7 +44,7 @@
     
     
     
-      <link rel="stylesheet" href="../custom.css">
+      <link rel="stylesheet" href="custom.css">
     
     
       
@@ -61,7 +61,7 @@
     <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#syntax-keywords" class="md-skip">
+        <a href="#design" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="wings" class="md-header__button md-logo" aria-label="wings" data-md-component="logo">
+    <a href="index.html" title="wings" class="md-header__button md-logo" aria-label="wings" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Syntax
+              Design
             
           </span>
         </div>
@@ -173,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="wings" class="md-nav__button md-logo" aria-label="wings" data-md-component="logo">
+    <a href="index.html" title="wings" class="md-nav__button md-logo" aria-label="wings" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -205,23 +205,8 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Home
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../design/" class="md-nav__link">
-        Design
       </a>
     </li>
   
@@ -245,12 +230,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Syntax
+          Design
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Syntax
+      <a href="design.html" class="md-nav__link md-nav__link--active">
+        Design
       </a>
       
         
@@ -268,51 +253,85 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lang-filepath" class="md-nav__link">
-    {lang}-filepath
+  <a href="#goal" class="md-nav__link">
+    Goal
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-import" class="md-nav__link">
-    {lang}-import
+  <a href="#flow" class="md-nav__link">
+    Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-defined-wings-file" class="md-nav__link">
+    User defined .wings file
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#import" class="md-nav__link">
-    import
+        
+          <li class="md-nav__item">
+  <a href="#parse-into-iwings" class="md-nav__link">
+    Parse into IWings
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#lang-implement" class="md-nav__link">
-    {lang}-implement
+        
+          <li class="md-nav__item">
+  <a href="#check-and-fulfill-dependency" class="md-nav__link">
+    Check and fulfill dependency
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#lang-func" class="md-nav__link">
-    {lang}-func
+        
+          <li class="md-nav__item">
+  <a href="#parse-into-templatable" class="md-nav__link">
+    Parse into Templatable
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    #
+        
+          <li class="md-nav__item">
+  <a href="#wingsjson" class="md-nav__link">
+    wings.json
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    //
+        
+          <li class="md-nav__item">
+  <a href="#parse-into-config" class="md-nav__link">
+    Parse into Config
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-tconfigs" class="md-nav__link">
+    Generate TConfig(s)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-output-content" class="md-nav__link">
+    Generate output content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-write-into-output-file" class="md-nav__link">
+    Create + write into output file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -332,7 +351,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../config/" class="md-nav__link">
+      <a href="syntax.html" class="md-nav__link">
+        Syntax
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config.html" class="md-nav__link">
         Config
       </a>
     </li>
@@ -347,7 +381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../template/" class="md-nav__link">
+      <a href="template.html" class="md-nav__link">
         Template
       </a>
     </li>
@@ -362,7 +396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../experimental/" class="md-nav__link">
+      <a href="experimental.html" class="md-nav__link">
         Experimental
       </a>
     </li>
@@ -419,7 +453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tsUtil/" class="md-nav__link">
+      <a href="tsUtil/index.html" class="md-nav__link">
         index.ts
       </a>
     </li>
@@ -446,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../license/" class="md-nav__link">
+      <a href="license.html" class="md-nav__link">
         License
       </a>
     </li>
@@ -479,51 +513,85 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lang-filepath" class="md-nav__link">
-    {lang}-filepath
+  <a href="#goal" class="md-nav__link">
+    Goal
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-import" class="md-nav__link">
-    {lang}-import
+  <a href="#flow" class="md-nav__link">
+    Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-defined-wings-file" class="md-nav__link">
+    User defined .wings file
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#import" class="md-nav__link">
-    import
+        
+          <li class="md-nav__item">
+  <a href="#parse-into-iwings" class="md-nav__link">
+    Parse into IWings
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#lang-implement" class="md-nav__link">
-    {lang}-implement
+        
+          <li class="md-nav__item">
+  <a href="#check-and-fulfill-dependency" class="md-nav__link">
+    Check and fulfill dependency
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#lang-func" class="md-nav__link">
-    {lang}-func
+        
+          <li class="md-nav__item">
+  <a href="#parse-into-templatable" class="md-nav__link">
+    Parse into Templatable
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    #
+        
+          <li class="md-nav__item">
+  <a href="#wingsjson" class="md-nav__link">
+    wings.json
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    //
+        
+          <li class="md-nav__item">
+  <a href="#parse-into-config" class="md-nav__link">
+    Parse into Config
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-tconfigs" class="md-nav__link">
+    Generate TConfig(s)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-output-content" class="md-nav__link">
+    Generate output content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-write-into-output-file" class="md-nav__link">
+    Create + write into output file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -539,28 +607,45 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/binhonglee/wings/edit/master/docs/syntax.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/binhonglee/wings/edit/master/docs/design.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="syntax-keywords">Syntax Keywords</h1>
-<p>Simple explanation on how the syntax works with wings. Rows that are unbounded and / or with undefined keywords will lead to an error being thrown.</p>
-<h2 id="lang-filepath"><code>{lang}-filepath</code></h2>
-<p>Basically the path location of where the generated file lives relative to where the build is ran (which if you use Please or Nimble as suggested, it will always be at the top level folder of this project - <code>wings/</code>).</p>
-<p>If the namespace for a specific language is not defined, the file for that language will not be generated.</p>
-<h2 id="lang-import"><code>{lang}-import</code></h2>
-<p>Usually the <code>include</code> or <code>import</code> statement required for some part of the file to work properly. (In this case, its mostly external classes or enums for custom typing.)</p>
-<h2 id="import"><code>import</code></h2>
-<p>Similar to the above but this is specific to <code>include</code> or <code>import</code> another <code>wings</code> file.</p>
-<h2 id="lang-implement"><code>{lang}-implement</code></h2>
-<p>In many occassion, your struct or object might be implementing a separate interface class. Use this to specify the class that it is implementing. (There is not support for this in <code>go</code> since it would already inherently associate your struct to the interface if you implemented all the functions and variables defined in the interface.)</p>
-<h2 id="lang-func"><code>{lang}-func</code></h2>
-<p>Specific functions for specific programming languages. Ideally, you should have a separate utility classes that do all the other operations. This is mostly designed to be used for defining functions in an interface that the struct / class is implementing.</p>
-<h2 id="_1"><code>#</code></h2>
-<p>Comments for struct (usually description). This comment will be carried forward and included in the generated file.</p>
-<h2 id="_2"><code>//</code></h2>
-<p>Comment in file. Unlike <code>#</code>, lines that begins with <code>//</code> will be ignored by the parser unless it is written inside the <code>{lang}Func()</code> where it would then be copied over to the generated file exactly the way it is. (Tabbing does not matter.)</p>
+                <h1 id="design">Design</h1>
+<h2 id="goal">Goal</h2>
+<p>Allow customizable cross language object (struct) and enum code generation to maintain variable name and type consistency across stack. In the case of wings, you only have to create / maintain the <code>.wings</code> file and wings will generate its corresponding output files. See <a href="index.html">home</a> for example.</p>
+<h2 id="flow">Flow</h2>
+<p>Here's a diagram for a high level illustration on how the files are generated. (More explanation on each steps are available below after the diagram.)</p>
+<p><img alt="Simple Design Image" src="design.jpg" /></p>
+<p><em>Note: Intentionally using API doc for linking most of the "<a href="">Source</a>" since code location might change and API doc will usually automatically update based on that.</em></p>
+<h3 id="user-defined-wings-file">User defined <code>.wings</code> file</h3>
+<p>Reading the user input files.</p>
+<p><em><a href="api/wingspkg/core.html#fromFiles%2Cseq%5BT%5D%5Bstring%5D%2CConfig">Source</a></em></p>
+<h3 id="parse-into-iwings">Parse into <code>IWings</code></h3>
+<p>Parse the wings file into an <code>IWings</code> object type. More details on wings syntax <a href="syntax.html">here</a>.</p>
+<p><em><a href="api/wingspkg/lib/winterface.html#parseFile%2Cstring%2Cbool">Source</a></em></p>
+<h3 id="check-and-fulfill-dependency">Check and fulfill dependency</h3>
+<p>After parsing all the wings file and understanding each of their dependencies (wings file does not allow circular dependency), it would start parsing (fulfilling) it from the one that doesn't have dependency and work its way up. If <code>skipImport</code> is set to <code>true</code> in the config file, it would skip generating output files of the dependencies that isn't included in the CLI argument and goes straight to generating its output filenames (required for next step).</p>
+<p><em><a href="api/wingspkg/lib/wiutil.html#dependencyGraph%2CTable%5Bstring%2CIWings%5D%2CConfig">Source</a></em></p>
+<h3 id="parse-into-templatable">Parse into <code>Templatable</code></h3>
+<p>Once the dependency of the wings file is fulfilled, it can now be parsed to <code>Templatable</code> object type. (Dependency needs to be fulfilled first before this step because this step needs the file name / location of the files it depends on which can only be obtained from generating its wings file.)</p>
+<p><em><a href="api/wingspkg/lib/templatable.html#wingsToTemplatable%2CIWings%2CTConfig">Source</a></em></p>
+<h3 id="wingsjson">wings.json</h3>
+<p>Reading the user config file.</p>
+<p><em><a href="https://github.com/binhonglee/wings/blob/devel/src/main/wings.nim#L48-L51">Source</a></em></p>
+<h3 id="parse-into-config">Parse into Config</h3>
+<p>Parse user config file into <code>Config</code> object type. More details on how config files work <a href="config.html">here</a>.</p>
+<p><em><a href="api/wingspkg/util/config.html#parse%2Cstring">Source</a></em></p>
+<h3 id="generate-tconfigs">Generate <code>TConfig</code>(s)</h3>
+<p>Based on <code>Config</code>, parse each language specific output config file into <code>TConfig</code>. <code>TConfig</code> is essentially the language template file to tell wings how the output language is formatted. More details on how template files work <a href="template.html">here</a>.</p>
+<p><em><a href="api/wingspkg/lib/tutil.html#parse%2Cstring">Source</a></em></p>
+<h3 id="generate-output-content">Generate output content</h3>
+<p>Generate output content by parsing information from <code>Templatable</code> based on the format / design specified in <code>TConfig</code>.</p>
+<p><em><a href="api/wingspkg/lib/templating.html#genFile%2CTemplatable%2CTConfig%2CWingsType">Source</a></em></p>
+<h3 id="create-write-into-output-file">Create + write into output file</h3>
+<p>Create the destination file and folder (if they do not already exist) and write output content into it (overwrite original file content if it exist). If there is a write protected existing file, this step would fail.</p>
+<p><em><a href="https://github.com/binhonglee/wings/blob/devel/src/main/wings.nim#L17-L28">Source</a></em></p>
                 
               
               
@@ -579,7 +664,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../design/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="index.html" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -588,19 +673,19 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Design
+              Home
             </div>
           </div>
         </a>
       
       
-        <a href="../config/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="syntax.html" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Config
+              Syntax
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -629,10 +714,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.34eae1b6.min.js"></script>
+      <script src="assets/javascripts/bundle.34eae1b6.min.js"></script>
       
     
   </body>
