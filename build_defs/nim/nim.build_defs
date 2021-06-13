@@ -1,11 +1,35 @@
-def nimscript(name:str, main:str, deps:list=None, visibility:list=None):
-  cmds = 'cp $SRCS $OUT'
+def nimscript(name:str, main:str, refs:dict=None, deps:list=[], visibility:list=None):
+  cmd = 'cp $SRCS temp'
+
+  # TODO: Current implementation is really hacky and have a lot of underlying assumptions
+  # 1. Assumes imported file to be at the same directory as script
+  # 2. Assumes imported file does not also import other files
+  # 3. Assumes `mode` is explicitly defined in the script
+
+  if refs:
+    for i in refs.keys():
+      cmd = ' && '.join([
+        cmd,
+        'echo ' + refs[i],
+        'awk \'!/' + i + '/\' temp > temp2',
+        'rm temp',
+        'mv temp2 temp',
+        'LINE=`awk \'/mode =/{print NR}\' temp`',
+        '((LINE++))',
+        'TEXT=`cat $PKG_DIR/' + i + '.nim`',
+        'awk -v text="$TEXT" "NR==$LINE{print text}1" temp > temp2',
+        'rm temp',
+        'mv temp2 temp',
+      ])
+      deps += [refs[i]]
+
+  cmd = cmd + ' && cp temp $OUT'
 
   return build_rule(
     name = name,
     srcs = [main],
     outs = ['%s.nims' % name],
-    cmd = cmds,
+    cmd = cmd,
     deps = deps,
     binary = True,
     needs_transitive_deps = True,

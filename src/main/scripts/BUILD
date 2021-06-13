@@ -1,27 +1,29 @@
-subinclude('//build_defs/nim')
+subinclude("//build_defs/nim")
 
 nimscript(
-  name = 'docs',
-  main = 'docs.nims',
-  deps = ['//src/main:wings_api_doc'],
+    name = "docs",
+    main = "docs.nims",
+    deps = ["//src/main:wings_api_doc"],
 )
 
 nimscript(
-  name = 'release',
-  main = 'release.nims',
+    name = "release",
+    main = "release.nims",
+    refs = {
+        "releaseConst": ":releaseConst",
+    },
 )
 
 nim_run_script(
-  name = 'preCompile',
-  main = 'preCompile.nims',
-  outs = ['const.nim'],
-  out_path = 'src/main',
-  deps = [':releaseConst'],
-  visibility = ['//src/main:files'],
+    name = "preCompile",
+    outs = ["const.nim"],
+    main = "preCompile.nims",
+    out_path = "src/main",
+    visibility = ["//src/main:files"],
 )
 
 filegroup(
-  name = 'releaseConst',
-  srcs = ['releaseConst.nim'],
-  visibility = ['PUBLIC'],
+    name = "releaseConst",
+    srcs = ["releaseConst.nim"],
+    visibility = ["PUBLIC"],
 )
