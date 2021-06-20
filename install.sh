@@ -46,6 +46,49 @@ case $OS in
     ;;
 esac
 
+download() {
+  if [ "$WINGS_DOWNLOAD_ONLY" = "TRUE" ]; then
+    WINGS_OUTPUT_FILE="wings"
+  else
+    WINGS_OUTPUT_FILE="$WINGS_HOME""$LATEST_VERSION""/wings"
+  fi
+
+  echo
+  echo "Downloading latest version (""$LATEST_VERSION"") of wings..."
+  curl -s -L --output "$WINGS_OUTPUT_FILE" "https://github.com/binhonglee/wings/releases/download/""$LATEST_VERSION""/wings_""$ARCH""_""$OS"
+  chmod +x "$WINGS_OUTPUT_FILE"
+  if [ "$WINGS_DOWNLOAD_ONLY" != "TRUE" ]; then
+    cp "$WINGS_OUTPUT_FILE" "$WINGS_HOME""$BIN""wings"
+  fi
+}
+
+help() {
+  echo "Welcome to wings install script!"
+  echo
+  echo "If you run the script without any option or argument, it will install wings inside the user directory in '.wings/'. However, there are some options it can take as mentioned below."
+  echo
+  echo "-d Only download the correct binary and do nothing else. when completed, there will be a binary file name 'wings' in the directory of where the script is ran."
+  echo "-h Show this menu."
+}
+
+while getopts dh opt; do
+  case $opt in
+    d)
+      WINGS_DOWNLOAD_ONLY="TRUE"
+      download
+      exit
+      ;;
+    h)
+      help
+      exit
+      ;;
+    \?)
+      help
+      exit 1
+      ;;
+  esac
+done
+
 echo
 echo "Creating directories..."
 if [ ! -d $WINGS_HOME ]; then
@@ -56,11 +99,7 @@ else
   INSTALLED="TRUE"
 fi
 
-echo
-echo "Downloading latest version (""$LATEST_VERSION"") of wings..."
-curl -s -L --output "$WINGS_HOME""$LATEST_VERSION""/wings" "https://github.com/binhonglee/wings/releases/download/""$LATEST_VERSION""/wings_""$ARCH""_""$OS"
-chmod +x "$WINGS_HOME""$LATEST_VERSION""/wings"
-cp "$WINGS_HOME""$LATEST_VERSION""/wings" "$WINGS_HOME""$BIN""wings"
+download
 
 echo
 echo "Adding PATH info into your rc file..."
