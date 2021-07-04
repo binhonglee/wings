@@ -7,9 +7,19 @@
   }, {
     "include": "#filepath"
   }, {
+    "include": "#filetype"
+  }, {
     "include": "#code-comment"
   }, {
     "include": "#wings-comment"
+  }, {
+    "include": "#enum"
+  }, {
+    "include": "#struct"
+  }, {
+    "include": "#logger"
+  }, {
+    "include": "#interface"
   }, {
     "include": "#wings-types"
   }, {
@@ -60,6 +70,15 @@
         "match": ".*"
       }]
     },
+    "filetype": {
+      "begin": "^( |\t)*(gen-filetype|db-type)\\b",
+      "end": "\n",
+      "name": "storage.modifier",
+      "patterns": [{
+        "name": "support.class",
+        "match": ".*"
+      }]
+    },
     "code-comment": {
       "name": "comment.line.double-slash",
       "match": "//( |\t)*(.*)$"
@@ -95,8 +114,8 @@
         "include": "$self"
       }]
     },
-    "wings-types": {
-      "begin": "^( |\t)*(interface|struct|enum)",
+    "enum": {
+      "begin": "^( |\t)*(enum)",
       "end": "}",
       "name": "storage.modifier",
       "patterns": [{
@@ -114,59 +133,142 @@
             "patterns": [{
               "include": "#code-comment"
             }, {
-              "name": "string.quoted.double",
-              "begin": "\"",
-              "end": "\"",
-              "patterns": [{
-                "name": "constant.character.escape",
-                "match": "\\\\."
-              }]
-            }, {
-              "begin": "'",
-              "beginCaptures": {
-                "0": {
-                  "patterns": [{
-                    "match": "'"
-                  }]
-                }
-              },
-              "end": "'",
-              "endCaptures": {
-                "0": {
-                  "patterns": [{
-                    "match": "'"
-                  }]
-                }
-              },
-              "name": "constant.character",
-              "patterns": [{
-                "match": "\\\\.",
-                "name": "constant.character.escape.java"
-              }]
-            }, {
-              "name": "entity.name.tag",
-              "match": "( |\t)*([\\[\\]])*(int|flt|dbl|str|char|bool|date)( |\t|\n)"
-            }, {
               "name": "support.class",
-              "match": "( |\t)*([\\[\\]])*([A-Z]+[a-zA-Z0-9]+)( |\t|\n)"
-            }, {
-              "include": "#map"
-            }, {
-              "name": "constant.numeric",
-              "match": "( |\t)*([\\-][0-9]+)(\n)"
-            }, {
-              "name": "constant.language",
-              "match": "( |\t)*(true|false|null)(\n)"
-            }, {
-              "name": "support.constant",
-              "match": "( |\t)*(([a-zA-Z0-9]|[_]|[.])+)(\n)"
-            }, {
-              "name": "variable.other",
-              "match": "( |\t)*([a-zA-Z0-9]|[_])+( |\t)"
+              "match": "( |\t)*([A-Z]+[a-zA-Z0-9]+)( |\t|\n)"
             }]
           }]
         }]
       }]
+    },
+    "regular-types": {
+      "patterns": [{
+        "include": "#code-comment"
+      }, {
+        "name": "string.quoted.double",
+        "begin": "\"",
+        "end": "\"",
+        "patterns": [{
+          "name": "constant.character.escape",
+          "match": "\\\\."
+        }]
+      }, {
+        "begin": "'",
+        "beginCaptures": {
+          "0": {
+            "patterns": [{
+              "match": "'"
+            }]
+          }
+        },
+        "end": "'",
+        "endCaptures": {
+          "0": {
+            "patterns": [{
+              "match": "'"
+            }]
+          }
+        },
+        "name": "constant.character",
+        "patterns": [{
+          "match": "\\\\.",
+          "name": "constant.character.escape.java"
+        }]
+      }, {
+        "name": "entity.name.tag",
+        "match": "( |\t)*([\\[\\]])*(int|flt|dbl|str|char|bool|date)( |\t|\n)"
+      }, {
+        "name": "support.class",
+        "match": "( |\t)*([\\[\\]])*([A-Z]+[a-zA-Z0-9]+)( |\t|\n)"
+      }, {
+        "include": "#map"
+      }, {
+        "name": "constant.language",
+        "match": "( |\t)*(true|false|null)(\n)"
+      }, {
+        "name": "constant.numeric",
+        "match": "( |\t)*([\\-]*[0-9]+)(\n)"
+      }, {
+        "name": "support.constant",
+        "match": "( |\t)*(([a-zA-Z0-9]|[_]|[.])+)(\n)"
+      }, {
+        "name": "variable.other",
+        "match": "( |\t)*([a-zA-Z0-9]|[_])+( |\t)"
+      }]
+    },
+    "logger": {
+      "begin": "^( |\t)*(logger)",
+      "end": "}",
+      "name": "storage.modifier",
+      "patterns": [{
+        "begin": " [A-Z]+[a-zA-Z]* ",
+        "end": "(?=})",
+        "name": "entity.name.class",
+        "patterns": [{
+          "begin": "{",
+          "end": "(?=})",
+          "name": "storage.modifier",
+          "patterns": [{
+            "begin": "\n",
+            "end": "(?=})",
+            "name": "invalid",
+            "patterns": [{
+              "include": "#db-keywords"
+            }, {
+              "include": "#regular-types"
+            }]
+          }]
+        }]
+      }]
+    },
+    "struct": {
+      "begin": "^( |\t)*(struct)",
+      "end": "}",
+      "name": "storage.modifier",
+      "patterns": [{
+        "begin": " [A-Z]+[a-zA-Z]* ",
+        "end": "(?=})",
+        "name": "entity.name.class",
+        "patterns": [{
+          "begin": "{",
+          "end": "(?=})",
+          "name": "storage.modifier",
+          "patterns": [{
+            "begin": "\n",
+            "end": "(?=})",
+            "name": "invalid",
+            "patterns": [{
+              "include": "#regular-types"
+            }]
+          }]
+        }]
+      }]
+    },
+    "interface": {
+      "begin": "^( |\t)*(interface)",
+      "end": "}",
+      "name": "storage.modifier",
+      "patterns": [{
+        "begin": " [A-Z]+[a-zA-Z]* ",
+        "end": "(?=})",
+        "name": "entity.name.class",
+        "patterns": [{
+          "begin": "{",
+          "end": "(?=})",
+          "name": "storage.modifier",
+          "patterns": [{
+            "begin": "\n",
+            "end": "(?=})",
+            "name": "invalid",
+            "patterns": [{
+              "include": "#regular-types"
+            }]
+          }]
+        }]
+      }]
+    },
+    "db-keywords": {
+      "match": "( |\t)*(unique|serial|primary|nonnull)( |\t|\n)",
+      "name": "storage.modifier"
     },
     "go-func": {
       "begin": "^go\\-func\\(",

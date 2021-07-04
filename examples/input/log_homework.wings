@@ -1,0 +1,12 @@
+go-filepath examples/output/go
+ts-filepath examples/output/ts
+
+gen-filetype go
+db-type psql
+
+logger LogHomework {
+  id int unique serial primary
+  name str nonnull
+  due_date date nonnull
+  given_date date nonnull
+}
