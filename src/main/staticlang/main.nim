@@ -60,6 +60,9 @@ proc genFile(inputFile: string): void =
   push(c.TEMPLATE_INTERFACE_PRE, config.templates.getOrDefault("interface"), c.TEMPLATE_INTERFACE_POST)
 
   push()
+  push(c.TEMPLATE_LOGGER_PRE, config.templates.getOrDefault("logger"), c.TEMPLATE_LOGGER_POST)
+
+  push()
   push(c.TYPES_PRE)
   for k, v in config.types.pairs:
     push(

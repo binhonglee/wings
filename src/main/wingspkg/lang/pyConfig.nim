@@ -57,6 +57,10 @@ const TEMPLATE_INTERFACE: string = """
 
 """
 
+const TEMPLATE_LOGGER: string = """
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "double", "", "0", ""),
   "bool": initTypeInterpreter("bool", "bool", "", "False", ""),
@@ -98,6 +102,7 @@ let PY_CONFIG*: TConfig = initTConfig(
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
     "interface": TEMPLATE_INTERFACE,
+    "logger": TEMPLATE_LOGGER,
   }.toTable(),
   ty = TYPES,
 )

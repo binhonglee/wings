@@ -84,6 +84,35 @@ type {#NAME_PASCAL} interface {
 
 """
 
+const TEMPLATE_LOGGER: string = """
+package {#1}
+// #BEGIN_IMPORT
+
+import (
+	// #IMPORT2 {#IMPORT_1} "{#IMPORT_2}"
+	// #IMPORT1 "{#IMPORT_1}"
+)
+// #END_IMPORT
+// #BEGIN_VAR
+
+func Log{#NAME_PASCAL}(
+	// #VAR {#VARNAME_LOWER} {#TYPE},
+) bool {
+  sqlStatement := `
+    INSERT INTO {#NAME_CAMEL} ({#VARNAME_LOWER_LIST})
+    VALUES ({#VARNAME_COUNT_LIST})
+  `
+  err := db.QueryRow(sqlStatement, {#VARNAME_LOWER_LIST})
+  return err != nil
+}
+// #END_VAR
+// #BEGIN_FUNCTIONS
+
+// #FUNCTIONS {#FUNCTIONS}
+// #END_FUNCTIONS
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "double", "", "", ""),
   "void": initTypeInterpreter("void", "", "", "", ""),
@@ -126,6 +155,7 @@ let GO_CONFIG*: TConfig = initTConfig(
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
     "interface": TEMPLATE_INTERFACE,
+    "logger": TEMPLATE_LOGGER,
   }.toTable(),
   ty = TYPES,
 )

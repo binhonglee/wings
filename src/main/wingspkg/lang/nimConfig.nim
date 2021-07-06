@@ -54,6 +54,10 @@ const TEMPLATE_INTERFACE: string = """
 
 """
 
+const TEMPLATE_LOGGER: string = """
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "float64", "", "", ""),
   "bool": initTypeInterpreter("bool", "bool", "", "", ""),
@@ -95,6 +99,7 @@ let NIM_CONFIG*: TConfig = initTConfig(
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
     "interface": TEMPLATE_INTERFACE,
+    "logger": TEMPLATE_LOGGER,
   }.toTable(),
   ty = TYPES,
 )

@@ -1,4 +1,4 @@
-from strutils import indent, isEmptyOrWhitespace, isSpaceAscii, removePrefix,
+from strutils import indent, isEmptyOrWhitespace, isSpaceAscii, join, removePrefix,
   removeSuffix, replace, split, splitLines, splitWhitespace, startsWith, unindent
 import stones/genlib
 import stones/cases
@@ -187,11 +187,32 @@ proc parseFields(iwings: var IWings, fs: seq[string], tconfig: TConfig): seq[Tab
       parseType(iwings, fields[1], tconfig)
     )
     if fields.len() > 2:
-      if variables.hasKey(wrap(TK_TYPE, TK_INIT)):
-        variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
+      if iwings.wingsType == WingsType.loggerw:
+        var keywords: seq[string] = newSeq[string]()
+        for i in 2..(fields.len() - 1):
+          if DBKeywords.contains(toLowerCase(fields[i])):
+            keywords.add(toUpperCase(fields[i]))
+          elif i == (fields.len() - 1):
+            variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
+        variables[wrap(TK_TYPE, TK_DB_KEYWORDS)] = keywords.join()
       else:
         variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
     result.add(variables)
+
+proc parseFieldsList(fields: seq[Table[string, string]]): Table[string, string] =
+  result = initTable[string, string]()
+  for c in Case.low..Case.high:
+    var vars = newSeq[string]()
+    for f in fields:
+      vars.add(f.getOrDefault(wrap(TK_VARNAME, $c)))
+    result[wrap(TK_VARNAME, $c, TK_LIST)] = vars.join(", ")
+
+  var l = newSeq[string]()
+  var i = 1
+  for f in fields:
+    l.add("$" & $i)
+    inc(i)
+  result[wrap(TK_VARNAME, TK_COUNT, TK_LIST)] = l.join(", ")
 
 proc parseAbstractFunc(
   iwings: var IWings,
@@ -313,6 +334,19 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
       for key in varnames.keys:
         variables[wrap(TK_VARNAME, $key)] = varnames[key]
       result.fields.add(variables)
+
+  of WingsType.loggerw:
+    let wlogger: WLogger = WLogger(iwings)
+    result.fields = parseFields(iwings, wlogger.fields, tconfig)
+    result.replacements.merge(parseFieldsList(result.fields))
+
+    if wlogger.functions.hasKey(lang):
+      result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = processFunctions(
+        wlogger.functions[lang], tconfig.indentation
+      )
+    else:
+      result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = ""
+
   of WingsType.default:
     LOG(FATAL, "Invalid `WingsType`.")
 

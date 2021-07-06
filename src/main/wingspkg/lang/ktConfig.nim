@@ -81,6 +81,10 @@ interface {#NAME} {#IMPLEMENT}{
 
 """
 
+const TEMPLATE_LOGGER: string = """
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "Double", "", "0", ""),
   "void": initTypeInterpreter("void", "Unit", "", "", ""),
@@ -123,6 +127,7 @@ let KT_CONFIG*: TConfig = initTConfig(
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
     "interface": TEMPLATE_INTERFACE,
+    "logger": TEMPLATE_LOGGER,
   }.toTable(),
   ty = TYPES,
 )

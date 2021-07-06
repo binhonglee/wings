@@ -91,6 +91,35 @@ export default interface {#NAME_PASCAL} {#IMPLEMENT}{
 
 """
 
+const TEMPLATE_LOGGER: string = """
+import { Client } from 'pg';
+// #BEGIN_IMPORT
+// #IMPORT2 import {#IMPORT_1} from '{#IMPORT_2}';
+// #END_IMPORT
+
+export default class {#NAME_PASCAL} {
+  public static async log(
+// #BEGIN_VAR
+    // #VAR {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT},
+// #END_VAR
+  ): Promise<boolean> {
+    const client = new Client();
+    client.connect();
+
+    const sqlStatement = 'INSERT INTO {#NAME_PASCAL} ({#VARNAME_CAMEL_LIST}) VALUES({#VARNAME_COUNT_LIST})';
+    const values = [{#VARNAME_CAMEL_LIST}];
+
+    try {
+      await client.query(sqlStatement, values);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+}
+
+"""
+
 let TYPES: Table[string, TypeInterpreter] = {
   "dbl": initTypeInterpreter("dbl", "Number", "", "0", "obj.{#VARNAME_JSON}"),
   "void": initTypeInterpreter("void", "void", "", "", "obj.{#VARNAME_JSON}"),
@@ -133,6 +162,7 @@ let TS_CONFIG*: TConfig = initTConfig(
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
     "interface": TEMPLATE_INTERFACE,
+    "logger": TEMPLATE_LOGGER,
   }.toTable(),
   ty = TYPES,
 )

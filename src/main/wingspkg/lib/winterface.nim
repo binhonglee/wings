@@ -14,12 +14,15 @@ type
     structw = "struct"
     enumw = "enum"
     interfacew = "interface"
+    loggerw = "logger"
 
 type
   Visibility* = enum
     public = "public"
     protected = "protected"
     private = "private"
+
+const DBKeywords* = ["unique", "serial", "primary", "nonnull"].toHashSet()
 
 const COMMENT = "//"
 
@@ -36,6 +39,9 @@ const WINGS_IMPORT = "import"
 const WINGS_FUNC = "wings"
 const WINGS_FUNC_OPEN = '('
 const WINGS_FUNC_CLOSE = ')'
+
+const DB_TYPE = "db-type"
+const GEN_FILETYPE = "gen-filetype"
 
 type
   ImportedWingsType* = ref object
@@ -82,6 +88,13 @@ type
     fields*: seq[string]
     functions*: Table[string, string]
     abstractFunctions*: Table[string, AbstractFunction]
+
+type
+  WLogger* = ref object of IWings
+    fields*: seq[string]
+    functions*: Table[string, string]
+    dbType*: string
+    genFiletype*: string
 
 proc initImportedWingsType*(
   name: string = "",
@@ -154,6 +167,23 @@ proc initWInterface(iwings: IWings = initIWings()): WInterface =
   result.typesImported = iwings.typesImported
   result.wingsType = WingsType.interfacew
 
+proc initWLogger(iwings: IWings = initIWings(), dbType: string, genFiletype: string): WLogger =
+  ## Returns an empty initialized `WLogger`.
+  result = WLogger()
+  result.comment = iwings.comment
+  result.dependencies = iwings.dependencies
+  result.fields = newSeq[string](0)
+  result.filename = iwings.filename
+  result.filepath = iwings.filepath
+  result.functions = initTable[string, string]()
+  result.implement = iwings.implement
+  result.imported = iwings.imported
+  result.imports = iwings.imports
+  result.name = iwings.name
+  result.dbType = dbType
+  result.genFiletype = genFiletype
+  result.wingsType = WingsType.loggerw
+
 proc initAbstractFunction(
   visibility: Visibility = Visibility.public,
   name: string = "",
@@ -169,16 +199,16 @@ proc initAbstractFunction(
 proc error(line: int, message: string): void =
   LOG(FATAL, "Line " & $line & ": " & message)
 
-proc parseFields(fields: var seq[string], words: seq[string]): string =
+proc parseFields(fields: var seq[string], words: seq[string], ignoreLimit = false): string =
   if words[0] == WINGS_CLOSE:
     result = ""
-  elif words.len() < 2 or words.len() > 3:
+  elif (words.len() < 2 or words.len() > 3) and not ignoreLimit:
     LOG(FATAL, "Unexpected input: " & join(words, " "))
   else:
     fields.add(join(words, " "))
     result = $WingsType.default
 
-proc parseWInteface(winterface: var WInterface, words: seq[string]): string =
+proc parseWInterface(winterface: var WInterface, words: seq[string]): string =
   result = parseFields(winterface.fields, words)
 
 proc parseWEnum(wenum: var WEnum, words: seq[string]): string =
@@ -193,6 +223,9 @@ proc parseWEnum(wenum: var WEnum, words: seq[string]): string =
 
 proc parseWStruct(wstruct: var WStruct, words: seq[string]): string =
   result = parseFields(wstruct.fields, words)
+
+proc parseWLogger(wlogger: var WLogger, words: seq[string]): string =
+  result = parseFields(wlogger.fields, words, true)
 
 proc parseAbstractFunc(
   winterface: var WInterface,
@@ -256,10 +289,10 @@ proc parseAbstractFunc(
         error(0, "Missing type declaration in `" & param & "`.")
       elif ss.len() > 2:
         error(0, "Unexpected characters in `" & param & "`.")
-      
+
       if paramTable.hasKey(ss[0]):
         error(0, "Parameter name `" & ss[0] & "` already declared previously.")
-      
+
       paramTable[strip(ss[0])] = strip(ss[1])
 
   winterface.abstractFunctions[name] = initAbstractFunction(
@@ -291,6 +324,8 @@ proc parseFileIWings(
   var line: string = ""
   var lineNo: int = 1
   var inObj: string = ""
+  var dbType: string = ""
+  var genFiletype: string = ""
 
   let file: File = open(filename)
   while readLine(file, line):
@@ -298,6 +333,7 @@ proc parseFileIWings(
 
     if (
       inObj == "" or
+      inObj == $WingsType.loggerw or
       inObj == $WingsType.structw or
       inObj == $WingsType.enumw
     ) and (
@@ -315,9 +351,14 @@ proc parseFileIWings(
           inObj = parseWStruct(WStruct(iwings), words)
         else:
           inObj = parseFunc(WStruct(iwings).functions, words, line, inObj)
+      elif iwings of Wlogger:
+        if inObj == $WingsType.default:
+          inObj = parseWLogger(Wlogger(iwings), words)
+        else:
+          inObj = parseFunc(WStruct(iwings).functions, words, line, inObj)
       elif iwings of WInterface:
         if inObj == $WingsType.default:
-          inObj = parseWInteface(WInterface(iwings), words)
+          inObj = parseWInterface(WInterface(iwings), words)
         elif inObj == WINGS_FUNC:
           inObj = parseAbstractFunc(WInterface(iwings), words, line)
         else:
@@ -345,6 +386,18 @@ proc parseFileIWings(
       if not fileExists(words[1]):
         error(lineNo, "Could not find import file '" & words[1] & "'.")
       iwings.dependencies.add(words[1])
+    of DB_TYPE:
+      if words.len() != 2:
+        error(lineNo, "Invalid db-type argument.")
+      dbType = words[1]
+    of GEN_FILETYPE:
+      if words.len() != 2:
+        error(lineNo, "Invalid gen-filetype argument.")
+
+      if not iwings.filepath.hasKey(words[1]):
+        error(lineNo, "gen-filetype is not declared as one of the filepath.")
+
+      genFiletype = words[1]
     elif words.len > 2 and words[2] == WINGS_OPEN:
       case words[0]
       of $WingsType.structw:
@@ -353,6 +406,12 @@ proc parseFileIWings(
         iwings = initWEnum(iwings)
       of $WingsType.interfacew:
         iwings = initWInterface(iwings)
+      of $WingsType.loggerw:
+        if not dbType.len() > 0:
+          error(lineNo, "Missing db-type declaration for logger.")
+        if not genFiletype.len() > 0:
+          error(lineNo, "Missing gen-filetype declaration for logger.")
+        iwings = initWLogger(iwings, dbType, genFiletype)
       else:
         error(
           lineNo,

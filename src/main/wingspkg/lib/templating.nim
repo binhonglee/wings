@@ -95,8 +95,8 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
       "`genFile()` should only be called on templatable containing that language type."
     )
 
-  if not tconfig.templates.hasKey($wingsType):
-    LOG(FATAL, "No template found for the given type and language.")
+  if not tconfig.templates.hasKey($wingsType) or (tconfig.templates.getOrDefault($wingsType) == "\n"):
+    LOG(FATAL, "No template found for " & tconfig.filetype & " " & $wingsType & " file.")
 
   let givenTemplate: StringStream = newStringStream(tconfig.templates[$wingsType])
 

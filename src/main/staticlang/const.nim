@@ -53,6 +53,8 @@ const TEMPLATE_ENUM_PRE*: string = "const TEMPLATE_ENUM: string = \"\"\"\n"
 const TEMPLATE_ENUM_POST*: string = "\n\"\"\""
 const TEMPLATE_INTERFACE_PRE*: string = "const TEMPLATE_INTERFACE: string = \"\"\"\n"
 const TEMPLATE_INTERFACE_POST*: string = "\n\"\"\""
+const TEMPLATE_LOGGER_PRE*: string = "const TEMPLATE_LOGGER: string = \"\"\"\n"
+const TEMPLATE_LOGGER_POST*: string = "\n\"\"\""
 
 const TYPES_PRE*: string = "let TYPES: Table[string, TypeInterpreter] = {"
 const TYPES_POST*: string = "}.toTable()"
@@ -81,6 +83,7 @@ const CONFIG_POST*: string = """_CONFIG*: TConfig = initTConfig(
     "struct": TEMPLATE_STRUCT,
     "enum": TEMPLATE_ENUM,
     "interface": TEMPLATE_INTERFACE,
+    "logger": TEMPLATE_LOGGER,
   }.toTable(),
   ty = TYPES,
 )"""

@@ -4,7 +4,7 @@ ts-filepath examples/output/ts
 gen-filetype go
 db-type psql
 
-logger LogHomework {
+logger HomeworkLogger {
   id int unique serial primary
   name str nonnull
   due_date date nonnull
