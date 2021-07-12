@@ -1,12 +1,13 @@
-from strutils import indent, isEmptyOrWhitespace, isSpaceAscii, join, removePrefix,
-  removeSuffix, replace, split, splitLines, splitWhitespace, startsWith, unindent
+from strutils import indent, isEmptyOrWhitespace, isSpaceAscii, join, parseEnum,
+   removePrefix, removeSuffix, replace, split, splitLines, splitWhitespace,
+   startsWith, unindent
 import stones/genlib
 import stones/cases
 import stones/log
 import stones/strlib
 import sets
 import tables
-import ./tconfig, ./tempconst, ./winterface
+import ./tconfig, ./tempconst, ./winterface, ./dbtconfig
 import ../util/filename
 
 type
@@ -190,11 +191,18 @@ proc parseFields(iwings: var IWings, fs: seq[string], tconfig: TConfig): seq[Tab
       if iwings.wingsType == WingsType.loggerw:
         var keywords: seq[string] = newSeq[string]()
         for i in 2..(fields.len() - 1):
-          if DBKeywords.contains(toLowerCase(fields[i])):
-            keywords.add(toUpperCase(fields[i]))
+          let dbk: DBKeyword = parseEnum[DBKeyword](toLowerCase(fields[i]), DBKeyword.unknown)
+          if dbk != DBKeyword.unknown:
+            try:
+              let dbconfig = DBTConfig(tconfig)
+              if not dbconfig.keywords.hasKey(dbk):
+                LOG(FATAL, "Missing keyword conversion for " & $dbk & " on " & dbconfig.dbtype & ".")
+              keywords.add(dbconfig.keywords.getOrDefault(dbk))
+            except ObjectConversionDefect:
+              discard
           elif i == (fields.len() - 1):
             variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
-        variables[wrap(TK_TYPE, TK_DB_KEYWORDS)] = keywords.join()
+        variables[wrap(TK_DB_KEYWORDS)] = keywords.join(" ")
       else:
         variables[wrap(TK_TYPE, TK_INIT)] = fields[2]
     result.add(variables)
@@ -212,6 +220,8 @@ proc parseFieldsList(fields: seq[Table[string, string]]): Table[string, string] 
   for f in fields:
     l.add("$" & $i)
     inc(i)
+  # TODO: Add this as a param in the json file instead of hardcoded.
+  l.add("$" & $i)
   result[wrap(TK_VARNAME, TK_COUNT, TK_LIST)] = l.join(", ")
 
 proc parseAbstractFunc(
@@ -246,9 +256,31 @@ proc parseAbstractFunc(
 
     result.add(function)
 
+proc genericTemplatable(templatable: var Templatable, iwings: IWings, lang: string, fallbackLang: string = lang) =
+  templatable.langBasedReps[lang] = initTable[string, string]()
+  templatable.langBasedReps[lang][wrap(TK_FUNCTIONS)] = ""
+  templatable.langBasedMultireps[lang] = initTable[string, HashSet[string]]()
+  templatable.replacements[wrap(TK_COMMENT)] = iwings.comment
+  templatable.replacements[wrap(TK_NAME)] = iwings.name
+
+  var names: Table[Case, string] = allCases(iwings.name, Snake)
+  for key in names.keys:
+    templatable.replacements[wrap(TK_NAME, $key)] = names[key]
+
+  var i: int = 1
+  var words: seq[string] = tFilename(
+    iwings.filename,
+    iwings.filepath[fallbackLang],
+  ).split('/')
+
+  for w in words:
+    var word: string = w
+    if word != "." and word != "..":
+      templatable.langBasedReps[lang][wrap($(words.len() - i))] = word
+    inc(i)
+
 proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
-  ## Convert IWings to TConfig.
-  result = initTemplatable()
+  ## Convert IWings to Templatable.
   if iwings.dependencies.len() > 0:
     LOG(
       FATAL,
@@ -258,28 +290,8 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
     )
 
   let lang: string = tconfig.filetype
-
-  result.langBasedReps[lang] = initTable[string, string]()
-  result.langBasedReps[lang][wrap(TK_FUNCTIONS)] = ""
-  result.langBasedMultireps[lang] = initTable[string, HashSet[string]]()
-  result.replacements[wrap(TK_COMMENT)] = iwings.comment
-  result.replacements[wrap(TK_NAME)] = iwings.name
-
-  var names: Table[Case, string] = allCases(iwings.name, Snake)
-  for key in names.keys:
-    result.replacements[wrap(TK_NAME, $key)] = names[key]
-
-  var i: int = 1
-  var words: seq[string] = tFilename(
-    iwings.filename,
-    iwings.filepath[lang],
-  ).split('/')
-
-  for w in words:
-    var word: string = w
-    if word != "." and word != "..":
-      result.langBasedReps[lang][wrap($(words.len() - i))] = word
-    inc(i)
+  result = initTemplatable()
+  genericTemplatable(result, iwings, lang)
 
   case iwings.wingsType
   of WingsType.interfacew:
@@ -354,3 +366,12 @@ proc wingsToTemplatable*(iwings: var IWings, tconfig: TConfig): Templatable =
     result.langBasedMultireps[lang][wrap(TK_IMPORT)] = iwings.imports[lang]
   else:
     result.langBasedMultireps[lang][wrap(TK_IMPORT)] = initHashSet[string]()
+
+proc wingsToTemplatableDB*(loggerw: var WLogger, dbconfig: DBConfig, tconfig: TConfig): Templatable =
+  ## Convert WLogger to Templatable.
+  var iwings: IWings = loggerw
+  result = wingsToTemplatable(iwings, tconfig)
+  genericTemplatable(result, iwings, dbconfig.dbtype, tconfig.filetype)
+  result.fields = parseFields(iwings, loggerw.fields, toTConfig(dbConfig, tconfig))
+  result.replacements.merge(parseFieldsList(result.fields))
+  loggerw = WLogger(iwings)

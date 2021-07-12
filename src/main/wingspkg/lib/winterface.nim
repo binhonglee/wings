@@ -22,7 +22,14 @@ type
     protected = "protected"
     private = "private"
 
-const DBKeywords* = ["unique", "serial", "primary", "nonnull"].toHashSet()
+type
+  DBKeyword* = enum
+    key = "key"
+    nonnull = "nonnull",
+    primary = "primary",
+    serial = "serial"
+    unique = "unique",
+    unknown = "unknown"
 
 const COMMENT = "//"
 
@@ -285,7 +292,6 @@ proc parseAbstractFunc(
     for param in params:
       let ss = split(param, ":")
       if ss.len() < 2:
-        echo ss
         error(0, "Missing type declaration in `" & param & "`.")
       elif ss.len() > 2:
         error(0, "Unexpected characters in `" & param & "`.")

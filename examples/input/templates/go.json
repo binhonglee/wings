@@ -16,7 +16,8 @@
     "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.go",
     "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.go",
     "interface": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/interface.go",
-    "logger": "examples/input/templates/logger.go"
+    "logger": "examples/input/templates/logger.go",
+    "psql": "examples/input/templates/genpsql.go"
   },
   "interfaceConfig": {
     "interfaceSupported": true,

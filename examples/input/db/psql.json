@@ -1,0 +1,34 @@
+{
+  "dbtype": "psql",
+  "keywords": {
+    "key": "KEY",
+    "nonnull": "NOT NULL",
+    "primary": "PRIMARY",
+    "serial": "SERIAL",
+    "unique": "UNIQUE"
+  },
+  "types": [
+    {
+      "wingsType": "int",
+      "targetType": "INT"
+    }, {
+      "wingsType": "flt",
+      "targetType": "FLOAT"
+    }, {
+      "wingsType": "dbl",
+      "targetType": "DOUBLE"
+    }, {
+      "wingsType": "str",
+      "targetType": "TEXT"
+    }, {
+      "wingsType": "bool",
+      "targetType": "BOOL"
+    }, {
+      "wingsType": "date",
+      "targetType": "TIMESTAMPZ"
+    }, {
+      "wingsType": "[]{TYPE}",
+      "targetType": "{TYPE1}[]"
+    }
+  ]
+}

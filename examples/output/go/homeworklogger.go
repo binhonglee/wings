@@ -16,8 +16,8 @@ func LogHomeworkLogger(
 	givendate time.Time,
 ) bool {
   sqlStatement := `
-    INSERT INTO HomeworkLogger (id, name, duedate, givendate)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO HomeworkLogger (id, name, due_date, given_date)
+    VALUES ($1, $2, $3, $4, $5)
   `
   err := db.QueryRow(sqlStatement, id, name, duedate, givendate)
   return err != nil

@@ -113,6 +113,30 @@ proc dependencyGraph*(
               config.langConfigs[lang],
               wings.wingsType
             )
+
+      if wings.wingsType == WingsType.loggerw:
+        var logger = WLogger(wings)
+        var fn = wings.filename
+        var fns = fn.split("/")
+        fns[fns.len() - 1] = "gen_" & fns[fns.len() - 1]
+        fn = fns.join("/")
+        files[
+          outputFilename(
+            fn,
+            wings.filepath[logger.genFiletype],
+            config.langConfigs[logger.genFiletype],
+          )
+        ] = genHeader(
+          config.langConfigs[logger.genFiletype].comment,
+          wings.filename,
+          config.header,
+        ) & genFile(
+          wingsToTemplatableDB(
+            logger, config.dbConfigs[logger.dbType], config.langConfigs[logger.genFiletype],
+          ),
+          config.langConfigs[logger.genFiletype], wings.wingsType, logger.dbType, true
+        )
+
       result[name] = files
 
     if reverseDependencyTable.hasKey(name):

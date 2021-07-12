@@ -1,4 +1,4 @@
-from strutils import contains, removePrefix,
+from strutils import contains, endsWith, removePrefix, removeSuffix,
   spaces, replace, split, splitWhitespace, startsWith, strip
 from tempconst import wrap, TK_SPACED
 import streams
@@ -10,6 +10,7 @@ import ./tconfig, ./templatable, ./winterface
 const MK_BEGIN: string = "BEGIN_"
 const MK_END: string = "END_"
 const MK_PREFIX: string = "// #"
+const MK_TRIM: string = "_TRIM"
 
 proc rows(format: string, replacements: seq[Table[string, string]]): string =
   result = ""
@@ -88,17 +89,21 @@ proc multiWords(keyword: string, inputs: HashSet[string], givenTemplate: string)
       result &= "\n"
     result &= rows(row, brokenDownInput[count])
 
-proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType): string =
-  if not templatable.langBasedReps.hasKey(tconfig.filetype):
+proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType, filetype: string = tconfig.filetype, genlogger: bool = false): string =
+  if not templatable.langBasedReps.hasKey(filetype):
     LOG(
       FATAL,
       "`genFile()` should only be called on templatable containing that language type."
     )
 
-  if not tconfig.templates.hasKey($wingsType) or (tconfig.templates.getOrDefault($wingsType) == "\n"):
-    LOG(FATAL, "No template found for " & tconfig.filetype & " " & $wingsType & " file.")
+  var templateKey = $wingsType
+  if wingsType == WingsType.loggerw and genlogger:
+    templateKey = filetype
 
-  let givenTemplate: StringStream = newStringStream(tconfig.templates[$wingsType])
+  if not tconfig.templates.hasKey(templateKey) or (tconfig.templates.getOrDefault(templateKey) == "\n"):
+    LOG(FATAL, "No template found for " & filetype & " " & templateKey & " file.")
+
+  let givenTemplate: StringStream = newStringStream(tconfig.templates[templateKey])
 
   result = ""
   var line: string = ""
@@ -152,6 +157,11 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
       else:
         output = multiRow(keyword, templatable.fields, templateText)
 
+      if line.endsWith(MK_TRIM):
+        line.removeSuffix(MK_TRIM)
+        var words = @line
+        output.substr(0, output.len() - parseInt(words[words.len() - 1]) - 1)
+
       if output.len() > 0:
         if postfix.len() > 0:
           output = output & "\n" & postfix
@@ -168,6 +178,6 @@ proc genFile*(templatable: Templatable, tconfig: TConfig, wingsType: WingsType):
 
     inc(lineNo)
   var reps: Table[string, string] = templatable.replacements
-  reps.merge(templatable.langBasedReps[tconfig.filetype])
+  reps.merge(templatable.langBasedReps[filetype])
   givenTemplate.close()
   result = result.replace(reps)

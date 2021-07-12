@@ -51,7 +51,7 @@ type
     paramJoiner*: string
 
 type
-  TConfig* = object
+  TConfig* = ref object of RootObj
     ## Object of template config.
     comment*: string
     customTypes*: Table[string, CustomTypeInterpreter]

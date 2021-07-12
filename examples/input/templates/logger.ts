@@ -12,7 +12,7 @@ export default class {#NAME_PASCAL} {
     const client = new Client();
     client.connect();
 
-    const sqlStatement = 'INSERT INTO {#NAME_PASCAL} ({#VARNAME_CAMEL_LIST}) VALUES({#VARNAME_COUNT_LIST})';
+    const sqlStatement = 'INSERT INTO {#NAME_PASCAL} ({#VARNAME_SNAKE_LIST}) VALUES({#VARNAME_COUNT_LIST})';
     const values = [{#VARNAME_CAMEL_LIST}];
 
     try {

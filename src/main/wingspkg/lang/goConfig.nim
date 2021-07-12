@@ -99,7 +99,7 @@ func Log{#NAME_PASCAL}(
 	// #VAR {#VARNAME_LOWER} {#TYPE},
 ) bool {
   sqlStatement := `
-    INSERT INTO {#NAME_CAMEL} ({#VARNAME_LOWER_LIST})
+    INSERT INTO {#NAME_PASCAL} ({#VARNAME_SNAKE_LIST})
     VALUES ({#VARNAME_COUNT_LIST})
   `
   err := db.QueryRow(sqlStatement, {#VARNAME_LOWER_LIST})

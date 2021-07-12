@@ -1,6 +1,7 @@
 filegroup(
     name = "lib",
     srcs = [
+        "dbtconfig.nim",
         "tconfig.nim",
         "tempconst.nim",
         "templatable.nim",

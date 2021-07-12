@@ -5,6 +5,7 @@ filegroup(
         "goConfig.nim",
         "ktConfig.nim",
         "nimConfig.nim",
+        "psqlConfig.nim",
         "pyConfig.nim",
         "tsConfig.nim",
     ],

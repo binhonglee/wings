@@ -15,7 +15,7 @@ export default class HomeworkLogger {
     const client = new Client();
     client.connect();
 
-    const sqlStatement = 'INSERT INTO HomeworkLogger (ID, name, dueDate, givenDate) VALUES($1, $2, $3, $4)';
+    const sqlStatement = 'INSERT INTO HomeworkLogger (id, name, due_date, given_date) VALUES($1, $2, $3, $4, $5)';
     const values = [ID, name, dueDate, givenDate];
 
     try {

@@ -7,7 +7,7 @@ import sets
 import std/sha1
 import tables
 import stones/log
-import ../lang/defaults, ../lib/tconfig, ../lib/tutil
+import ../lang/defaults, ../lib/tconfig, ../lib/dbtconfig, ../lib/tutil
 
 # Expected fields
 const ACRONYMS: string = "acronyms"
@@ -40,6 +40,7 @@ type
     ## An object that stores user configurations.
     header*: string
     langConfigs*: Table[string, TConfig]
+    dbConfigs*: Table[string, DBConfig]
     outputRootDirs*: HashSet[string]
     skipImport*: bool
 
@@ -55,6 +56,8 @@ proc initConfig*(
   result.langConfigs = langConfigs
   result.outputRootDirs = outputRootDirs
   result.skipImport = skipImport
+  # TODO: Add parsing for custom DB configs
+  result.dbConfigs = DEFAULT_DB_CONFIGS
 
 proc verifyRootDir(outputRootDir: string): string =
   result = getCurrentDir()
