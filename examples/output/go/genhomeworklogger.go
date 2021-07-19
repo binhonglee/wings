@@ -6,6 +6,7 @@
 package go
 
 import (
+	person "github.com/binhonglee/wings/examples/output/go/person"
 	"time"
 )
 
@@ -23,6 +24,7 @@ func initHomeworkLogger() {
 			CREATE TABLE HomeworkLogger (
 				id INT UNIQUE SERIAL PRIMARY,
 				name TEXT NOT NULL,
+				emotion INT NOT NULL,
 				due_date TIMESTAMPZ NOT NULL,
 				given_date TIMESTAMPZ NOT NULL
 			);`
@@ -34,6 +36,7 @@ func initHomeworkLogger() {
 	} else {
 		db.Exec("ALTER TABLE HomeworkLogger ADD COLUMN IF NOT EXISTS id INT UNIQUE SERIAL PRIMARY;")
 		db.Exec("ALTER TABLE HomeworkLogger ADD COLUMN IF NOT EXISTS name TEXT NOT NULL;")
+		db.Exec("ALTER TABLE HomeworkLogger ADD COLUMN IF NOT EXISTS emotion INT NOT NULL;")
 		db.Exec("ALTER TABLE HomeworkLogger ADD COLUMN IF NOT EXISTS due_date TIMESTAMPZ NOT NULL;")
 		db.Exec("ALTER TABLE HomeworkLogger ADD COLUMN IF NOT EXISTS given_date TIMESTAMPZ NOT NULL;")
 	}

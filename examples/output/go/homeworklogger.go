@@ -6,19 +6,21 @@
 package go
 
 import (
+	person "github.com/binhonglee/wings/examples/output/go/person"
 	"time"
 )
 
 func LogHomeworkLogger(
 	id int,
 	name string,
+	emotion person.Emotion,
 	duedate time.Time,
 	givendate time.Time,
 ) bool {
   sqlStatement := `
-    INSERT INTO HomeworkLogger (id, name, due_date, given_date)
+    INSERT INTO HomeworkLogger (id, name, emotion, due_date, given_date)
     VALUES ($1, $2, $3, $4, $5)
   `
-  err := db.QueryRow(sqlStatement, id, name, duedate, givendate)
+  err := db.QueryRow(sqlStatement, id, name, emotion, duedate, givendate)
   return err != nil
 }

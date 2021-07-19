@@ -1,0 +1,13 @@
+go-filepath examples/output/go
+ts-filepath examples/output/ts
+
+import examples/input/emotion.wings
+
+gen-filetype ts
+db-type psql
+
+logger EmotionChangeLogger {
+  time date nonnull
+  uid int primary nonnull
+  event Emotion nonnull
+}

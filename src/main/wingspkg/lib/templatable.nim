@@ -152,15 +152,24 @@ proc parseType(
         result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
         result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
   elif not hit:
-    result.add(
-      wrap(TK_TYPE),
-      langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp),
-    )
-    result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
-    result.add(
-      wrap(TK_TYPE, TK_PARSE),
-      langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
-    )
+    try:
+      discard DBTConfig(langConfig)
+      result[wrap(TK_TYPE)] = langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp)
+      result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
+      result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
+    except ObjectConversionDefect:
+      discard result.hasKeyOrPut(
+        wrap(TK_TYPE),
+        langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp)
+      )
+      discard result.hasKeyOrPut(
+        wrap(TK_TYPE, TK_INIT),
+        langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
+      )
+      discard result.hasKeyOrPut(
+        wrap(TK_TYPE, TK_PARSE),
+        langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
+      )
 
 proc initTemplatable(): Templatable =
   result = Templatable()
@@ -220,8 +229,6 @@ proc parseFieldsList(fields: seq[Table[string, string]]): Table[string, string] 
   for f in fields:
     l.add("$" & $i)
     inc(i)
-  # TODO: Add this as a param in the json file instead of hardcoded.
-  l.add("$" & $i)
   result[wrap(TK_VARNAME, TK_COUNT, TK_LIST)] = l.join(", ")
 
 proc parseAbstractFunc(

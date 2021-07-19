@@ -27,8 +27,11 @@
       "wingsType": "date",
       "targetType": "TIMESTAMPZ"
     }, {
-      "wingsType": "[]{TYPE}",
-      "targetType": "{TYPE1}[]"
+      "wingsType": "!imported",
+      "targetType": "INT"
+    }, {
+      "wingsType": "!unimported",
+      "targetType": "INT"
     }
   ]
 }

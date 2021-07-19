@@ -17,7 +17,8 @@
     "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.ts",
     "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.ts",
     "interface": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/interface.ts",
-    "logger": "examples/input/templates/logger.ts"
+    "logger": "examples/input/templates/logger.ts",
+    "psql": "examples/input/templates/genpsql.ts"
   },
   "interfaceConfig": {
     "interfaceSupported": true,

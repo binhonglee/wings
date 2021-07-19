@@ -10,6 +10,8 @@ let TYPES: Table[string, TypeInterpreter] = {
   "date": initTypeInterpreter("date", "TIMESTAMPZ", "", "", ""),
   "str": initTypeInterpreter("str", "TEXT", "", "", ""),
   "int": initTypeInterpreter("int", "INT", "", "", ""),
+  "!imported": initTypeInterpreter("!imported", "INT", "", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "INT", "", "", ""),
 }.toTable()
 
 let KEYWORDS: Table[DBKeyword, string] = {
