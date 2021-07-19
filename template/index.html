@@ -13,19 +13,19 @@
         <meta name="author" content="BinHong Lee">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.11">
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
-        <title>Syntax - wings</title>
+        <title>Template - wings</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.3754935a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
         
           
           
@@ -44,7 +44,7 @@
     
     
     
-      <link rel="stylesheet" href="custom.css">
+      <link rel="stylesheet" href="../custom.css">
     
     
       
@@ -63,7 +63,7 @@
     <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -71,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#syntax-keywords" class="md-skip">
+        <a href="#template" class="md-skip">
           Skip to content
         </a>
       
@@ -82,7 +82,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="wings" class="md-header__button md-logo" aria-label="wings" data-md-component="logo">
+    <a href=".." title="wings" class="md-header__button md-logo" aria-label="wings" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Syntax
+              Template
             
           </span>
         </div>
@@ -175,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="wings" class="md-nav__button md-logo" aria-label="wings" data-md-component="logo">
+    <a href=".." title="wings" class="md-nav__button md-logo" aria-label="wings" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -207,7 +207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="index.html" class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Home
       </a>
     </li>
@@ -222,8 +222,38 @@
   
   
     <li class="md-nav__item">
-      <a href="design.html" class="md-nav__link">
+      <a href="../design/" class="md-nav__link">
         Design
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syntax/" class="md-nav__link">
+        Syntax
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config/" class="md-nav__link">
+        Config
       </a>
     </li>
   
@@ -247,12 +277,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Syntax
+          Template
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="syntax.html" class="md-nav__link md-nav__link--active">
-        Syntax
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Template
       </a>
       
         
@@ -270,51 +300,180 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lang-filepath" class="md-nav__link">
-    {lang}-filepath
+  <a href="#comment-str" class="md-nav__link">
+    comment*: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-import" class="md-nav__link">
-    {lang}-import
+  <a href="#filename-case" class="md-nav__link">
+    filename*: Case
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#import" class="md-nav__link">
-    import
+  <a href="#filetype-str" class="md-nav__link">
+    filetype*: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-implement" class="md-nav__link">
-    {lang}-implement
+  <a href="#implementformat-str" class="md-nav__link">
+    implementFormat: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-func" class="md-nav__link">
-    {lang}-func
+  <a href="#importpath-obj" class="md-nav__link">
+    importPath*: obj
+  </a>
+  
+    <nav class="md-nav" aria-label="importPath*: obj">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-str" class="md-nav__link">
+    format: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separator-str" class="md-nav__link">
+    separator: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pathtype-never-absolute-relative" class="md-nav__link">
+    pathType*: "never" || "absolute" || "relative"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix-str" class="md-nav__link">
+    prefix: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-int" class="md-nav__link">
+    level*: int
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indentation-obj" class="md-nav__link">
+    indentation: obj
+  </a>
+  
+    <nav class="md-nav" aria-label="indentation: obj">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spacing-str" class="md-nav__link">
+    spacing: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preindent-bool" class="md-nav__link">
+    preIndent: bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parseformat-str" class="md-nav__link">
+    parseFormat: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    #
+  <a href="#templates-obj" class="md-nav__link">
+    templates*: obj
   </a>
+  
+    <nav class="md-nav" aria-label="templates*: obj">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#struct-str" class="md-nav__link">
+    struct*: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-str" class="md-nav__link">
+    enum*: str
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    //
+  <a href="#types-obj" class="md-nav__link">
+    types*: obj[]
   </a>
+  
+    <nav class="md-nav" aria-label="types*: obj[]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wingstype-str" class="md-nav__link">
+    wingsType*: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#targettype-str" class="md-nav__link">
+    targetType*: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#targetinit-str" class="md-nav__link">
+    targetInit: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requiredimport-str" class="md-nav__link">
+    requiredImport: str
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -334,37 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="config.html" class="md-nav__link">
-        Config
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="template.html" class="md-nav__link">
-        Template
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="experimental.html" class="md-nav__link">
+      <a href="../experimental/" class="md-nav__link">
         Experimental
       </a>
     </li>
@@ -421,7 +550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="tsUtil/index.html" class="md-nav__link">
+      <a href="../tsUtil/" class="md-nav__link">
         index.ts
       </a>
     </li>
@@ -448,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="license.html" class="md-nav__link">
+      <a href="../license/" class="md-nav__link">
         License
       </a>
     </li>
@@ -481,51 +610,180 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#lang-filepath" class="md-nav__link">
-    {lang}-filepath
+  <a href="#comment-str" class="md-nav__link">
+    comment*: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-import" class="md-nav__link">
-    {lang}-import
+  <a href="#filename-case" class="md-nav__link">
+    filename*: Case
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#import" class="md-nav__link">
-    import
+  <a href="#filetype-str" class="md-nav__link">
+    filetype*: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-implement" class="md-nav__link">
-    {lang}-implement
+  <a href="#implementformat-str" class="md-nav__link">
+    implementFormat: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#lang-func" class="md-nav__link">
-    {lang}-func
+  <a href="#importpath-obj" class="md-nav__link">
+    importPath*: obj
+  </a>
+  
+    <nav class="md-nav" aria-label="importPath*: obj">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-str" class="md-nav__link">
+    format: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separator-str" class="md-nav__link">
+    separator: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pathtype-never-absolute-relative" class="md-nav__link">
+    pathType*: "never" || "absolute" || "relative"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefix-str" class="md-nav__link">
+    prefix: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-int" class="md-nav__link">
+    level*: int
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indentation-obj" class="md-nav__link">
+    indentation: obj
+  </a>
+  
+    <nav class="md-nav" aria-label="indentation: obj">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spacing-str" class="md-nav__link">
+    spacing: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preindent-bool" class="md-nav__link">
+    preIndent: bool
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parseformat-str" class="md-nav__link">
+    parseFormat: str
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    #
+  <a href="#templates-obj" class="md-nav__link">
+    templates*: obj
   </a>
+  
+    <nav class="md-nav" aria-label="templates*: obj">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#struct-str" class="md-nav__link">
+    struct*: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-str" class="md-nav__link">
+    enum*: str
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    //
+  <a href="#types-obj" class="md-nav__link">
+    types*: obj[]
   </a>
+  
+    <nav class="md-nav" aria-label="types*: obj[]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wingstype-str" class="md-nav__link">
+    wingsType*: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#targettype-str" class="md-nav__link">
+    targetType*: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#targetinit-str" class="md-nav__link">
+    targetInit: str
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requiredimport-str" class="md-nav__link">
+    requiredImport: str
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -541,28 +799,73 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/binhonglee/wings/edit/master/docs/syntax.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/binhonglee/wings/edit/master/docs/template.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="syntax-keywords">Syntax Keywords</h1>
-<p>Simple explanation on how the syntax works with wings. Rows that are unbounded and / or with undefined keywords will lead to an error being thrown.</p>
-<h2 id="lang-filepath"><code>{lang}-filepath</code></h2>
-<p>Basically the path location of where the generated file lives relative to where the build is ran (which if you use Please or Nimble as suggested, it will always be at the top level folder of this project - <code>wings/</code>).</p>
-<p>If the namespace for a specific language is not defined, the file for that language will not be generated.</p>
-<h2 id="lang-import"><code>{lang}-import</code></h2>
-<p>Usually the <code>include</code> or <code>import</code> statement required for some part of the file to work properly. (In this case, its mostly external classes or enums for custom typing.)</p>
-<h2 id="import"><code>import</code></h2>
-<p>Similar to the above but this is specific to <code>include</code> or <code>import</code> another <code>wings</code> file.</p>
-<h2 id="lang-implement"><code>{lang}-implement</code></h2>
-<p>In many occassion, your struct or object might be implementing a separate interface class. Use this to specify the class that it is implementing. (There is not support for this in <code>go</code> since it would already inherently associate your struct to the interface if you implemented all the functions and variables defined in the interface.)</p>
-<h2 id="lang-func"><code>{lang}-func</code></h2>
-<p>Specific functions for specific programming languages. Ideally, you should have a separate utility classes that do all the other operations. This is mostly designed to be used for defining functions in an interface that the struct / class is implementing.</p>
-<h2 id="_1"><code>#</code></h2>
-<p>Comments for struct (usually description). This comment will be carried forward and included in the generated file.</p>
-<h2 id="_2"><code>//</code></h2>
-<p>Comment in file. Unlike <code>#</code>, lines that begins with <code>//</code> will be ignored by the parser unless it is written inside the <code>{lang}Func()</code> where it would then be copied over to the generated file exactly the way it is. (Tabbing does not matter.)</p>
+                <h1 id="template">Template</h1>
+<p>This is for more advanced use case where you want your own way of formatting for the output files or if you use wings for languages that is not currently supported. Check out the <a href="https://github.com/binhonglee/wings/tree/devel/examples/input/templates">examples/input/template</a> folder for an example of how it works for currently supported languages (start from the json files).</p>
+<p><em>* indicates required field. Non-required fields will have its default value specified.</em></p>
+<h2 id="comment-str">comment*: <code>str</code></h2>
+<p>Language line prefix for comments (eg. <code>//</code> in TypeScript or <code>#</code> in Python).</p>
+<h2 id="filename-case">filename*: <a href="https://binhonglee.github.io/stones/stones/cases.html#Case"><code>Case</code></a></h2>
+<p>The Case / format in which the output filename should be in.</p>
+<h2 id="filetype-str">filetype*: <code>str</code></h2>
+<p>This is used for deduplication of language template files and also to be appended to the generated filename ending as filetype.</p>
+<h2 id="implementformat-str">implementFormat: <code>str</code></h2>
+<div class="highlight"><pre><span></span><code>default: &quot;{#IMPLEMENT}&quot;
+</code></pre></div>
+<p>The string in which is used in the specific language to declare that the current class extends or implements an existing different class.</p>
+<h2 id="importpath-obj">importPath*: <code>obj</code></h2>
+<h3 id="format-str">format: <code>str</code></h3>
+<div class="highlight"><pre><span></span><code>default: &quot;{#IMPORT}&quot;
+</code></pre></div>
+<p>The format in which import path are written in.</p>
+<h3 id="separator-str">separator: <code>str</code></h3>
+<div class="highlight"><pre><span></span><code>default: &#39;/&#39;
+</code></pre></div>
+<p>The way files / folders are joined. Some programming languages uses '.' in import path instead of '/'.</p>
+<h3 id="pathtype-never-absolute-relative">pathType*: <code>"never" || "absolute" || "relative"</code></h3>
+<p>This is to define how the import path should be written for the imported files.</p>
+<h3 id="prefix-str">prefix: <code>str</code></h3>
+<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+</code></pre></div>
+<p>Prefix for import path. Will be overwritten by the <code>prefix</code> value in the project config if already defined there.</p>
+<h3 id="level-int">level*: <code>int</code></h3>
+<p>The level of folder the import should run and stop at. <code>0</code> is the lowest possible number which refers to the file itself, <code>1</code> refers to the folder the file is in and so on.</p>
+<p><em>*Note: Only required when <code>pathType</code> is not set to <code>"never"</code></em></p>
+<h2 id="indentation-obj">indentation: <code>obj</code></h2>
+<h3 id="spacing-str">spacing: <code>str</code></h3>
+<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+</code></pre></div>
+<p>Define the "tab" width. This <strong>WOULD NOT</strong> replace the existing tabbing in your template files but rather is used to properly indent functions declared in the wings file.</p>
+<h3 id="preindent-bool">preIndent: <code>bool</code></h3>
+<div class="highlight"><pre><span></span><code>default: false
+</code></pre></div>
+<p>This is to define if the imported functions should be indented in the output file.</p>
+<h2 id="parseformat-str">parseFormat: <code>str</code></h2>
+<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+</code></pre></div>
+<p>General fallback option for the more specific <code>targetParse</code> below if that's not defined.</p>
+<h2 id="templates-obj">templates*: <code>obj</code></h2>
+<h3 id="struct-str">struct*: <code>str</code></h3>
+<p>Filepath to the struct template file.</p>
+<h3 id="enum-str">enum*: <code>str</code></h3>
+<p>Filepath to the enum template file.</p>
+<h2 id="types-obj">types*: <code>obj[]</code></h2>
+<h3 id="wingstype-str">wingsType*: <code>str</code></h3>
+<p>Type to be parsed from wings file.</p>
+<h3 id="targettype-str">targetType*: <code>str</code></h3>
+<p>Generated type for output language.</p>
+<h3 id="targetinit-str">targetInit: <code>str</code></h3>
+<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+</code></pre></div>
+<p>Initialization for target output type.</p>
+<h3 id="requiredimport-str">requiredImport: <code>str</code></h3>
+<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+</code></pre></div>
+<p>Specific import that is needed to be added when this type is in use.</p>
                 
               
               
@@ -582,7 +885,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="design.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Design" rel="prev">
+        <a href="../config/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Config" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -591,20 +894,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Design
+              Config
             </div>
           </div>
         </a>
       
       
         
-        <a href="config.html" class="md-footer__link md-footer__link--next" aria-label="Next: Config" rel="next">
+        <a href="../experimental/" class="md-footer__link md-footer__link--next" aria-label="Next: Experimental" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Config
+              Experimental
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -633,10 +936,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
       
     
   </body>
