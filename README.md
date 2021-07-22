@@ -7,6 +7,7 @@ A customizable cross language struct and enum file generator.
 [![codecov](https://codecov.io/gh/binhonglee/wings/branch/devel/graph/badge.svg)](https://codecov.io/gh/binhonglee/wings)
 [![CodeFactor](https://www.codefactor.io/repository/github/binhonglee/wings/badge)](https://www.codefactor.io/repository/github/binhonglee/wings)
 [![mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/binhonglee/wings)](https://github.com/binhonglee/wings/blob/devel/.mergify.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbinhonglee%2Fwings.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbinhonglee%2Fwings?ref=badge_shield)
 
 [![Gitter](https://img.shields.io/gitter/room/binhonglee/wings.svg)](https://gitter.im/wings-sh/community)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fwings.sh)](https://wings.sh)
@@ -53,3 +54,7 @@ For some more comprehensive set up / testing procedure, [`.travis.yml`](https://
 
 - [Usage explanation and examples](https://wings.sh).
 - [Code documentation](https://wings.sh/api).
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbinhonglee%2Fwings.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbinhonglee%2Fwings?ref=badge_large)
