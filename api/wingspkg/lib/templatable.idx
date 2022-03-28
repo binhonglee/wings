@@ -1,0 +1,2 @@
+Templatable	wingspkg/lib/templatable.html#Templatable	templatable: Templatable	
+wingsToTemplatable	wingspkg/lib/templatable.html#wingsToTemplatable,IWings,TConfig	templatable: wingsToTemplatable(iwings: var IWings; tconfig: TConfig): Templatable	
