@@ -1,4 +1,5 @@
-import { equal } from 'assert';
+import { describe, it } from "mocha";
+import { strictEqual } from 'assert';
 import { WingsStructUtil } from '../index';
 import Student from './Student';
 import Homework from './Homework';
@@ -6,20 +7,20 @@ import Emotion from './person/Emotion';
 
 describe('isIWingsStruct', () => {
   it('Student should pass isIWingsStruct', () => {
-    equal(WingsStructUtil.isIWingsStruct(new Student()), true);
+    strictEqual(WingsStructUtil.isIWingsStruct(new Student()), true);
   });
   it('Homework should pass isIWingsStruct', () => {
-    equal(WingsStructUtil.isIWingsStruct(new Homework()), true);
+    strictEqual(WingsStructUtil.isIWingsStruct(new Homework()), true);
   });
 
   class NonWingsClass {}
 
   it('NonWingsClass should fail isWingsStruct', () => {
-    equal(WingsStructUtil.isIWingsStruct(new NonWingsClass()), false);
+    strictEqual(WingsStructUtil.isIWingsStruct(new NonWingsClass()), false);
   });
 
   it('Passing non object into isIWingsStruct', () => {
-    equal(WingsStructUtil.isIWingsStruct(''), false);
+    strictEqual(WingsStructUtil.isIWingsStruct(''), false);
   });
 });
 
@@ -34,7 +35,7 @@ describe('stringify Student', () => {
     homeworks: [
       new Homework({
         id: 2353456,
-        name: 'Test Homework1 Name',
+        name: 'Test "Homework1" Name',
         due_date: new Date(),
         given_date: new Date(),
         feeling: [Emotion.Accomplished, Emotion.Frustrated],
@@ -55,7 +56,7 @@ describe('stringify Student', () => {
   });
   const reversedObj = new Student(
     JSON.parse(
-      WingsStructUtil.stringify(student)
+      WingsStructUtil.stringify(student, true)
     )
   );
 
@@ -93,23 +94,23 @@ describe('stringify Homework', () => {
 
 function test(original?: any, reversed?: any) {
   if (original instanceof Date) {
-    equal(original.toISOString(), reversed.toISOString());
+    strictEqual(original.toISOString(), reversed.toISOString());
   } else if (original instanceof Array) {
-    equal(reversed instanceof Array, true);
-    equal(
+    strictEqual(reversed instanceof Array, true);
+    strictEqual(
       original.length,
       reversed.length,
     );
   } else if (original instanceof Map) {
-    equal(
+    strictEqual(
       reversed instanceof Map,
       true
     );
-    equal(
+    strictEqual(
       Object.keys(original).length,
       Object.keys(reversed).length
     );
   } else {
-    equal(reversed, original);
+    strictEqual(reversed, original);
   }
 }

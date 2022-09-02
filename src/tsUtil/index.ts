@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export interface IWingsStruct {
   toJsonKey(key: string): string;
 }
@@ -9,19 +7,19 @@ export class WingsStructUtil {
     return (arg as IWingsStruct).toJsonKey !== undefined;
   }
 
-  public static stringify(obj: any): string {
+  public static stringify(obj: any, escapeString = false): string {
     let toReturn = '{';
-    
+
     if (typeof obj === 'object' &&
       !(obj instanceof Number) &&
       !(obj instanceof String) &&
       !(obj instanceof Boolean)
     ) {
       Object.keys(obj).forEach(key => {
-        toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key]) + ',';
+        toReturn += this.wrap(obj.toJsonKey(key)) + ':' + this.valString(obj[key], escapeString) + ',';
       });
     } else {
-      return this.valString(obj);
+      return this.valString(obj, escapeString);
     }
 
     return toReturn.slice(0, -1) + '}';
@@ -31,12 +29,15 @@ export class WingsStructUtil {
     return '\"' + toWrap + '\"';
   }
 
-  private static valString(val: any): string {
+  private static valString(val: any, escapeString: boolean): string {
     switch (typeof val) {
       case 'number': {
         return String(val);
       }
       case 'string': {
+        if (escapeString) {
+          val = stringEscape(val as string);
+        }
         return this.wrap(val);
       }
       case 'boolean': {
@@ -44,13 +45,13 @@ export class WingsStructUtil {
       }
       default: {
         if (this.isIWingsStruct(val)) {
-          return this.stringify(val);
+          return this.stringify(val, escapeString);
         } else if (val instanceof Date) {
           return this.wrap(val.toISOString());
         } else if (val instanceof Array) {
           let toReturn = '[';
           for (const item of val) {
-            toReturn += this.stringify(item) + ',';
+            toReturn += this.stringify(item, escapeString) + ',';
           }
           if (val.length > 0) {
             toReturn = toReturn.slice(0, -1);
@@ -60,7 +61,7 @@ export class WingsStructUtil {
         } else if (val instanceof Map) {
           let toReturn = '{';
           val.forEach((v, k) => {
-            toReturn += this.stringify(k) + ':' + this.stringify(v) + ',';
+            toReturn += this.stringify(k, escapeString) + ':' + this.stringify(v, escapeString) + ',';
           });
           if (val.size > 0) {
             toReturn = toReturn.slice(0, -1);
@@ -116,4 +117,16 @@ export function parseArray<T>(
   } else {
     return parseRegularArray(obj);
   }
+}
+
+export function stringEscape(val: string): string {
+  return val.replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+export function stringUnescape(val: string): string {
+  return val
+    .replace(/\\"/g, '"')
+    .replace(/\\'/g, "'")
+    .replace(/\\\\/g, "\\")
+    .replace(/\n/g, "\\n");
 }
