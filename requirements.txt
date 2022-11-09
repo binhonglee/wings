@@ -1,5 +1,5 @@
 pymdown-extensions==9.8
 pygments==2.13.0
-mkdocs-material==8.5.8
+mkdocs-material==8.5.9
 mkdocs==1.4.2
 mkdocs-cluster==0.0.9
