@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>plz-out/tmp/src/main/wings_api_doc._build/src/main/wingspkg/lang/pyConfig</title>
+<title>wingspkg/lang/pyConfig</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
 <script type="text/javascript" src="../../dochack.js"></script>
@@ -34,6 +34,7 @@ function main() {
     }
   }
 
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   function switchTheme(e) {
       if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
@@ -44,32 +45,24 @@ function main() {
       }
   }
 
-  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-  if (toggleSwitch !== null) {
-    toggleSwitch.addEventListener('change', switchTheme, false);
-  }
+  toggleSwitch.addEventListener('change', switchTheme, false);
 
-  var currentTheme = localStorage.getItem('theme');
-  if (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    currentTheme = 'dark';
-  }
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
   if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
 
-    if (currentTheme === 'dark' && toggleSwitch !== null) {
+    if (currentTheme === 'dark') {
       toggleSwitch.checked = true;
     }
   }
 }
-
-window.addEventListener('DOMContentLoaded', main);
 </script>
 
 </head>
-<body>
+<body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">plz-out/tmp/src/main/wings_api_doc._build/src/main/wingspkg/lang/pyConfig</h1>
+    <h1 class="title">wingspkg/lang/pyConfig</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -110,12 +103,12 @@ window.addEventListener('DOMContentLoaded', main);
       <li><a class="reference" href="#PY_CONFIG"
     title="PY_CONFIG: TConfig = initTConfig(COMMENT, CUSTOM_TYPES, FILENAME, FILETYPE,
                                  IMPLEMENT_FORMAT, IMPORT_PATH_FORMAT,
-                                 IMPORT_PATH_TYPE, IMPORT_PATH_PREFIX, '.', 0,
+                                 IMPORT_PATH_TYPE, IMPORT_PATH_PREFIX, &apos;.&apos;, 0,
                                  INDENTATION_SPACING, PRE_INDENT,
                                  INTERFACE_SUPPORTED, PARAM_FORMAT,
                                  PARAM_JOINER, PARSE_FORMAT, toTable([
     (&quot;struct&quot;, TEMPLATE_STRUCT), (&quot;enum&quot;, TEMPLATE_ENUM),
-    (&quot;interface&quot;, TEMPLATE_INTERFACE)]), TYPES)">PY_CONFIG</a></li>
+    (&quot;interface&quot;, TEMPLATE_INTERFACE)]), TYPES)"><wbr />PY_<wbr />CONFIG<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -123,11 +116,6 @@ window.addEventListener('DOMContentLoaded', main);
 </ul>
 
   </div>
-  &nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lang/pyConfig.nim#L1"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lang/pyConfig.nim#L1" class="link-seesrc" target="_blank" >Edit</a>
-
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
@@ -140,7 +128,7 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="9">
 <h1><a class="toc-backref" href="#9">Lets</a></h1>
 <dl class="item">
-<div id="PY_CONFIG">
+<a id="PY_CONFIG"></a>
 <dt><pre><a href="pyConfig.html#PY_CONFIG"><span class="Identifier">PY_CONFIG</span></a><span class="Other">:</span> <a href="../lib/tconfig.html#TConfig"><span class="Identifier">TConfig</span></a> <span class="Other">=</span> <span class="Identifier">initTConfig</span><span class="Other">(</span><span class="Identifier">COMMENT</span><span class="Other">,</span> <span class="Identifier">CUSTOM_TYPES</span><span class="Other">,</span> <span class="Identifier">FILENAME</span><span class="Other">,</span> <span class="Identifier">FILETYPE</span><span class="Other">,</span>
                                  <span class="Identifier">IMPLEMENT_FORMAT</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_FORMAT</span><span class="Other">,</span>
                                  <span class="Identifier">IMPORT_PATH_TYPE</span><span class="Other">,</span> <span class="Identifier">IMPORT_PATH_PREFIX</span><span class="Other">,</span> <span class="CharLit">'.'</span><span class="Other">,</span> <span class="DecNumber">0</span><span class="Other">,</span>
@@ -155,10 +143,9 @@ class="link-seesrc" target="_blank">Source</a>
 &nbsp;&nbsp;<a
 href="https://wings.sh/tree/devel/src/main/wingspkg/lang/pyConfig.nim#L80"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lang/pyConfig.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lang/pyConfig.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-</div>
 
 </dl></div>
 
@@ -169,7 +156,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-11-16 13:07:12 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-11-24 13:05:04 UTC</small>
       </div>
     </div>
   </div>
