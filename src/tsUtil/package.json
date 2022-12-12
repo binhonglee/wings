@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/assert": "1.5.6",
     "@types/mocha": "10.0.1",
-    "@types/node": "18.11.12",
+    "@types/node": "18.11.13",
     "mocha": "10.1.0",
     "nyc": "15.1.0",
     "ts-node": "10.9.1",
