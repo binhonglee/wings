@@ -603,7 +603,7 @@
 <h2 id="installation">Installation</h2>
 <h3 id="script-easiest">Script (easiest)</h3>
 <p>Just run the following in your terminal.</p>
-<div class="highlight"><pre><span></span><code>curl -s https://wings.sh/install.sh <span class="p">|</span> sh
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>https://wings.sh/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
 </code></pre></div>
 <h3 id="nimble-easy-ish">Nimble (easy-ish)</h3>
 <p>If you have <a href="https://github.com/nim-lang/nimble"><code>nimble</code></a> installed, you can just do <code>nimble install wings</code>.</p>
@@ -666,72 +666,72 @@ cd wings/
 
 <p>Output files:</p>
 <div class="tabbed-set" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">examples/go/classroom/student.go</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span><span class="w"></span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span><span class="w"></span>
-<span class="c1">// Source: examples/input/student.wings</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
+<span class="c1">//</span>
+<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
+<span class="c1">// Source: examples/input/student.wings</span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nx">classroom</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">classroom</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="nx">person</span><span class="w"> </span><span class="s">&quot;github.com/binhonglee/wings/examples/output/go/person&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="s">&quot;time&quot;</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="nx">person</span><span class="w"> </span><span class="s">&quot;github.com/binhonglee/wings/examples/output/go/person&quot;</span>
+<span class="w">  </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-<span class="c1">// Student - Any person who is studying in a class</span><span class="w"></span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nx">ID</span><span class="w">            </span><span class="kt">int</span><span class="w">                  </span><span class="s">`json:&quot;id&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Name</span><span class="w">          </span><span class="kt">string</span><span class="w">               </span><span class="s">`json:&quot;name&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">CurClass</span><span class="w">      </span><span class="kt">string</span><span class="w">               </span><span class="s">`json:&quot;cur_class&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Feeling</span><span class="w">       </span><span class="nx">person</span><span class="p">.</span><span class="nx">Emotion</span><span class="w">       </span><span class="s">`json:&quot;feeling&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">IsActive</span><span class="w">      </span><span class="kt">bool</span><span class="w">                 </span><span class="s">`json:&quot;is_active&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Year</span><span class="w">          </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w">            </span><span class="s">`json:&quot;year&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Graduation</span><span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w">            </span><span class="s">`json:&quot;graduation&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Homeworks</span><span class="w">     </span><span class="p">[]</span><span class="nx">Homework</span><span class="w">           </span><span class="s">`json:&quot;homeworks&quot;`</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Something</span><span class="w">     </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;something&quot;`</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="c1">// Student - Any person who is studying in a class</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ID</span><span class="w">            </span><span class="kt">int</span><span class="w">                  </span><span class="s">`json:&quot;id&quot;`</span>
+<span class="w">  </span><span class="nx">Name</span><span class="w">          </span><span class="kt">string</span><span class="w">               </span><span class="s">`json:&quot;name&quot;`</span>
+<span class="w">  </span><span class="nx">CurClass</span><span class="w">      </span><span class="kt">string</span><span class="w">               </span><span class="s">`json:&quot;cur_class&quot;`</span>
+<span class="w">  </span><span class="nx">Feeling</span><span class="w">       </span><span class="nx">person</span><span class="p">.</span><span class="nx">Emotion</span><span class="w">       </span><span class="s">`json:&quot;feeling&quot;`</span>
+<span class="w">  </span><span class="nx">IsActive</span><span class="w">      </span><span class="kt">bool</span><span class="w">                 </span><span class="s">`json:&quot;is_active&quot;`</span>
+<span class="w">  </span><span class="nx">Year</span><span class="w">          </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w">            </span><span class="s">`json:&quot;year&quot;`</span>
+<span class="w">  </span><span class="nx">Graduation</span><span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w">            </span><span class="s">`json:&quot;graduation&quot;`</span>
+<span class="w">  </span><span class="nx">Homeworks</span><span class="w">     </span><span class="p">[]</span><span class="nx">Homework</span><span class="w">           </span><span class="s">`json:&quot;homeworks&quot;`</span>
+<span class="w">  </span><span class="nx">Something</span><span class="w">     </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;something&quot;`</span>
+<span class="p">}</span>
 
-<span class="c1">// Students - An array of Student</span><span class="w"></span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">Students</span><span class="w"> </span><span class="p">[]</span><span class="nx">Student</span><span class="w"></span>
+<span class="c1">// Students - An array of Student</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Students</span><span class="w"> </span><span class="p">[]</span><span class="nx">Student</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">examples/kt/Student.kt</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span><span class="w"></span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span><span class="w"></span>
-<span class="c1">// Source: examples/input/student.wings</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
+<span class="c1">//</span>
+<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
+<span class="c1">// Source: examples/input/student.wings</span>
 
-<span class="k">package</span><span class="w"> </span><span class="nn">kt</span><span class="w"></span>
+<span class="k">package</span><span class="w"> </span><span class="nn">kt</span>
 
-<span class="c1">// Any person who is studying in a class</span><span class="w"></span>
-<span class="kd">class</span><span class="w"> </span><span class="nc">Student</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">ID</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">curClass</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">feeling</span><span class="p">:</span><span class="w"> </span><span class="n">Emotion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Emotion</span><span class="p">.</span><span class="na">Meh</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">isActive</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">year</span><span class="p">:</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">graduation</span><span class="p">:</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">homeworks</span><span class="p">:</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Homework</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arrayListOf</span><span class="o">&lt;</span><span class="n">Homework</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">something</span><span class="p">:</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hashMapOf</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="c1">// Any person who is studying in a class</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Student</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">ID</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="m">1</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">curClass</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">feeling</span><span class="p">:</span><span class="w"> </span><span class="n">Emotion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Emotion</span><span class="p">.</span><span class="na">Meh</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">isActive</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">year</span><span class="p">:</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">()</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">graduation</span><span class="p">:</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">()</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">homeworks</span><span class="p">:</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Homework</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arrayListOf</span><span class="o">&lt;</span><span class="n">Homework</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nv">something</span><span class="p">:</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hashMapOf</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
 
-<span class="w">  </span><span class="kd">fun</span><span class="w"> </span><span class="nf">toJsonKey</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="n">string</span><span class="p">):</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;ID&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;curClass&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;cur_class&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;feeling&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;feeling&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;isActive&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;is_active&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;year&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;year&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;graduation&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;graduation&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;homeworks&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;homeworks&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;something&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;something&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">key</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">fun</span><span class="w"> </span><span class="nf">toJsonKey</span><span class="p">(</span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="n">string</span><span class="p">):</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;ID&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;id&quot;</span>
+<span class="w">      </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;name&quot;</span>
+<span class="w">      </span><span class="s">&quot;curClass&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;cur_class&quot;</span>
+<span class="w">      </span><span class="s">&quot;feeling&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;feeling&quot;</span>
+<span class="w">      </span><span class="s">&quot;isActive&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;is_active&quot;</span>
+<span class="w">      </span><span class="s">&quot;year&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;year&quot;</span>
+<span class="w">      </span><span class="s">&quot;graduation&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;graduation&quot;</span>
+<span class="w">      </span><span class="s">&quot;homeworks&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;homeworks&quot;</span>
+<span class="w">      </span><span class="s">&quot;something&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;something&quot;</span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">key</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">examples/nim/student.nim</label><div class="tabbed-content">
@@ -741,23 +741,23 @@ cd wings/
 <span class="c"># run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
 <span class="c"># Source: examples/input/student.wings</span>
 
-<span class="kn">import</span> <span class="n">json</span>
-<span class="kn">import</span> <span class="p">.</span><span class="o">/</span><span class="n">homework</span>
-<span class="kn">import</span> <span class="n">tables</span>
-<span class="kn">import</span> <span class="p">.</span><span class="o">/</span><span class="n">emotion</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">homework</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">tables</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">emotion</span>
 
 <span class="k">type</span>
-  <span class="n">Student</span><span class="o">*</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
-    <span class="sd">## Any person who is studying in a class</span>
-    <span class="n">ID</span><span class="o">*</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">name</span><span class="o">*</span><span class="p">:</span> <span class="nb">string</span>
-    <span class="n">curClass</span><span class="o">*</span><span class="p">:</span> <span class="nb">string</span>
-    <span class="n">feeling</span><span class="o">*</span><span class="p">:</span> <span class="n">Emotion</span>
-    <span class="n">isActive</span><span class="o">*</span><span class="p">:</span> <span class="nb">bool</span>
-    <span class="n">year</span><span class="o">*</span><span class="p">:</span> <span class="n">DateTime</span>
-    <span class="n">graduation</span><span class="o">*</span><span class="p">:</span> <span class="n">DateTime</span>
-    <span class="n">homeworks</span><span class="o">*</span><span class="p">:</span> <span class="nb">seq</span><span class="o">[</span><span class="n">Homework</span><span class="o">]</span>
-    <span class="n">something</span><span class="o">*</span><span class="p">:</span> <span class="n">Table</span><span class="o">[</span><span class="nb">string</span><span class="p">,</span> <span class="nb">string</span><span class="o">]</span>
+<span class="w">  </span><span class="n">Student</span><span class="o">*</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">ref</span><span class="w"> </span><span class="k">object</span>
+<span class="w">    </span><span class="sd">## Any person who is studying in a class</span>
+<span class="w">    </span><span class="n">ID</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="nb">int</span>
+<span class="w">    </span><span class="n">name</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span>
+<span class="w">    </span><span class="n">curClass</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span>
+<span class="w">    </span><span class="n">feeling</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="n">Emotion</span>
+<span class="w">    </span><span class="n">isActive</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="nb">bool</span>
+<span class="w">    </span><span class="n">year</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="n">DateTime</span>
+<span class="w">    </span><span class="n">graduation</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="n">DateTime</span>
+<span class="w">    </span><span class="n">homeworks</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="nb">seq</span><span class="o">[</span><span class="n">Homework</span><span class="o">]</span>
+<span class="w">    </span><span class="n">something</span><span class="o">*</span><span class="p">:</span><span class="w"> </span><span class="n">Table</span><span class="o">[</span><span class="nb">string</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="o">]</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">examples/py/student.py</label><div class="tabbed-content">
@@ -790,83 +790,83 @@ cd wings/
 </code></pre></div>
 </div>
 <input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><label for="__tabbed_1_5">examples/ts/Student.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span><span class="w"></span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span><span class="w"></span>
-<span class="c1">// Source: examples/input/student.wings</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
+<span class="c1">//</span>
+<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
+<span class="c1">// Source: examples/input/student.wings</span>
 
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">parseMap</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="nx">Homework</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./Homework&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">IWingsStruct</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">parseMap</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Homework</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./Homework&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">IWingsStruct</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;wings-ts-util&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span>
 
-<span class="c1">// Any person who is studying in a class</span><span class="w"></span>
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">IWingsStruct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="p">[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">any</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">ID</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">curClass</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">feeling</span><span class="o">:</span><span class="w"> </span><span class="kt">Emotion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Emotion</span><span class="p">.</span><span class="nx">Meh</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">isActive</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">year</span><span class="o">:</span><span class="w"> </span><span class="kt">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">graduation</span><span class="o">:</span><span class="w"> </span><span class="kt">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">homeworks</span><span class="o">:</span><span class="w"> </span><span class="kt">Homework</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span><span class="w"></span>
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">something</span><span class="o">:</span><span class="w"> </span><span class="kt">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// Any person who is studying in a class</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="nx">IWingsStruct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">any</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">ID</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">curClass</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">feeling</span><span class="o">:</span><span class="w"> </span><span class="kt">Emotion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Emotion</span><span class="p">.</span><span class="nx">Meh</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">isActive</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">year</span><span class="o">:</span><span class="w"> </span><span class="kt">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">graduation</span><span class="o">:</span><span class="w"> </span><span class="kt">Date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">homeworks</span><span class="o">:</span><span class="w"> </span><span class="kt">Homework</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">something</span><span class="o">:</span><span class="w"> </span><span class="kt">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">obj?</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">curClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">feeling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">feeling</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">feeling</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj.feeling</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Emotion.Meh</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">isActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">is_active</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">is_active</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj.is_active</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">year</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">year</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">year</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">graduation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">graduation</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">graduation</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">graduation</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[];</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">something</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">something</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">something</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">parseMap</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">something</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">obj?</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">curClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">cur_class</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">feeling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">feeling</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">feeling</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj.feeling</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Emotion.Meh</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">isActive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">is_active</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">is_active</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj.is_active</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">year</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">year</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">year</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">graduation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">graduation</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">graduation</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">graduation</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">homeworks</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[];</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">something</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">something</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">obj</span><span class="p">.</span><span class="nx">something</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">parseMap</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">something</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">toJsonKey</span><span class="p">(</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;ID&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;id&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;curClass&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;cur_class&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;feeling&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;feeling&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;isActive&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;is_active&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;year&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;year&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;graduation&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;graduation&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;homeworks&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;homeworks&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;something&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;something&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">toJsonKey</span><span class="p">(</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;ID&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;id&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;name&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;curClass&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;cur_class&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;feeling&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;feeling&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;isActive&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;is_active&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;year&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;year&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;graduation&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;graduation&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;homeworks&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;homeworks&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;something&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;something&#39;</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">addHomework</span><span class="p">(</span><span class="nx">hw</span><span class="o">:</span><span class="w"> </span><span class="kt">Homework</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">Homeworks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">hw</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="nx">addHomework</span><span class="p">(</span><span class="nx">hw</span><span class="o">:</span><span class="w"> </span><span class="kt">Homework</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">Homeworks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">hw</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
@@ -905,55 +905,55 @@ cd wings/
 
 <p>Output files:</p>
 <div class="tabbed-set" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">examples/go/emotion.go</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span><span class="w"></span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span><span class="w"></span>
-<span class="c1">// Source: examples/input/emotion.wings</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
+<span class="c1">//</span>
+<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
+<span class="c1">// Source: examples/input/emotion.wings</span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nx">person</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">person</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="kt">int</span><span class="w"></span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="kt">int</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Accomplished</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Angry</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Annoyed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Appalled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Excited</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Exhausted</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">FeelsGood</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Frustrated</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Happy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Meh</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Sad</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Satisfied</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="nx">Accomplished</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Angry</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Annoyed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Appalled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Excited</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Exhausted</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">FeelsGood</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Frustrated</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Happy</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Meh</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Sad</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="w">  </span><span class="nx">Satisfied</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">examples/kt/Emotion.kt</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span><span class="w"></span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span><span class="w"></span>
-<span class="c1">// Source: examples/input/emotion.wings</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
+<span class="c1">//</span>
+<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
+<span class="c1">// Source: examples/input/emotion.wings</span>
 
-<span class="k">package</span><span class="w"> </span><span class="nn">kt</span><span class="w"></span>
+<span class="k">package</span><span class="w"> </span><span class="nn">kt</span>
 
-<span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Emotion</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Accomplished</span><span class="w"></span>
-<span class="w">  </span><span class="n">Angry</span><span class="w"></span>
-<span class="w">  </span><span class="n">Annoyed</span><span class="w"></span>
-<span class="w">  </span><span class="n">Appalled</span><span class="w"></span>
-<span class="w">  </span><span class="n">Excited</span><span class="w"></span>
-<span class="w">  </span><span class="n">Exhausted</span><span class="w"></span>
-<span class="w">  </span><span class="n">FeelsGood</span><span class="w"></span>
-<span class="w">  </span><span class="n">Frustrated</span><span class="w"></span>
-<span class="w">  </span><span class="n">Happy</span><span class="w"></span>
-<span class="w">  </span><span class="n">Meh</span><span class="w"></span>
-<span class="w">  </span><span class="n">Sad</span><span class="w"></span>
-<span class="w">  </span><span class="n">Satisfied</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Emotion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Accomplished</span>
+<span class="w">  </span><span class="n">Angry</span>
+<span class="w">  </span><span class="n">Annoyed</span>
+<span class="w">  </span><span class="n">Appalled</span>
+<span class="w">  </span><span class="n">Excited</span>
+<span class="w">  </span><span class="n">Exhausted</span>
+<span class="w">  </span><span class="n">FeelsGood</span>
+<span class="w">  </span><span class="n">Frustrated</span>
+<span class="w">  </span><span class="n">Happy</span>
+<span class="w">  </span><span class="n">Meh</span>
+<span class="w">  </span><span class="n">Sad</span>
+<span class="w">  </span><span class="n">Satisfied</span>
+<span class="p">}</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">examples/nim/emotion.nim</label><div class="tabbed-content">
@@ -964,19 +964,19 @@ cd wings/
 <span class="c"># Source: examples/input/emotion.wings</span>
 
 <span class="k">type</span>
-  <span class="n">Emotion</span><span class="o">*</span> <span class="o">=</span> <span class="k">enum</span>
-    <span class="n">Accomplished</span>
-    <span class="n">Angry</span>
-    <span class="n">Annoyed</span>
-    <span class="n">Appalled</span>
-    <span class="n">Excited</span>
-    <span class="n">Exhausted</span>
-    <span class="n">FeelsGood</span>
-    <span class="n">Frustrated</span>
-    <span class="n">Happy</span>
-    <span class="n">Meh</span>
-    <span class="n">Sad</span>
-    <span class="n">Satisfied</span>
+<span class="w">  </span><span class="n">Emotion</span><span class="o">*</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">enum</span>
+<span class="w">    </span><span class="n">Accomplished</span>
+<span class="w">    </span><span class="n">Angry</span>
+<span class="w">    </span><span class="n">Annoyed</span>
+<span class="w">    </span><span class="n">Appalled</span>
+<span class="w">    </span><span class="n">Excited</span>
+<span class="w">    </span><span class="n">Exhausted</span>
+<span class="w">    </span><span class="n">FeelsGood</span>
+<span class="w">    </span><span class="n">Frustrated</span>
+<span class="w">    </span><span class="n">Happy</span>
+<span class="w">    </span><span class="n">Meh</span>
+<span class="w">    </span><span class="n">Sad</span>
+<span class="w">    </span><span class="n">Satisfied</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">examples/py/emotion.py</label><div class="tabbed-content">
@@ -1004,28 +1004,28 @@ cd wings/
 </code></pre></div>
 </div>
 <input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">examples/ts/person/Emotion.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span><span class="w"></span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span><span class="w"></span>
-<span class="c1">// Source: examples/input/emotion.wings</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
+<span class="c1">//</span>
+<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
+<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
+<span class="c1">// Source: examples/input/emotion.wings</span>
 
-<span class="kd">enum</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Accomplished</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Angry</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Annoyed</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Appalled</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Excited</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Exhausted</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">FeelsGood</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Frustrated</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Happy</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Meh</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Sad</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">Satisfied</span><span class="p">,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">enum</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">Accomplished</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Angry</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Annoyed</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Appalled</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Excited</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Exhausted</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">FeelsGood</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Frustrated</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Happy</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Meh</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Sad</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">Satisfied</span><span class="p">,</span>
+<span class="p">}</span>
 
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Emotion</span><span class="p">;</span><span class="w"></span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Emotion</span><span class="p">;</span>
 </code></pre></div>
 </div>
 </div>

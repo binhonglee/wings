@@ -592,13 +592,13 @@
 <p>See <a href="https://binhonglee.github.io/stones/stones/cases.html#setAcronyms%2CHashSet%5Bstring%5D">here</a> for more information about how its used.</p>
 <h2 id="header-str">header: <code>[]str</code></h2>
 <p>This is the header comment to be added to the generated files. The array of strings will be joined with a <code>\n</code> character so you can have multiline comment by having each line of comment as a separate string in this array. If you have <code>{#SOURCE_FILE}</code> included in there, it will be replaced with the path to the source wings file where this is generated from.</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;header&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Line 1&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;Line 2&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;etc...&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;header&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;Line 1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Line 2&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;etc...&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2 id="langconfigs-str">langConfigs: <code>[]str</code></h2>
 <p>The array of language config files to use. If this is left empty, it will just fallback to built-in supported <a href="../template/">language template files</a>.</p>
@@ -611,11 +611,11 @@
 <p><em>Note: The call should be made in the deeper of the different folder hierarchies.</em></p>
 <h2 id="prefixes-mapstrstr">prefixes: <code>Map&lt;str,str&gt;</code></h2>
 <p>This is mainly created for <code>go</code> since the import path isn't just relative from the file calling it nor the top level location of the project folder but rather, something that can be defined in the <code>go.mod</code> file. This allows <code>go</code> to have customized import path prefix.</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;prefixes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;go&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;github.com/binhonglee/wings&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;prefixes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;go&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;github.com/binhonglee/wings&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2 id="skipimport-bool">skipImport: <code>bool</code></h2>
 <p>When <code>skipimport</code> is set to <code>true</code>, wings will skip parsing and generating imported wings file(s) and only generate from the wings file given.</p>
