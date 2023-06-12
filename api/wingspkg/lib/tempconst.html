@@ -17,7 +17,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>plz-out/tmp/src/main/wings_api_doc._build/src/main/wingspkg/lib/tempconst</title>
+<title>wingspkg/lib/tempconst</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
 <script type="text/javascript" src="../../dochack.js"></script>
@@ -34,6 +34,7 @@ function main() {
     }
   }
 
+  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
   function switchTheme(e) {
       if (e.target.checked) {
           document.documentElement.setAttribute('data-theme', 'dark');
@@ -44,32 +45,24 @@ function main() {
       }
   }
 
-  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-  if (toggleSwitch !== null) {
-    toggleSwitch.addEventListener('change', switchTheme, false);
-  }
+  toggleSwitch.addEventListener('change', switchTheme, false);
 
-  var currentTheme = localStorage.getItem('theme');
-  if (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    currentTheme = 'dark';
-  }
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
   if (currentTheme) {
     document.documentElement.setAttribute('data-theme', currentTheme);
 
-    if (currentTheme === 'dark' && toggleSwitch !== null) {
+    if (currentTheme === 'dark') {
       toggleSwitch.checked = true;
     }
   }
 }
-
-window.addEventListener('DOMContentLoaded', main);
 </script>
 
 </head>
-<body>
+<body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">plz-out/tmp/src/main/wings_api_doc._build/src/main/wingspkg/lib/tempconst</h1>
+    <h1 class="title">wingspkg/lib/tempconst</h1>
     <div class="row">
   <div class="three columns">
   <div class="theme-switch-wrapper">
@@ -101,48 +94,48 @@ window.addEventListener('DOMContentLoaded', main);
 <li>
   <a class="reference reference-toplevel" href="#10" id="60">Consts</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#TK_COMMENT"
-    title="TK_COMMENT: string = &quot;COMMENT&quot;">TK_COMMENT</a></li>
-  <li><a class="reference" href="#TK_FILENAME"
-    title="TK_FILENAME: string = &quot;FILENAME&quot;">TK_FILENAME</a></li>
-  <li><a class="reference" href="#TK_FUNCNAME"
-    title="TK_FUNCNAME: string = &quot;FUNCNAME&quot;">TK_FUNCNAME</a></li>
-  <li><a class="reference" href="#TK_FUNCTIONS"
-    title="TK_FUNCTIONS: string = &quot;FUNCTIONS&quot;">TK_FUNCTIONS</a></li>
-  <li><a class="reference" href="#TK_IMPLEMENT"
-    title="TK_IMPLEMENT: string = &quot;IMPLEMENT&quot;">TK_IMPLEMENT</a></li>
-  <li><a class="reference" href="#TK_IMPORT"
-    title="TK_IMPORT: string = &quot;IMPORT&quot;">TK_IMPORT</a></li>
-  <li><a class="reference" href="#TK_INIT"
-    title="TK_INIT: string = &quot;INIT&quot;">TK_INIT</a></li>
-  <li><a class="reference" href="#TK_IPREFIX"
-    title="TK_IPREFIX: string = &quot;PREFIX&quot;">TK_IPREFIX</a></li>
-  <li><a class="reference" href="#TK_JSON"
-    title="TK_JSON: string = &quot;JSON&quot;">TK_JSON</a></li>
-  <li><a class="reference" href="#TK_NAME"
-    title="TK_NAME: string = &quot;NAME&quot;">TK_NAME</a></li>
-  <li><a class="reference" href="#TK_PARAM"
-    title="TK_PARAM: string = &quot;PARAM&quot;">TK_PARAM</a></li>
-  <li><a class="reference" href="#TK_PARAMS"
-    title="TK_PARAMS: string = &quot;PARAMS&quot;">TK_PARAMS</a></li>
-  <li><a class="reference" href="#TK_PARSE"
-    title="TK_PARSE: string = &quot;PARSE&quot;">TK_PARSE</a></li>
-  <li><a class="reference" href="#TK_SEPARATOR"
-    title="TK_SEPARATOR: string = &quot;_&quot;">TK_SEPARATOR</a></li>
-  <li><a class="reference" href="#TK_SPACED"
-    title="TK_SPACED: string = &quot;SPACED&quot;">TK_SPACED</a></li>
-  <li><a class="reference" href="#TK_TYPE"
-    title="TK_TYPE: string = &quot;TYPE&quot;">TK_TYPE</a></li>
-  <li><a class="reference" href="#TK_VARNAME"
-    title="TK_VARNAME: string = &quot;VARNAME&quot;">TK_VARNAME</a></li>
-  <li><a class="reference" href="#TYPE_IMPORTED"
-    title="TYPE_IMPORTED: string = &quot;!imported&quot;">TYPE_IMPORTED</a></li>
+      <li><a class="reference" href="#TYPE_PREFIX"
+    title="TYPE_PREFIX: string = &quot;{TYPE&quot;"><wbr />TYPE_<wbr />PREFIX<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#TYPE_POSTFIX"
-    title="TYPE_POSTFIX: string = &quot;}&quot;">TYPE_POSTFIX</a></li>
-  <li><a class="reference" href="#TYPE_PREFIX"
-    title="TYPE_PREFIX: string = &quot;{TYPE&quot;">TYPE_PREFIX</a></li>
+    title="TYPE_POSTFIX: string = &quot;}&quot;"><wbr />TYPE_<wbr />POSTFIX<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_SEPARATOR"
+    title="TK_SEPARATOR: string = &quot;_&quot;"><wbr />TK_<wbr />SEPARATOR<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_COMMENT"
+    title="TK_COMMENT: string = &quot;COMMENT&quot;"><wbr />TK_<wbr />COMMENT<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_FILENAME"
+    title="TK_FILENAME: string = &quot;FILENAME&quot;"><wbr />TK_<wbr />FILENAME<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_FUNCTIONS"
+    title="TK_FUNCTIONS: string = &quot;FUNCTIONS&quot;"><wbr />TK_<wbr />FUNCTIONS<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_IMPLEMENT"
+    title="TK_IMPLEMENT: string = &quot;IMPLEMENT&quot;"><wbr />TK_<wbr />IMPLEMENT<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_IMPORT"
+    title="TK_IMPORT: string = &quot;IMPORT&quot;"><wbr />TK_<wbr />IMPORT<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_INIT"
+    title="TK_INIT: string = &quot;INIT&quot;"><wbr />TK_<wbr />INIT<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_JSON"
+    title="TK_JSON: string = &quot;JSON&quot;"><wbr />TK_<wbr />JSON<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_NAME"
+    title="TK_NAME: string = &quot;NAME&quot;"><wbr />TK_<wbr />NAME<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_PARSE"
+    title="TK_PARSE: string = &quot;PARSE&quot;"><wbr />TK_<wbr />PARSE<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_IPREFIX"
+    title="TK_IPREFIX: string = &quot;PREFIX&quot;"><wbr />TK_<wbr />IPREFIX<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_SPACED"
+    title="TK_SPACED: string = &quot;SPACED&quot;"><wbr />TK_<wbr />SPACED<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_TYPE"
+    title="TK_TYPE: string = &quot;TYPE&quot;"><wbr />TK_<wbr />TYPE<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_VARNAME"
+    title="TK_VARNAME: string = &quot;VARNAME&quot;"><wbr />TK_<wbr />VARNAME<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_FUNCNAME"
+    title="TK_FUNCNAME: string = &quot;FUNCNAME&quot;"><wbr />TK_<wbr />FUNCNAME<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_PARAM"
+    title="TK_PARAM: string = &quot;PARAM&quot;"><wbr />TK_<wbr />PARAM<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TK_PARAMS"
+    title="TK_PARAMS: string = &quot;PARAMS&quot;"><wbr />TK_<wbr />PARAMS<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#TYPE_IMPORTED"
+    title="TYPE_IMPORTED: string = &quot;!imported&quot;"><wbr />TYPE_<wbr />IMPORTED<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#TYPE_UNIMPORTED"
-    title="TYPE_UNIMPORTED: string = &quot;!unimported&quot;">TYPE_UNIMPORTED</a></li>
+    title="TYPE_UNIMPORTED: string = &quot;!unimported&quot;"><wbr />TYPE_<wbr />UNIMPORTED<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -151,7 +144,7 @@ window.addEventListener('DOMContentLoaded', main);
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">wrap
       <li><a class="reference" href="#wrap%2Cstring%2Cvarargs%5Bstring%5D"
-    title="wrap(s: string; ss: varargs[string]): string">wrap(s: string; ss: varargs[string]): string</a></li>
+    title="wrap(s: string; ss: varargs[string]): string">wrap,string,varargs[string]<span class="attachedType"></span></a></li>
 
   </ul>
 
@@ -161,11 +154,6 @@ window.addEventListener('DOMContentLoaded', main);
 </ul>
 
   </div>
-  &nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L1"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L1" class="link-seesrc" target="_blank" >Edit</a>
-
   <div class="nine columns" id="content">
   <div id="tocRoot"></div>
   
@@ -173,235 +161,7 @@ class="link-seesrc" target="_blank">Source</a>
   <div class="section" id="10">
 <h1><a class="toc-backref" href="#10">Consts</a></h1>
 <dl class="item">
-<div id="TK_COMMENT">
-<dt><pre><a href="tempconst.html#TK_COMMENT"><span class="Identifier">TK_COMMENT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;COMMENT&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L8"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L8" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_FILENAME">
-<dt><pre><a href="tempconst.html#TK_FILENAME"><span class="Identifier">TK_FILENAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;FILENAME&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L9"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L9" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_FUNCNAME">
-<dt><pre><a href="tempconst.html#TK_FUNCNAME"><span class="Identifier">TK_FUNCNAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;FUNCNAME&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L21"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L21" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_FUNCTIONS">
-<dt><pre><a href="tempconst.html#TK_FUNCTIONS"><span class="Identifier">TK_FUNCTIONS</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;FUNCTIONS&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L10"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L10" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_IMPLEMENT">
-<dt><pre><a href="tempconst.html#TK_IMPLEMENT"><span class="Identifier">TK_IMPLEMENT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;IMPLEMENT&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L11"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L11" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_IMPORT">
-<dt><pre><a href="tempconst.html#TK_IMPORT"><span class="Identifier">TK_IMPORT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;IMPORT&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L12"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L12" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_INIT">
-<dt><pre><a href="tempconst.html#TK_INIT"><span class="Identifier">TK_INIT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;INIT&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L13"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L13" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_IPREFIX">
-<dt><pre><a href="tempconst.html#TK_IPREFIX"><span class="Identifier">TK_IPREFIX</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PREFIX&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L17"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L17" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_JSON">
-<dt><pre><a href="tempconst.html#TK_JSON"><span class="Identifier">TK_JSON</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;JSON&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L14"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L14" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_NAME">
-<dt><pre><a href="tempconst.html#TK_NAME"><span class="Identifier">TK_NAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;NAME&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L15"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L15" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_PARAM">
-<dt><pre><a href="tempconst.html#TK_PARAM"><span class="Identifier">TK_PARAM</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PARAM&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L22"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_PARAMS">
-<dt><pre><a href="tempconst.html#TK_PARAMS"><span class="Identifier">TK_PARAMS</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PARAMS&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L23"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_PARSE">
-<dt><pre><a href="tempconst.html#TK_PARSE"><span class="Identifier">TK_PARSE</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PARSE&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L16"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L16" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_SEPARATOR">
-<dt><pre><a href="tempconst.html#TK_SEPARATOR"><span class="Identifier">TK_SEPARATOR</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;_&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L5"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L5" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_SPACED">
-<dt><pre><a href="tempconst.html#TK_SPACED"><span class="Identifier">TK_SPACED</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;SPACED&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L18"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L18" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_TYPE">
-<dt><pre><a href="tempconst.html#TK_TYPE"><span class="Identifier">TK_TYPE</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;TYPE&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L19"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TK_VARNAME">
-<dt><pre><a href="tempconst.html#TK_VARNAME"><span class="Identifier">TK_VARNAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;VARNAME&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L20"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L20" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TYPE_IMPORTED">
-<dt><pre><a href="tempconst.html#TYPE_IMPORTED"><span class="Identifier">TYPE_IMPORTED</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;!imported&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L25"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TYPE_POSTFIX">
-<dt><pre><a href="tempconst.html#TYPE_POSTFIX"><span class="Identifier">TYPE_POSTFIX</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;}&quot;</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L2"
-class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L2" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-</div>
-<div id="TYPE_PREFIX">
+<a id="TYPE_PREFIX"></a>
 <dt><pre><a href="tempconst.html#TYPE_PREFIX"><span class="Identifier">TYPE_PREFIX</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;{TYPE&quot;</span></pre></dt>
 <dd>
 
@@ -409,11 +169,219 @@ class="link-seesrc" target="_blank">Source</a>
 &nbsp;&nbsp;<a
 href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L1"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L1" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L1" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-</div>
-<div id="TYPE_UNIMPORTED">
+<a id="TYPE_POSTFIX"></a>
+<dt><pre><a href="tempconst.html#TYPE_POSTFIX"><span class="Identifier">TYPE_POSTFIX</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;}&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L2"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L2" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_SEPARATOR"></a>
+<dt><pre><a href="tempconst.html#TK_SEPARATOR"><span class="Identifier">TK_SEPARATOR</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;_&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L5"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L5" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_COMMENT"></a>
+<dt><pre><a href="tempconst.html#TK_COMMENT"><span class="Identifier">TK_COMMENT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;COMMENT&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L8"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L8" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_FILENAME"></a>
+<dt><pre><a href="tempconst.html#TK_FILENAME"><span class="Identifier">TK_FILENAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;FILENAME&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L9"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L9" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_FUNCTIONS"></a>
+<dt><pre><a href="tempconst.html#TK_FUNCTIONS"><span class="Identifier">TK_FUNCTIONS</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;FUNCTIONS&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L10"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L10" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_IMPLEMENT"></a>
+<dt><pre><a href="tempconst.html#TK_IMPLEMENT"><span class="Identifier">TK_IMPLEMENT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;IMPLEMENT&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L11"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L11" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_IMPORT"></a>
+<dt><pre><a href="tempconst.html#TK_IMPORT"><span class="Identifier">TK_IMPORT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;IMPORT&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L12"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L12" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_INIT"></a>
+<dt><pre><a href="tempconst.html#TK_INIT"><span class="Identifier">TK_INIT</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;INIT&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L13"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L13" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_JSON"></a>
+<dt><pre><a href="tempconst.html#TK_JSON"><span class="Identifier">TK_JSON</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;JSON&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L14"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L14" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_NAME"></a>
+<dt><pre><a href="tempconst.html#TK_NAME"><span class="Identifier">TK_NAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;NAME&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L15"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L15" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_PARSE"></a>
+<dt><pre><a href="tempconst.html#TK_PARSE"><span class="Identifier">TK_PARSE</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PARSE&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L16"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L16" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_IPREFIX"></a>
+<dt><pre><a href="tempconst.html#TK_IPREFIX"><span class="Identifier">TK_IPREFIX</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PREFIX&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L17"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L17" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_SPACED"></a>
+<dt><pre><a href="tempconst.html#TK_SPACED"><span class="Identifier">TK_SPACED</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;SPACED&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L18"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L18" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_TYPE"></a>
+<dt><pre><a href="tempconst.html#TK_TYPE"><span class="Identifier">TK_TYPE</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;TYPE&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L19"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_VARNAME"></a>
+<dt><pre><a href="tempconst.html#TK_VARNAME"><span class="Identifier">TK_VARNAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;VARNAME&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L20"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L20" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_FUNCNAME"></a>
+<dt><pre><a href="tempconst.html#TK_FUNCNAME"><span class="Identifier">TK_FUNCNAME</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;FUNCNAME&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L21"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L21" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_PARAM"></a>
+<dt><pre><a href="tempconst.html#TK_PARAM"><span class="Identifier">TK_PARAM</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PARAM&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L22"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TK_PARAMS"></a>
+<dt><pre><a href="tempconst.html#TK_PARAMS"><span class="Identifier">TK_PARAMS</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;PARAMS&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L23"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TYPE_IMPORTED"></a>
+<dt><pre><a href="tempconst.html#TYPE_IMPORTED"><span class="Identifier">TYPE_IMPORTED</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;!imported&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L25"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="TYPE_UNIMPORTED"></a>
 <dt><pre><a href="tempconst.html#TYPE_UNIMPORTED"><span class="Identifier">TYPE_UNIMPORTED</span></a><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="StringLit">&quot;!unimported&quot;</span></pre></dt>
 <dd>
 
@@ -421,27 +389,25 @@ class="link-seesrc" target="_blank">Source</a>
 &nbsp;&nbsp;<a
 href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L26"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L26" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L26" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-</div>
 
 </dl></div>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<div id="wrap,string,varargs[string]">
-<dt><pre><span class="Keyword">proc</span> <a href="#wrap%2Cstring%2Cvarargs%5Bstring%5D"><span class="Identifier">wrap</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">ss</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<a id="wrap,string,varargs[string]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#wrap%2Cstring%2Cvarargs%5Bstring%5D"><span class="Identifier">wrap</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">ss</span><span class="Other">:</span> <span class="Identifier">varargs</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
 href="https://wings.sh/tree/devel/src/main/wingspkg/lib/tempconst.nim#L28"
 class="link-seesrc" target="_blank">Source</a>
-&nbsp;&nbsp;<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L28" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://wings.sh/edit/devel/src/main/wingspkg/lib/tempconst.nim#L28" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-</div>
 
 </dl></div>
 
@@ -452,7 +418,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2023-05-29 14:02:01 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2023-06-12 14:03:51 UTC</small>
       </div>
     </div>
   </div>
