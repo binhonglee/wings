@@ -82,23 +82,23 @@ interface {#NAME} {#IMPLEMENT}{
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
-  "dbl": initTypeInterpreter("dbl", "Double", "", "0", ""),
-  "void": initTypeInterpreter("void", "Unit", "", "", ""),
-  "bool": initTypeInterpreter("bool", "Boolean", "", "false", ""),
-  "flt": initTypeInterpreter("flt", "Float", "", "0", ""),
-  "date": initTypeInterpreter("date", "Date", "", "Date()", ""),
-  "str": initTypeInterpreter("str", "String", "", "\"\"", ""),
-  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "{#TYPE_PASCAL}()", ""),
   "int": initTypeInterpreter("int", "Int", "", "0", ""),
+  "str": initTypeInterpreter("str", "String", "", "\"\"", ""),
+  "void": initTypeInterpreter("void", "Unit", "", "", ""),
+  "date": initTypeInterpreter("date", "Date", "", "Date()", ""),
   "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "{#TYPE_PASCAL}()", ""),
+  "dbl": initTypeInterpreter("dbl", "Double", "", "0", ""),
+  "bool": initTypeInterpreter("bool", "Boolean", "", "false", ""),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "{#TYPE_PASCAL}()", ""),
+  "flt": initTypeInterpreter("flt", "Float", "", "0", ""),
 }.toTable()
 
 let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
-  "Map<": interpretType(
-    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "HashMap<{TYPE1}, {TYPE2}>", "", "hashMapOf<{TYPE1}, {TYPE2}>()", "")
-  ),
   "[]": interpretType(
     initTypeInterpreter("[]{TYPE}", "ArrayList<{TYPE1}>", "", "arrayListOf<{TYPE1}>()", "")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "HashMap<{TYPE1}, {TYPE2}>", "", "hashMapOf<{TYPE1}, {TYPE2}>()", "")
   ),
 }.toTable()
 

@@ -6,7 +6,7 @@ orbs:
 executors:
   linux:
     machine:
-      image: ubuntu-2004:202010-01
+      image: ubuntu-2204:2024.11.1
 
 jobs:
   build_core:
@@ -23,11 +23,6 @@ jobs:
       - checkout
       - restore_cache:
           key: nim-<< parameters.version >>
-      - restore_cache:
-          key: please-{{ checksum ".pleasew" }}
-      - run:
-          name: Add nimble to path
-          command: echo 'export PATH=~/.nimble/bin:$PATH' >> $BASH_ENV
       - run:
           name: Install dependencies
           command: |
@@ -43,8 +38,19 @@ jobs:
               choosenim << parameters.version >>
             fi
       - run:
-          name: Build files
-          command: ./pleasew --show_all_output build //src/main/...
+          name: Add nimble to path
+          command: |
+            echo 'export PATH=~/.nimble/bin:$PATH' >> $BASH_ENV
+            source "$BASH_ENV"
+      - run:
+          name: Install stones
+          command: nimble install stones
+      - run:
+          name: Build staticlang
+          command: nim c -d:ssl src/main/staticlang/main.nim
+      - run:
+          name: Build wings
+          command: nim c -d:ssl src/main/wings.nim
       - run:
           name: Run core test
           command: ./scripts/test.sh
@@ -52,10 +58,6 @@ jobs:
           key: nim-<< parameters.version >>
           paths:
             - .nimble
-      - save_cache:
-          key: please-{{ checksum ".pleasew" }}
-          paths:
-            - .please
   build_tsutil:
     parameters:
       os:
@@ -104,7 +106,7 @@ workflows:
           matrix:
             parameters:
               os: [linux]
-              version: ["1.4.0", "stable"]
+              version: ["2.2.0", "stable"]
       - build_tsutil:
           name: tsutil
           matrix:

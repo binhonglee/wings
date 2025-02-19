@@ -2,13 +2,13 @@ pull_request_rules:
   - name: Dependabot updates
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
-      - "status-success=core (1.4.0)"
+      - "status-success=core (2.2.0)"
       - "status-success=core (stable)"
       - "status-success=tsutil"
       - "status-success=coverage"
       - "status-success=documentation"
       - "status-success=ci/circleci: codecov"
-      - "status-success=ci/circleci: core-v1.4.0"
+      - "status-success=ci/circleci: core-v2.2.0"
       - "status-success=ci/circleci: core-vstable"
       - "status-success=ci/circleci: tsutil"
       - "status-success=security/snyk (binhonglee)"
@@ -20,13 +20,13 @@ pull_request_rules:
   - name: Approved PRs
     conditions:
       - "approved-reviews-by=binhonglee"
-      - "status-success=core (1.4.0)"
+      - "status-success=core (2.2.0)"
       - "status-success=core (stable)"
       - "status-success=tsutil"
       - "status-success=coverage"
       - "status-success=documentation"
       - "status-success=ci/circleci: codecov"
-      - "status-success=ci/circleci: core-v1.4.0"
+      - "status-success=ci/circleci: core-v2.2.0"
       - "status-success=ci/circleci: core-vstable"
       - "status-success=ci/circleci: tsutil"
       - "status-success=security/snyk (binhonglee)"

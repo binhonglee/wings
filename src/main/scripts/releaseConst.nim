@@ -5,6 +5,7 @@ type
   UnsupportedOSError* = object of ValueError
 
 const arm*: string = "--cpu:arm -t:-marm -l:-marm"
+const arm64*: string = "--cpu:arm64"
 const bit_32*: string = "--cpu:i386 -t:-m32 -l:-m32"
 const bit_64*: string = "--cpu:amd64 -t:-m64 -l:-m64"
 
@@ -21,6 +22,7 @@ const options*: seq[string] =
     windows & " " & bit_64,
     macosx & " " & bit_32,
     macosx & " " & bit_64,
+    macosx & " " & arm64,
   ]
 
 proc getFilename*(option: string): string =
@@ -39,6 +41,8 @@ proc getFilename*(option: string): string =
     return "32bit_macosx"
   of macosx & " " & bit_64:
     return "64bit_macosx"
+  of macosx & " " & arm64:
+    return "arm64_macosx"
   else:
     raise newException(
       MissingFilenameError,
@@ -65,10 +69,13 @@ proc getVersion*(): string =
     echo "64 bits Windows detected"
   elif defined(macosx) and defined(i386):
     result = options[5]
-    echo "64 bits MacOS detected"
+    echo "32 bits MacOS detected"
   elif defined(macosx) and defined(amd64):
     result = options[6]
     echo "64 bits MacOS detected"
+  elif defined(macosx) and defined(arm64):
+    result = options[7]
+    echo "ARM MacOS detected"
   else:
     raise newException(
       UnsupportedOSError,

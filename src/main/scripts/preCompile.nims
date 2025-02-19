@@ -16,7 +16,7 @@ proc genRun(): void =
   if status == "":
     getHash &= "^"
   let (hash, _) = gorgeEx(getHash)
-  let version = "v0.0.7-alpha"
+  let version = "v0.0.8-alpha"
   writeFile(
     outputFile,
     header & "\n" &
