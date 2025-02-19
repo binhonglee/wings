@@ -2,7 +2,7 @@
 
 WINGS_HOME="$HOME/.wings/"
 BIN="bin/"
-LATEST_VERSION="v0.0.7-alpha"
+LATEST_VERSION="v0.0.8-alpha"
 ARCH=$(uname -m)
 OS=$(uname -s)
 INSTALLED=""
@@ -24,6 +24,9 @@ case $ARCH in
     ;;
   "ARMv8")
     ARCH="arm"
+    ;;
+  "arm64")
+    ARCH="arm64"
     ;;
   *)
     echo "$RED""ERROR""$DEFAULT"": Unsupported system architechture. Halting installation..."

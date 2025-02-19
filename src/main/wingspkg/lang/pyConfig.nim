@@ -58,22 +58,22 @@ const TEMPLATE_INTERFACE: string = """
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "int", "", "0", ""),
+  "str": initTypeInterpreter("str", "str", "", "\"\"", ""),
+  "date": initTypeInterpreter("date", "datetime", "datetime:datetime", "datetime.now()", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", ""),
   "dbl": initTypeInterpreter("dbl", "double", "", "0", ""),
   "bool": initTypeInterpreter("bool", "bool", "", "False", ""),
-  "flt": initTypeInterpreter("flt", "float", "", "0", ""),
-  "date": initTypeInterpreter("date", "datetime", "datetime:datetime", "datetime.now()", ""),
-  "str": initTypeInterpreter("str", "str", "", "\"\"", ""),
   "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", ""),
-  "int": initTypeInterpreter("int", "int", "", "0", ""),
-  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", ""),
+  "flt": initTypeInterpreter("flt", "float", "", "0", ""),
 }.toTable()
 
 let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
-  "Map<": interpretType(
-    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "dict", "", "{}", "")
-  ),
   "[]": interpretType(
     initTypeInterpreter("[]{TYPE}", "list", "", "[]", "")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "dict", "", "{}", "")
   ),
 }.toTable()
 

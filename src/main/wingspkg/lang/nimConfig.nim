@@ -55,22 +55,22 @@ const TEMPLATE_INTERFACE: string = """
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
+  "int": initTypeInterpreter("int", "int", "", "", ""),
+  "str": initTypeInterpreter("str", "string", "", "", ""),
+  "date": initTypeInterpreter("date", "DateTime", "", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "", ""),
   "dbl": initTypeInterpreter("dbl", "float64", "", "", ""),
   "bool": initTypeInterpreter("bool", "bool", "", "", ""),
-  "flt": initTypeInterpreter("flt", "float", "", "", ""),
-  "date": initTypeInterpreter("date", "DateTime", "", "", ""),
-  "str": initTypeInterpreter("str", "string", "", "", ""),
   "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "", ""),
-  "int": initTypeInterpreter("int", "int", "", "", ""),
-  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "", ""),
+  "flt": initTypeInterpreter("flt", "float", "", "", ""),
 }.toTable()
 
 let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
-  "Map<": interpretType(
-    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]", "tables", "", "")
-  ),
   "[]": interpretType(
     initTypeInterpreter("[]{TYPE}", "seq[{TYPE1}]", "", "", "")
+  ),
+  "Map<": interpretType(
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]", "tables", "", "")
   ),
 }.toTable()
 

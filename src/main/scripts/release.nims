@@ -6,9 +6,7 @@ mode = ScriptMode.Verbose
 
 const folder: string = "release"
 const main: string = "src/main/wings.nim"
-const nimble: string = "plz-out/.nimble/pkgs"
-const plz_args: string = " --nocolour --nocache --plain_output --verbosity=error"
-const plz_run: string = "./pleasew run"
+const nimble: string = "~/.nimble/pkgs"
 const release: string = "-d:release"
 const ssl: string = "-d:ssl"
 
@@ -24,7 +22,7 @@ proc genRun(): void =
     echo "Exiting..."
     return
 
-  exec(plz_run & plz_args & " //src/main/staticlang:static")
+  exec("nim c src/main/staticlang/main.nim")
 
   if paramCount() > 1 and paramStr(2) == "--all":
     var status: string = ""
@@ -33,15 +31,11 @@ proc genRun(): void =
         build(i)
         status &= "\n  \u001b[32m[SUCCESS] " & getFilename(i) & "\u001b[0m"
       except:
-        status &= "\n  \u001b[31m[FAILED] " & getFilename(i) & "\u001b[0m"
+        status &= "\n  \u001b[31m[FAILED]  " & getFilename(i) & "\u001b[0m"
     echo "Build status:" & status
     return
   else:
-    try:
-      build(getVersion())
-    except UnsupportedOSError:
-      echo "Unsupported OS version"
-      return
+    build(getVersion())
 
   echo "Build successful. Exiting..."
 

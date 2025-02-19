@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        nim-version: [1.4.0, stable]
+        nim-version: [2.2.0, stable]
     steps:
     - uses: actions/checkout@v1
     - name: Cache choosenim
@@ -16,12 +16,6 @@ jobs:
       with:
         path: ~/.choosenim
         key: ${{ runner.os }}-choosenim
-    - name: Cache please
-      id: cache-please
-      uses: actions/cache@v1
-      with:
-        path: ~/.please
-        key: ${{ runner.os }}-please
     - name: Cache nimble
       id: cache-nimble
       uses: actions/cache@v1
@@ -35,12 +29,16 @@ jobs:
         sh init.sh -y
     - name: Set nimble path
       run: echo "$HOME/.nimble/bin" >> $GITHUB_PATH
+    - name: Install stones
+      run: nimble install stones
     - name: Update choosenim and select version
       run: |
         choosenim update self
         choosenim ${{ matrix.nim-version }}
-    - name: Build project
-      run: ./pleasew --show_all_output build //src/main/...
+    - name: Build staticlang
+      run: nim c -d:ssl --NimblePath:/home/runner/.nimble/pkgs src/main/staticlang/main.nim
+    - name: Build wings
+      run: nim c -d:ssl --NimblePath:/home/runner/.nimble/pkgs src/main/wings.nim
     - name: Run package test
       run: ./scripts/test.sh
   tsutil:
@@ -61,7 +59,7 @@ jobs:
     - name: Test / Cover
       run: npm run cover
     - name: Upload nyc coverage report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: tsUtil-coverage
         path: |
@@ -73,7 +71,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Download nyc coverage report
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: tsUtil-coverage
     - name: Send to codecov
@@ -89,12 +87,6 @@ jobs:
       with:
         path: ~/.choosenim
         key: ${{ runner.os }}-choosenim
-    - name: Cache please
-      id: cache-please
-      uses: actions/cache@v1
-      with:
-        path: ~/.please
-        key: ${{ runner.os }}-please
     - name: Cache nimble
       id: cache-nimble
       uses: actions/cache@v1
@@ -112,7 +104,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Generate documentations
-      run: ./pleasew --show_all_output genDocs
+      run: nim src/main/scripts/docs.nims
     - name: Deploy
       if: github.ref == 'refs/heads/devel'
       uses: peaceiris/actions-gh-pages@v3

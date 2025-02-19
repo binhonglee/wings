@@ -3,11 +3,11 @@
 // If you would like to make any changes, please edit the source file instead.
 // run `plz genFile -- examples/input/student.wings -c:wings.json` upon completion.
 
-import { parseMap } from 'wings-ts-util';
-import Homework from './Homework';
-import { parseArray } from 'wings-ts-util';
-import Emotion from './person/Emotion';
 import { IWingsStruct } from 'wings-ts-util';
+import { parseMap } from 'wings-ts-util';
+import { parseArray } from 'wings-ts-util';
+import Homework from './Homework';
+import Emotion from './person/Emotion';
 
 // Any person who is studying in a class
 export default class Student implements IWingsStruct {
