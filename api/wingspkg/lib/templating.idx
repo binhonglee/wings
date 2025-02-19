@@ -1,1 +1,0 @@
-genFile	wingspkg/lib/templating.html#genFile,Templatable,TConfig,WingsType	templating: genFile(templatable: Templatable; tconfig: TConfig; wingsType: WingsType): string	
