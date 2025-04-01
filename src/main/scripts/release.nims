@@ -1,6 +1,7 @@
 #!/usr/bin/env nim
 from os import lastPathPart
 import ./releaseConst
+import strutils
 
 mode = ScriptMode.Verbose
 
@@ -9,10 +10,11 @@ const main: string = "src/main/wings.nim"
 const nimble: string = "~/.nimble/pkgs"
 const release: string = "-d:release"
 const ssl: string = "-d:ssl"
+const ssl3: string = "-d:useOpenssl3"
 
 proc build(version: string): void =
   exec(
-    "nim " & version & " " & ssl & " " & release & " --verbosity:0 --NimblePath:" & nimble & " -o:" &
+    "nim " & version & " " & ssl & (if "linux" in getFilename(version): (" " & ssl3 & " ") else: " ") & release & " --verbosity:0 --NimblePath:" & nimble & " -o:" &
     folder & "/wings_" & getFilename(version) & " c " & main
   )
 

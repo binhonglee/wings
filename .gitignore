@@ -10,3 +10,5 @@ docs/api/
 docs/license.md
 tempconfigfile
 temptemplatefile
+nimble.develop
+nimble.paths
