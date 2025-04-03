@@ -4,7 +4,7 @@ from stones/cases import setAcronyms
 import httpClient
 import json
 import sets
-import std/sha1
+import checksums/sha1
 import tables
 import stones/log
 import ../lang/defaults, ../lib/tconfig, ../lib/tutil

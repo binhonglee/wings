@@ -46,6 +46,9 @@ jobs:
           name: Install stones
           command: nimble install stones
       - run:
+          name: Install checksums
+          command: nimble install checksums
+      - run:
           name: Build staticlang
           command: nim c -d:ssl src/main/staticlang/main.nim
       - run:
@@ -84,19 +87,6 @@ jobs:
           paths:
             - ../../report
             - .nyc_output
-  send_codecov:
-    parameters:
-      os:
-        type: executor
-    executor: << parameters.os >>
-    working_directory: ~/wings
-    steps:
-      - checkout
-      - restore_cache:
-          key: nyc_report-{{ checksum "." }}
-      - run:
-          name: Send to codecov
-          command: bash <(curl -s https://codecov.io/bash)
 
 workflows:
   workflow:
@@ -109,14 +99,6 @@ workflows:
               version: ["2.2.0", "stable"]
       - build_tsutil:
           name: tsutil
-          matrix:
-            parameters:
-              os: [linux]
-      - send_codecov:
-          name: codecov
-          requires:
-            - build_core
-            - build_tsutil
           matrix:
             parameters:
               os: [linux]

@@ -151,15 +151,11 @@ proc parseType(
         result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
         result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
   elif not hit:
-    result.add(
-      wrap(TK_TYPE),
-      langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp),
-    )
+    if not result.hasKey(wrap(TK_TYPE)):
+      result[wrap(TK_TYPE)] = langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp)
     result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
-    result.add(
-      wrap(TK_TYPE, TK_PARSE),
-      langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp),
-    )
+    if not result.hasKey(wrap(TK_TYPE, TK_PARSE)):
+      result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
 
 proc initTemplatable(): Templatable =
   result = Templatable()

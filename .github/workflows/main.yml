@@ -31,6 +31,8 @@ jobs:
       run: echo "$HOME/.nimble/bin" >> $GITHUB_PATH
     - name: Install stones
       run: nimble install stones
+    - name: Install checksums
+      run: nimble install checksums
     - name: Update choosenim and select version
       run: |
         choosenim update self
@@ -75,7 +77,7 @@ jobs:
       with:
         name: tsUtil-coverage
     - name: Send to codecov
-      run: bash <(curl -s https://codecov.io/bash)
+      uses: codecov/codecov-action@v5
   documentation:
     needs: core
     runs-on: ubuntu-latest

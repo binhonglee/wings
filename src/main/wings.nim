@@ -63,7 +63,7 @@ proc init(count: int): void =
     elif file.startsWith(CONFIG_PREFIX):
       if configFile.len() > 0:
         LOG(FATAL, "Only one config file is allowed.")
-      configFile = string(file)
+      configFile = file
     elif file.startsWith(UPGRADE_OPTION):
       upgrade()
       return

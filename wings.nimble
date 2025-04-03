@@ -1,6 +1,6 @@
 # Package
 
-version      = "0.0.7"
+version      = "0.0.9"
 author       = "BinHong Lee"
 description  = "A simple cross language struct and enum file generator."
 license      = "MIT"
@@ -14,6 +14,7 @@ installExt   = @["nim"]
 # in the generated code (breaking CI).
 requires "nim >= 1.4.0"
 requires "stones#devel"
+requires "checksums"
 
 task genFile, "Generate file(s)":
   exec "nimble build"

@@ -7,6 +7,7 @@ nim_binary(
     deps = [
         ":files",
         ":stones",
+        ":checksums",
     ],
 )
 
@@ -25,6 +26,7 @@ nim_doc(
     deps = [
         ":files",
         ":stones",
+        ":checksums",
     ],
 )
 
@@ -32,6 +34,17 @@ nimble_install(
     name = "stones",
     pkg_name = "stones",
     revision = "#devel",
+    visibility = [
+        ":wings",
+        ":wings_api_doc",
+        "//src/main/staticlang:static",
+    ],
+)
+
+nimble_install(
+    name = "checksums",
+    pkg_name = "checksums",
+    revision = "0.2.1",
     visibility = [
         ":wings",
         ":wings_api_doc",
