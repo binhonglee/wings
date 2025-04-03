@@ -100,17 +100,13 @@ if [ ! -d $WINGS_HOME ]; then
   mkdir "$WINGS_HOME""$LATEST_VERSION"
 else
   INSTALLED="TRUE"
+  mkdir "$WINGS_HOME""$LATEST_VERSION"
 fi
 
 download
 
 echo
 echo "Adding PATH info into your rc file..."
-if [ "$INSTALLED" = "TRUE" ]; then
-  echo "$YELLOW""WARNING""$DEFAULT"": Unable to determine which shell is in use. Please add \`export PATH=\"\$HOME/.wings/bin\":\$PATH\` to your rc file and source it before you continue to use \`wings\`."
-  exit
-fi
-
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
   SHELL_FILE=".zshrc"
 elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
