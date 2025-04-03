@@ -24,7 +24,7 @@
     "@types/assert": "1.5.11",
     "@types/mocha": "10.0.1",
     "@types/node": "22.14.0",
-    "mocha": "10.8.2",
+    "mocha": "11.1.0",
     "nyc": "17.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.8.2"
