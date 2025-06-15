@@ -55,22 +55,22 @@ const TEMPLATE_INTERFACE: string = """
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
-  "int": initTypeInterpreter("int", "int", "", "", ""),
-  "str": initTypeInterpreter("str", "string", "", "", ""),
-  "date": initTypeInterpreter("date", "DateTime", "", "", ""),
-  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "", ""),
-  "dbl": initTypeInterpreter("dbl", "float64", "", "", ""),
-  "bool": initTypeInterpreter("bool", "bool", "", "", ""),
-  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "", ""),
-  "flt": initTypeInterpreter("flt", "float", "", "", ""),
+  "int": initTypeInterpreter("int", "int", "", "", "", "", ""),
+  "str": initTypeInterpreter("str", "string", "", "", "", "", ""),
+  "date": initTypeInterpreter("date", "DateTime", "", "", "", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "", "", "", ""),
+  "dbl": initTypeInterpreter("dbl", "float64", "", "", "", "", ""),
+  "bool": initTypeInterpreter("bool", "bool", "", "", "", "", ""),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "", "", "", ""),
+  "flt": initTypeInterpreter("flt", "float", "", "", "", "", ""),
 }.toTable()
 
 let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
   "[]": interpretType(
-    initTypeInterpreter("[]{TYPE}", "seq[{TYPE1}]", "", "", "")
+    initTypeInterpreter("[]{TYPE}", "seq[{TYPE1}]", "", "", "", "", "")
   ),
   "Map<": interpretType(
-    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]", "tables", "", "")
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Table[{TYPE1}, {TYPE2}]", "tables", "", "", "", "")
   ),
 }.toTable()
 

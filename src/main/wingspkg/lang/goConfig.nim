@@ -85,23 +85,23 @@ type {#NAME_PASCAL} interface {
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
-  "int": initTypeInterpreter("int", "int", "", "", ""),
-  "str": initTypeInterpreter("str", "string", "", "", ""),
-  "void": initTypeInterpreter("void", "", "", "", ""),
-  "date": initTypeInterpreter("date", "time.Time", "time", "", ""),
-  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "", ""),
-  "dbl": initTypeInterpreter("dbl", "double", "", "", ""),
-  "bool": initTypeInterpreter("bool", "bool", "", "", ""),
-  "!imported": initTypeInterpreter("!imported", "{#1}.{#TYPE_PASCAL}", "", "", ""),
-  "flt": initTypeInterpreter("flt", "float", "", "", ""),
+  "int": initTypeInterpreter("int", "int", "", "", "", "", ""),
+  "str": initTypeInterpreter("str", "string", "", "", "", "", ""),
+  "void": initTypeInterpreter("void", "", "", "", "", "", ""),
+  "date": initTypeInterpreter("date", "time.Time", "time", "", "", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "", "", "", ""),
+  "dbl": initTypeInterpreter("dbl", "double", "", "", "", "", ""),
+  "bool": initTypeInterpreter("bool", "bool", "", "", "", "", ""),
+  "!imported": initTypeInterpreter("!imported", "{#1}.{#TYPE_PASCAL}", "", "", "", "", ""),
+  "flt": initTypeInterpreter("flt", "float", "", "", "", "", ""),
 }.toTable()
 
 let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
   "[]": interpretType(
-    initTypeInterpreter("[]{TYPE}", "[]{TYPE1}", "", "", "")
+    initTypeInterpreter("[]{TYPE}", "[]{TYPE1}", "", "", "", "", "")
   ),
   "Map<": interpretType(
-    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "map[{TYPE1}]{TYPE2}", "", "", "")
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "map[{TYPE1}]{TYPE2}", "", "", "", "", "")
   ),
 }.toTable()
 

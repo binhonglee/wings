@@ -91,6 +91,8 @@ proc processCustomType(
     result[wrap(TK_TYPE, $key)] = t[key]
   result[wrap(TK_TYPE)] = str
   result[wrap(TK_TYPE, TK_INIT)] = ti.targetInit.replace(ts)
+  result[wrap(TK_TYPE, TK_T_PREFIX)] = ti.targetPrefix.replace(ts)
+  result[wrap(TK_TYPE, TK_T_SUFFIX)] = ti.targetSuffix.replace(ts) 
   result[wrap(TK_TYPE, TK_PARSE)] = ti.targetParse.replace(ts)
 
 proc parseType(
@@ -146,16 +148,24 @@ proc parseType(
     if langConfig.types[s].targetInit.len() > 0:
       result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[s].targetInit
       result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[s].targetParse
+      result[wrap(TK_TYPE, TK_T_PREFIX)] = langConfig.types[s].targetPrefix
+      result[wrap(TK_TYPE, TK_T_SUFFIX)] = langConfig.types[s].targetSuffix
     else:
       if langConfig.types.hasKey(TYPE_UNIMPORTED) and langConfig.types[TYPE_UNIMPORTED].targetInit.len() > 0:
         result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
         result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
+        result[wrap(TK_TYPE, TK_T_PREFIX)] = langConfig.types[TYPE_UNIMPORTED].targetPrefix.replace(temp)
+        result[wrap(TK_TYPE, TK_T_SUFFIX)] = langConfig.types[TYPE_UNIMPORTED].targetSuffix.replace(temp)
   elif not hit:
     if not result.hasKey(wrap(TK_TYPE)):
       result[wrap(TK_TYPE)] = langConfig.types[TYPE_UNIMPORTED].targetType.replace(temp)
     result[wrap(TK_TYPE, TK_INIT)] = langConfig.types[TYPE_UNIMPORTED].targetInit.replace(temp)
     if not result.hasKey(wrap(TK_TYPE, TK_PARSE)):
       result[wrap(TK_TYPE, TK_PARSE)] = langConfig.types[TYPE_UNIMPORTED].targetParse.replace(temp)
+    if not result.hasKey(wrap(TK_TYPE, TK_T_PREFIX)):
+      result[wrap(TK_TYPE, TK_T_PREFIX)] = langConfig.types[TYPE_UNIMPORTED].targetPrefix.replace(temp)
+    if not result.hasKey(wrap(TK_TYPE, TK_T_SUFFIX)):
+      result[wrap(TK_TYPE, TK_T_SUFFIX)] = langConfig.types[TYPE_UNIMPORTED].targetSuffix.replace(temp)
 
 proc initTemplatable(): Templatable =
   result = Templatable()

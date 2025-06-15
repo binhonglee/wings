@@ -92,23 +92,23 @@ export default interface {#NAME_PASCAL} {#IMPLEMENT}{
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
-  "int": initTypeInterpreter("int", "Number", "", "0", "obj.{#VARNAME_JSON}"),
-  "str": initTypeInterpreter("str", "String", "", "''", "obj.{#VARNAME_JSON}"),
-  "void": initTypeInterpreter("void", "void", "", "", "obj.{#VARNAME_JSON}"),
-  "date": initTypeInterpreter("date", "Date", "", "new Date()", "new Date(obj.{#VARNAME_JSON})"),
-  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", "new {#TYPE_PASCAL}(obj.{#VARNAME_JSON})"),
-  "dbl": initTypeInterpreter("dbl", "Number", "", "0", "obj.{#VARNAME_JSON}"),
-  "bool": initTypeInterpreter("bool", "Boolean", "", "false", "obj.{#VARNAME_JSON}"),
-  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", "new {#TYPE_PASCAL}(obj.{#VARNAME_JSON})"),
-  "flt": initTypeInterpreter("flt", "Number", "", "0", "obj.{#VARNAME_JSON}"),
+  "int": initTypeInterpreter("int", "Number", "", "0", "obj.{#VARNAME_JSON}", "", ""),
+  "str": initTypeInterpreter("str", "String", "", "''", "obj.{#VARNAME_JSON}", "", ""),
+  "void": initTypeInterpreter("void", "void", "", "", "obj.{#VARNAME_JSON}", "", ""),
+  "date": initTypeInterpreter("date", "Date", "", "new Date()", "new Date(obj.{#VARNAME_JSON})", "", ""),
+  "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", "new {#TYPE_PASCAL}(obj.{#VARNAME_JSON})", "", ""),
+  "dbl": initTypeInterpreter("dbl", "Number", "", "0", "obj.{#VARNAME_JSON}", "", ""),
+  "bool": initTypeInterpreter("bool", "Boolean", "", "false", "obj.{#VARNAME_JSON}", "", ""),
+  "!imported": initTypeInterpreter("!imported", "{#TYPE_PASCAL}", "", "new {#TYPE_PASCAL}()", "new {#TYPE_PASCAL}(obj.{#VARNAME_JSON})", "", ""),
+  "flt": initTypeInterpreter("flt", "Number", "", "0", "obj.{#VARNAME_JSON}", "", ""),
 }.toTable()
 
 let CUSTOM_TYPES: Table[string, CustomTypeInterpreter] = {
   "[]": interpretType(
-    initTypeInterpreter("[]{TYPE}", "{TYPE1}[]", "{ parseArray }:wings-ts-util", "[]", "parseArray<{TYPE1}>({TYPE1}, obj.{#VARNAME_JSON})")
+    initTypeInterpreter("[]{TYPE}", "{TYPE1}[]", "{ parseArray }:wings-ts-util", "[]", "parseArray<{TYPE1}>({TYPE1}, obj.{#VARNAME_JSON})", "", "")
   ),
   "Map<": interpretType(
-    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Map<{TYPE1}, {TYPE2}>", "{ parseMap }:wings-ts-util", "new Map<{TYPE1}, {TYPE2}>()", "parseMap<{TYPE2}>(obj.{#VARNAME_JSON})")
+    initTypeInterpreter("Map<{TYPE1},{TYPE2}>", "Map<{TYPE1}, {TYPE2}>", "{ parseMap }:wings-ts-util", "new Map<{TYPE1}, {TYPE2}>()", "parseMap<{TYPE2}>(obj.{#VARNAME_JSON})", "", "")
   ),
 }.toTable()
 

@@ -66,7 +66,13 @@ proc genFile(inputFile: string): void =
       indent(
         "\"" & k & "\": initTypeInterpreter(" &
         args(
-          v.wingsType, v.targetType, v.requiredImport, replace(v.targetInit, "\"", "\\\""), v.targetParse
+          v.wingsType,
+          v.targetType,
+          replace(v.requiredImport, "\n", "\\n"),
+          replace(v.targetInit, "\"", "\\\""),
+          v.targetParse,
+          v.targetPrefix,
+          v.targetSuffix
         ), 2
       ), "),"
     )
@@ -82,9 +88,11 @@ proc genFile(inputFile: string): void =
           "initTypeInterpreter(" & args(
             v.wingsType,
             v.targetType,
-            v.requiredImport,
+            replace(v.requiredImport, "\n", "\\n"),
             replace(v.targetInit, "\"", "\\\""),
-            v.targetParse
+            v.targetParse,
+            v.targetPrefix,
+            v.targetSuffix
           ) & ")", 2
         ) & "\n),", 2
       )

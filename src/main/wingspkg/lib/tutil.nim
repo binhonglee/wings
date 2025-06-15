@@ -33,6 +33,8 @@ const T_T = "targetType"
 const R_I = "requiredImport"
 const T_I = "targetInit"
 const T_P = "targetParse"
+const T_PRE = "targetPrefix"
+const T_SUF = "targetSuffix"
 
 const parseFMT = "{P_FMT}"
 
@@ -205,6 +207,8 @@ proc parse*(filename: string, altName: string = ""): TConfig =
       var requiredImport: string
       var targetInit: string
       var targetParse: string
+      var targetPrefix: string
+      var targetSuffix: string
 
       if t.hasKey(W_T):
         wingsType = t[W_T].getStr("")
@@ -232,8 +236,18 @@ proc parse*(filename: string, altName: string = ""): TConfig =
       else:
         targetParse = result.parseFormat
 
+      if t.hasKey(T_PRE):
+        targetPrefix = t[T_PRE].getStr("")
+      else:
+        targetPrefix = ""
+
+      if t.hasKey(T_SUF):
+        targetSuffix = t[T_SUF].getStr("")
+      else:
+        targetSuffix = ""
+
       let typeInterpreter: TypeInterpreter = initTypeInterpreter(
-        wingsType, targetType, requiredImport, targetInit, targetParse,
+        wingsType, targetType, requiredImport, targetInit, targetParse, targetPrefix, targetSuffix,
       )
 
       if wingsType.contains(TYPE_PREFIX):
