@@ -2,6 +2,7 @@ go-filepath examples/output/go/classroom
 kt-filepath examples/output/kt
 nim-filepath examples/output/nim
 py-filepath examples/output/py
+swift-filepath examples/output/swift
 ts-filepath examples/output/ts
 
 ts-import { IWingsStruct }:wings-ts-util

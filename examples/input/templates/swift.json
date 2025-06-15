@@ -1,0 +1,69 @@
+{
+  "comment": "//",
+  "filename": "pascal",
+  "filetype": "swift",
+  "implementFormat": ": {#IMPLEMENT} ",
+  "importPath": {
+    "pathType": "never"
+  },
+  "indentation": {
+    "spacing": "  ",
+    "preIndent": true
+  },
+  "templates": {
+    "struct": "examples/input/templates/struct.swift",
+    "enum": "examples/input/templates/enum.swift"
+  },
+  "interfaceConfig": {
+    "interfaceSupported": false,
+    "paramFormat": "{#PARAM_NAME}: {#PARAM_TYPE}",
+    "paramJoiner": ", "
+  },
+  "types": [
+    {
+      "wingsType": "int",
+      "targetType": "Int",
+      "targetInit": "0"
+    }, {
+      "wingsType": "void",
+      "targetType": "Void",
+      "targetInit": ""
+    }, {
+      "wingsType": "flt",
+      "targetType": "Float",
+      "targetInit": "0"
+    }, {
+      "wingsType": "dbl",
+      "targetType": "Double",
+      "targetInit": "0"
+    }, {
+      "wingsType": "str",
+      "targetType": "String",
+      "targetInit": "\"\""
+    }, {
+      "wingsType": "bool",
+      "targetType": "Boolean",
+      "targetInit": "false"
+    }, {
+      "wingsType": "date",
+      "targetType": "Date",
+      "targetInit": "Date.now()"
+    }, {
+      "wingsType": "[]{TYPE}",
+      "targetType": "[{TYPE1}]",
+      "targetInit": "[] as [{TYPE1}]"
+    }, {
+      "wingsType": "Map<{TYPE1},{TYPE2}>",
+      "targetType": "[{TYPE1}: {TYPE2}]",
+      "targetInit": "[:] as [{TYPE1}: {TYPE2}]"
+    }, {
+      "wingsType": "!imported",
+      "targetType": "{#TYPE_PASCAL}",
+      "targetInit": "{#TYPE_PASCAL}()"
+    }, {
+      "wingsType": "!unimported",
+      "targetType": "{#TYPE_PASCAL}",
+      "targetInit": "{#TYPE_PASCAL}()"
+    }
+  ]
+}

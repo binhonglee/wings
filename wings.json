@@ -12,7 +12,7 @@
     "go": "github.com/binhonglee/wings"
   },
   "langFilter": [
-    "go", "kt", "nim", "py", "ts"
+    "go", "kt", "nim", "py", "swift", "ts"
   ],
   "skipImport": false,
   "langConfigs": [
@@ -20,6 +20,7 @@
     "examples/input/templates/kt.json",
     "examples/input/templates/nim.json",
     "examples/input/templates/py.json",
+    "examples/input/templates/swift.json",
     "examples/input/templates/ts.json"
   ],
   "remoteLangConfigs": [{

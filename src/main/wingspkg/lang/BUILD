@@ -6,6 +6,7 @@ filegroup(
         "ktConfig.nim",
         "nimConfig.nim",
         "pyConfig.nim",
+        "swiftConfig.nim",
         "tsConfig.nim",
     ],
     visibility = [
