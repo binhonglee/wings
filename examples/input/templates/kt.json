@@ -11,8 +11,8 @@
     "preIndent": true
   },
   "templates": {
-    "struct": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/struct.kt",
-    "enum": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/enum.kt",
+    "struct": "examples/input/templates/struct.kt",
+    "enum": "examples/input/templates/enum.kt",
     "interface": "https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/interface.kt"
   },
   "interfaceConfig": {
@@ -47,8 +47,10 @@
       "targetInit": "false"
     }, {
       "wingsType": "date",
-      "targetType": "Date",
-      "targetInit": "Date()"
+      "targetType": "Instant",
+      "targetInit": "Instant.now()",
+      "targetPrefix": "@TypeParceler<Instant, InstantParceler>",
+      "requiredImport": "kotlinx.datetime.Instant\nimport kotlinx.parcelize.TypeParceler"
     }, {
       "wingsType": "[]{TYPE}",
       "targetType": "ArrayList<{TYPE1}>",

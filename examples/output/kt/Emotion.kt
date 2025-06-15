@@ -5,17 +5,19 @@
 
 package kt
 
-enum class Emotion {
-  Accomplished
-  Angry
-  Annoyed
-  Appalled
-  Excited
-  Exhausted
-  FeelsGood
-  Frustrated
-  Happy
-  Meh
-  Sad
-  Satisfied
+var val_Emotion = 0
+
+enum class Emotion(val value: Int = val_Emotion++) {
+    Accomplished,
+    Angry,
+    Annoyed,
+    Appalled,
+    Excited,
+    Exhausted,
+    FeelsGood,
+    Frustrated,
+    Happy,
+    Meh,
+    Sad,
+    Satisfied,
 }

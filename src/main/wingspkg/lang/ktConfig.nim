@@ -25,37 +25,35 @@ const INDENTATION_SPACING: string = "  "
 const TEMPLATE_STRUCT: string = """
 package {#1}
 // #BEGIN_IMPORT
-
 // #IMPORT1 import {#IMPORT_1}
 // #END_IMPORT
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 // {#COMMENT}
-class {#NAME} {#IMPLEMENT}{
+@Serializable
+@Parcelize
+data class {#NAME}(
 // #BEGIN_VAR
-  // #VAR var {#VARNAME_CAMEL}: {#TYPE} = {#TYPE_INIT}
+    // #VAR {#TYPE_PREFIX}
+    // #VAR @SerialName(value = "{#VARNAME_JSON}")
+    // #VAR var {#VARNAME_CAMEL}: {#TYPE},
+    // #VAR {#TYPE_SUFFIX}
 // #END_VAR
-
-// #BEGIN_JSON
-  fun toJsonKey(key: string): string {
-    when (key) {
-      // #JSON "{#VARNAME_CAMEL}" -> return "{#VARNAME_JSON}"
-      else -> return key
-    }
-  }
-// #END_JSON
-// #BEGIN_FUNCTIONS
-// #FUNCTIONS {#FUNCTIONS}
-// #END_FUNCTIONS
-}
+) : {#IMPLEMENT}Parcelable
 
 """
 
 const TEMPLATE_ENUM: string = """
 package {#1}
 
+var val_{#NAME} = 0
+
 // #BEGIN_VAR
-enum class {#NAME} {
-  // #VAR {#VARNAME_PASCAL}
+enum class {#NAME}(val value: Int = val_{#NAME}++) {
+    // #VAR {#VARNAME_PASCAL},
 }
 // #END_VAR
 
@@ -82,10 +80,10 @@ interface {#NAME} {#IMPLEMENT}{
 """
 
 let TYPES: Table[string, TypeInterpreter] = {
-  "date": initTypeInterpreter("date", "Date", "", "Date()", ""),
   "int": initTypeInterpreter("int", "Int", "", "0", "", "", ""),
   "str": initTypeInterpreter("str", "String", "", "\"\"", "", "", ""),
   "void": initTypeInterpreter("void", "Unit", "", "", "", "", ""),
+  "date": initTypeInterpreter("date", "Instant", "kotlinx.datetime.Instant\nimport kotlinx.parcelize.TypeParceler", "Instant.now()", "", "@TypeParceler<Instant, InstantParceler>", ""),
   "!unimported": initTypeInterpreter("!unimported", "{#TYPE_PASCAL}", "", "{#TYPE_PASCAL}()", "", "", ""),
   "dbl": initTypeInterpreter("dbl", "Double", "", "0", "", "", ""),
   "bool": initTypeInterpreter("bool", "Boolean", "", "false", "", "", ""),

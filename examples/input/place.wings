@@ -1,4 +1,5 @@
 go-filepath examples/output/go
+kt-filepath examples/output/kt
 ts-filepath examples/output/ts
 
 ts-import { IWingsStruct }:wings-ts-util
