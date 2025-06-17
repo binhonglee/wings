@@ -2,7 +2,7 @@
 
 WINGS_HOME="$HOME/.wings/"
 BIN="bin/"
-LATEST_VERSION="v0.0.9-alpha"
+LATEST_VERSION="v0.0.10-alpha"
 ARCH=$(uname -m)
 OS=$(uname -s)
 INSTALLED=""
