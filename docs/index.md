@@ -1,467 +1,377 @@
-# wings
+# Wings - Cross-Language Code Generator
 
-A simple customizable cross language struct and enum file generator.
+Wings is a simple, customizable cross-language code generator that helps maintain consistency across your multi-language tech stack. Define your data structures once in `.wings` files, and generate corresponding code in multiple programming languages automatically.
 
-Click [here](./api) for code documentation index instead.
+## 🚀 Quick Start
 
-## Installation
+### Installation
 
-### Script (easiest)
-
-Just run the following in your terminal.
-
-```sh
+**Script Installation (Recommended)**
+```bash
 curl -s https://wings.sh/install.sh | sh
 ```
 
-### Nimble (easy-ish)
-
-If you have [`nimble`](https://github.com/nim-lang/nimble) installed, you can just do `nimble install wings`.
-
-### GitHub Release (manual)
-
-If you prefer to download them manually instead, you could do the following.
-
-- Download the appropriate binary [here](https://github.com/binhonglee/wings/releases).
-- Add binary to an included path and rename it to `wings`.
-- Run `wings {filepath}` to generate the files. (eg. `wings /path/to/student.wings`)
-
-*Note: While there are Windows binaries available for download from GitHub release page, they aren't thoroughly tested and some features (like self-updating) might not work as intended.*
-
-### Compile from source (from scratch)
-
-If you'd like to compile it from source, you can clone the repo and compile it with the release script.
-
-```
-git clone git@github.com:binhonglee/wings.git
-cd wings/
-./pleasew release
+**Using Nimble**
+```bash
+nimble install wings
 ```
 
-### VSCode (additional plugin)
+**Manual Installation**
+1. Download the appropriate binary from [GitHub Releases](https://github.com/binhonglee/wings/releases)
+2. Add to your PATH and rename to `wings`
+3. Make executable: `chmod +x wings`
 
-If you are coding with VSCode, its recommended that you also install [this plugin](https://marketplace.visualstudio.com/items?itemName=binhonglee.vscode-wings) to get proper syntax highlighting on your wings files.
+**Build from Source**
+```bash
+git clone https://github.com/binhonglee/wings.git
+cd wings
+nim c -r src/main/wings.nim
+```
 
-## Struct
+### Your First Wings File
 
-Input file:
+Create a file named `person.wings`:
 
-<div class="input_div">
-<label class="input_label">student.wings</label>
-<pre class="highlight" id="codeblock">
-  <span class="kn">go-filepath</span> <span class="s">examples/go/classroom</span>
-  <span class="kn">kt-filepath</span> <span class="s">examples/kt</span>
-  <span class="kn">nim-filepath</span> <span class="s">examples/nim</span>
-  <span class="kn">py-filepath</span> <span class="s">examples/py</span>
-  <span class="kn">ts-filepath</span> <span class="s">examples/ts</span>
+```wings
+# Define output paths for different languages
+go-filepath examples/go
+ts-filepath examples/ts
+py-filepath examples/py
 
-  <span class="kn">py-import</span> <span class="nx">examples.output.py.people</span>
-  <span class="kn">ts-import</span> <span class="nx">{ IWingsStruct }</span><span class="kn">:</span><span class="kt">wings-ts-util</span>
-  <span class="kn">import</span> <span class="s">examples/input/emotion.wings</span>
-  <span class="kn">import</span> <span class="s">examples/input/homework.wings</span>
+# Define a simple struct
+struct Person {
+    id int -1
+    name str ""
+    email str ""
+    age int 0
+    is_active bool true
+}
+```
 
-  <span class="kn">py-implement</span> <span class="nx">People</span>
-  <span class="kn">ts-implement</span> <span class="nx">IWingsStruct</span>
+Generate code:
+```bash
+wings person.wings
+```
 
-  <span class="c1"># Any person who is studying in a class</span>
+This creates corresponding struct/class files in the configured languages with proper type definitions and JSON serialization.
 
-  <span class="kn">struct</span> <span class="nx">Student</span> <span class="kn">{</span>
-    <span class="n">id</span>          <span class="kt">int</span>       <span class="mi">-1</span>
-    <span class="n">name</span>        <span class="kt">str</span>
-    <span class="n">cur_class</span>   <span class="kt">str</span>
-    <span class="n">feeling</span>     <span class="nx">Emotion</span>   <span class="p">Emotion.Meh</span>
-    <span class="n">is_active</span>   <span class="kt">bool</span>
-    <span class="n">year</span>        <span class="kt">date</span>
-    <span class="n">graduation</span>  <span class="kt">date</span>
-    <span class="n">homeworks</span>   <span class="nx">[]Homework</span>
-    <span class="n">something</span>   <span class="nx">Map<</span><span class="kt">str</span><span class="nx">,</span><span class="kt">str</span><span class="nx">></span>
-  <span class="kn">}</span>
+## 📋 Table of Contents
 
-  <span class="nc">ts-func(</span>
-    <span class="kt">public</span> <span class="nx">addHomework</span><span class="p">(</span><span class="nx">hw</span><span class="p">:</span> <span class="kt">Homework</span><span class="p">):</span> <span class="kn">void</span> <span class="p">{</span>
-      <span class="kn">this</span><span class="kn">.</span><span class="nx">Homeworks</span><span class="kn">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">hw</span><span class="p">)</span><span class="kn">;</span>
-    <span class="p">}</span>
-  <span class="nc">)</span>
-</pre>
-</div>
+1. [Core Concepts](#core-concepts)
+2. [Language Configuration](#language-configuration)
+3. [Struct Definition](#struct-definition)
+4. [Enum Definition](#enum-definition)
+5. [Configuration File](#configuration-file)
+6. [Examples](#examples)
+7. [Contributing](#contributing)
 
-Output files:
+## 🎯 Core Concepts
 
-=== "examples/go/classroom/student.go"
-    ```go
-    // This is a generated file
-    //
-    // If you would like to make any changes, please edit the source file instead.
-    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    // Source: examples/input/student.wings
+### What Wings Does
 
-    package classroom
+Wings solves the problem of maintaining identical data structures across multiple programming languages. Instead of manually keeping structs, classes, and enums synchronized across your different services, you define them once and generate consistent code.
 
-    import (
-      person "github.com/binhonglee/wings/examples/output/go/person"
-      "time"
-    )
+### Key Benefits
 
-    // Student - Any person who is studying in a class
-    type Student struct {
-      ID            int                  `json:"id"`
-      Name          string               `json:"name"`
-      CurClass      string               `json:"cur_class"`
-      Feeling       person.Emotion       `json:"feeling"`
-      IsActive      bool                 `json:"is_active"`
-      Year          time.Time            `json:"year"`
-      Graduation    time.Time            `json:"graduation"`
-      Homeworks     []Homework           `json:"homeworks"`
-      Something     map[string]string    `json:"something"`
-    }
+- **Single Source of Truth**: Define structures once, use everywhere
+- **Type Safety**: Generates proper type definitions for each language
+- **Consistency**: Ensures field names, types, and defaults are identical
+- **Simplicity**: Straightforward syntax and minimal configuration
 
-    // Students - An array of Student
-    type Students []Student
-    ```
+## 🔧 Language Configuration
 
-=== "examples/kt/Student.kt"
-    ```kotlin
-    // This is a generated file
-    //
-    // If you would like to make any changes, please edit the source file instead.
-    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    // Source: examples/input/student.wings
+### Output Path Configuration
 
-    package kt
+Define where generated files should be placed:
 
-    // Any person who is studying in a class
-    class Student {
-      var ID: Int = -1
-      var name: String = ""
-      var curClass: String = ""
-      var feeling: Emotion = Emotion.Meh
-      var isActive: Boolean = false
-      var year: Date = Date()
-      var graduation: Date = Date()
-      var homeworks: ArrayList<Homework> = arrayListOf<Homework>()
-      var something: HashMap<String, String> = hashMapOf<String, String>()
+```wings
+# Single language
+go-filepath src/models
 
-      fun toJsonKey(key: string): string {
-        when (key) {
-          "ID" -> return "id"
-          "name" -> return "name"
-          "curClass" -> return "cur_class"
-          "feeling" -> return "feeling"
-          "isActive" -> return "is_active"
-          "year" -> return "year"
-          "graduation" -> return "graduation"
-          "homeworks" -> return "homeworks"
-          "something" -> return "something"
-          else -> return key
-        }
-      }
-    }
-    ```
+# Multiple languages
+go-filepath backend/models
+ts-filepath frontend/src/types
+py-filepath services/shared/models
+```
 
-=== "examples/nim/student.nim"
-    ```nim
-    # This is a generated file
-    #
-    # If you would like to make any changes, please edit the source file instead.
-    # run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    # Source: examples/input/student.wings
+### Import Configuration
 
-    import json
-    import ./homework
-    import tables
-    import ./emotion
+Control how imports are handled:
 
-    type
-      Student* = ref object
-        ## Any person who is studying in a class
-        ID*: int
-        name*: string
-        curClass*: string
-        feeling*: Emotion
-        isActive*: bool
-        year*: DateTime
-        graduation*: DateTime
-        homeworks*: seq[Homework]
-        something*: Table[string, string]
-    ```
+```wings
+# Import external wings files
+import shared/common.wings
+import validation/rules.wings
+```
 
-=== "examples/py/student.py"
-    ```py
-    # This is a generated file
-    #
-    # If you would like to make any changes, please edit the source file instead.
-    # run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    # Source: examples/input/student.wings
+## 🏗️ Struct Definition
 
-    import json
-    import examples.output.py.homework
-    import examples.output.py.people
-    import examples.output.py.emotion
-    from datetime import datetime
+### Basic Syntax
 
-    # Any person who is studying in a class
-    class Student(People):
-      id: int = -1
-      name: str = ""
-      cur_class: str = ""
-      feeling: Emotion = Emotion.Meh
-      is_active: bool = False
-      year: datetime = datetime.now()
-      graduation: datetime = datetime.now()
-      homeworks: list = []
-      something: dict = {}
+```wings
+struct StructName {
+    field_name field_type default_value
+    another_field another_type
+}
+```
 
-      def __init__(self, data):
-        self = json.loads(data)
-    ```
+### Field Types
 
-=== "examples/ts/Student.ts"
-    ```ts
-    // This is a generated file
-    //
-    // If you would like to make any changes, please edit the source file instead.
-    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    // Source: examples/input/student.wings
+#### Primitive Types
+```wings
+struct DataTypes {
+    # Integers
+    user_id int 0
+    count int 0
+    
+    # Strings
+    name str ""
+    description str "No description"
+    
+    # Booleans
+    is_active bool true
+    is_deleted bool false
+    
+    # Floating point
+    price float 0.0
+}
+```
 
-    import { parseMap } from 'wings-ts-util';
-    import Homework from './Homework';
-    import { IWingsStruct } from 'wings-ts-util';
-    import Emotion from './person/Emotion';
+#### Complex Types
+```wings
+struct ComplexTypes {
+    # Arrays/Lists
+    tags []str
+    scores []int
+    
+    # Maps/Dictionaries (if supported)
+    metadata Map<str,str>
+    counts Map<str,int>
+    
+    # Custom types (from other wings files)
+    address Address
+    permissions []Permission
+}
+```
 
-    // Any person who is studying in a class
-    export default class Student implements IWingsStruct {
-      [key: string]: any;
-      public ID: number = -1;
-      public name: string = '';
-      public curClass: string = '';
-      public feeling: Emotion = Emotion.Meh;
-      public isActive: boolean = false;
-      public year: Date = new Date();
-      public graduation: Date = new Date();
-      public homeworks: Homework[] = [];
-      public something: Map<string, string> = new Map<string, string>();
+#### Optional Fields and Defaults
 
-      public constructor(obj?: any) {
-        if (obj) {
-          this.ID = obj.id !== undefined && obj.id !== null ? obj.id : -1;
-          this.name = obj.name !== undefined && obj.name !== null ? obj.name : '';
-          this.curClass = obj.cur_class !== undefined && obj.cur_class !== null ? obj.cur_class : '';
-          this.feeling = obj.feeling !== undefined && obj.feeling !== null ? obj.feeling : Emotion.Meh;
-          this.isActive = obj.is_active !== undefined && obj.is_active !== null ? obj.is_active : false;
-          this.year = obj.year !== undefined && obj.year !== null ? new Date(obj.year) : new Date();
-          this.graduation = obj.graduation !== undefined && obj.graduation !== null ? new Date(obj.graduation) : new Date();
-          this.homeworks = obj.homeworks !== undefined && obj.homeworks !== null ? obj.homeworks : [];
-          this.something = obj.something !== undefined && obj.something !== null ? parseMap<string>(obj.something) : new Map<string, string>();
-        }
-      }
+```wings
+struct UserProfile {
+    # Required fields (no default)
+    id int
+    email str
+    
+    # Optional with defaults
+    name str "Anonymous"
+    age int 0
+    bio str ""
+    
+    # Optional arrays
+    tags []str
+}
+```
 
-      public toJsonKey(key: string): string {
-        switch (key) {
-          case 'ID': {
-            return 'id';
-          }
-          case 'name': {
-            return 'name';
-          }
-          case 'curClass': {
-            return 'cur_class';
-          }
-          case 'feeling': {
-            return 'feeling';
-          }
-          case 'isActive': {
-            return 'is_active';
-          }
-          case 'year': {
-            return 'year';
-          }
-          case 'graduation': {
-            return 'graduation';
-          }
-          case 'homeworks': {
-            return 'homeworks';
-          }
-          case 'something': {
-            return 'something';
-          }
-          default: {
-            return key;
-          }
-        }
-      }
+## 🔢 Enum Definition
 
-      public addHomework(hw: Homework): void {
-        this.Homeworks.push(hw);
-      }
-    }
-    ```
+### Basic Enum
 
-The format of the fields goes from left to right in such order "field name", "field type", "field JSON name", and "initialize as" (optional, not used in Go and Nim).
+```wings
+enum Status {
+    Active
+    Inactive
+    Pending
+    Suspended
+}
+```
 
-_*Note: There is no gurranttee that "initialize as" field goes through a proper conversion or localization based on the targetted output languages so ideally you want to make sure it works with all versions of output that will be using it._
+### Enum with Comments
 
-## Enum
+```wings
+# User account status
+enum UserStatus {
+    # Account is active and user can log in
+    Active
+    
+    # Account is temporarily disabled
+    Inactive
+    
+    # Account is waiting for email verification
+    Pending
+    
+    # Account is suspended due to policy violation
+    Suspended
+}
+```
 
-Input file:
+### Using Enums in Structs
 
-<div class="input_div">
-<label class="input_label">emotion.wings</label>
-<pre class="highlight" id="codeblock">
-  <span class="kn">go-filepath</span> <span class="s">examples/go</span>
-  <span class="kn">kt-filepath</span> <span class="s">examples/kt</span>
-  <span class="kn">nim-filepath</span> <span class="s">examples/nim</span>
-  <span class="kn">py-filepath</span> <span class="s">examples/py</span>
-  <span class="kn">ts-filepath</span> <span class="s">examples/ts/person</span>
+```wings
+import enums/status.wings
 
-  <span class="c1">//Ignored comment</span>
-  <span class="c1">// Another ignored comment</span>
+struct User {
+    id int
+    name str
+    status Status Status.Active
+}
+```
 
-  <span class="kn">enum</span> <span class="nx">Emotion</span> <span class="kn">{</span>
-    <span class="n">Accomplished</span>
-    <span class="n">Angry</span>
-    <span class="n">Annoyed</span>
-    <span class="n">Appalled</span>
-    <span class="n">Excited</span>
-    <span class="n">Exhausted</span>
-    <span class="n">FeelsGood</span>
-    <span class="n">Frustrated</span>
-    <span class="n">Happy</span>
-    <span class="n">Meh</span>
-    <span class="n">Sad</span>
-    <span class="n">Satisfied</span>
-  <span class="kn">}</span>
-</pre>
-</div>
+## ⚙️ Configuration File
 
-Output files:
+Create a `wings.json` configuration file for advanced settings:
 
-=== "examples/go/emotion.go"
-    ```go
-    // This is a generated file
-    //
-    // If you would like to make any changes, please edit the source file instead.
-    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    // Source: examples/input/emotion.wings
+```json
+{
+  "header": [
+    "This is a generated file",
+    "Do not edit manually"
+  ],
+  "acronyms": ["ID", "URL", "API", "HTTP", "JSON"],
+  "langFilter": ["go", "ts", "py"],
+  "skipImport": false,
+  "logging": 2
+}
+```
 
-    package person
+### Configuration Options
 
-    type Emotion int
+| Option | Type | Description |
+|--------|------|-------------|
+| `header` | `[]string` | Header comments for generated files |
+| `acronyms` | `[]string` | Words to keep as ALL_CAPS in naming |
+| `langFilter` | `[]string` | Only generate these languages |
+| `skipImport` | `bool` | Skip processing imported files |
+| `logging` | `int` | Logging verbosity (0-4) |
 
-    const (
-      Accomplished = iota
-      Angry = iota
-      Annoyed = iota
-      Appalled = iota
-      Excited = iota
-      Exhausted = iota
-      FeelsGood = iota
-      Frustrated = iota
-      Happy = iota
-      Meh = iota
-      Sad = iota
-      Satisfied = iota
-    )
-    ```
+## 🎨 Best Practices
 
-=== "examples/kt/Emotion.kt"
-    ```kotlin
-    // This is a generated file
-    //
-    // If you would like to make any changes, please edit the source file instead.
-    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    // Source: examples/input/emotion.wings
+### File Organization
 
-    package kt
+```
+project/
+├── wings/
+│   ├── shared/
+│   │   ├── common.wings
+│   │   └── enums.wings
+│   ├── models/
+│   │   ├── user.wings
+│   │   └── product.wings
+├── wings.json
+└── generated/
+    ├── go/
+    ├── ts/
+    └── py/
+```
 
-    enum class Emotion {
-      Accomplished
-      Angry
-      Annoyed
-      Appalled
-      Excited
-      Exhausted
-      FeelsGood
-      Frustrated
-      Happy
-      Meh
-      Sad
-      Satisfied
-    }
-    ```
+### Naming Conventions
 
-=== "examples/nim/emotion.nim"
-    ```nim
-    # This is a generated file
-    #
-    # If you would like to make any changes, please edit the source file instead.
-    # run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    # Source: examples/input/emotion.wings
+- Use `snake_case` for field names in wings files
+- Wings will automatically convert to language-appropriate naming
+- Use descriptive names for structs and enums
 
-    type
-      Emotion* = enum
-        Accomplished
-        Angry
-        Annoyed
-        Appalled
-        Excited
-        Exhausted
-        FeelsGood
-        Frustrated
-        Happy
-        Meh
-        Sad
-        Satisfied
-    ```
+### Default Values
 
-=== "examples/py/emotion.py"
-    ```py
-    # This is a generated file
-    #
-    # If you would like to make any changes, please edit the source file instead.
-    # run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    # Source: examples/input/emotion.wings
+- Always provide sensible defaults for optional fields
+- Use empty strings `""` for optional text fields
+- Use `false` for boolean flags that default to off
+- Use `0` for numeric counters
 
-    from enum import Enum, auto
+### Comments and Documentation
 
-    class Emotion(Enum):
-      Accomplished = auto()
-      Angry = auto()
-      Annoyed = auto()
-      Appalled = auto()
-      Excited = auto()
-      Exhausted = auto()
-      FeelsGood = auto()
-      Frustrated = auto()
-      Happy = auto()
-      Meh = auto()
-      Sad = auto()
-      Satisfied = auto()
-    ```
+```wings
+# This comment describes the entire struct
+struct User {
+    # User's unique identifier
+    id int
+    
+    # Full name of the user
+    name str ""
+    
+    # Email address for authentication
+    email str
+}
+```
 
-=== "examples/ts/person/Emotion.ts"
-    ```ts
-    // This is a generated file
-    //
-    // If you would like to make any changes, please edit the source file instead.
-    // run `plz genFile -- "{SOURCE_FILE}" -c:wings.json` upon completion.
-    // Source: examples/input/emotion.wings
+## 📚 Examples
 
-    enum Emotion {
-      Accomplished,
-      Angry,
-      Annoyed,
-      Appalled,
-      Excited,
-      Exhausted,
-      FeelsGood,
-      Frustrated,
-      Happy,
-      Meh,
-      Sad,
-      Satisfied,
-    }
+### Simple API Model
 
-    export default Emotion;
-    ```
+```wings
+# wings/api/user.wings
+struct User {
+    id int
+    name str
+    email str
+    is_active bool true
+    created_at str
+}
 
-If you are interested in testing out an experimental feature, we also have some basic support for abstract functions on interface documented [here](./experimental/#interface).
+enum UserRole {
+    Admin
+    User
+    Guest
+}
+
+struct UserWithRole {
+    id int
+    name str
+    email str
+    role UserRole UserRole.User
+}
+```
+
+### E-commerce Product
+
+```wings
+# wings/ecommerce/product.wings
+import shared/common.wings
+
+struct Product {
+    id int
+    name str
+    description str ""
+    price float
+    is_available bool true
+    tags []str
+}
+
+enum ProductCategory {
+    Electronics
+    Clothing
+    Books
+    Home
+}
+```
+
+## 🤝 Contributing
+
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/binhonglee/wings.git
+cd wings
+
+# Build from source (requires Nim)
+nim c -r src/main/wings.nim
+
+# Run tests
+./scripts/test.sh
+```
+
+### Reporting Issues
+
+- Use GitHub Issues for bugs and feature requests
+- Include wings file examples and configuration
+- Provide generated output when relevant
+- Specify operating system and wings version
+
+## 📖 Further Reading
+
+- [GitHub Repository](https://github.com/binhonglee/wings)
+- [Configuration Reference](https://wings.sh/config/)
+- [Template Documentation](https://wings.sh/template/)
+
+---
+
+*Wings is a simple cross-language struct and enum file generator. For the latest updates and contributions, visit our [GitHub repository](https://github.com/binhonglee/wings).*

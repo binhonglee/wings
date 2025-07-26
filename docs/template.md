@@ -1,123 +1,364 @@
-# Template
+# Templating System
 
-This is for more advanced use case where you want your own way of formatting for the output files or if you use wings for languages that is not currently supported. Check out the [examples/input/template](https://github.com/binhonglee/wings/tree/devel/examples/input/templates) folder for an example of how it works for currently supported languages (start from the json files).
+## Overview
 
-_\* indicates required field. Non-required fields will have its default value specified._
+Templating system allows you to define custom templates for languages that aren't currently supported or to customize the output format for existing languages.
 
-## comment*: `str`
+## Template Configuration Structure
 
-Language line prefix for comments (eg. `//` in TypeScript or `#` in Python).
+The Wings templating system is configured using JSON files that define how code should be generated for specific programming languages. Each template configuration contains several key sections:
 
-## filename*: [`Case`](https://binhonglee.github.io/stones/stones/cases.html#Case)
+### Required Fields
 
-The Case / format in which the output filename should be in.
+#### `comment` (string) *required*
+The language line prefix for comments.
 
-## filetype*: `str`
+**Examples:**
+- `//` for TypeScript, Java, C++
+- `#` for Python, Ruby, Bash
+- `--` for SQL, Haskell
 
-This is used for deduplication of language template files and also to be appended to the generated filename ending as filetype.
+#### `filename` (Case) *required*
+The case/format in which the output filename should be written.
 
-## implementFormat: `str`
+**Supported Cases:**
+- `camelCase`
+- `PascalCase`
+- `snake_case`
+- `kebab-case`
+- `SCREAMING_SNAKE_CASE`
 
-```
-default: "{#IMPLEMENT}"
-```
+#### `filetype` (string) *required*
+The file extension for the generated files. This is used for:
+- Deduplication of language template files
+- Appending to the generated filename
 
-The string in which is used in the specific language to declare that the current class extends or implements an existing different class.
+**Examples:**
+- `"ts"` for TypeScript files
+- `"py"` for Python files
+- `"java"` for Java files
+- `"cpp"` for C++ files
 
-## importPath*: `obj`
+#### `templates` (object) *required*
+Defines the template files to use for different code structures.
 
-### format: `str`
-
-```
-default: "{#IMPORT}"
-```
-
-The format in which import path are written in.
-
-### separator: `str`
-
-```
-default: '/'
-```
-
-The way files / folders are joined. Some programming languages uses '.' in import path instead of '/'.
-
-### pathType*: `"never" || "absolute" || "relative"`
-
-This is to define how the import path should be written for the imported files.
-
-### prefix: `str`
-
-```
-default: ""
-```
-
-Prefix for import path. Will be overwritten by the `prefix` value in the project config if already defined there.
-
-### level*: `int`
-
-The level of folder the import should run and stop at. `0` is the lowest possible number which refers to the file itself, `1` refers to the folder the file is in and so on.
-
-_\*Note: Only required when `pathType` is not set to `"never"`_
-
-## indentation: `obj`
-
-### spacing: `str`
-
-```
-default: ""
+**Structure:**
+```json
+{
+  "templates": {
+    "struct": "path/to/struct_template.txt",
+    "enum": "path/to/enum_template.txt"
+  }
+}
 ```
 
-Define the "tab" width. This **WOULD NOT** replace the existing tabbing in your template files but rather is used to properly indent functions declared in the wings file.
+#### `types` (array of objects) *required*
+Maps Wings types to target language types.
 
-### preIndent: `bool`
-
-```
-default: false
-```
-
-This is to define if the imported functions should be indented in the output file.
-
-## parseFormat: `str`
-
-```
-default: ""
-```
-
-General fallback option for the more specific `targetParse` below if that's not defined.
-
-## templates*: `obj`
-
-### struct*: `str`
-
-Filepath to the struct template file.
-
-### enum*: `str`
-
-Filepath to the enum template file.
-
-## types*: `obj[]`
-
-### wingsType*: `str`
-
-Type to be parsed from wings file.
-
-### targetType*: `str`
-
-Generated type for output language.
-
-### targetInit: `str`
-
-```
-default: ""
+**Structure:**
+```json
+{
+  "types": [
+    {
+      "wingsType": "str",
+      "targetType": "string",
+      "targetInit": "\"\"",
+      "requiredImport": ""
+    }
+  ]
+}
 ```
 
-Initialization for target output type.
+### Optional Fields
 
-### requiredImport: `str`
+#### `implementFormat` (string)
+Default: `"{#IMPLEMENT}"`
 
+The string format used to declare that a class extends or implements another class.
+
+**Examples:**
+- `"extends {#IMPLEMENT}"` for Java
+- `"implements {#IMPLEMENT}"` for interfaces
+- `": {#IMPLEMENT}"` for C++
+
+#### `importPath` (object)
+Controls how import statements are generated.
+
+**Structure:**
+```json
+{
+  "importPath": {
+    "format": "{#IMPORT}",
+    "separator": "/",
+    "pathType": "relative",
+    "prefix": "",
+    "level": 1
+  }
+}
 ```
-default: ""
+
+**Fields:**
+- `format`: Import statement format (default: `"{#IMPORT}"`)
+- `separator`: Path separator (default: `"/"`, some languages use `"."`)
+- `pathType`: `"never"`, `"absolute"`, or `"relative"`
+- `prefix`: Prefix for import paths
+- `level`: Folder level for imports (0 = file itself, 1 = parent folder, etc.)
+
+#### `indentation` (object)
+Controls code indentation in generated files.
+
+**Structure:**
+```json
+{
+  "indentation": {
+    "spacing": "  ",
+    "preIndent": false
+  }
+}
 ```
 
-Specific import that is needed to be added when this type is in use.
+**Fields:**
+- `spacing`: Defines the "tab" width (default: `""`)
+- `preIndent`: Whether imported functions should be indented (default: `false`)
+
+#### `parseFormat` (string)
+Default: `""`
+
+General fallback option for parsing when more specific `targetParse` is not defined.
+
+## Template Placeholders
+
+The Wings templating system uses specific placeholder syntax that gets replaced during code generation:
+
+### Core Placeholders
+
+#### `{#IMPLEMENT}`
+Used in the `implementFormat` to specify inheritance or interface implementation.
+
+**Example Template:**
+```java
+public class {#CLASS_NAME} {#IMPLEMENT} {
+    // class body
+}
+```
+
+#### `{#IMPORT}`
+Used in import statements to specify the import path.
+
+**Example Template:**
+```typescript
+import { {#IMPORT_TYPES} } from '{#IMPORT}';
+```
+
+### Type Mapping
+
+The `types` array maps Wings primitive types to target language types:
+
+#### Common Type Mappings
+
+**String Types:**
+```json
+{
+  "wingsType": "str",
+  "targetType": "string",
+  "targetInit": "\"\"",
+  "requiredImport": ""
+}
+```
+
+**Number Types:**
+```json
+{
+  "wingsType": "int",
+  "targetType": "number",
+  "targetInit": "0",
+  "requiredImport": ""
+}
+```
+
+**Boolean Types:**
+```json
+{
+  "wingsType": "bool",
+  "targetType": "boolean",
+  "targetInit": "false",
+  "requiredImport": ""
+}
+```
+
+**Array Types:**
+```json
+{
+  "wingsType": "array",
+  "targetType": "Array<{#TYPE}>",
+  "targetInit": "[]",
+  "requiredImport": ""
+}
+```
+
+## Template File Structure
+
+Template files are text files that contain the skeleton code for structs and enums, with placeholders that get replaced during generation.
+
+### Struct Template Example
+
+```typescript
+// {#COMMENT} Generated by Wings
+{#IMPORTS}
+
+export interface {#STRUCT_NAME} {#IMPLEMENT} {
+{#FIELDS}
+}
+```
+
+### Enum Template Example
+
+```typescript
+// {#COMMENT} Generated by Wings
+{#IMPORTS}
+
+export enum {#ENUM_NAME} {
+{#VALUES}
+}
+```
+
+## Complete Configuration Example
+
+Here's a complete template configuration for TypeScript:
+
+```json
+{
+  "comment": "//",
+  "filename": "PascalCase",
+  "filetype": "ts",
+  "implementFormat": "extends {#IMPLEMENT}",
+  "importPath": {
+    "format": "import {{ {#IMPORT_TYPES} }} from '{#IMPORT}';",
+    "separator": "/",
+    "pathType": "relative",
+    "prefix": "./",
+    "level": 1
+  },
+  "indentation": {
+    "spacing": "  ",
+    "preIndent": false
+  },
+  "parseFormat": "",
+  "templates": {
+    "struct": "templates/typescript/struct.ts.template",
+    "enum": "templates/typescript/enum.ts.template"
+  },
+  "types": [
+    {
+      "wingsType": "str",
+      "targetType": "string",
+      "targetInit": "\"\"",
+      "requiredImport": ""
+    },
+    {
+      "wingsType": "int",
+      "targetType": "number",
+      "targetInit": "0",
+      "requiredImport": ""
+    },
+    {
+      "wingsType": "bool",
+      "targetType": "boolean",
+      "targetInit": "false",
+      "requiredImport": ""
+    },
+    {
+      "wingsType": "array",
+      "targetType": "Array<{#TYPE}>",
+      "targetInit": "[]",
+      "requiredImport": ""
+    }
+  ]
+}
+```
+
+## Usage Workflow
+
+1. **Create Template Files**: Write template files for structs and enums with appropriate placeholders
+2. **Configure JSON**: Create a JSON configuration file defining the language-specific settings
+3. **Define Wings Schema**: Create your data structures in Wings format
+4. **Generate Code**: Run Wings to generate code files in your target language
+
+## Best Practices
+
+### Template Design
+- Keep templates simple and focused on structure
+- Use consistent placeholder naming
+- Include proper commenting and formatting
+- Test templates with various data structures
+
+### Configuration Management
+- Use descriptive names for template files
+- Organize templates by language in separate folders
+- Document custom type mappings
+- Validate JSON configuration files
+
+### Type Mapping
+- Cover all primitive types used in your Wings schemas
+- Provide sensible default values for initialization
+- Include required imports for complex types
+- Consider nullable and optional type variants
+
+## Advanced Features
+
+### Custom Import Handling
+The `importPath` configuration allows fine-grained control over how imports are generated:
+
+```json
+{
+  "importPath": {
+    "format": "from {#IMPORT} import {#IMPORT_TYPES}",
+    "separator": ".",
+    "pathType": "absolute",
+    "prefix": "myproject",
+    "level": 2
+  }
+}
+```
+
+### Conditional Logic
+Templates can include conditional logic based on the presence of certain fields or inheritance:
+
+```python
+class {#CLASS_NAME}{#IMPLEMENT}:
+    """Generated by Wings"""
+    
+    def __init__(self):
+{#INIT_FIELDS}
+```
+
+### Multiple File Generation
+Wings can generate multiple files from a single schema by using different template configurations for different aspects of the code (interfaces, implementations, tests, etc.).
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Template Not Found**: Ensure template file paths are correct and files exist
+2. **Invalid JSON**: Validate configuration JSON syntax
+3. **Missing Type Mappings**: Ensure all Wings types used in schemas have corresponding mappings
+4. **Import Errors**: Check `importPath` configuration and template import syntax
+
+### Debugging Tips
+
+- Start with simple templates and gradually add complexity
+- Test type mappings with basic data structures first
+- Use the Wings validation tools to check configuration
+- Review generated code for syntax errors in target language
+
+## Extending Wings
+
+The templating system is designed to be extensible. To add support for a new language:
+
+1. Create struct and enum template files
+2. Define type mappings for the target language
+3. Configure language-specific settings (comments, imports, etc.)
+4. Test with various Wings schema files
+5. Contribute back to the Wings project
+
+This templating system provides a flexible foundation for generating consistent, well-structured code across multiple programming languages while maintaining the ability to customize output for specific needs.
