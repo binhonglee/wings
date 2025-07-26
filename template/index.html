@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#template" class="md-skip">
+        <a href="#templating-system" class="md-skip">
           Skip to content
         </a>
       
@@ -370,91 +370,235 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#comment-str" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      comment*: str
+      Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#filename-case" class="md-nav__link">
+  <a href="#template-configuration-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      filename*: Case
+      Template Configuration Structure
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#filetype-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      filetype*: str
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementformat-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      implementFormat: str
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#importpath-obj" class="md-nav__link">
-    <span class="md-ellipsis">
-      importPath*: obj
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="importPath*: obj">
+    <nav class="md-nav" aria-label="Template Configuration Structure">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#format-str" class="md-nav__link">
+  <a href="#required-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      format: str
+      Required Fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Required Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comment-string-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      comment (string) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#separator-str" class="md-nav__link">
+  <a href="#filename-case-required" class="md-nav__link">
     <span class="md-ellipsis">
-      separator: str
+      filename (Case) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pathtype-never-absolute-relative" class="md-nav__link">
+  <a href="#filetype-string-required" class="md-nav__link">
     <span class="md-ellipsis">
-      pathType*: "never" || "absolute" || "relative"
+      filetype (string) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prefix-str" class="md-nav__link">
+  <a href="#templates-object-required" class="md-nav__link">
     <span class="md-ellipsis">
-      prefix: str
+      templates (object) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#level-int" class="md-nav__link">
+  <a href="#types-array-of-objects-required" class="md-nav__link">
     <span class="md-ellipsis">
-      level*: int
+      types (array of objects) required
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optional Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementformat-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      implementFormat (string)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importpath-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      importPath (object)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indentation-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      indentation (object)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parseformat-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      parseFormat (string)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Placeholders
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Template Placeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Placeholders
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Placeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      {#IMPLEMENT}
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      {#IMPORT}
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Type Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-type-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Type Mappings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template File Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Template File Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#struct-template-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Struct Template Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-template-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enum Template Example
     </span>
   </a>
   
@@ -466,28 +610,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#indentation-obj" class="md-nav__link">
+  <a href="#complete-configuration-example" class="md-nav__link">
     <span class="md-ellipsis">
-      indentation: obj
+      Complete Configuration Example
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="indentation: obj">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#spacing-str" class="md-nav__link">
+  <a href="#template-design" class="md-nav__link">
     <span class="md-ellipsis">
-      spacing: str
+      Template Design
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#preindent-bool" class="md-nav__link">
+  <a href="#configuration-management" class="md-nav__link">
     <span class="md-ellipsis">
-      preIndent: bool
+      Configuration Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-mapping_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Mapping
     </span>
   </a>
   
@@ -499,37 +670,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parseformat-str" class="md-nav__link">
+  <a href="#advanced-features" class="md-nav__link">
     <span class="md-ellipsis">
-      parseFormat: str
+      Advanced Features
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#templates-obj" class="md-nav__link">
-    <span class="md-ellipsis">
-      templates*: obj
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="templates*: obj">
+    <nav class="md-nav" aria-label="Advanced Features">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#struct-str" class="md-nav__link">
+  <a href="#custom-import-handling" class="md-nav__link">
     <span class="md-ellipsis">
-      struct*: str
+      Custom Import Handling
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#enum-str" class="md-nav__link">
+  <a href="#conditional-logic" class="md-nav__link">
     <span class="md-ellipsis">
-      enum*: str
+      Conditional Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-file-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple File Generation
     </span>
   </a>
   
@@ -541,46 +712,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#types-obj" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      types*: obj[]
+      Troubleshooting
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="types*: obj[]">
+    <nav class="md-nav" aria-label="Troubleshooting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#wingstype-str" class="md-nav__link">
+  <a href="#common-issues" class="md-nav__link">
     <span class="md-ellipsis">
-      wingsType*: str
+      Common Issues
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#targettype-str" class="md-nav__link">
+  <a href="#debugging-tips" class="md-nav__link">
     <span class="md-ellipsis">
-      targetType*: str
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#targetinit-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      targetInit: str
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#requiredimport-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      requiredImport: str
+      Debugging Tips
     </span>
   </a>
   
@@ -588,6 +741,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extending-wings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending Wings
+    </span>
+  </a>
   
 </li>
       
@@ -784,91 +946,235 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#comment-str" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      comment*: str
+      Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#filename-case" class="md-nav__link">
+  <a href="#template-configuration-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      filename*: Case
+      Template Configuration Structure
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#filetype-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      filetype*: str
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementformat-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      implementFormat: str
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#importpath-obj" class="md-nav__link">
-    <span class="md-ellipsis">
-      importPath*: obj
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="importPath*: obj">
+    <nav class="md-nav" aria-label="Template Configuration Structure">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#format-str" class="md-nav__link">
+  <a href="#required-fields" class="md-nav__link">
     <span class="md-ellipsis">
-      format: str
+      Required Fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Required Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comment-string-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      comment (string) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#separator-str" class="md-nav__link">
+  <a href="#filename-case-required" class="md-nav__link">
     <span class="md-ellipsis">
-      separator: str
+      filename (Case) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pathtype-never-absolute-relative" class="md-nav__link">
+  <a href="#filetype-string-required" class="md-nav__link">
     <span class="md-ellipsis">
-      pathType*: "never" || "absolute" || "relative"
+      filetype (string) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prefix-str" class="md-nav__link">
+  <a href="#templates-object-required" class="md-nav__link">
     <span class="md-ellipsis">
-      prefix: str
+      templates (object) required
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#level-int" class="md-nav__link">
+  <a href="#types-array-of-objects-required" class="md-nav__link">
     <span class="md-ellipsis">
-      level*: int
+      types (array of objects) required
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optional Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementformat-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      implementFormat (string)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importpath-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      importPath (object)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indentation-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      indentation (object)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parseformat-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      parseFormat (string)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Placeholders
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Template Placeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Placeholders
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Placeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      {#IMPLEMENT}
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    <span class="md-ellipsis">
+      {#IMPORT}
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Mapping
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Type Mapping">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-type-mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Type Mappings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#template-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template File Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Template File Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#struct-template-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Struct Template Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum-template-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enum Template Example
     </span>
   </a>
   
@@ -880,28 +1186,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#indentation-obj" class="md-nav__link">
+  <a href="#complete-configuration-example" class="md-nav__link">
     <span class="md-ellipsis">
-      indentation: obj
+      Complete Configuration Example
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="indentation: obj">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#spacing-str" class="md-nav__link">
+  <a href="#template-design" class="md-nav__link">
     <span class="md-ellipsis">
-      spacing: str
+      Template Design
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#preindent-bool" class="md-nav__link">
+  <a href="#configuration-management" class="md-nav__link">
     <span class="md-ellipsis">
-      preIndent: bool
+      Configuration Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-mapping_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Mapping
     </span>
   </a>
   
@@ -913,37 +1246,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parseformat-str" class="md-nav__link">
+  <a href="#advanced-features" class="md-nav__link">
     <span class="md-ellipsis">
-      parseFormat: str
+      Advanced Features
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#templates-obj" class="md-nav__link">
-    <span class="md-ellipsis">
-      templates*: obj
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="templates*: obj">
+    <nav class="md-nav" aria-label="Advanced Features">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#struct-str" class="md-nav__link">
+  <a href="#custom-import-handling" class="md-nav__link">
     <span class="md-ellipsis">
-      struct*: str
+      Custom Import Handling
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#enum-str" class="md-nav__link">
+  <a href="#conditional-logic" class="md-nav__link">
     <span class="md-ellipsis">
-      enum*: str
+      Conditional Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-file-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple File Generation
     </span>
   </a>
   
@@ -955,46 +1288,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#types-obj" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      types*: obj[]
+      Troubleshooting
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="types*: obj[]">
+    <nav class="md-nav" aria-label="Troubleshooting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#wingstype-str" class="md-nav__link">
+  <a href="#common-issues" class="md-nav__link">
     <span class="md-ellipsis">
-      wingsType*: str
+      Common Issues
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#targettype-str" class="md-nav__link">
+  <a href="#debugging-tips" class="md-nav__link">
     <span class="md-ellipsis">
-      targetType*: str
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#targetinit-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      targetInit: str
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#requiredimport-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      requiredImport: str
+      Debugging Tips
     </span>
   </a>
   
@@ -1002,6 +1317,15 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extending-wings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending Wings
+    </span>
+  </a>
   
 </li>
       
@@ -1024,68 +1348,298 @@
   
 
 
-<h1 id="template">Template</h1>
-<p>This is for more advanced use case where you want your own way of formatting for the output files or if you use wings for languages that is not currently supported. Check out the <a href="https://github.com/binhonglee/wings/tree/devel/examples/input/templates">examples/input/template</a> folder for an example of how it works for currently supported languages (start from the json files).</p>
-<p><em>* indicates required field. Non-required fields will have its default value specified.</em></p>
-<h2 id="comment-str">comment*: <code>str</code></h2>
-<p>Language line prefix for comments (eg. <code>//</code> in TypeScript or <code>#</code> in Python).</p>
-<h2 id="filename-case">filename*: <a href="https://binhonglee.github.io/stones/stones/cases.html#Case"><code>Case</code></a></h2>
-<p>The Case / format in which the output filename should be in.</p>
-<h2 id="filetype-str">filetype*: <code>str</code></h2>
-<p>This is used for deduplication of language template files and also to be appended to the generated filename ending as filetype.</p>
-<h2 id="implementformat-str">implementFormat: <code>str</code></h2>
-<div class="highlight"><pre><span></span><code>default: &quot;{#IMPLEMENT}&quot;
+<h1 id="templating-system">Templating System</h1>
+<h2 id="overview">Overview</h2>
+<p>Templating system allows you to define custom templates for languages that aren't currently supported or to customize the output format for existing languages.</p>
+<h2 id="template-configuration-structure">Template Configuration Structure</h2>
+<p>The Wings templating system is configured using JSON files that define how code should be generated for specific programming languages. Each template configuration contains several key sections:</p>
+<h3 id="required-fields">Required Fields</h3>
+<h4 id="comment-string-required"><code>comment</code> (string) <em>required</em></h4>
+<p>The language line prefix for comments.</p>
+<p><strong>Examples:</strong>
+- <code>//</code> for TypeScript, Java, C++
+- <code>#</code> for Python, Ruby, Bash
+- <code>--</code> for SQL, Haskell</p>
+<h4 id="filename-case-required"><code>filename</code> (Case) <em>required</em></h4>
+<p>The case/format in which the output filename should be written.</p>
+<p><strong>Supported Cases:</strong>
+- <code>camelCase</code>
+- <code>PascalCase</code>
+- <code>snake_case</code>
+- <code>kebab-case</code>
+- <code>SCREAMING_SNAKE_CASE</code></p>
+<h4 id="filetype-string-required"><code>filetype</code> (string) <em>required</em></h4>
+<p>The file extension for the generated files. This is used for:
+- Deduplication of language template files
+- Appending to the generated filename</p>
+<p><strong>Examples:</strong>
+- <code>"ts"</code> for TypeScript files
+- <code>"py"</code> for Python files
+- <code>"java"</code> for Java files
+- <code>"cpp"</code> for C++ files</p>
+<h4 id="templates-object-required"><code>templates</code> (object) <em>required</em></h4>
+<p>Defines the template files to use for different code structures.</p>
+<p><strong>Structure:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;struct&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path/to/struct_template.txt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path/to/enum_template.txt&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="types-array-of-objects-required"><code>types</code> (array of objects) <em>required</em></h4>
+<p>Maps Wings types to target language types.</p>
+<p><strong>Structure:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;str&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;\&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="optional-fields">Optional Fields</h3>
+<h4 id="implementformat-string"><code>implementFormat</code> (string)</h4>
+<p>Default: <code>"{#IMPLEMENT}"</code></p>
+<p>The string format used to declare that a class extends or implements another class.</p>
+<p><strong>Examples:</strong>
+- <code>"extends {#IMPLEMENT}"</code> for Java
+- <code>"implements {#IMPLEMENT}"</code> for interfaces
+- <code>": {#IMPLEMENT}"</code> for C++</p>
+<h4 id="importpath-object"><code>importPath</code> (object)</h4>
+<p>Controls how import statements are generated.</p>
+<p><strong>Structure:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;importPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{#IMPORT}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;separator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pathType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;relative&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Fields:</strong>
+- <code>format</code>: Import statement format (default: <code>"{#IMPORT}"</code>)
+- <code>separator</code>: Path separator (default: <code>"/"</code>, some languages use <code>"."</code>)
+- <code>pathType</code>: <code>"never"</code>, <code>"absolute"</code>, or <code>"relative"</code>
+- <code>prefix</code>: Prefix for import paths
+- <code>level</code>: Folder level for imports (0 = file itself, 1 = parent folder, etc.)</p>
+<h4 id="indentation-object"><code>indentation</code> (object)</h4>
+<p>Controls code indentation in generated files.</p>
+<p><strong>Structure:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;indentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;spacing&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;  &quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preIndent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Fields:</strong>
+- <code>spacing</code>: Defines the "tab" width (default: <code>""</code>)
+- <code>preIndent</code>: Whether imported functions should be indented (default: <code>false</code>)</p>
+<h4 id="parseformat-string"><code>parseFormat</code> (string)</h4>
+<p>Default: <code>""</code></p>
+<p>General fallback option for parsing when more specific <code>targetParse</code> is not defined.</p>
+<h2 id="template-placeholders">Template Placeholders</h2>
+<p>The Wings templating system uses specific placeholder syntax that gets replaced during code generation:</p>
+<h3 id="core-placeholders">Core Placeholders</h3>
+<h4 id="implement"><code>{#IMPLEMENT}</code></h4>
+<p>Used in the <code>implementFormat</code> to specify inheritance or interface implementation.</p>
+<p><strong>Example Template:</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="err">{#</span><span class="nc">CLASS_NAME</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="err">#</span><span class="n">IMPLEMENT</span><span class="p">}</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// class body</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="import"><code>{#IMPORT}</code></h4>
+<p>Used in import statements to specify the import path.</p>
+<p><strong>Example Template:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="n">#IMPORT_TYPES</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;{#IMPORT}&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<h3 id="type-mapping">Type Mapping</h3>
+<p>The <code>types</code> array maps Wings primitive types to target language types:</p>
+<h4 id="common-type-mappings">Common Type Mappings</h4>
+<p><strong>String Types:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;str&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;\&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Number Types:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Boolean Types:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bool&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Array Types:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Array&lt;{#TYPE}&gt;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[]&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h2 id="template-file-structure">Template File Structure</h2>
+<p>Template files are text files that contain the skeleton code for structs and enums, with placeholders that get replaced during generation.</p>
+<h3 id="struct-template-example">Struct Template Example</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// {#COMMENT} Generated by Wings</span>
+<span class="p">{</span><span class="n">#IMPORTS</span><span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span><span class="n">#STRUCT_NAME</span><span class="p">}</span><span class="w"> </span><span class="p">{</span><span class="n">#IMPLEMENT</span><span class="p">}</span><span class="w"> </span><span class="p">{</span>
+<span class="p">{</span><span class="n">#FIELDS</span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>The string in which is used in the specific language to declare that the current class extends or implements an existing different class.</p>
-<h2 id="importpath-obj">importPath*: <code>obj</code></h2>
-<h3 id="format-str">format: <code>str</code></h3>
-<div class="highlight"><pre><span></span><code>default: &quot;{#IMPORT}&quot;
+<h3 id="enum-template-example">Enum Template Example</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// {#COMMENT} Generated by Wings</span>
+<span class="p">{</span><span class="n">#IMPORTS</span><span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="p">{</span><span class="n">#ENUM_NAME</span><span class="p">}</span><span class="w"> </span><span class="p">{</span>
+<span class="p">{</span><span class="n">#VALUES</span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>The format in which import path are written in.</p>
-<h3 id="separator-str">separator: <code>str</code></h3>
-<div class="highlight"><pre><span></span><code>default: &#39;/&#39;
+<h2 id="complete-configuration-example">Complete Configuration Example</h2>
+<p>Here's a complete template configuration for TypeScript:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;//&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PascalCase&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;filetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ts&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;implementFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;extends {#IMPLEMENT}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;importPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;import {{ {#IMPORT_TYPES} }} from &#39;{#IMPORT}&#39;;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;separator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pathType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;relative&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;indentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;spacing&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;  &quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preIndent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;parseFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;struct&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;templates/typescript/struct.ts.template&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;templates/typescript/enum.ts.template&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;str&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;\&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bool&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Array&lt;{#TYPE}&gt;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[]&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>The way files / folders are joined. Some programming languages uses '.' in import path instead of '/'.</p>
-<h3 id="pathtype-never-absolute-relative">pathType*: <code>"never" || "absolute" || "relative"</code></h3>
-<p>This is to define how the import path should be written for the imported files.</p>
-<h3 id="prefix-str">prefix: <code>str</code></h3>
-<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+<h2 id="usage-workflow">Usage Workflow</h2>
+<ol>
+<li><strong>Create Template Files</strong>: Write template files for structs and enums with appropriate placeholders</li>
+<li><strong>Configure JSON</strong>: Create a JSON configuration file defining the language-specific settings</li>
+<li><strong>Define Wings Schema</strong>: Create your data structures in Wings format</li>
+<li><strong>Generate Code</strong>: Run Wings to generate code files in your target language</li>
+</ol>
+<h2 id="best-practices">Best Practices</h2>
+<h3 id="template-design">Template Design</h3>
+<ul>
+<li>Keep templates simple and focused on structure</li>
+<li>Use consistent placeholder naming</li>
+<li>Include proper commenting and formatting</li>
+<li>Test templates with various data structures</li>
+</ul>
+<h3 id="configuration-management">Configuration Management</h3>
+<ul>
+<li>Use descriptive names for template files</li>
+<li>Organize templates by language in separate folders</li>
+<li>Document custom type mappings</li>
+<li>Validate JSON configuration files</li>
+</ul>
+<h3 id="type-mapping_1">Type Mapping</h3>
+<ul>
+<li>Cover all primitive types used in your Wings schemas</li>
+<li>Provide sensible default values for initialization</li>
+<li>Include required imports for complex types</li>
+<li>Consider nullable and optional type variants</li>
+</ul>
+<h2 id="advanced-features">Advanced Features</h2>
+<h3 id="custom-import-handling">Custom Import Handling</h3>
+<p>The <code>importPath</code> configuration allows fine-grained control over how imports are generated:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;importPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;from {#IMPORT} import {#IMPORT_TYPES}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;separator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pathType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;absolute&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myproject&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>Prefix for import path. Will be overwritten by the <code>prefix</code> value in the project config if already defined there.</p>
-<h3 id="level-int">level*: <code>int</code></h3>
-<p>The level of folder the import should run and stop at. <code>0</code> is the lowest possible number which refers to the file itself, <code>1</code> refers to the folder the file is in and so on.</p>
-<p><em>*Note: Only required when <code>pathType</code> is not set to <code>"never"</code></em></p>
-<h2 id="indentation-obj">indentation: <code>obj</code></h2>
-<h3 id="spacing-str">spacing: <code>str</code></h3>
-<div class="highlight"><pre><span></span><code>default: &quot;&quot;
+<h3 id="conditional-logic">Conditional Logic</h3>
+<p>Templates can include conditional logic based on the presence of certain fields or inheritance:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="err">{#</span><span class="nc">CLASS_NAME</span><span class="p">}{</span><span class="c1">#IMPLEMENT}:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generated by Wings&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="p">{</span><span class="c1">#INIT_FIELDS}</span>
 </code></pre></div>
-<p>Define the "tab" width. This <strong>WOULD NOT</strong> replace the existing tabbing in your template files but rather is used to properly indent functions declared in the wings file.</p>
-<h3 id="preindent-bool">preIndent: <code>bool</code></h3>
-<div class="highlight"><pre><span></span><code>default: false
-</code></pre></div>
-<p>This is to define if the imported functions should be indented in the output file.</p>
-<h2 id="parseformat-str">parseFormat: <code>str</code></h2>
-<div class="highlight"><pre><span></span><code>default: &quot;&quot;
-</code></pre></div>
-<p>General fallback option for the more specific <code>targetParse</code> below if that's not defined.</p>
-<h2 id="templates-obj">templates*: <code>obj</code></h2>
-<h3 id="struct-str">struct*: <code>str</code></h3>
-<p>Filepath to the struct template file.</p>
-<h3 id="enum-str">enum*: <code>str</code></h3>
-<p>Filepath to the enum template file.</p>
-<h2 id="types-obj">types*: <code>obj[]</code></h2>
-<h3 id="wingstype-str">wingsType*: <code>str</code></h3>
-<p>Type to be parsed from wings file.</p>
-<h3 id="targettype-str">targetType*: <code>str</code></h3>
-<p>Generated type for output language.</p>
-<h3 id="targetinit-str">targetInit: <code>str</code></h3>
-<div class="highlight"><pre><span></span><code>default: &quot;&quot;
-</code></pre></div>
-<p>Initialization for target output type.</p>
-<h3 id="requiredimport-str">requiredImport: <code>str</code></h3>
-<div class="highlight"><pre><span></span><code>default: &quot;&quot;
-</code></pre></div>
-<p>Specific import that is needed to be added when this type is in use.</p>
+<h3 id="multiple-file-generation">Multiple File Generation</h3>
+<p>Wings can generate multiple files from a single schema by using different template configurations for different aspects of the code (interfaces, implementations, tests, etc.).</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<ol>
+<li><strong>Template Not Found</strong>: Ensure template file paths are correct and files exist</li>
+<li><strong>Invalid JSON</strong>: Validate configuration JSON syntax</li>
+<li><strong>Missing Type Mappings</strong>: Ensure all Wings types used in schemas have corresponding mappings</li>
+<li><strong>Import Errors</strong>: Check <code>importPath</code> configuration and template import syntax</li>
+</ol>
+<h3 id="debugging-tips">Debugging Tips</h3>
+<ul>
+<li>Start with simple templates and gradually add complexity</li>
+<li>Test type mappings with basic data structures first</li>
+<li>Use the Wings validation tools to check configuration</li>
+<li>Review generated code for syntax errors in target language</li>
+</ul>
+<h2 id="extending-wings">Extending Wings</h2>
+<p>The templating system is designed to be extensible. To add support for a new language:</p>
+<ol>
+<li>Create struct and enum template files</li>
+<li>Define type mappings for the target language</li>
+<li>Configure language-specific settings (comments, imports, etc.)</li>
+<li>Test with various Wings schema files</li>
+<li>Contribute back to the Wings project</li>
+</ol>
+<p>This templating system provides a flexible foundation for generating consistent, well-structured code across multiple programming languages while maintaining the ability to customize output for specific needs.</p>
 
 
 
