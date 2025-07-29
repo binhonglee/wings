@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../library/">
+        <link rel="prev" href="../design/">
       
       
-        <link rel="next" href="../tsUtil/">
+        <link rel="next" href="../license/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Experimental - wings</title>
+        <title>Dev Setup - wings</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#experimental" class="md-skip">
+        <a href="#development-setup" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Experimental
+              Dev Setup
             
           </span>
         </div>
@@ -405,32 +405,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Experimental
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../experimental/" class="md-nav__link">
         
   
   
@@ -441,44 +419,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#remote-template" class="md-nav__link">
-    <span class="md-ellipsis">
-      Remote Template
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      Interface
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -601,18 +541,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
         
           
           <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
@@ -628,7 +570,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             Contributing
@@ -662,10 +604,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../devSetup/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Dev Setup
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -676,6 +640,251 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-compilation-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Compilation Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repository Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-and-initialize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone and Initialize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nim-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nim Environment Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Scripts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentation-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#release-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-template-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language Template Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#making-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-your-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Your Changes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Your Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Testing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-platform-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Platform Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-new-language-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Language Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-submitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Submitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useful-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful Resources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -737,20 +946,227 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#remote-template" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
-      Remote Template
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#required-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-compilation-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Compilation Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repository Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-and-initialize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clone and Initialize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nim-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nim Environment Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Scripts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentation-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#release-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Release Build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-template-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language Template Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#making-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making Changes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Structure
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#interface" class="md-nav__link">
+  <a href="#testing-your-changes" class="md-nav__link">
     <span class="md-ellipsis">
-      Interface
+      Testing Your Changes
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Testing Your Changes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Testing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-platform-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Platform Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-new-language-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding New Language Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributing-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contributing Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contributing Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-submitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before Submitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#useful-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful Resources
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -773,105 +1189,143 @@
   
 
 
-<h1 id="experimental">Experimental</h1>
-<p>This page generally documents features that are experimental with no guarantee that its support will remain as the project goes on. As they get more stable, each sections will be moved to its own appropriate page.</p>
-<h2 id="remote-template">Remote Template</h2>
-<p>To use a remote language config file (template) instead of a local one, you can add something like the following to your <code>wings.json</code>. Hash field is optional. If a hash is not defined, it will not be checked. If a hash is defined and it does not match the hash of the downloaded file, it will not be parsed.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;remoteLangConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/go.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F6F38AE46ACB6A79EB333D360EF3705CBF76CDC1&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/kt.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7885BBF682B5A931468A0A6BA51B47EA9CB31C79&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/nim.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BF55F9715D5997EE718DF811AB5F7194A76DF404&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/py.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CC07CDD6622A39E0E09A13E6107FC3BBBC8A428B&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/ts.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9E59AB2883F3C1DE2E6338622E067588420A069C&quot;</span>
-<span class="p">}]</span>
+<h1 id="development-setup">Development Setup</h1>
+<p>Guide for contributors who want to work on the Wings project itself.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="required-dependencies">Required Dependencies</h3>
+<ul>
+<li><strong>Nim</strong>: Programming language and compiler</li>
+<li><strong>Nimble</strong>: Nim package manager (usually comes with Nim)</li>
+<li><strong>Git</strong>: For version control</li>
+</ul>
+<h3 id="cross-compilation-dependencies">Cross-Compilation Dependencies</h3>
+<p>Some additional packages might be needed for cross-compilation:
+- <code>gcc-multilib</code>
+- <code>gcc-arm-linux-gnueabihf</code> 
+- <code>mingw-w64</code>
+- <code>libevent-dev</code></p>
+<p><strong>Note</strong>: The exact installation varies by platform.</p>
+<h2 id="repository-setup">Repository Setup</h2>
+<h3 id="clone-and-initialize">Clone and Initialize</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/binhonglee/wings.git
+<span class="nb">cd</span><span class="w"> </span>wings/
 </code></pre></div>
-<h2 id="interface">Interface</h2>
-<p>Input file:</p>
-<div class="input_div">
-<label class="input_label">sample_interface.wings</label>
-<pre class="highlight" id="codeblock">
-  <span class="kn">go-filepath</span> <span class="s">examples/go</span>
-  <span class="kn">kt-filepath</span> <span class="s">examples/kt</span>
-  <span class="kn">ts-filepath</span> <span class="s">examples/ts</span>
+<h3 id="nim-environment-setup">Nim Environment Setup</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install Nim dependencies</span>
+nimble<span class="w"> </span>install<span class="w"> </span>-d
 
-  <span class="kn">import</span> <span class="s">examples/input/emotion.wings</span>
-
-  <span class="c1"># Just some interface</span>
-
-  <span class="kn">interface</span> <span class="nx">Student</span> <span class="kn">{</span>
-  <span class="kn">}</span>
-
-  wings-func(
-    public functionOne (firstParam: str, secondParam: str) void
-    public functionTwo () str
-  )
-
-</pre>
-</div>
-
-<p>Output files:</p>
-<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">examples/go/sampleinterface.go</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="kn">package</span><span class="w"> </span><span class="k">go</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="nx">person</span><span class="w"> </span><span class="s">&quot;github.com/binhonglee/wings/examples/output/go/person&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// SampleInterface - Just some interface</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">SampleInterface</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">FunctionTwo</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">  </span><span class="nx">FunctionOne</span><span class="p">(</span><span class="nx">firstParam</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">secondParam</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span>
-<span class="p">}</span>
+<span class="c1"># Verify setup</span>
+nim<span class="w"> </span>--version
+nimble<span class="w"> </span>--version
 </code></pre></div>
-</div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">examples/kt/SampleInterface.kt</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="k">package</span><span class="w"> </span><span class="nn">kt</span>
-
-<span class="c1">// Just some interface</span>
-<span class="kd">interface</span><span class="w"> </span><span class="nc">SampleInterface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">fun</span><span class="w"> </span><span class="nf">functionTwo</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span>
-<span class="w">  </span><span class="kd">fun</span><span class="w"> </span><span class="nf">functionOne</span><span class="p">(</span><span class="n">firstParam</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">secondParam</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="kt">Unit</span>
-<span class="p">}</span>
+<h2 id="development-scripts">Development Scripts</h2>
+<h3 id="documentation-development">Documentation Development</h3>
+<p><div class="highlight"><pre><span></span><code>nim<span class="w"> </span>src/main/scripts/docs.nims
 </code></pre></div>
-</div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">examples/ts/SampleInterface.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
+- Runs MkDocs development server for real-time feedback
+- Watches changes in the <code>docs/</code> folder<br />
+- Requires <code>mkdocs</code> to be installed</p>
+<h3 id="release-build">Release Build</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build for current environment</span>
+nim<span class="w"> </span>src/main/scripts/release.nims
 
-<span class="k">import</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span>
-
-<span class="c1">// Just some interface</span>
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">SampleInterface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">functionTwo</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">functionOne</span><span class="p">(</span><span class="nx">firstParam</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">secondParam</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="c1"># Cross-compile for other environments  </span>
+nim<span class="w"> </span>src/main/scripts/release.nims<span class="w"> </span>--all
 </code></pre></div>
-</div>
-</div>
+<h3 id="language-template-generation">Language Template Generation</h3>
+<p><div class="highlight"><pre><span></span><code>nim<span class="w"> </span>c<span class="w"> </span>-r<span class="w"> </span>-d:ssl<span class="w"> </span>src/main/staticlang/main.nim
+</code></pre></div>
+This generates/updates the <code>lang</code> folder based on files in <code>src/main/wingspkg/lang</code> and <code>examples/input/templates</code>.</p>
+<h3 id="testing">Testing</h3>
+<p><div class="highlight"><pre><span></span><code>./scripts/test.sh
+</code></pre></div>
+<strong>Important</strong>: This isn't a proper test for everything. Recommend reading the script, &lt; 20 lines, before running it.</p>
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="making-changes">Making Changes</h3>
+<ol>
+<li>
+<p><strong>Basic Development Cycle</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1"># Make changes to source code</span>
+
+<span class="c1"># Test basic compilation</span>
+nim<span class="w"> </span>c<span class="w"> </span>src/main/wings.nim
+
+<span class="c1"># Test with example files</span>
+./wings<span class="w"> </span>examples/input/student.wings
+
+<span class="c1"># Run the basic test suite</span>
+./scripts/test.sh
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Working with Templates</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1"># After modifying template files in examples/input/templates/</span>
+nim<span class="w"> </span>c<span class="w"> </span>-r<span class="w"> </span>-d:ssl<span class="w"> </span>src/main/staticlang/main.nim
+
+<span class="c1"># Test the updated templates</span>
+./wings<span class="w"> </span>examples/input/student.wings
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Documentation Changes</strong>
+   <div class="highlight"><pre><span></span><code><span class="c1"># Start documentation server</span>
+nim<span class="w"> </span>src/main/scripts/docs.nims
+
+<span class="c1"># Edit documentation in docs/ folder</span>
+<span class="c1"># Changes should auto-reload</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="repository-structure">Repository Structure</h2>
+<div class="highlight"><pre><span></span><code>wings/
+├── src/main/
+│   ├── wings.nim              # Main entry point
+│   ├── wingspkg/              # Core package code
+│   └── scripts/               # Development scripts
+├── examples/
+│   ├── input/                 # Example Wings files
+│   └── output/               # Generated example outputs
+├── docs/                     # Documentation source
+└── scripts/                  # Build and test scripts
+</code></pre></div>
+<h2 id="testing-your-changes">Testing Your Changes</h2>
+<h3 id="basic-testing">Basic Testing</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test with provided examples</span>
+find<span class="w"> </span>examples/input<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.wings&quot;</span><span class="w"> </span>-exec<span class="w"> </span>./wings<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+</code></pre></div>
+<h3 id="cross-platform-testing">Cross-Platform Testing</h3>
+<h2 id="adding-new-language-support">Adding New Language Support</h2>
+<ol>
+<li><strong>Create Template Configuration</strong></li>
+<li>Add your language configuration to <code>examples/input/templates/</code></li>
+<li>
+<p>Follow the templating system documentation on wings.sh</p>
+</li>
+<li>
+<p><strong>Test Your Template</strong>
+   <div class="highlight"><pre><span></span><code>wings<span class="w"> </span>-c:examples/input/templates/your_lang.json<span class="w"> </span>examples/input/student.wings
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Add to Built-in Support</strong> (Optional)
+   <div class="highlight"><pre><span></span><code><span class="c1"># After adding to src/main/wingspkg/lang/</span>
+nim<span class="w"> </span>c<span class="w"> </span>-r<span class="w"> </span>-d:ssl<span class="w"> </span>src/main/staticlang/main.nim
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="contributing-guidelines">Contributing Guidelines</h2>
+<h3 id="before-submitting">Before Submitting</h3>
+<ul>
+<li>Ensure your changes compile: <code>nim c src/main/wings.nim</code></li>
+<li>Run the test suite: <code>./scripts/test.sh</code></li>
+<li>Test with example files to ensure nothing breaks</li>
+<li>Check that documentation builds if you made doc changes</li>
+</ul>
+<h3 id="useful-resources">Useful Resources</h3>
+<ul>
+<li>Example Wings files in <code>examples/input/</code> show expected syntax and features</li>
+<li>Template examples in <code>examples/input/templates/</code> demonstrate language support</li>
+</ul>
 
 
 

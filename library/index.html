@@ -1,0 +1,1290 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A simple cross language struct and enum file generator.">
+      
+      
+        <meta name="author" content="BinHong Lee">
+      
+      
+      
+        <link rel="prev" href="../template/">
+      
+      
+        <link rel="next" href="../experimental/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Library - wings</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:300,300i,400,400i,700,700i%7CVictor+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"PT Sans";--md-code-font:"Victor Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-wings-as-a-nimble-library" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="wings" class="md-header__button md-logo" aria-label="wings" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            wings
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Library
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/binhonglee/wings" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wings
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="wings" class="md-nav__button md-logo" aria-label="wings" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    wings
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/binhonglee/wings" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wings
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syntax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Syntax
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Library
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Library
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Modules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-api-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main API Function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Usage Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-with-multiple-output-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing with Multiple Output Directories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-script-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build Script Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-value-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Return Value Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experimental/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Experimental
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utility classes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Utility classes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_1" id="__nav_10_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    TypeScript
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_1">
+            <span class="md-nav__icon md-icon"></span>
+            TypeScript
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tsUtil/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    index.ts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Contributing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Contributing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../devSetup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dev Setup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    License
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Modules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main-api-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main API Function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Usage Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-with-multiple-output-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing with Multiple Output Directories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-script-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build Script Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#return-value-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Return Value Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="using-wings-as-a-nimble-library">Using Wings as a Nimble Library</h1>
+<p>Wings can be used programmatically as a Nim library.</p>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code>nimble<span class="w"> </span>install<span class="w"> </span>wings
+</code></pre></div>
+<h2 id="api-structure">API Structure</h2>
+<h3 id="core-modules">Core Modules</h3>
+<ul>
+<li><code>wingspkg/core</code> - Main processing functions</li>
+<li><code>wingspkg/util/config</code> - Configuration management</li>
+<li><code>wingspkg/util/upgrade</code> - Version management</li>
+</ul>
+<h3 id="main-api-function">Main API Function</h3>
+<p>The primary function for code generation is <code>fromFiles()</code> from the core module:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">core</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+
+<span class="c"># The main generation function</span>
+<span class="k">proc</span><span class="w"> </span><span class="nf">fromFiles</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">:</span><span class="w"> </span><span class="nb">seq</span><span class="o">[</span><span class="nb">string</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="n">Config</span><span class="p">):</span><span class="w"> </span><span class="n">Table</span><span class="o">[</span><span class="nb">string</span><span class="p">,</span><span class="w"> </span><span class="n">Table</span><span class="o">[</span><span class="nb">string</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="o">]]</span>
+</code></pre></div>
+<p>This function:
+- Takes a sequence of Wings file paths
+- Takes a configuration object
+- Returns a nested table structure: <code>[filename][filetype] -&gt; generated_content</code></p>
+<h2 id="configuration-management">Configuration Management</h2>
+<h3 id="loading-configuration">Loading Configuration</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+
+<span class="c"># Parse configuration from JSON file</span>
+<span class="k">proc</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="n">configPath</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span><span class="p">):</span><span class="w"> </span><span class="n">Config</span>
+
+<span class="c"># Initialize default config</span>
+<span class="k">proc</span><span class="w"> </span><span class="nf">initConfig</span><span class="p">():</span><span class="w"> </span><span class="n">Config</span>
+</code></pre></div>
+<h3 id="configuration-type">Configuration Type</h3>
+<h2 id="complete-usage-example">Complete Usage Example</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">core</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">tables</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">os</span>
+
+<span class="c"># Load configuration</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initConfig</span><span class="p">()</span><span class="w">  </span><span class="c"># Start with defaults</span>
+<span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">):</span>
+<span class="w">  </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">)</span>
+
+<span class="c"># Process Wings files</span>
+<span class="k">let</span><span class="w"> </span><span class="n">wingsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;schemas/user.wings&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schemas/api.wings&quot;</span><span class="o">]</span>
+<span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+
+<span class="c"># Write generated files</span>
+<span class="k">for</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">filetype</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">]</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">][</span><span class="n">filetype</span><span class="o">]</span>
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">outputPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">filetype</span>
+
+<span class="w">    </span><span class="c"># Create output directory if needed</span>
+<span class="w">    </span><span class="n">createDir</span><span class="p">(</span><span class="n">parentDir</span><span class="p">(</span><span class="n">outputPath</span><span class="p">))</span>
+<span class="w">    </span><span class="n">writeFile</span><span class="p">(</span><span class="n">outputPath</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">)</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Generated: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">outputPath</span>
+</code></pre></div>
+<h2 id="advanced-usage">Advanced Usage</h2>
+<h3 id="custom-configuration">Custom Configuration</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">tables</span>
+
+<span class="c"># Create custom configuration</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initConfig</span><span class="p">()</span>
+
+<span class="c"># Modify configuration (exact field names depend on Config type definition)</span>
+<span class="n">config</span><span class="p">.</span><span class="n">langFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;go&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ts&quot;</span><span class="o">]</span><span class="w">  </span><span class="c"># Only generate Go and TypeScript</span>
+<span class="n">config</span><span class="p">.</span><span class="n">outputRootDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;./generated&quot;</span><span class="o">]</span>
+<span class="n">config</span><span class="p">.</span><span class="n">skipImport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span><span class="w">  </span><span class="c"># Don&#39;t process imported files</span>
+
+<span class="c"># Use custom config with fromFiles()</span>
+<span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">&quot;schema.wings&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="processing-with-multiple-output-directories">Processing with Multiple Output Directories</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">core</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">os</span>
+
+<span class="k">proc</span><span class="w"> </span><span class="nf">generateToMultipleDirs</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">:</span><span class="w"> </span><span class="nb">seq</span><span class="o">[</span><span class="nb">string</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="n">Config</span><span class="p">):</span><span class="w"> </span><span class="n">void</span><span class="w"> </span><span class="o">=</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c"># The original code writes to each output directory</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">outputDir</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="n">outputRootDirs</span><span class="p">:</span>
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">originalDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCurrentDir</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">outputDir</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">      </span><span class="n">setCurrentDir</span><span class="p">(</span><span class="n">outputDir</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c"># Write files in this directory</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="n">filetype</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">]</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
+<span class="w">        </span><span class="k">let</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">][</span><span class="n">filetype</span><span class="o">]</span>
+<span class="w">        </span><span class="n">createDir</span><span class="p">(</span><span class="n">parentDir</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+<span class="w">        </span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">)</span>
+<span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Generated: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span>
+
+<span class="w">    </span><span class="n">setCurrentDir</span><span class="p">(</span><span class="n">originalDir</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="build-script-integration">Build Script Integration</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">core</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">os</span><span class="p">,</span><span class="w"> </span><span class="n">times</span>
+
+<span class="k">proc</span><span class="w"> </span><span class="nf">buildWithWings</span><span class="p">():</span><span class="w"> </span><span class="n">void</span><span class="w"> </span><span class="o">=</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">):</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">               </span><span class="k">else</span><span class="p">:</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">initConfig</span><span class="p">()</span>
+
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">wingsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;schemas/api.wings&quot;</span><span class="o">]</span>
+
+<span class="w">  </span><span class="c"># Check if regeneration is needed</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="n">needsRegen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">false</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">wingsFile</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">wingsFiles</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;src/generated&quot;</span><span class="p">):</span>
+<span class="w">      </span><span class="n">needsRegen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span>
+<span class="w">      </span><span class="k">break</span>
+
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">wingsTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getLastModificationTime</span><span class="p">(</span><span class="n">wingsFile</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">genFile</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">walkDirRec</span><span class="p">(</span><span class="s">&quot;src/generated&quot;</span><span class="p">):</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">getLastModificationTime</span><span class="p">(</span><span class="n">genFile</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">wingsTime</span><span class="p">:</span>
+<span class="w">        </span><span class="n">needsRegen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span>
+<span class="w">        </span><span class="k">break</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">needsRegen</span><span class="p">:</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Regenerating Wings files...&quot;</span>
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c"># Process output files as needed</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="n">filetype</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">]</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
+<span class="w">        </span><span class="k">let</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">][</span><span class="n">filetype</span><span class="o">]</span>
+<span class="w">        </span><span class="c"># Write to appropriate location</span>
+
+<span class="w">  </span><span class="c"># Continue with build process...</span>
+
+<span class="k">when</span><span class="w"> </span><span class="n">isMainModule</span><span class="p">:</span>
+<span class="w">  </span><span class="n">buildWithWings</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="return-value-structure">Return Value Structure</h2>
+<p>The <code>fromFiles()</code> function returns a nested table structure:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Table[string, Table[string, string]]</span>
+<span class="c"># Where:</span>
+<span class="c"># - Outer key: base filename/path</span>
+<span class="c"># - Inner key: file extension/type (go, ts, py, etc.)</span>
+<span class="c"># - Inner value: generated source code content</span>
+
+<span class="k">let</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">&quot;user.wings&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+<span class="c"># results[&quot;user&quot;][&quot;go&quot;] contains the Go source code</span>
+<span class="c"># results[&quot;user&quot;][&quot;ts&quot;] contains the TypeScript source code</span>
+<span class="c"># etc.</span>
+</code></pre></div>
+<h2 id="error-handling">Error Handling</h2>
+<p>Wings uses the <code>stones/log</code> module for logging. Error handling should check for:</p>
+<ul>
+<li>File existence before processing</li>
+<li>Configuration parsing errors</li>
+<li>Template processing failures</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">core</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">util</span><span class="o">/</span><span class="n">config</span>
+<span class="kn">import</span><span class="w"> </span><span class="n">os</span>
+
+<span class="k">try</span><span class="p">:</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;schema.wings&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Wings file not found&quot;</span>
+<span class="w">    </span><span class="k">return</span>
+
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">):</span>
+<span class="w">                 </span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">)</span>
+<span class="w">               </span><span class="k">else</span><span class="p">:</span>
+<span class="w">                 </span><span class="n">initConfig</span><span class="p">()</span>
+
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">&quot;schema.wings&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+<span class="w">  </span><span class="c"># Process results...</span>
+
+<span class="k">except</span><span class="p">:</span>
+<span class="w">  </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Error processing Wings files: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getCurrentExceptionMsg</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="dependencies">Dependencies</h2>
+<p>When using Wings as a library, you'll need these dependencies:</p>
+<ul>
+<li><code>stones</code> - For logging and utilities</li>
+<li>Standard library modules: <code>times</code>, <code>os</code>, <code>strutils</code>, <code>sets</code>, <code>tables</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../library/">
+        <link rel="prev" href="../integration/">
       
       
-        <link rel="next" href="../tsUtil/">
+        <link rel="next" href="../template/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Experimental - wings</title>
+        <title>Troubleshooting - wings</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#experimental" class="md-skip">
+        <a href="#troubleshooting-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Experimental
+              Troubleshooting
             
           </span>
         </div>
@@ -339,10 +339,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../troubleshoot/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -353,6 +375,158 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing Configuration File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-json-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invalid JSON Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wings-file-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wings File Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wings File Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import Errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generation Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generation Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-output-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing Output Directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Help">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#self-diagnosis-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-Diagnosis Steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Community Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -405,32 +579,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Experimental
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../experimental/" class="md-nav__link">
         
   
   
@@ -441,44 +593,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#remote-template" class="md-nav__link">
-    <span class="md-ellipsis">
-      Remote Template
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      Interface
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -737,20 +851,134 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#remote-template" class="md-nav__link">
+  <a href="#configuration-issues" class="md-nav__link">
     <span class="md-ellipsis">
-      Remote Template
+      Configuration Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-configuration-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing Configuration File
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#interface" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#invalid-json-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Interface
+      Invalid JSON Configuration
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wings-file-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wings File Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wings File Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Import Errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syntax-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generation-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generation Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generation Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-output-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing Output Directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting Help
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Help">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#self-diagnosis-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-Diagnosis Steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#community-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Community Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -773,105 +1001,67 @@
   
 
 
-<h1 id="experimental">Experimental</h1>
-<p>This page generally documents features that are experimental with no guarantee that its support will remain as the project goes on. As they get more stable, each sections will be moved to its own appropriate page.</p>
-<h2 id="remote-template">Remote Template</h2>
-<p>To use a remote language config file (template) instead of a local one, you can add something like the following to your <code>wings.json</code>. Hash field is optional. If a hash is not defined, it will not be checked. If a hash is defined and it does not match the hash of the downloaded file, it will not be parsed.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;remoteLangConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/go.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F6F38AE46ACB6A79EB333D360EF3705CBF76CDC1&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/kt.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7885BBF682B5A931468A0A6BA51B47EA9CB31C79&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/nim.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BF55F9715D5997EE718DF811AB5F7194A76DF404&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/py.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CC07CDD6622A39E0E09A13E6107FC3BBBC8A428B&quot;</span>
-<span class="p">},</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/binhonglee/wings/devel/examples/input/templates/ts.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9E59AB2883F3C1DE2E6338622E067588420A069C&quot;</span>
-<span class="p">}]</span>
-</code></pre></div>
-<h2 id="interface">Interface</h2>
-<p>Input file:</p>
-<div class="input_div">
-<label class="input_label">sample_interface.wings</label>
-<pre class="highlight" id="codeblock">
-  <span class="kn">go-filepath</span> <span class="s">examples/go</span>
-  <span class="kn">kt-filepath</span> <span class="s">examples/kt</span>
-  <span class="kn">ts-filepath</span> <span class="s">examples/ts</span>
-
-  <span class="kn">import</span> <span class="s">examples/input/emotion.wings</span>
-
-  <span class="c1"># Just some interface</span>
-
-  <span class="kn">interface</span> <span class="nx">Student</span> <span class="kn">{</span>
-  <span class="kn">}</span>
-
-  wings-func(
-    public functionOne (firstParam: str, secondParam: str) void
-    public functionTwo () str
-  )
-
-</pre>
-</div>
-
-<p>Output files:</p>
-<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">examples/go/sampleinterface.go</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="kn">package</span><span class="w"> </span><span class="k">go</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="nx">person</span><span class="w"> </span><span class="s">&quot;github.com/binhonglee/wings/examples/output/go/person&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// SampleInterface - Just some interface</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">SampleInterface</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">FunctionTwo</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">  </span><span class="nx">FunctionOne</span><span class="p">(</span><span class="nx">firstParam</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">secondParam</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span>
-<span class="p">}</span>
-</code></pre></div>
-</div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">examples/kt/SampleInterface.kt</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="k">package</span><span class="w"> </span><span class="nn">kt</span>
-
-<span class="c1">// Just some interface</span>
-<span class="kd">interface</span><span class="w"> </span><span class="nc">SampleInterface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">fun</span><span class="w"> </span><span class="nf">functionTwo</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span>
-<span class="w">  </span><span class="kd">fun</span><span class="w"> </span><span class="nf">functionOne</span><span class="p">(</span><span class="n">firstParam</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">secondParam</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="kt">Unit</span>
-<span class="p">}</span>
-</code></pre></div>
-</div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">examples/ts/SampleInterface.ts</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="c1">// This is a generated file</span>
-<span class="c1">//</span>
-<span class="c1">// If you would like to make any changes, please edit the source file instead.</span>
-<span class="c1">// run `plz genFile -- &quot;{SOURCE_FILE}&quot; -c:wings.json` upon completion.</span>
-<span class="c1">// Source: examples/input/sample_interface.wings</span>
-
-<span class="k">import</span><span class="w"> </span><span class="nx">Emotion</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./person/Emotion&#39;</span><span class="p">;</span>
-
-<span class="c1">// Just some interface</span>
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">SampleInterface</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">functionTwo</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">functionOne</span><span class="p">(</span><span class="nx">firstParam</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">secondParam</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-</div>
-</div>
+<h1 id="troubleshooting-guide">Troubleshooting Guide</h1>
+<p>Common issues and solutions when using Wings.</p>
+<h2 id="configuration-issues">Configuration Issues</h2>
+<h3 id="missing-configuration-file">Missing Configuration File</h3>
+<p><strong>Problem</strong>: Wings can't find the configuration file
+<strong>Solutions</strong>:
+- Ensure <code>wings.json</code> exists in the current directory
+- Use <code>-c:path/to/config.json</code> to specify the config file location
+- Check that the config file has the correct JSON syntax</p>
+<h3 id="invalid-json-configuration">Invalid JSON Configuration</h3>
+<p><strong>Problem</strong>: Configuration file has syntax errors
+<strong>Solutions</strong>:
+- Validate your JSON using an online JSON validator
+- Check for common issues:
+  - Missing commas between array/object elements
+  - Trailing commas (not allowed in JSON)
+  - Unclosed brackets or quotes
+  - Incorrect escape sequences</p>
+<h2 id="wings-file-issues">Wings File Issues</h2>
+<h3 id="import-errors">Import Errors</h3>
+<p><strong>Problem</strong>: Wings can't find imported files
+<strong>Solutions</strong>:
+- Verify the import path is correct relative to the current file
+- Ensure the imported <code>.wings</code> file exists
+- Check file permissions - Wings needs read access to imported files</p>
+<h3 id="syntax-errors">Syntax Errors</h3>
+<p><strong>Problem</strong>: Wings file has invalid syntax
+<strong>Solutions</strong>:
+- Check struct and enum definitions follow the correct format
+- Verify field definitions have the required components (name, type)
+- Ensure proper use of comments (starting with <code>//</code>)</p>
+<h2 id="generation-issues">Generation Issues</h2>
+<h3 id="missing-output-directories">Missing Output Directories</h3>
+<p><strong>Problem</strong>: Generated files aren't created
+<strong>Solutions</strong>:
+- Check that output directories specified in config exist
+- Verify Wings has write permissions to output directories
+- Ensure <code>outputRootDirs</code> in config points to valid paths</p>
+<h3 id="template-errors">Template Errors</h3>
+<p><strong>Problem</strong>: Custom templates cause generation failures
+<strong>Solutions</strong>:
+- Verify template file paths in <code>langConfigs</code> are correct
+- Check that template files exist and are readable
+- Validate template syntax matches Wings expectations</p>
+<h2 id="getting-help">Getting Help</h2>
+<h3 id="self-diagnosis-steps">Self-Diagnosis Steps</h3>
+<ol>
+<li>Check that your Wings file syntax is valid</li>
+<li>Verify your configuration file is valid JSON</li>
+<li>Ensure all imported files exist and are accessible</li>
+<li>Test with a minimal example to isolate issues</li>
+</ol>
+<h3 id="community-support">Community Support</h3>
+<ul>
+<li>Check existing issues on <a href="https://github.com/binhonglee/wings/issues">GitHub</a></li>
+<li>Create a new issue with:</li>
+<li>Your Wings file content</li>
+<li>Your configuration file</li>
+<li>The complete error message</li>
+<li>Your operating system and Wings installation method</li>
+</ul>
 
 
 
