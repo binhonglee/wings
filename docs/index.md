@@ -1,4 +1,4 @@
-# Wings - Cross-Language Code Generator
+# Wings
 
 Wings is a simple, customizable cross-language code generator that helps maintain consistency across your multi-language tech stack. Define your data structures once in `.wings` files, and generate corresponding code in multiple programming languages automatically.
 

@@ -26,14 +26,20 @@ extra_css: [custom.css]
 
 nav:
   - Home: index.md
-  - Design: design.md
+  - CLI: cli.md
   - Syntax: syntax.md
   - Config: config.md
+  - Integration: integration.md
+  - Troubleshooting: troubleshoot.md
   - Template: template.md
+  - Library: library.md
   - Experimental: experimental.md
   - Utility classes:
     - TypeScript:
       - index.ts: tsUtil/index.md
+  - Contributing:
+    - Design: design.md
+    - Dev Setup: devSetup.md
   - License: license.md
 
 plugins:

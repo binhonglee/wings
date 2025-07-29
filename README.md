@@ -402,4 +402,5 @@ nim c -r src/main/wings.nim
 
 - [Official Wings Website](https://wings.sh)
 - [Configuration Reference](https://wings.sh/config/)
+- [Dev Setup Guide](https://wings.sh/devSetup/)
 - [Template Documentation](https://wings.sh/template/)
