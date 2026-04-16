@@ -92,7 +92,7 @@ function parseWingsArray<T>(
   TConstruct: new (_: any) => T, obj?: any[]
 ): T[] {
   let toReturn = [];
-  for (const item of obj) {
+  for (const item of (obj ?? [])) {
     toReturn.push(new TConstruct(item));
   }
   return toReturn;
@@ -100,7 +100,7 @@ function parseWingsArray<T>(
 
 function parseRegularArray<T>(obj?: any[]): T[] {
   let toReturn = [];
-  for (const item of obj) {
+  for (const item of (obj ?? [])) {
     toReturn.push(item);
   }
   return toReturn;
