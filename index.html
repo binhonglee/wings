@@ -1732,8 +1732,8 @@ py-filepath examples/py
 # Define a simple struct
 struct Person {
     id int -1
-    name str &quot;&quot;
-    email str &quot;&quot;
+    name str ""
+    email str ""
     age int 0
     is_active bool true
 }
@@ -1794,8 +1794,8 @@ import validation/rules.wings
     count int 0
 
     # Strings
-    name str &quot;&quot;
-    description str &quot;No description&quot;
+    name str ""
+    description str "No description"
 
     # Booleans
     is_active bool true
@@ -1827,9 +1827,9 @@ import validation/rules.wings
     email str
 
     # Optional with defaults
-    name str &quot;Anonymous&quot;
+    name str "Anonymous"
     age int 0
-    bio str &quot;&quot;
+    bio str ""
 
     # Optional arrays
     tags []str
@@ -1872,14 +1872,14 @@ struct User {
 <h2 id="configuration-file">⚙️ Configuration File</h2>
 <p>Create a <code>wings.json</code> configuration file for advanced settings:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;header&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="s2">&quot;This is a generated file&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;Do not edit manually&quot;</span>
+<span class="w">  </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">"This is a generated file"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Do not edit manually"</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;acronyms&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;URL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;API&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;HTTP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;JSON&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;langFilter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;go&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;py&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;skipImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;logging&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="nt">"acronyms"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"URL"</span><span class="p">,</span><span class="w"> </span><span class="s2">"API"</span><span class="p">,</span><span class="w"> </span><span class="s2">"HTTP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"JSON"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"langFilter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"go"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ts"</span><span class="p">,</span><span class="w"> </span><span class="s2">"py"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"skipImport"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"logging"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="configuration-options">Configuration Options</h3>
@@ -1951,11 +1951,11 @@ struct User {
 <h3 id="comments-and-documentation">Comments and Documentation</h3>
 <div class="highlight"><pre><span></span><code># This comment describes the entire struct
 struct User {
-    # User&#39;s unique identifier
+    # User's unique identifier
     id int
 
     # Full name of the user
-    name str &quot;&quot;
+    name str ""
 
     # Email address for authentication
     email str
@@ -1992,7 +1992,7 @@ import shared/common.wings
 struct Product {
     id int
     name str
-    description str &quot;&quot;
+    description str ""
     price float
     is_available bool true
     tags []str

@@ -1782,9 +1782,9 @@
 <p>Defines the template files to use for different code structures.</p>
 <p><strong>Structure:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;struct&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path/to/struct_template.txt&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path/to/enum_template.txt&quot;</span>
+<span class="w">  </span><span class="nt">"templates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"struct"</span><span class="p">:</span><span class="w"> </span><span class="s2">"path/to/struct_template.txt"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"path/to/enum_template.txt"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
@@ -1792,12 +1792,12 @@
 <p>Maps Wings types to target language types.</p>
 <p><strong>Structure:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;str&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;\&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"str"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\"\""</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
@@ -1814,12 +1814,12 @@
 <p>Controls how import statements are generated.</p>
 <p><strong>Structure:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;importPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{#IMPORT}&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;separator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pathType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;relative&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="nt">"importPath"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{#IMPORT}"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"pathType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relative"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
@@ -1833,9 +1833,9 @@
 <p>Controls code indentation in generated files.</p>
 <p><strong>Structure:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;indentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;spacing&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;  &quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;preIndent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="nt">"indentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"spacing"</span><span class="p">:</span><span class="w"> </span><span class="s2">"  "</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"preIndent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
@@ -1858,41 +1858,41 @@
 <h4 id="import"><code>{#IMPORT}</code></h4>
 <p>Used in import statements to specify the import path.</p>
 <p><strong>Example Template:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="n">#IMPORT_TYPES</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;{#IMPORT}&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="n">#IMPORT_TYPES</span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'{#IMPORT}'</span><span class="p">;</span>
 </code></pre></div></p>
 <h3 id="type-mapping">Type Mapping</h3>
 <p>The <code>types</code> array maps Wings primitive types to target language types:</p>
 <h4 id="common-type-mappings">Common Type Mappings</h4>
 <p><strong>String Types:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;str&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;\&quot;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"str"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\"\""</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <p><strong>Number Types:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <p><strong>Boolean Types:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bool&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bool"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <p><strong>Array Types:</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Array&lt;{#TYPE}&gt;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[]&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Array&lt;{#TYPE}&gt;"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[]"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <h2 id="template-file-structure">Template File Structure</h2>
@@ -1916,50 +1916,50 @@
 <h2 id="complete-configuration-example">Complete Configuration Example</h2>
 <p>Here's a complete template configuration for TypeScript:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;//&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PascalCase&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;filetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ts&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;implementFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;extends {#IMPLEMENT}&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;importPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;import {{ {#IMPORT_TYPES} }} from &#39;{#IMPORT}&#39;;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;separator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pathType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;relative&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"//"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PascalCase"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"filetype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ts"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"implementFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"extends {#IMPLEMENT}"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"importPath"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"import {{ {#IMPORT_TYPES} }} from '{#IMPORT}';"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"pathType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relative"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;indentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;spacing&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;  &quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;preIndent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="nt">"indentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"spacing"</span><span class="p">:</span><span class="w"> </span><span class="s2">"  "</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"preIndent"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;parseFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;struct&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;templates/typescript/struct.ts.template&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;templates/typescript/enum.ts.template&quot;</span>
+<span class="w">  </span><span class="nt">"parseFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"templates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"struct"</span><span class="p">:</span><span class="w"> </span><span class="s2">"templates/typescript/struct.ts.template"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="s2">"templates/typescript/enum.ts.template"</span>
 <span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;str&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;\&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"str"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\"\""</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bool&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bool"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;wingsType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Array&lt;{#TYPE}&gt;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;targetInit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[]&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;requiredImport&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="nt">"wingsType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Array&lt;{#TYPE}&gt;"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"targetInit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[]"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"requiredImport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
@@ -1997,19 +1997,19 @@
 <h3 id="custom-import-handling">Custom Import Handling</h3>
 <p>The <code>importPath</code> configuration allows fine-grained control over how imports are generated:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;importPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;from {#IMPORT} import {#IMPORT_TYPES}&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;separator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pathType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;absolute&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myproject&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="nt">"importPath"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"from {#IMPORT} import {#IMPORT_TYPES}"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"separator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"."</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"pathType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"absolute"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myproject"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="conditional-logic">Conditional Logic</h3>
 <p>Templates can include conditional logic based on the presence of certain fields or inheritance:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="err">{#</span><span class="nc">CLASS_NAME</span><span class="p">}{</span><span class="c1">#IMPLEMENT}:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generated by Wings&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generated by Wings"""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="p">{</span><span class="c1">#INIT_FIELDS}</span>

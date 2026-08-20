@@ -1246,23 +1246,23 @@
 
 <span class="c"># Load configuration</span>
 <span class="kd">var</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initConfig</span><span class="p">()</span><span class="w">  </span><span class="c"># Start with defaults</span>
-<span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">):</span>
-<span class="w">  </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">"wings.json"</span><span class="p">):</span>
+<span class="w">  </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse</span><span class="p">(</span><span class="s">"wings.json"</span><span class="p">)</span>
 
 <span class="c"># Process Wings files</span>
-<span class="k">let</span><span class="w"> </span><span class="n">wingsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;schemas/user.wings&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schemas/api.wings&quot;</span><span class="o">]</span>
+<span class="k">let</span><span class="w"> </span><span class="n">wingsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">"schemas/user.wings"</span><span class="p">,</span><span class="w"> </span><span class="s">"schemas/api.wings"</span><span class="o">]</span>
 <span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
 
 <span class="c"># Write generated files</span>
 <span class="k">for</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">filetype</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">]</span><span class="p">.</span><span class="n">keys</span><span class="p">:</span>
 <span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">][</span><span class="n">filetype</span><span class="o">]</span>
-<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">outputPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">filetype</span>
+<span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">outputPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s">"."</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">filetype</span>
 
 <span class="w">    </span><span class="c"># Create output directory if needed</span>
 <span class="w">    </span><span class="n">createDir</span><span class="p">(</span><span class="n">parentDir</span><span class="p">(</span><span class="n">outputPath</span><span class="p">))</span>
 <span class="w">    </span><span class="n">writeFile</span><span class="p">(</span><span class="n">outputPath</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">)</span>
-<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Generated: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">outputPath</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">"Generated: "</span><span class="p">,</span><span class="w"> </span><span class="n">outputPath</span>
 </code></pre></div>
 <h2 id="advanced-usage">Advanced Usage</h2>
 <h3 id="custom-configuration">Custom Configuration</h3>
@@ -1273,12 +1273,12 @@
 <span class="kd">var</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initConfig</span><span class="p">()</span>
 
 <span class="c"># Modify configuration (exact field names depend on Config type definition)</span>
-<span class="n">config</span><span class="p">.</span><span class="n">langFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;go&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ts&quot;</span><span class="o">]</span><span class="w">  </span><span class="c"># Only generate Go and TypeScript</span>
-<span class="n">config</span><span class="p">.</span><span class="n">outputRootDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;./generated&quot;</span><span class="o">]</span>
-<span class="n">config</span><span class="p">.</span><span class="n">skipImport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span><span class="w">  </span><span class="c"># Don&#39;t process imported files</span>
+<span class="n">config</span><span class="p">.</span><span class="n">langFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">"go"</span><span class="p">,</span><span class="w"> </span><span class="s">"ts"</span><span class="o">]</span><span class="w">  </span><span class="c"># Only generate Go and TypeScript</span>
+<span class="n">config</span><span class="p">.</span><span class="n">outputRootDirs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">"./generated"</span><span class="o">]</span>
+<span class="n">config</span><span class="p">.</span><span class="n">skipImport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span><span class="w">  </span><span class="c"># Don't process imported files</span>
 
 <span class="c"># Use custom config with fromFiles()</span>
-<span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">&quot;schema.wings&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+<span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">"schema.wings"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="processing-with-multiple-output-directories">Processing with Multiple Output Directories</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="n">wingspkg</span><span class="o">/</span><span class="n">core</span>
@@ -1301,7 +1301,7 @@
 <span class="w">        </span><span class="k">let</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputFiles</span><span class="o">[</span><span class="n">filename</span><span class="o">][</span><span class="n">filetype</span><span class="o">]</span>
 <span class="w">        </span><span class="n">createDir</span><span class="p">(</span><span class="n">parentDir</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 <span class="w">        </span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">)</span>
-<span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Generated: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span>
+<span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="s">"Generated: "</span><span class="p">,</span><span class="w"> </span><span class="n">outputDir</span><span class="p">,</span><span class="w"> </span><span class="s">"/"</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span>
 
 <span class="w">    </span><span class="n">setCurrentDir</span><span class="p">(</span><span class="n">originalDir</span><span class="p">)</span>
 </code></pre></div>
@@ -1311,28 +1311,28 @@
 <span class="kn">import</span><span class="w"> </span><span class="n">os</span><span class="p">,</span><span class="w"> </span><span class="n">times</span>
 
 <span class="k">proc</span><span class="w"> </span><span class="nf">buildWithWings</span><span class="p">():</span><span class="w"> </span><span class="n">void</span><span class="w"> </span><span class="o">=</span>
-<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">):</span><span class="w"> </span>
-<span class="w">                 </span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">"wings.json"</span><span class="p">):</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">parse</span><span class="p">(</span><span class="s">"wings.json"</span><span class="p">)</span><span class="w"> </span>
 <span class="w">               </span><span class="k">else</span><span class="p">:</span><span class="w"> </span>
 <span class="w">                 </span><span class="n">initConfig</span><span class="p">()</span>
 
-<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">wingsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">&quot;schemas/api.wings&quot;</span><span class="o">]</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">wingsFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">@[</span><span class="s">"schemas/api.wings"</span><span class="o">]</span>
 
 <span class="w">  </span><span class="c"># Check if regeneration is needed</span>
 <span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="n">needsRegen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">false</span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">wingsFile</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">wingsFiles</span><span class="p">:</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;src/generated&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">"src/generated"</span><span class="p">):</span>
 <span class="w">      </span><span class="n">needsRegen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span>
 <span class="w">      </span><span class="k">break</span>
 
 <span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">wingsTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getLastModificationTime</span><span class="p">(</span><span class="n">wingsFile</span><span class="p">)</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">genFile</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">walkDirRec</span><span class="p">(</span><span class="s">&quot;src/generated&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">genFile</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">walkDirRec</span><span class="p">(</span><span class="s">"src/generated"</span><span class="p">):</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">getLastModificationTime</span><span class="p">(</span><span class="n">genFile</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">wingsTime</span><span class="p">:</span>
 <span class="w">        </span><span class="n">needsRegen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kp">true</span>
 <span class="w">        </span><span class="k">break</span>
 
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">needsRegen</span><span class="p">:</span>
-<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Regenerating Wings files...&quot;</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">"Regenerating Wings files..."</span>
 <span class="w">    </span><span class="k">let</span><span class="w"> </span><span class="n">outputFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="n">wingsFiles</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c"># Process output files as needed</span>
@@ -1354,9 +1354,9 @@
 <span class="c"># - Inner key: file extension/type (go, ts, py, etc.)</span>
 <span class="c"># - Inner value: generated source code content</span>
 
-<span class="k">let</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">&quot;user.wings&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
-<span class="c"># results[&quot;user&quot;][&quot;go&quot;] contains the Go source code</span>
-<span class="c"># results[&quot;user&quot;][&quot;ts&quot;] contains the TypeScript source code</span>
+<span class="k">let</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">"user.wings"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+<span class="c"># results["user"]["go"] contains the Go source code</span>
+<span class="c"># results["user"]["ts"] contains the TypeScript source code</span>
 <span class="c"># etc.</span>
 </code></pre></div>
 <h2 id="error-handling">Error Handling</h2>
@@ -1371,20 +1371,20 @@
 <span class="kn">import</span><span class="w"> </span><span class="n">os</span>
 
 <span class="k">try</span><span class="p">:</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;schema.wings&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Wings file not found&quot;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">"schema.wings"</span><span class="p">):</span>
+<span class="w">    </span><span class="n">echo</span><span class="w"> </span><span class="s">"Wings file not found"</span>
 <span class="w">    </span><span class="k">return</span>
 
-<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">):</span>
-<span class="w">                 </span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;wings.json&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">fileExists</span><span class="p">(</span><span class="s">"wings.json"</span><span class="p">):</span>
+<span class="w">                 </span><span class="n">parse</span><span class="p">(</span><span class="s">"wings.json"</span><span class="p">)</span>
 <span class="w">               </span><span class="k">else</span><span class="p">:</span>
 <span class="w">                 </span><span class="n">initConfig</span><span class="p">()</span>
 
-<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">&quot;schema.wings&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromFiles</span><span class="p">(</span><span class="o">@[</span><span class="s">"schema.wings"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">)</span>
 <span class="w">  </span><span class="c"># Process results...</span>
 
 <span class="k">except</span><span class="p">:</span>
-<span class="w">  </span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;Error processing Wings files: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getCurrentExceptionMsg</span><span class="p">()</span>
+<span class="w">  </span><span class="n">echo</span><span class="w"> </span><span class="s">"Error processing Wings files: "</span><span class="p">,</span><span class="w"> </span><span class="n">getCurrentExceptionMsg</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="dependencies">Dependencies</h2>
 <p>When using Wings as a library, you'll need these dependencies:</p>

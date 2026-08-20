@@ -1272,10 +1272,10 @@
 </code></pre></div>
 <h3 id="npm-scripts-nodejstypescript">npm Scripts (Node.js/TypeScript)</h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;generate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wings schemas/api.wings&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;prebuild&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;npm run generate&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tsc&quot;</span>
+<span class="w">  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"generate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wings schemas/api.wings"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"prebuild"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npm run generate"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tsc"</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1285,7 +1285,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_wings</span><span class="p">():</span>
-    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;wings&#39;</span><span class="p">,</span> <span class="s1">&#39;schemas/models.wings&#39;</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">'wings'</span><span class="p">,</span> <span class="s1">'schemas/models.wings'</span><span class="p">],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Call before your main build process</span>
 <span class="n">generate_wings</span><span class="p">()</span>
@@ -1300,23 +1300,23 @@
 │   └── api.wings
 
 backend/
-├── wings.json          # langFilter: [&quot;go&quot;]
+├── wings.json          # langFilter: ["go"]
 └── shared-schemas/     # git submodule or copy
 
 frontend/
-├── wings.json          # langFilter: [&quot;ts&quot;] 
+├── wings.json          # langFilter: ["ts"] 
 └── shared-schemas/     # git submodule or copy
 </code></pre></div>
 <p>Backend <code>wings.json</code>:
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;langFilter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;go&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;outputRootDirs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;./internal/models&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"langFilter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"go"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"outputRootDirs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"./internal/models"</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <p>Frontend <code>wings.json</code>:
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;langFilter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ts&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;outputRootDirs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;./src/types&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">"langFilter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ts"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"outputRootDirs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"./src/types"</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <h2 id="development-workflow">Development Workflow</h2>
@@ -1340,7 +1340,7 @@ frontend/
 - Add generated files to <code>.gitignore</code>
 - Generate code as part of build process
 - Requires all developers to have Wings installed</p>
-<div class="highlight"><pre><span></span><code># Option 2: Don&#39;t commit generated files
+<div class="highlight"><pre><span></span><code># Option 2: Don't commit generated files
 src/generated/
 *.generated.*
 </code></pre></div>
@@ -1348,8 +1348,8 @@ src/generated/
 <p>Consider regenerating files when schemas change:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># Simple pre-commit script</span>
-<span class="k">if</span><span class="w"> </span>git<span class="w"> </span>diff<span class="w"> </span>--cached<span class="w"> </span>--name-only<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;\.wings$&#39;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Wings files changed, regenerating...&quot;</span>
+<span class="k">if</span><span class="w"> </span>git<span class="w"> </span>diff<span class="w"> </span>--cached<span class="w"> </span>--name-only<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'\.wings$'</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Wings files changed, regenerating..."</span>
 <span class="w">    </span>wings<span class="w"> </span>schemas/api.wings
 <span class="w">    </span>git<span class="w"> </span>add<span class="w"> </span>src/generated/
 <span class="k">fi</span>
@@ -1379,7 +1379,7 @@ fswatch<span class="w"> </span>schemas/*.wings<span class="w"> </span><span clas
 <h3 id="incremental-builds">Incremental Builds</h3>
 <p>For better performance in large projects:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Only regenerate if Wings files are newer than generated files</span>
-find<span class="w"> </span>schemas<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.wings&quot;</span><span class="w"> </span>-newer<span class="w"> </span>src/generated/last_build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span>
+find<span class="w"> </span>schemas<span class="w"> </span>-name<span class="w"> </span><span class="s2">"*.wings"</span><span class="w"> </span>-newer<span class="w"> </span>src/generated/last_build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span>wings<span class="w"> </span>schemas/api.wings
 <span class="w">    </span>touch<span class="w"> </span>src/generated/last_build
 <span class="o">}</span>
